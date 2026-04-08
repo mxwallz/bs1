@@ -255,3 +255,53 @@ if (atlasCard) {
     dotsEl?.querySelectorAll('.rs-dot').forEach((d,j) => d.classList.toggle('active', j===cur));
   }, {passive:true});
 })();
+
+// ── MOBILE COLLAPSIBLE NAV ────────────────────────────────────────
+(function() {
+  const badge = document.getElementById('s-badge');
+  const panel = document.getElementById('mob-nav-panel');
+  if (!badge || !panel) return;
+
+  badge.addEventListener('click', () => {
+    if (window.innerWidth > 640) return;
+    const open = badge.classList.toggle('open');
+    panel.classList.toggle('open', open);
+  });
+
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    badge.classList.remove('open');
+    panel.classList.remove('open');
+  }));
+
+  document.addEventListener('click', e => {
+    if (!badge.contains(e.target) && !panel.contains(e.target)) {
+      badge.classList.remove('open');
+      panel.classList.remove('open');
+    }
+  });
+})();
+
+// ── MOBILE VERTICAL TIMELINE ─────────────────────────────────────
+(function() {
+  if (window.innerWidth > 640) return;
+  const vFill = document.getElementById('tl-v-fill');
+  const wrapper = document.getElementById('tl-wrapper');
+  const cards = [
+    document.getElementById('tl-c0'),
+    document.getElementById('tl-c1'),
+    document.getElementById('tl-c2'),
+  ].filter(Boolean);
+
+  if (!wrapper) return;
+
+  // draw vertical fill when wrapper enters view
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) vFill?.classList.add('drawn');
+  }, { threshold: 0.1 }).observe(wrapper);
+
+  // light up each card as it enters view
+  const cardObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('tl-lit'); });
+  }, { threshold: 0.3 });
+  cards.forEach(c => cardObs.observe(c));
+})();

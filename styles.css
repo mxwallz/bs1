@@ -92,7 +92,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
   display: flex; align-items: center;
 }
 .nav-inner { width:100%; max-width:920px; margin:0 auto; padding:0 36px; display:flex; align-items:center; justify-content:space-between; }
-.wordmark { font-family:'Space Mono',monospace; font-size:16px; font-weight:700; color:var(--cream); text-decoration:none; letter-spacing:.22em; text-transform:uppercase; }
+.wordmark { font-family:'Space Mono',monospace; font-size:19px; font-weight:700; color:var(--cream); text-decoration:none; letter-spacing:.22em; text-transform:uppercase; }
 .nav-apply {
   display:inline-flex; align-items:center;
   background:none; border:1px solid rgba(201,168,76,0.4); color:var(--gold);
@@ -374,11 +374,78 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
 }
 .tl-node.lit { border-color:var(--gold); color:var(--gold); opacity:1; box-shadow:0 0 20px rgba(201,168,76,0.2); }
 .tl-card { padding:28px 24px 0; position:relative; z-index:1; }
+/* ── MOBILE NAV PANEL ────────────────────────────────────────── */
+.mob-nav-panel {
+  display:none; /* shown only on mobile via media query */
+}
+.s-chevron { transition:transform .25s ease; flex-shrink:0; }
+.s-badge.open .s-chevron { transform:rotate(180deg); }
+
+/* ── VERTICAL TIMELINE (mobile only — hidden on desktop) ─────── */
+.tl-v-track { display:none; }
+.tl-mob-node { display:none; }
+
 @media(max-width:640px){
-  .timeline-grid{grid-template-columns:1fr;} #tl-line{display:none;} .tl-nodes-row{display:none;}
-  .tl-wrapper{padding-top:0;}
-  .tl-card{padding:0;margin-bottom:40px;display:flex;gap:20px;}
-  .tl-node{flex-shrink:0;margin-bottom:0;margin-left:0;display:flex;}
+  /* ── timeline vertical ── */
+  .timeline-grid { grid-template-columns:1fr !important; }
+  #tl-line { display:none; }
+  .tl-nodes-row { display:none; }
+  .tl-wrapper { padding-top:0; position:relative; }
+
+  .tl-v-track {
+    display:block; position:absolute;
+    left:20px; top:4px; bottom:4px; width:1px;
+    background:rgba(59,130,246,0.1);
+    pointer-events:none;
+  }
+  .tl-v-fill {
+    position:absolute; top:0; left:0; width:100%; height:0;
+    background:linear-gradient(to bottom,var(--gold),var(--gold-d));
+    transition:height 1.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .tl-v-fill.drawn { height:100%; }
+
+  .tl-mob-node {
+    display:flex; align-items:center; justify-content:center;
+    position:absolute; left:1px; top:0;
+    width:38px; height:38px;
+    border:1px solid rgba(59,130,246,0.2);
+    background:var(--bg);
+    font-family:'Space Mono',monospace; font-size:9px; font-weight:700;
+    color:rgba(255,255,255,0.3);
+    transition:border-color .5s, color .5s, box-shadow .5s;
+    z-index:1;
+  }
+  .tl-card { padding:0 0 52px 68px; position:relative; }
+  .tl-card:last-child { padding-bottom:8px; }
+  .tl-card.tl-lit .tl-mob-node {
+    border-color:var(--gold); color:var(--gold);
+    box-shadow:0 0 14px rgba(59,130,246,0.25);
+  }
+
+  /* ── mobile nav panel ── */
+  .mob-nav-panel {
+    display:flex; flex-direction:column;
+    position:fixed; bottom:calc(14px + 34px + 8px); right:14px;
+    z-index:9997;
+    background:rgba(0,0,0,0.97); border:1px solid rgba(59,130,246,0.2);
+    backdrop-filter:blur(16px); min-width:190px;
+    transform:translateY(6px) scale(0.97); opacity:0; pointer-events:none;
+    transition:transform .22s ease, opacity .22s ease;
+    transform-origin:bottom right;
+  }
+  .mob-nav-panel.open { transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+  .mob-nav-link {
+    padding:14px 18px; font-family:'Space Mono',monospace; font-size:10px;
+    font-weight:700; color:rgba(255,255,255,0.55); text-decoration:none;
+    letter-spacing:.1em; text-transform:uppercase;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    transition:color .15s;
+  }
+  .mob-nav-link:last-child { border-bottom:none; }
+  .mob-nav-link:hover { color:var(--cream); }
+  .mob-nav-apply { color:var(--gold); }
+  .mob-nav-apply:hover { color:var(--gold-l); }
 }
 
 /* ── MOBILE — sections & cards ───────────────────────────────── */
@@ -657,12 +724,13 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
   section[data-badge] { padding:64px 0 !important; }
   .stmt-break { padding:48px 20px; }
 
-  /* banner: hide "Apply Now" link on tiny screens */
-  #enroll-banner a { display:none; }
-  #enroll-banner p { font-size:10px; }
-
-  /* nav inner padding */
-  .nav-inner { padding:0 20px; }
+  /* ── HEADER: banner hidden, nav pinned to top:0 ── */
+  #enroll-banner { display:none; }
+  body { padding-top:44px; }
+  #main-nav { top:0 !important; height:44px; }
+  .nav-apply { display:none; }
+  .nav-inner { padding:0 18px; }
+  .wordmark { font-size:17px; }
 
   /* hero */
   .hero-split { grid-template-columns:1fr !important; gap:32px; }
@@ -695,18 +763,11 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
   /* font sizes for large serif numbers */
   .prob-num { font-size:44px; bottom:10px; right:14px; }
 
-  /* ── MOBILE NAV: hide banner + shrink main nav ── */
-  #enroll-banner { display:none; }
-  body { padding-top:44px; }
-  #main-nav { height:44px; }
-  .nav-apply { display:none; }
-  .wordmark { font-size:13px; letter-spacing:.15em; }
-
-  /* ── S-BADGE: compact compass nav bottom-right ── */
+  /* ── S-BADGE: compass nav trigger, bottom-right ── */
   .s-badge {
     left:auto; right:14px; transform:none;
-    bottom:14px; font-size:8px; padding:5px 10px 5px 8px;
-    gap:6px;
+    bottom:14px; font-size:8px; padding:6px 10px 6px 8px;
+    gap:6px; cursor:pointer; user-select:none;
   }
 
   /* ── STATS: vertical stack ── */
@@ -740,11 +801,15 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
   }
   .rs-track::-webkit-scrollbar { display:none; }
   .rs-slide {
-    flex:0 0 88vw;
+    flex:0 0 92vw;
     scroll-snap-align:start;
-    margin-right:12px;
+    margin-right:14px;
     border:1px solid var(--border);
   }
+  .rs-thumb { aspect-ratio:3/2 !important; }
+  .rs-metric { font-size:clamp(24px,6vw,36px) !important; }
+  .rs-body { padding:22px 22px 26px; }
+  .rs-body p { font-size:14px; }
   .rs-arrows {
     display:flex; align-items:center; justify-content:center;
     gap:16px; margin-top:20px;

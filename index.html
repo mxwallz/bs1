@@ -12,10 +12,20 @@
 </head>
 <body>
 
-  <!-- ── STRUCTURE BADGE (dynamic section name) ─────────────────── -->
+  <!-- ── MOBILE NAV PANEL (collapsed by default) ──────────────── -->
+  <div class="mob-nav-panel" id="mob-nav-panel">
+    <a href="#how-it-works" class="mob-nav-link">How It Works</a>
+    <a href="#results" class="mob-nav-link">Results</a>
+    <a href="#about" class="mob-nav-link">About</a>
+    <a href="#faq" class="mob-nav-link">FAQ</a>
+    <a href="#apply" class="mob-nav-link mob-nav-apply">Apply Now →</a>
+  </div>
+
+  <!-- ── STRUCTURE BADGE / MOBILE NAV TRIGGER ──────────────────── -->
   <div class="s-badge" id="s-badge">
-    <svg width="12" height="12" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><circle cx="9" cy="9" r="8" fill="none" stroke="rgba(59,130,246,0.5)" stroke-width="0.8"/><polygon points="9,2.5 7.8,9 9,7.5 10.2,9" fill="#3b82f6"/><polygon points="9,15.5 7.8,9 9,10.5 10.2,9" fill="rgba(255,255,255,0.2)"/><circle cx="9" cy="9" r="1.2" fill="rgba(255,255,255,0.4)"/></svg>
+    <svg width="13" height="13" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><circle cx="9" cy="9" r="8" fill="none" stroke="rgba(59,130,246,0.5)" stroke-width="0.8"/><polygon points="9,2.5 7.8,9 9,7.5 10.2,9" fill="#3b82f6"/><polygon points="9,15.5 7.8,9 9,10.5 10.2,9" fill="rgba(255,255,255,0.2)"/><circle cx="9" cy="9" r="1.2" fill="rgba(255,255,255,0.4)"/></svg>
     <span id="s-badge-text">ORIGIN</span>
+    <svg class="s-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.6)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 15l-6-6-6 6"/></svg>
   </div>
 
   <!-- ── ENROLLMENT BANNER ───────────────────────────────────────── -->
@@ -540,29 +550,34 @@
       </div>
 
       <div class="tl-wrapper fi" id="tl-wrapper">
-        <!-- Connector line between nodes -->
+        <!-- Connector line between nodes (desktop) -->
         <div id="tl-line"></div>
-        <!-- Nodes row: sits above the cards -->
+        <!-- Nodes row: desktop -->
         <div class="tl-nodes-row">
           <div class="tl-node" id="tl-n0">W1</div>
           <div class="tl-node" id="tl-n1">W3</div>
           <div class="tl-node" id="tl-n2">D90</div>
         </div>
-        <!-- Content cards below the nodes -->
+        <!-- Vertical line: mobile -->
+        <div class="tl-v-track"><div class="tl-v-fill" id="tl-v-fill"></div></div>
+        <!-- Content cards -->
         <div class="timeline-grid">
-          <div class="tl-card">
+          <div class="tl-card" id="tl-c0">
+            <div class="tl-mob-node">W1</div>
             <p class="label label-gold" style="margin-bottom:14px;">Week 1–2</p>
             <h3 class="serif" style="font-size:22px;font-weight:500;color:var(--cream);margin-bottom:16px;">Pipeline Live</h3>
             <p style="font-size:15px;line-height:1.9;color:var(--cream-70);margin-bottom:18px;">Profiles rebuilt. Female advisory review complete. Instagram dialed in. Approach gameplan ready. All three channels running simultaneously.</p>
             <p class="label label-gold" style="font-size:11px;letter-spacing:.12em;">First matches. First conversations.</p>
           </div>
-          <div class="tl-card">
+          <div class="tl-card" id="tl-c1">
+            <div class="tl-mob-node">W3</div>
             <p class="label label-gold" style="margin-bottom:14px;">Week 3–4</p>
             <h3 class="serif" style="font-size:22px;font-weight:500;color:var(--cream);margin-bottom:16px;">First Dates</h3>
             <p style="font-size:15px;line-height:1.9;color:var(--cream-70);margin-bottom:18px;">Conversion Blueprint in play. Scripts deployed. Message support active for every situation that comes up. Most clients book their first date in this window.</p>
             <p class="label label-gold" style="font-size:11px;letter-spacing:.12em;">The proof of concept.</p>
           </div>
-          <div class="tl-card">
+          <div class="tl-card" id="tl-c2">
+            <div class="tl-mob-node">D90</div>
             <p class="label label-gold" style="margin-bottom:14px;">Day 90</p>
             <h3 class="serif" style="font-size:22px;font-weight:500;color:var(--cream);margin-bottom:16px;">Operating at Capacity</h3>
             <p style="font-size:15px;line-height:1.9;color:var(--cream-70);margin-bottom:18px;">One to three dates per week, consistently. The feedback loop is permanent. The skill is yours. You don't need us anymore. That's the goal.</p>
