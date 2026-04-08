@@ -117,7 +117,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); }
 #section-nav a:hover { color:var(--cream); }
 #section-nav a.active { color:var(--gold); }
 #section-nav .snav-cta { margin-left:auto; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.35); padding:4px 14px; text-decoration:none; flex-shrink:0; transition:all .2s; letter-spacing:.07em; text-transform:uppercase; }
-@media(max-width:640px){ #section-nav{display:none;} }
+@media(max-width:860px){ #section-nav{display:none !important;} }
 
 /* ── ROUTE LINE (left fixed progress) ────────────────────────── */
 #route-track {
