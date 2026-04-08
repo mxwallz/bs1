@@ -105,7 +105,9 @@ const badgeSections = document.querySelectorAll('[data-badge]');
 const badgeObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting && badge) {
-      badge.textContent = e.target.dataset.badge;
+      const t = document.getElementById('s-badge-text');
+      const label = e.target.dataset.badge.replace(/^ATLAS · /,'');
+      if (t) t.textContent = label;
     }
   });
 }, {rootMargin:'-20% 0px -75% 0px'});
@@ -216,4 +218,40 @@ if (atlasCard) {
   const cardWidth = () => grid.querySelector('div')?.offsetWidth + 12 || window.innerWidth * 0.82 + 12;
   document.querySelector('.carousel-prev')?.addEventListener('click', () => grid.scrollBy({ left: -cardWidth(), behavior: 'smooth' }));
   document.querySelector('.carousel-next')?.addEventListener('click', () => grid.scrollBy({ left:  cardWidth(), behavior: 'smooth' }));
+})();
+
+// ── RESULTS SWIPE CAROUSEL ───────────────────────────────────────
+(function() {
+  const track = document.getElementById('rs-track');
+  const dotsEl = document.getElementById('rs-dots');
+  if (!track) return;
+  const slides = track.querySelectorAll('.rs-slide');
+  let cur = 0;
+
+  // build dots
+  slides.forEach((_,i) => {
+    const d = document.createElement('span');
+    d.className = 'rs-dot' + (i===0?' active':'');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl?.appendChild(d);
+  });
+
+  function goTo(i) {
+    cur = Math.max(0, Math.min(i, slides.length-1));
+    if (window.innerWidth <= 640) {
+      const w = slides[0].offsetWidth + 12;
+      track.scrollTo({ left: cur * w, behavior:'smooth' });
+    }
+    dotsEl?.querySelectorAll('.rs-dot').forEach((d,j) => d.classList.toggle('active', j===cur));
+  }
+
+  document.querySelector('.rs-prev')?.addEventListener('click', () => goTo(cur-1));
+  document.querySelector('.rs-next')?.addEventListener('click', () => goTo(cur+1));
+
+  track.addEventListener('scroll', () => {
+    if (!slides[0]) return;
+    const w = slides[0].offsetWidth + 12;
+    cur = Math.round(track.scrollLeft / w);
+    dotsEl?.querySelectorAll('.rs-dot').forEach((d,j) => d.classList.toggle('active', j===cur));
+  }, {passive:true});
 })();

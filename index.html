@@ -13,7 +13,10 @@
 <body>
 
   <!-- ── STRUCTURE BADGE (dynamic section name) ─────────────────── -->
-  <div class="s-badge" id="s-badge">ATLAS · ORIGIN</div>
+  <div class="s-badge" id="s-badge">
+    <svg width="12" height="12" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><circle cx="9" cy="9" r="8" fill="none" stroke="rgba(59,130,246,0.5)" stroke-width="0.8"/><polygon points="9,2.5 7.8,9 9,7.5 10.2,9" fill="#3b82f6"/><polygon points="9,15.5 7.8,9 9,10.5 10.2,9" fill="rgba(255,255,255,0.2)"/><circle cx="9" cy="9" r="1.2" fill="rgba(255,255,255,0.4)"/></svg>
+    <span id="s-badge-text">ORIGIN</span>
+  </div>
 
   <!-- ── ENROLLMENT BANNER ───────────────────────────────────────── -->
   <div id="enroll-banner">
@@ -238,14 +241,6 @@
           <div class="serif" style="font-size:40px;font-weight:700;color:var(--cream);" data-countup data-target="5" data-prefix="&lt;" data-suffix="%">&lt;5%</div>
           <div class="label label-muted" style="margin-top:8px;">Accepted</div>
         </div>
-      </div>
-      <div class="chips-row fi">
-        <div class="chip">Todd &nbsp;·&nbsp; 20 dates in 30 days</div>
-        <div class="chip">Spencer &nbsp;·&nbsp; 40+ matches in 24 hrs</div>
-        <div class="chip">Aakash &nbsp;·&nbsp; Women cold-DM'd first</div>
-        <div class="chip">Hector &nbsp;·&nbsp; 10 dates in first month</div>
-        <div class="chip">Ben &nbsp;·&nbsp; 4 dates in 2 weeks</div>
-        <div class="chip">Parker &nbsp;·&nbsp; More matches than he can handle</div>
       </div>
     </div>
   </section>
@@ -603,96 +598,74 @@
         <p style="font-size:17px;color:var(--cream-70);max-width:500px;margin:0 auto;line-height:1.75;">These are not outliers. This is what the system consistently produces.</p>
       </div>
 
-      <!-- Featured: Todd (video thumbnail) -->
-      <div class="fi" style="margin-bottom:28px;border:1px solid var(--border);border-left:3px solid var(--gold);display:grid;grid-template-columns:300px 1fr;gap:0;overflow:hidden;background:var(--bg2);" class="todd-grid">
-        <!-- Video thumbnail -->
-        <div style="position:relative;min-height:240px;background:linear-gradient(145deg,#0d1020 0%,#0a0b17 50%,#111526 100%);cursor:pointer;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(232,222,208,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(232,222,208,.018) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
-          <!-- metric -->
-          <div style="position:absolute;top:14px;left:14px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.28);padding:8px 14px;">
-            <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--gold);line-height:1;">20 dates</div>
-            <div style="font-family:'Space Mono',monospace;font-size:7px;color:rgba(232,222,208,0.45);letter-spacing:.08em;margin-top:3px;">IN 30 DAYS</div>
+      <!-- Unified results track: swipe on mobile, 3-col grid on desktop -->
+      <div class="rs-track fi" id="rs-track">
+
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:28px 28px;"></div>
+            <div class="rs-metric">20 dates<span class="rs-sub">IN 30 DAYS</span></div>
+            <div class="rs-namerow"><span class="rs-name">Todd</span><span class="rs-role">RETIRED INVESTOR · 54</span></div>
           </div>
-          <!-- play -->
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-            <div style="width:56px;height:56px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(232,222,208,0.85)" style="margin-left:2px;"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <!-- name -->
-          <div style="position:absolute;bottom:14px;left:14px;">
-            <div style="font-size:14px;font-weight:600;color:#fff;">Todd</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.45);font-family:'Space Mono',monospace;letter-spacing:.04em;">RETIRED INVESTOR · 54</div>
+          <div class="rs-body">
+            <p>Paying a matchmaker for six months. Dates that went nowhere. We rebuilt his pipeline: 20 dates in 30 days, most of them women in their 20s and 30s. Age was never the obstacle.</p>
           </div>
         </div>
-        <!-- Body -->
-        <div style="padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);">
-          <p style="font-size:15px;line-height:1.85;color:var(--cream-70);margin-bottom:20px;">Paying a matchmaker for six months. Dates that went nowhere. We rebuilt his pipeline from scratch: 20 dates in 30 days, most of them women in their 20s and 30s. Age was never the obstacle. The system was missing.</p>
-          <button class="proof-toggle" data-target="todd-exp" style="background:none;border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:6px;padding:0;letter-spacing:.08em;text-transform:uppercase;">
-            Full Story <svg class="read-more-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div id="todd-exp" class="proof-expand" style="margin-top:18px;">
-            <p style="font-size:14px;line-height:1.9;color:var(--cream-70);">Todd came to us at 54, recently single after a long marriage. We rebuilt his Hinge and Bumble profiles, ran his photos through our female advisor review, and built him a weekly real-life approach gameplan. Result: 20 dates in his first 30 days.</p>
+
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">20+ dates<span class="rs-sub">IN 30 DAYS</span></div>
+            <div class="rs-namerow"><span class="rs-name">Yaro</span><span class="rs-role">SOFTWARE ENGINEER · SF</span></div>
           </div>
-        </div>
-      </div>
-
-      <!-- Testimonial grid -->
-      <div class="results-carousel-wrap">
-        <button class="carousel-btn carousel-prev" aria-label="Previous">&#8592;</button>
-        <button class="carousel-btn carousel-next" aria-label="Next">&#8594;</button>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);" class="fi results-card-grid">
-
-        <!-- Yaro -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">20+ dates</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">IN 30 DAYS</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Yaro</div>
-          <div style="font-size:11px;color:var(--cream-45);">Software Engineer · SF</div>
+          <div class="rs-body"><p>Zero quality matches before Atlas. First month: 20+ dates booked.</p></div>
         </div>
 
-        <!-- Hector -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">10 dates</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">IN 30 DAYS</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Hector</div>
-          <div style="font-size:11px;color:var(--cream-45);">Post-Divorce Executive</div>
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">10 dates<span class="rs-sub">IN 30 DAYS</span></div>
+            <div class="rs-namerow"><span class="rs-name">Hector</span><span class="rs-role">POST-DIVORCE EXECUTIVE</span></div>
+          </div>
+          <div class="rs-body"><p>Back in the market after a long marriage. Rebuilt from scratch. 10 dates in month one.</p></div>
         </div>
 
-        <!-- Ben -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">4 dates</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">FIRST 2 WEEKS</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Ben</div>
-          <div style="font-size:11px;color:var(--cream-45);">Private Equity</div>
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">40+ matches<span class="rs-sub">IN 24 HOURS</span></div>
+            <div class="rs-namerow"><span class="rs-name">Spencer</span><span class="rs-role">CYBERSECURITY CONSULTANT</span></div>
+          </div>
+          <div class="rs-body"><p>Profile rebuilt by female advisors. 40+ Bumble matches in 24 hours after going live.</p></div>
         </div>
 
-        <!-- Spencer -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">40+ matches</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">IN 24 HOURS</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Spencer</div>
-          <div style="font-size:11px;color:var(--cream-45);">Cybersecurity Consultant</div>
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">Inbound<span class="rs-sub">WOMEN MESSAGED FIRST</span></div>
+            <div class="rs-namerow"><span class="rs-name">Aakash</span><span class="rs-role">QUANTITATIVE TRADER</span></div>
+          </div>
+          <div class="rs-body"><p>Instagram set up once. Never posted. Women started cold-DMing him within weeks.</p></div>
         </div>
 
-        <!-- Aakash -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">Inbound</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">WOMEN MESSAGED FIRST</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Aakash</div>
-          <div style="font-size:11px;color:var(--cream-45);">Quantitative Trader</div>
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">4 dates<span class="rs-sub">FIRST 2 WEEKS</span></div>
+            <div class="rs-namerow"><span class="rs-name">Ben</span><span class="rs-role">PRIVATE EQUITY</span></div>
+          </div>
+          <div class="rs-body"><p>Thought his schedule was the problem. It wasn't. 4 dates booked in his first two weeks.</p></div>
         </div>
 
-        <!-- Matt -->
-        <div style="background:var(--bg2);padding:28px 24px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;">Proof</div>
-          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cream-45);letter-spacing:.08em;margin-bottom:14px;">CROWNING MILESTONE</div>
-          <div style="font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;">Matt</div>
-          <div style="font-size:11px;color:var(--cream-45);">Atlas Client</div>
+        <div class="rs-slide">
+          <div class="rs-thumb">
+            <div class="rs-metric">Milestone<span class="rs-sub">CROWNING MOMENT</span></div>
+            <div class="rs-namerow"><span class="rs-name">Matt</span><span class="rs-role">ATLAS CLIENT</span></div>
+          </div>
+          <div class="rs-body"><p>"Last night felt like a crowning milestone. Sitting across from a woman I always knew I deserved."</p></div>
         </div>
 
       </div>
-      </div><!-- /results-carousel-wrap -->
+      <div class="rs-arrows">
+        <button class="rs-btn rs-prev" aria-label="Previous">&#8592;</button>
+        <span class="rs-dots" id="rs-dots"></span>
+        <button class="rs-btn rs-next" aria-label="Next">&#8594;</button>
+      </div>
 
       <div style="display:flex;justify-content:center;margin-top:56px;" class="fi">
         <a href="#apply" class="btn-gold">Apply for Your Consultation →</a>
