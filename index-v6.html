@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET + BASE ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── VARIABLES ──────────────────────────────────────────── */
+    :root {
+      --bg:      #000;
+      --bg1:     #080808;
+      --bg2:     #0f0f0f;
+      --bg3:     #141414;
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.05);
+      --w100:    #ffffff;
+      --w70:     rgba(255,255,255,0.70);
+      --w45:     rgba(255,255,255,0.45);
+      --w25:     rgba(255,255,255,0.25);
+      --w10:     rgba(255,255,255,0.10);
+      --w05:     rgba(255,255,255,0.05);
+    }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 13px;
+    }
+    .brand-mark {
+      width: 28px; height: 28px;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      position: relative;
+      animation: beacon 2.4s ease-in-out infinite;
+    }
+    .brand-mark::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    @keyframes beacon {
+      0%, 100% { box-shadow: none; opacity: 1; }
+      48% { box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 0 0 11px rgba(255,255,255,0.04); opacity: 0.7; }
+      52% { box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 0 0 11px rgba(255,255,255,0.04); opacity: 0.7; }
+    }
+    /* ─── QUALIFIER PILL ─────────────────────────────────────── */
+    .qualifier-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 11px 28px;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.04em; color: var(--w70);
+      margin-top: 28px;
+    }
+    .brand-wordmark {
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    .brand-name {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase; color: #fff;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38); line-height: 1;
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--w45);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-apply {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #fff; color: #000;
+      padding: 9px 24px; border-radius: 999px;
+      transition: opacity .2s, transform .15s;
+    }
+    .nav-apply:hover { opacity: 0.88; transform: scale(1.02); }
+    @media(max-width:768px){
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+    }
+
+    /* ─── ENROLLMENT TICKER ──────────────────────────────────── */
+    .enroll-bar {
+      position: fixed; top: 68px; left: 0; right: 0; z-index: 190;
+      height: 32px; background: var(--bg1);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+      animation: livepulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes livepulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+    .enroll-bar span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w45); }
+    .enroll-bar a { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .page-top { padding-top: 100px; }
+    .section {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 48px;
+      position: relative;
+      /* scroll-snap-align: start; — replaced by deck engine */
+    }
+    .section.tight { min-height: auto; padding: 80px 48px; }
+    .inner { width: 100%; max-width: 1040px; margin: 0 auto; }
+    .inner.wide { max-width: 1300px; }
+    .inner.narrow { max-width: 680px; }
+    @media(max-width:640px) {
+      .section { padding: 80px 24px; }
+    }
+
+    /* ─── PROFILE CARD — JAMES (Gap section) ───────────────────── */
+    .profile-snap {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 100px 24px 80px;
+      /* scroll-snap-align: start; — replaced by deck engine */
+    }
+    .profile-intro { margin-bottom: 32px; text-align: center; }
+    .profile-card {
+      width: 100%; max-width: 460px;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 60px 140px rgba(0,0,0,0.85);
+      flex-shrink: 0;
+    }
+    .profile-photo {
+      width: 100%; aspect-ratio: 9/16;
+      background: linear-gradient(160deg, #2d2926 0%, #1a1816 50%, #0e0d0c 100%);
+      position: relative;
+    }
+    .profile-photo-ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.12); gap: 12px;
+    }
+    .profile-photo-ph span {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+    }
+    .profile-vignette {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.3) 0%, transparent 60%),
+        linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.92) 100%);
+    }
+    .profile-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      padding: 28px 28px 32px;
+    }
+    .profile-name {
+      font-size: 36px; font-weight: 700; color: #fff;
+      letter-spacing: -0.02em; line-height: 1;
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .profile-name .age {
+      font-size: 28px; font-weight: 400; opacity: 0.75;
+    }
+    .profile-job {
+      font-size: 15px; color: rgba(255,255,255,0.6);
+      margin-top: 6px; font-weight: 400;
+    }
+    .profile-stats {
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: 14px; margin-top: 28px;
+    }
+    .profile-stat {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 14px; color: var(--w70); font-weight: 400;
+    }
+    .stat-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      flex-shrink: 0;
+      animation: beacon-dot 2.4s ease-in-out infinite;
+    }
+    .stat-dot.d2 { animation-delay: 0.4s; }
+    .stat-dot.d3 { animation-delay: 0.8s; }
+    .stat-dot.d4 { animation-delay: 1.2s; }
+    .stat-dot.d5 { animation-delay: 1.6s; }
+    .stat-dot.d6 { animation-delay: 2.0s; }
+    @keyframes beacon-dot {
+      0%, 100% { box-shadow: none; opacity: 0.7; }
+      48% { box-shadow: 0 0 0 4px rgba(255,255,255,0.1), 0 0 0 8px rgba(255,255,255,0.04); opacity: 1; }
+      52% { box-shadow: 0 0 0 4px rgba(255,255,255,0.1), 0 0 0 8px rgba(255,255,255,0.04); opacity: 1; }
+    }
+    .profile-caption {
+      margin-top: 28px; text-align: center;
+      font-size: 15px; color: var(--w45); line-height: 1.7;
+      max-width: 400px;
+    }
+
+    /* ─── REVEAL SYSTEM ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(.16,1,.3,1),
+                  transform 0.7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.36s; }
+    .reveal-d4 { transition-delay: 0.50s; }
+    .reveal-d5 { transition-delay: 0.64s; }
+    .reveal-d6 { transition-delay: 0.78s; }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+    .eyebrow {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--w25);
+      display: block; margin-bottom: 22px;
+    }
+    .h-xl {
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.04em; color: #fff;
+    }
+    .h-lg {
+      font-size: clamp(38px, 6vw, 78px);
+      font-weight: 900; line-height: 0.97;
+      letter-spacing: -0.035em; color: #fff;
+    }
+    .h-md {
+      font-size: clamp(28px, 4.5vw, 58px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em; color: #fff;
+    }
+    .h-sm {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; color: #fff;
+    }
+    .body-xl { font-size: clamp(18px, 2.4vw, 24px); color: var(--w70); line-height: 1.65; }
+    .body-lg { font-size: clamp(16px, 1.8vw, 19px); color: var(--w70); line-height: 1.75; }
+    .body-sm { font-size: 14px; color: var(--w45); line-height: 1.8; }
+    .italic { font-style: italic; }
+    em { font-style: italic; color: var(--w70); }
+
+    /* centered layout for statement sections */
+    .text-center { text-align: center; }
+    .text-center .body-xl,
+    .text-center .body-lg { max-width: 600px; margin-left: auto; margin-right: auto; }
+
+    /* ─── BUTTONS ────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+      border-radius: 999px; padding: 15px 36px;
+      transition: transform .18s, opacity .18s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { transform: scale(1.03); }
+    .btn-white { background: #fff; color: #000; }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline {
+      background: transparent; color: var(--w70);
+      border: 1px solid var(--border); padding: 14px 32px;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
+    .cta-row.center { justify-content: center; }
+    .sub-note { font-size: 12px; color: var(--w25); margin-top: 14px; letter-spacing: 0.03em; }
+
+    /* ─── VSL PLACEHOLDER ────────────────────────────────────── */
+    .vsl-wrap {
+      width: 100%; max-width: 860px;
+      aspect-ratio: 16/9;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative; overflow: hidden; cursor: pointer;
+      margin: 48px auto 0;
+    }
+    .vsl-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .vsl-inner {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    }
+    .vsl-play-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .2s;
+    }
+    .vsl-wrap:hover .vsl-play-btn { background: rgba(255,255,255,0.18); transform: scale(1.06); }
+    .vsl-play-btn svg { margin-left: 4px; }
+    .vsl-label {
+      font-size: 13px; color: var(--w45); font-style: italic;
+      text-align: center; padding: 0 24px;
+    }
+    .vsl-corner { position: absolute; top: 14px; left: 16px; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--w25); }
+
+    /* ─── DIVIDER LINE ───────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ─── STAT ROW ───────────────────────────────────────────── */
+    .stat-row { display: flex; flex-wrap: wrap; gap: 0; margin-top: 56px; }
+    .stat-cell {
+      flex: 1; min-width: 130px;
+      padding: 0 32px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell:first-child { padding-left: 0; }
+    .stat-num { font-size: clamp(28px, 4vw, 52px); font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w25); }
+    @media(max-width:640px) {
+      .stat-row { flex-wrap: wrap; gap: 28px; }
+      .stat-cell { flex: 1 0 40%; border-right: none; }
+    }
+
+    /* ─── PROOF MARQUEE ──────────────────────────────────────── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg1);
+    }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: marquee 32s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 0;
+      font-size: 13px; color: var(--w45);
+      padding: 14px 40px;
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .marquee-item strong { color: #fff; font-weight: 600; margin-right: 8px; }
+
+    /* ─── PROBLEM CARDS (stacking) ───────────────────────────── */
+    .problem-stack { display: flex; flex-direction: column; gap: 14px; margin-top: 52px; }
+    .problem-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+      padding: 36px 40px;
+      display: grid; grid-template-columns: 90px 1fr; gap: 32px; align-items: start;
+    }
+    .problem-num-wrap { display: flex; flex-direction: column; align-items: flex-start; padding-top: 4px; }
+    .problem-num-big { font-size: 44px; font-weight: 700; color: rgba(255,255,255,0.1); line-height: 1; letter-spacing: -0.04em; }
+    .problem-num-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w25); margin-top: 4px; }
+    .problem-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.01em; }
+    .problem-body { font-size: 16px; color: var(--w45); line-height: 1.8; }
+    /* Broken visuals — inline below body text */
+    .problem-visual {
+      margin-top: 20px; padding-top: 18px;
+      border-top: 1px solid var(--border2);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .pv-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w25); margin-bottom: 4px; }
+    /* Apps: disparity bars */
+    .pv-bar-row { display: flex; flex-direction: column; gap: 8px; }
+    .pv-row { display: flex; flex-direction: column; gap: 4px; }
+    .pv-name { font-size: 9px; color: var(--w25); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pv-bar-track { height: 6px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; width: 100%; }
+    .pv-bar-fill { height: 100%; border-radius: 999px; }
+    .pv-bar-fill.low  { width: 8%; background: rgba(239,68,68,0.6); }
+    .pv-bar-fill.high { width: 95%; background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.7)); }
+    .pv-val { font-size: 10px; font-weight: 700; color: var(--w45); }
+    /* Texts: ghosted chat */
+    .pv-chat { display: flex; flex-direction: column; gap: 5px; }
+    .pv-msg { font-size: 10px; padding: 6px 9px; border-radius: 10px; }
+    .pv-msg.sent { background: #0a84ff; color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; font-style: italic; }
+    .pv-msg.read { align-self: flex-end; font-size: 8px; color: rgba(239,68,68,0.7); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .pv-silence { font-size: 8px; color: rgba(255,255,255,0.15); font-style: italic; text-align: center; padding: 4px 0; }
+    /* Real life: countdown */
+    .pv-countdown { display: flex; flex-direction: column; gap: 6px; }
+    .pv-tick { font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .pv-tick .t-num { font-size: 16px; font-weight: 900; color: #fff; width: 32px; }
+    .pv-tick .t-bar { flex: 1; height: 3px; border-radius: 999px; }
+    .pv-tick.t1 .t-bar { background: rgba(255,255,255,0.5); }
+    .pv-tick.t2 .t-bar { background: rgba(255,255,255,0.25); width: 55%; }
+    .pv-tick.t3 .t-bar { background: rgba(239,68,68,0.5); width: 10%; }
+    .pv-closed { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(239,68,68,0.7); margin-top: 4px; }
+    @media(max-width:640px) { .problem-card { grid-template-columns: 1fr; gap: 16px; padding: 28px 24px; } }
+
+    /* ─── NETWORK VISUAL (3x bigger) ────────────────────────── */
+    .network-visual {
+      display: flex; justify-content: center; align-items: center;
+      padding: 0;
+    }
+    .network-svg { width: 100%; max-width: 100%; }
+
+    /* ─── TINDER RESULT CARDS ────────────────────────────────── */
+    .tinder-scroll-wrap {
+      overflow-x: auto; overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 52px -48px 0; padding: 8px 48px 28px;
+    }
+    .tinder-scroll-wrap::-webkit-scrollbar { display: none; }
+    .tinder-row { display: flex; gap: 18px; width: max-content; }
+    .tinder-card {
+      width: 230px; height: 690px; /* ~3:1 ratio */
+      border-radius: 22px; overflow: hidden; flex-shrink: 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4);
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s;
+      cursor: default;
+    }
+    .tinder-card:hover { transform: scale(1.025) translateY(-6px); box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5); }
+    .tc-photo { flex: 0 0 490px; position: relative; overflow: hidden; }
+    .tc-photo::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 65%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    }
+    .tc-photo::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.04) 0%, transparent 65%);
+    }
+    /* Each card gets a unique photo gradient */
+    .tc-g1 { background: linear-gradient(155deg, #1a1624 0%, #2d1b3a 50%, #120e1a 100%); }
+    .tc-g2 { background: linear-gradient(155deg, #0d1820 0%, #0d2232 50%, #060e18 100%); }
+    .tc-g3 { background: linear-gradient(155deg, #151e12 0%, #1d2e14 50%, #0a1208 100%); }
+    .tc-g4 { background: linear-gradient(155deg, #201415 0%, #320e12 50%, #160808 100%); }
+    .tc-g5 { background: linear-gradient(155deg, #14141e 0%, #1e1a2e 50%, #0c0c18 100%); }
+    .tc-g6 { background: linear-gradient(155deg, #1e1810 0%, #2e2010 50%, #120e08 100%); }
+    .tc-initial {
+      position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+      font-size: 100px; font-weight: 900; color: rgba(255,255,255,0.05);
+      letter-spacing: -0.05em; pointer-events: none;
+    }
+    .tc-stat-badge {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px); border-radius: 999px;
+      padding: 5px 12px; font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.04em;
+    }
+    .tc-name-row {
+      position: absolute; bottom: 16px; left: 16px; z-index: 2;
+    }
+    .tc-name { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1; }
+    .tc-job-title { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 3px; }
+    .tc-info {
+      flex: 1; padding: 18px 18px 20px;
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--bg2);
+    }
+    .tc-result-label { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; }
+    .tc-quote {
+      font-size: 12px; color: var(--w45); line-height: 1.65; font-style: italic;
+      flex: 1; margin-top: 2px;
+    }
+    .tc-footer {
+      display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 12px;
+      border-top: 1px solid var(--border2);
+    }
+    .tc-verified-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+    .tc-footer-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w25); }
+
+    /* ─── BRIDGE BLOCK ───────────────────────────────────────── */
+    .bridge-block {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 40px 48px;
+      text-align: center; margin-top: 44px;
+    }
+    .bridge-line1 { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .bridge-line2 { font-size: clamp(15px, 1.8vw, 18px); color: var(--w45); line-height: 1.75; }
+
+    /* ─── PHASE HEADER ───────────────────────────────────────── */
+    .phase-tag {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .phase-num-box {
+      width: 40px; height: 40px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .phase-num-box span { font-size: 12px; font-weight: 700; color: var(--w45); }
+    .phase-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w45); }
+
+    /* ─── SPLIT LAYOUT ───────────────────────────────────────── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .split.flip { direction: rtl; }
+    .split.flip > * { direction: ltr; }
+    @media(max-width:860px) {
+      .split { grid-template-columns: 1fr; gap: 48px; direction: ltr; }
+      .split.flip { direction: ltr; }
+    }
+
+    /* ─── iPHONE 15 PRO MAX MOCKUP ─────────────────────────────── */
+    .phone-wrap {
+      display: flex; justify-content: center; align-items: center;
+      position: relative; padding: 32px 40px;
+    }
+    /* Outer device: titanium frame (Black Titanium colorway)
+       Real dimensions: 76.7mm × 159.9mm → CSS: 270px × 563px */
+    .iphone15 {
+      position: relative;
+      width: 270px;
+      height: 563px;
+      border-radius: 46px;
+      background: linear-gradient(145deg,
+        #4a4a4e 0%, #2e2e32 15%,
+        #1c1c20 35%, #232328 60%,
+        #2e2e34 80%, #3e3e42 100%
+      );
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.22),
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 100px rgba(0,0,0,0.96),
+        0 20px 50px rgba(0,0,0,0.7),
+        0 6px 18px rgba(0,0,0,0.5);
+      padding: 13px 9px 26px;
+      flex-shrink: 0;
+    }
+    /* Screen container */
+    .iphone15-screen {
+      width: 100%; height: 100%;
+      border-radius: 36px;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Subtle screen reflection */
+    .iphone15-screen::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 35%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, transparent 100%);
+      pointer-events: none; z-index: 50; border-radius: 36px 36px 0 0;
+    }
+    /* Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 11px; left: 50%; transform: translateX(-50%);
+      width: 92px; height: 27px;
+      background: #000; border-radius: 999px; z-index: 20;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 9px; gap: 5px;
+    }
+    .di-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #222228, #0a0a10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 0 4px rgba(80,80,255,0.12);
+    }
+    .di-sensor {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #181828, #08080e);
+      box-shadow: 0 0 3px rgba(60,60,200,0.25);
+    }
+    /* Left buttons: action, vol up, vol down */
+    .iphone15-action {
+      position: absolute; left: -4px; top: 110px;
+      width: 4px; height: 30px; border-radius: 2px 0 0 2px;
+      background: linear-gradient(180deg, #3e3e42, #2a2a2e, #3e3e42);
+      box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 1px 0 0 rgba(255,255,255,0.07);
+    }
+    .iphone15-vol-up {
+      position: absolute; left: -4px; top: 160px;
+      width: 4px; height: 54px; border-radius: 2px 0 0 2px;
+      background: linear-gradient(180deg, #3e3e42, #2a2a2e, #3e3e42);
+      box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 1px 0 0 rgba(255,255,255,0.07);
+    }
+    .iphone15-vol-down {
+      position: absolute; left: -4px; top: 224px;
+      width: 4px; height: 54px; border-radius: 2px 0 0 2px;
+      background: linear-gradient(180deg, #3e3e42, #2a2a2e, #3e3e42);
+      box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 1px 0 0 rgba(255,255,255,0.07);
+    }
+    /* Right button: power */
+    .iphone15-power {
+      position: absolute; right: -4px; top: 178px;
+      width: 4px; height: 72px; border-radius: 0 2px 2px 0;
+      background: linear-gradient(180deg, #3e3e42, #2a2a2e, #3e3e42);
+      box-shadow: 1px 0 3px rgba(0,0,0,0.6), inset -1px 0 0 rgba(255,255,255,0.07);
+    }
+    /* Screen content area */
+    .phone-screen {
+      width: 100%; height: 100%;
+      overflow-y: auto; overflow-x: hidden;
+      scrollbar-width: none; background: #0d0d0d;
+    }
+    .phone-screen::-webkit-scrollbar { display: none; }
+    /* Home indicator */
+    .home-indicator {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 4px; border-radius: 999px;
+      background: rgba(255,255,255,0.22); z-index: 30;
+    }
+
+    /* App screen content */
+    .app-status-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 18px 4px;
+      font-size: 10px; color: rgba(255,255,255,0.85);
+      font-weight: 600;
+    }
+    .status-icons { display: flex; align-items: center; gap: 5px; }
+    .app-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .app-logo { font-size: 12px; font-weight: 900; letter-spacing: 0.08em; color: #FFD400; }
+    .app-notif { font-size: 9px; font-weight: 700; background: #FFD400; color: #000; padding: 3px 8px; border-radius: 999px; }
+
+    /* Profile card inside phone */
+    .profile-card-phone { padding: 10px 12px 10px; }
+    .profile-photo-ph {
+      width: 100%; aspect-ratio: 3/4;
+      border-radius: 14px; position: relative; overflow: hidden; margin-bottom: 10px;
+      /* Woman photo: hair (dark top), face (skin center), body (dark bottom) */
+      background:
+        radial-gradient(ellipse 70% 45% at 50% 16%, #2a1a12 0%, transparent 80%),  /* dark hair top */
+        radial-gradient(ellipse 55% 30% at 50% 12%, #1a0e08 0%, transparent 70%),   /* hair center */
+        radial-gradient(ellipse 50% 28% at 50% 38%, #c49a7a 0%, #a0735a 40%, transparent 80%), /* face skin */
+        radial-gradient(ellipse 35% 14% at 50% 50%, #d4a688 0%, transparent 70%),   /* nose bridge */
+        radial-gradient(ellipse 60% 20% at 50% 62%, #8b5e42 0%, transparent 70%),   /* shoulders/neck */
+        linear-gradient(180deg, #1a0e08 0%, #0d0608 30%, #1a1020 60%, #0a0814 100%);
+    }
+    .profile-photo-ph::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.88));
+    }
+    .profile-photo-ph::before {
+      content: '';
+      position: absolute; inset: 0;
+      /* subtle lighting effect */
+      background:
+        radial-gradient(ellipse at 35% 30%, rgba(255,220,180,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 65% 15%, rgba(255,255,255,0.03) 0%, transparent 40%);
+    }
+    .profile-initials {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-52%);
+      font-size: 42px; font-weight: 900; color: rgba(255,255,255,0.07);
+      letter-spacing: -0.03em;
+    }
+    .profile-overlay { position: absolute; bottom: 10px; left: 12px; z-index: 1; }
+    .profile-pname { font-size: 13px; font-weight: 700; color: #fff; }
+    .profile-page  { font-size: 10px; color: rgba(255,255,255,0.6); }
+    .app-actions { display: flex; justify-content: center; gap: 14px; padding: 6px 14px 10px; }
+    .app-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .app-btn.pass  { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+    .app-btn.like  { background: rgba(255,212,0,0.18); border: 1px solid rgba(255,212,0,0.35); }
+    .app-btn.super { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); }
+    /* MATCH NOTIFICATION */
+    .match-notif {
+      margin: 0 12px 10px;
+      background: linear-gradient(135deg, rgba(255,212,0,0.15), rgba(255,212,0,0.06));
+      border: 1px solid rgba(255,212,0,0.28); border-radius: 10px;
+      padding: 8px 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .match-text { font-size: 10px; font-weight: 700; color: #FFD400; letter-spacing: 0.06em; text-transform: uppercase; }
+    /* Notification badges */
+    .notif-stack { margin: 0 12px 10px; display: flex; flex-direction: column; gap: 5px; }
+    .notif-badge {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 9px; padding: 7px 10px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 9px; color: rgba(255,255,255,0.6);
+    }
+    .ni-icon { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .notif-badge .nb { font-weight: 700; color: #fff; font-size: 10px; }
+
+    /* ─── HEARTS ANIMATION ───────────────────────────────────── */
+    .hearts-container {
+      position: absolute; top: 40px; right: -55px;
+      width: 90px; height: 260px;
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      color: #FF3B57;
+      opacity: 0;
+      animation: heartFloat var(--dur,3s) ease-out infinite var(--delay,0s);
+      filter: drop-shadow(0 0 8px var(--glow, rgba(255,59,87,0.7)));
+    }
+    .heart svg { display: block; }
+    .h1 { left:6px;  --delay:0s;   --dur:2.8s; --glow:rgba(255,59,87,0.75); color:#FF3B57; }
+    .h2 { left:42px; --delay:0.7s; --dur:3.2s; --glow:rgba(255,75,145,0.75); color:#FF4B91; }
+    .h3 { left:18px; --delay:1.5s; --dur:2.6s; --glow:rgba(255,59,87,0.6);  color:#FF6B8A; }
+    .h4 { left:52px; --delay:2.2s; --dur:3.0s; --glow:rgba(255,59,87,0.75); color:#FF3B57; }
+    .h5 { left:28px; --delay:0.4s; --dur:3.4s; --glow:rgba(255,75,145,0.6); color:#FF4B91; }
+    .h6 { left:8px;  --delay:1.8s; --dur:2.9s; --glow:rgba(255,59,87,0.7);  color:#FF3B57; }
+    .h7 { left:60px; --delay:2.7s; --dur:3.1s; --glow:rgba(255,80,140,0.75);color:#FF6080; }
+    @keyframes heartFloat {
+      0%   { transform:translate(0,0) scale(0.35) rotate(-8deg); opacity:0; }
+      8%   { opacity:1; transform:translate(-4px,-22px) scale(0.8) rotate(-3deg); }
+      25%  { transform:translate(6px,-68px) scale(1.1) rotate(4deg); opacity:0.95; }
+      50%  { transform:translate(-6px,-120px) scale(0.9) rotate(-5deg); opacity:0.75; }
+      75%  { transform:translate(4px,-162px) scale(0.6) rotate(8deg); opacity:0.4; }
+      100% { transform:translate(-3px,-200px) scale(0.2) rotate(12deg); opacity:0; }
+    }
+
+    /* ─── CHAT PHONE ─────────────────────────────────────────── */
+    .chat-screen { padding: 12px 10px; display: flex; flex-direction: column; gap: 7px; }
+    .chat-header { display: flex; align-items: center; gap: 8px; padding: 0 4px 10px; border-bottom: 1px solid var(--border2); margin-bottom: 4px; }
+    .chat-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); }
+    .chat-name { font-size: 10px; font-weight: 700; color: #fff; }
+    .chat-active { font-size: 8px; color: #22c55e; }
+    .bubble {
+      max-width: 80%; font-size: 10px; line-height: 1.5; padding: 7px 10px; border-radius: 12px;
+    }
+    .bubble.them { background: var(--bg3); color: rgba(255,255,255,0.8); align-self: flex-start; border-bottom-left-radius: 3px; }
+    .bubble.me   { background: #0a84ff; color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+    .bubble.annotation {
+      background: transparent; border: 1px dashed rgba(255,255,255,0.15);
+      color: var(--w45); font-style: italic; font-size: 8px; align-self: center;
+      border-radius: 6px; padding: 4px 8px;
+    }
+    .typing-dots { display: flex; gap: 3px; align-items: center; padding: 9px 12px; }
+    .typing-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.4); animation: typingBounce 1.2s ease-in-out infinite; }
+    .typing-dot:nth-child(2) { animation-delay: .2s; }
+    .typing-dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes typingBounce { 0%,60%,100%{transform:translateY(0);} 30%{transform:translateY(-5px);} }
+
+    /* ─── THREE STREAMS VISUAL (+20%) ───────────────────────── */
+    .streams-visual {
+      display: flex; justify-content: center; gap: 52px;
+      padding: 24px 0 16px;
+    }
+    .stream-col {
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      width: 144px;
+    }
+    .stream-icon-wrap {
+      width: 62px; height: 62px; border-radius: 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .stream-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55); margin-bottom: 20px; text-align: center; line-height: 1.5;
+    }
+    .stream-track {
+      width: 3px; height: 456px; background: rgba(255,255,255,0.07);
+      position: relative; border-radius: 2px;
+    }
+    .stream-dot-anim {
+      width: 12px; height: 12px; border-radius: 50%; background: #fff;
+      position: absolute; left: -4.5px;
+      animation: streamFlow 2.5s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+    .stream-dot-anim:nth-child(2) { animation-delay: 0.8s; }
+    .stream-dot-anim:nth-child(3) { animation-delay: 1.6s; }
+    @keyframes streamFlow {
+      0%   { top: 0; opacity: 0; transform: scale(0.5); }
+      10%  { opacity: 1; transform: scale(1); }
+      85%  { opacity: 0.9; }
+      100% { top: 100%; opacity: 0; transform: scale(0.4); }
+    }
+    .stream-count { font-size: 26px; font-weight: 700; color: #fff; margin-top: 20px; letter-spacing: -0.03em; }
+    .stream-sub { font-size: 11px; color: var(--w25); text-align: center; margin-top: 5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .streams-merge {
+      width: 100%; display: flex; flex-direction: column; align-items: center;
+      margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .merge-label { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+    .merge-sub { font-size: 13px; color: var(--w45); margin-top: 7px; }
+
+    /* ─── TINDER AUTO-SCROLL ────────────────────────────────── */
+    @keyframes scrollCards {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 9px)); }
+    }
+    .tinder-row.auto-scroll {
+      animation: scrollCards 45s linear infinite;
+    }
+    .tinder-row.auto-scroll:hover { animation-play-state: paused; }
+
+    /* ─── PIPELINE CARDS (3 streams) ────────────────────────── */
+    .pipeline-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin-top: 48px;
+    }
+    .pipe-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 32px 28px;
+      display: flex; flex-direction: column;
+    }
+    .pipe-card-icon { font-size: 28px; margin-bottom: 18px; }
+    .pipe-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w25); margin-bottom: 10px; }
+    .pipe-card-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+    .pipe-card-body { font-size: 14px; color: var(--w45); line-height: 1.8; flex: 1; margin-bottom: 18px; }
+    .pipe-proof { font-size: 12px; color: var(--w45); font-style: italic; padding-top: 14px; border-top: 1px solid var(--border2); }
+    @media(max-width:760px) { .pipeline-cards { grid-template-columns: 1fr; } }
+
+    /* ─── TIMELINE ───────────────────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 3px; margin-top: 52px; }
+    .tl-row {
+      display: grid; grid-template-columns: 110px 1fr;
+      gap: 36px; padding: 32px 36px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; align-items: start;
+      border-left: 3px solid rgba(255,255,255,0.12);
+    }
+    .tl-row:nth-child(1) { border-left-color: rgba(255,255,255,0.35); }
+    .tl-row:nth-child(2) { border-left-color: rgba(255,255,255,0.25); }
+    .tl-row:nth-child(3) { border-left-color: rgba(255,255,255,0.18); }
+    .tl-row:nth-child(4) { border-left-color: rgba(255,255,255,0.55); }
+    .tl-week {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+      padding-top: 5px; line-height: 1.4;
+    }
+    .tl-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .tl-body { font-size: 15px; color: var(--w45); line-height: 1.85; margin-bottom: 10px; }
+    .tl-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    @media(max-width:640px) { .tl-row { grid-template-columns: 1fr; gap: 12px; } }
+
+    /* ─── RESULTS GRID ───────────────────────────────────────── */
+    .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 52px; }
+    .r-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px;
+      display: flex; flex-direction: column;
+    }
+    .r-card.wide {
+      grid-column: span 3;
+      background: #fff; color: #000;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+      padding: 44px 52px;
+    }
+    .r-metric { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .r-card.wide .r-metric { font-size: 64px; color: #000; }
+    .r-metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w25); margin-bottom: 16px; }
+    .r-card.wide .r-metric-label { color: rgba(0,0,0,0.4); }
+    .r-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .r-card.wide .r-name { color: #000; }
+    .r-role { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--w25); margin-bottom: 16px; }
+    .r-card.wide .r-role { color: rgba(0,0,0,0.4); }
+    .r-body { font-size: 14px; color: var(--w45); line-height: 1.8; flex: 1; }
+    .r-card.wide .r-body { font-size: 16px; color: rgba(0,0,0,0.65); }
+    @media(max-width:860px){
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .r-card.wide { grid-column: span 2; grid-template-columns: 1fr; gap: 24px; padding: 36px; }
+    }
+    @media(max-width:580px){
+      .results-grid { grid-template-columns: 1fr; }
+      .r-card.wide { grid-column: span 1; }
+    }
+
+    /* ─── COMPARISON TABLE ───────────────────────────────────── */
+    .cmp-wrap { overflow-x: auto; margin-top: 52px; }
+    .cmp { width: 100%; border-collapse: collapse; }
+    .cmp th, .cmp td { padding: 16px 24px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .cmp th { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w25); background: var(--bg2); }
+    .cmp td:first-child { color: var(--w45); }
+    .cmp td:nth-child(2) { color: #fff; font-weight: 600; }
+    .cmp td:last-child { color: rgba(239,68,68,0.6); font-style: italic; }
+    .cmp tr:last-child td { border-bottom: none; }
+
+    /* ─── GUARANTEE ──────────────────────────────────────────── */
+    .gtee-block {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 56px; text-align: center; margin-top: 52px;
+    }
+    .gtee-icon { font-size: 32px; margin-bottom: 20px; opacity: 0.6; }
+    .gtee-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .gtee-body { font-size: 17px; color: var(--w45); max-width: 520px; margin: 0 auto 10px; line-height: 1.75; }
+    .gtee-note { font-size: 13px; color: var(--w25); font-style: italic; }
+
+    /* ─── QUAL GRID ──────────────────────────────────────────── */
+    .qual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
+    .q-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 40px 36px; }
+    .q-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 26px; }
+    .q-label.yes { color: #22c55e; }
+    .q-label.no  { color: rgba(239,68,68,0.7); }
+    .q-list { list-style: none; }
+    .q-list li { font-size: 15px; color: var(--w70); padding: 10px 0; border-bottom: 1px solid var(--border2); display: flex; gap: 10px; align-items: flex-start; }
+    .q-list li:last-child { border-bottom: none; }
+    .q-card.fit   .q-list li::before { content: "✓"; color: #22c55e; font-weight: 700; flex-shrink: 0; }
+    .q-card.nofit .q-list li::before { content: "✗"; color: rgba(239,68,68,0.6); font-weight: 700; flex-shrink: 0; }
+    @media(max-width:640px) { .qual-grid { grid-template-columns: 1fr; } }
+
+    /* ─── FAQ ACCORDION ─────────────────────────────────────── */
+    .faq-list { margin-top: 52px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      font-size: 17px; font-weight: 600; color: #fff;
+      padding: 26px 0; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; user-select: none;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: rgba(255,255,255,0.85); }
+    .faq-toggle {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.2s;
+    }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); border-color: rgba(255,255,255,0.3); }
+    .faq-a-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(.16,1,.3,1);
+    }
+    .faq-item.open .faq-a-wrap { max-height: 300px; }
+    .faq-a { font-size: 15px; color: var(--w45); line-height: 1.85; padding-bottom: 26px; }
+
+    /* ─── SECTION BACKGROUNDS ────────────────────────────────── */
+    .s-black   { background: #000; }
+    .s-dark    { background: var(--bg1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .s-darker  { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    /* ─── WEEK SCHEDULE ──────────────────────────────────────── */
+    .week-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .week-row { display: flex; gap: 18px; }
+    .week-day { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w25); width: 44px; flex-shrink: 0; padding-top: 3px; }
+    .week-copy { font-size: 15px; color: var(--w70); line-height: 1.7; }
+    @media(max-width:580px) { .week-grid { grid-template-columns: 1fr; } }
+
+    /* ─── SCROLL PROGRESS BAR ────────────────────────────────── */
+    #progress-bar {
+      position: fixed; top: 100px; left: 0; z-index: 150;
+      height: 2px; background: rgba(255,255,255,0.15);
+      width: 100%; pointer-events: none;
+    }
+    #progress-fill {
+      height: 100%; background: #fff;
+      width: 0%; transition: width 0.5s ease;
+    }
+
+    /* ─── DECK ENGINE (desktop only) ────────────────────────── */
+    @media (min-width: 769px) {
+      html, body {
+        overflow: hidden !important;
+        height: 100vh !important;
+      }
+      #deck-wrap {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        will-change: transform;
+        transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      #deck-wrap > section {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        overflow: hidden !important;
+        /* Ensure content clears the fixed 68px nav */
+        padding-top: 92px !important;
+        box-sizing: border-box !important;
+      }
+      /* Scroll progress dots */
+      #deck-ticks {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.25s;
+        pointer-events: none;
+      }
+      #deck-ticks.show { opacity: 1; }
+      .dt-pip {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.25);
+        transition: background 0.15s, transform 0.15s;
+      }
+      .dt-pip.lit {
+        background: rgba(255,255,255,0.9);
+        transform: scale(1.35);
+      }
+      /* Section index dots (right side) */
+      #deck-nav {
+        position: fixed;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      .dn-dot {
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        transition: background 0.3s, transform 0.3s;
+      }
+      .dn-dot.cur {
+        background: rgba(255,255,255,0.8);
+        transform: scale(1.6);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <div class="brand-mark"></div>
+      <div class="brand-wordmark">
+        <span class="brand-name">Atlas</span>
+        <span class="brand-sub">Advisory</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">System</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#apply" class="nav-apply">Apply Now</a>
+  </nav>
+
+  <!-- ENROLLMENT BAR -->
+  <div class="enroll-bar">
+    <div class="live-dot"></div>
+    <span>ENROLLMENT: OPEN &nbsp;·&nbsp; 4 SPOTS REMAINING</span>
+    <a href="#apply" style="margin-left:8px;">&rarr;</a>
+  </div>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §1  HERO
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black page-top" id="hero" style="min-height:100vh;">
+    <div class="inner text-center">
+
+      <h1 class="h-xl reveal reveal-d1" style="margin-bottom:28px;">
+        You've built<br>everything.<br><em>Except this.</em>
+      </h1>
+
+      <p class="body-xl reveal reveal-d2" style="max-width:580px;margin:0 auto;">
+        We rebuild your profiles, dial in your messaging, and coach every conversation in real time. You just show up to the dates.
+      </p>
+
+      <!-- VSL -->
+      <div class="vsl-wrap reveal reveal-d3">
+        <div class="vsl-corner">WATCH FIRST · CONFIDENTIAL</div>
+        <div class="vsl-inner">
+          <div class="vsl-play-btn">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <p class="vsl-label">"How Yaro went from 0 quality matches to 20+ dates in 30 days"</p>
+        </div>
+      </div>
+
+      <div class="cta-row center reveal reveal-d4">
+        <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
+        <a href="#how-it-works" class="btn btn-outline">See how it works &darr;</a>
+      </div>
+      <p class="sub-note reveal reveal-d5">Less than 5% accepted &nbsp;·&nbsp; NDA protected &nbsp;·&nbsp; Takes 2 minutes</p>
+      <div class="reveal reveal-d5" style="margin-top:20px;">
+        <span class="qualifier-pill">For high-performing men who are done leaving this area of their life to chance.</span>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="stat-row reveal reveal-d5" style="margin-top:72px;">
+        <div class="stat-cell">
+          <div class="stat-num">200M+</div>
+          <div class="stat-label">Views</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">1,000+</div>
+          <div class="stat-label">Private Clients</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">&lt;5%</div>
+          <div class="stat-label">Accepted</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PROOF MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item"><strong>"20 dates in 30 days"</strong> Todd · Retired Investor, 54</span>
+      <span class="marquee-item"><strong>"40+ Bumble matches in 24 hrs"</strong> Spencer · Cybersecurity</span>
+      <span class="marquee-item"><strong>"Women cold-DM'd me first"</strong> Aakash · Quant Trader</span>
+      <span class="marquee-item"><strong>"10 dates in first month"</strong> Hector · Post-Divorce Executive</span>
+      <span class="marquee-item"><strong>"4 dates in 2 weeks"</strong> Ben · Private Equity</span>
+      <span class="marquee-item"><strong>"18 matches in one night"</strong> Parker · Business Analyst</span>
+      <span class="marquee-item"><strong>"20 dates in 30 days"</strong> Todd · Retired Investor, 54</span>
+      <span class="marquee-item"><strong>"40+ Bumble matches in 24 hrs"</strong> Spencer · Cybersecurity</span>
+      <span class="marquee-item"><strong>"Women cold-DM'd me first"</strong> Aakash · Quant Trader</span>
+      <span class="marquee-item"><strong>"10 dates in first month"</strong> Hector · Post-Divorce Executive</span>
+      <span class="marquee-item"><strong>"4 dates in 2 weeks"</strong> Ben · Private Equity</span>
+      <span class="marquee-item"><strong>"18 matches in one night"</strong> Parker · Business Analyst</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §2  THE GAP
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="s-black profile-snap">
+    <div class="profile-intro reveal">
+      <span class="eyebrow">The Gap</span>
+    </div>
+
+    <!-- Pure photo card — 9:16 portrait -->
+    <div class="profile-card reveal reveal-d2">
+      <div class="profile-photo">
+        <div class="profile-photo-ph">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8">
+            <circle cx="12" cy="8" r="4.5"/><path d="M3 21c0-4.42 4.03-8 9-8s9 3.58 9 8"/>
+          </svg>
+          <span>AI photo — swap before launch</span>
+        </div>
+        <div class="profile-vignette"></div>
+        <div class="profile-overlay">
+          <div class="profile-name">James <span class="age">38</span></div>
+          <div class="profile-job">Founder &amp; LP · San Francisco</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Characteristic stack -->
+    <div class="profile-stats reveal reveal-d3">
+      <span class="profile-stat"><span class="stat-dot"></span>6'1"</span>
+      <span class="profile-stat"><span class="stat-dot d2"></span>Harvard MBA</span>
+      <span class="profile-stat"><span class="stat-dot d3"></span>Owns his place</span>
+      <span class="profile-stat"><span class="stat-dot d4"></span>Never married</span>
+      <span class="profile-stat"><span class="stat-dot d5"></span>Wants something real</span>
+      <span class="profile-stat"><span class="stat-dot d6"></span>No kids</span>
+    </div>
+
+    <p class="profile-caption reveal reveal-d4">No feedback. No data. Just a pattern that keeps repeating.</p>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §3  THE PROBLEM
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark">
+    <div class="inner">
+      <span class="eyebrow reveal">Here's What Was Broken for James</span>
+      <h2 class="h-md reveal reveal-d1">Three channels.<br>All broken.</h2>
+
+      <div class="problem-stack">
+        <div class="problem-card reveal reveal-d2">
+          <div class="problem-num-wrap">
+            <div class="problem-num-big">01</div>
+            <div class="problem-num-tag">Apps</div>
+          </div>
+          <div>
+            <div class="problem-title">James was getting 3 likes a week. Guys half his caliber were in her inbox.</div>
+            <p class="problem-body">His profile wasn't his. Shot on an iPhone, bio a list of resume bullets. The algorithm had already decided he wasn't worth showing. Nobody told him the setup was the entire problem.</p>
+            <div class="problem-visual">
+              <div class="pv-label">Algorithm reach — before Atlas</div>
+              <div class="pv-bar-row">
+                <div class="pv-row">
+                  <span class="pv-name">You (before)</span>
+                  <div class="pv-bar-track"><div class="pv-bar-fill low"></div></div>
+                  <span class="pv-val" style="color:rgba(239,68,68,0.8);">3 likes / wk</span>
+                </div>
+                <div class="pv-row" style="margin-top:10px;">
+                  <span class="pv-name">Top 1% profile</span>
+                  <div class="pv-bar-track"><div class="pv-bar-fill high"></div></div>
+                  <span class="pv-val">50+ / wk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="problem-card reveal reveal-d3">
+          <div class="problem-num-wrap">
+            <div class="problem-num-big">02</div>
+            <div class="problem-num-tag">Texts</div>
+          </div>
+          <div>
+            <div class="problem-title">He matched someone worth his time. She read it and vanished.</div>
+            <p class="problem-body">He overthought it. She went cold. It happened enough times he started assuming something was wrong with him. It wasn't. He just had no system.</p>
+            <div class="problem-visual">
+              <div class="pv-label">What you saw</div>
+              <div class="pv-chat">
+                <div class="pv-msg sent">"Hey, want to grab coffee this week—"</div>
+                <div class="pv-msg read">
+                  <svg width="12" height="8" viewBox="0 0 18 12"><path d="M1 6l4 4L17 2" stroke="rgba(239,68,68,0.8)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M7 6l4 4" stroke="rgba(239,68,68,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                  Read · 9:47pm
+                </div>
+                <div class="pv-silence">— 3 hours later —</div>
+                <div class="pv-silence">— next day —</div>
+                <div class="pv-silence" style="color:rgba(239,68,68,0.4); font-weight:600;">nothing.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="problem-card reveal reveal-d4">
+          <div class="problem-num-wrap">
+            <div class="problem-num-big">03</div>
+            <div class="problem-num-tag">Real Life</div>
+          </div>
+          <div>
+            <div class="problem-title">He saw her at the rooftop bar. Had ten seconds. Did nothing.</div>
+            <p class="problem-body">The window closed. That specific woman, that specific moment — gone. He drove home knowing he had it and didn't take it. It wasn't fear. He just had no gameplan.</p>
+            <div class="problem-visual">
+              <div class="pv-label">Your window to act</div>
+              <div class="pv-countdown">
+                <div class="pv-tick t1"><span class="t-num">0:10</span><div class="t-bar"></div></div>
+                <div class="pv-tick t2"><span class="t-num">0:05</span><div class="t-bar"></div></div>
+                <div class="pv-tick t3"><span class="t-num">0:00</span><div class="t-bar"></div></div>
+              </div>
+              <div class="pv-closed">Window closed. She's gone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bridge-block reveal reveal-d5">
+        <p class="bridge-line1">None of this was a character flaw. It was a missing system.</p>
+        <p class="bridge-line2">We built it. Here's what that looked like for James.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §4  HOW IT WORKS — INTRO
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black text-center" id="how-it-works">
+    <div class="inner narrow">
+      <span class="eyebrow reveal">The Atlas System</span>
+      <h2 class="h-lg reveal reveal-d1">Three phases.<br>Ninety days.</h2>
+      <p class="body-xl reveal reveal-d2" style="margin-top:24px;">A business without leads is not a business. Your dating life works the same way. Three simultaneous streams. No single point of failure.</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §5  PHASE 1 — BUILD YOUR PIPELINE
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark">
+    <div class="inner wide">
+
+      <div class="split">
+
+        <!-- LEFT: TEXT -->
+        <div>
+          <div class="phase-tag reveal">
+            <div class="phase-num-box"><span>01</span></div>
+            <span class="phase-label">The 3-Part Pipeline</span>
+          </div>
+
+          <h2 class="h-md reveal reveal-d1">Build your<br>pipeline.</h2>
+
+          <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
+            A business without leads is not a business. We build three simultaneous streams so there is no single point of failure.
+          </p>
+          <p class="body-lg reveal reveal-d3" style="margin-top:14px; color:var(--w45);">
+            5-10 leads from apps. 5-10 from Instagram. 3-5 from real life. Three dates a week isn't a goal. It's just math.
+          </p>
+        </div>
+
+        <!-- RIGHT: iPHONE 15 PRO MAX WITH HEARTS -->
+        <div class="reveal reveal-d2">
+          <div class="phone-wrap">
+
+            <div class="iphone15" style="position:relative;">
+              <!-- Hearts emerge from inside the phone -->
+              <div class="hearts-container" style="position:absolute;top:60px;right:-52px;width:80px;height:280px;pointer-events:none;z-index:50;">
+                <div class="heart h1"><svg width="22" height="20" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h2"><svg width="30" height="27" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h3"><svg width="16" height="14" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h4"><svg width="26" height="23" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h5"><svg width="20" height="18" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h6"><svg width="18" height="16" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+                <div class="heart h7"><svg width="28" height="25" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="currentColor"/></svg></div>
+              </div>
+              <div class="iphone15-action"></div>
+              <div class="iphone15-vol-up"></div>
+              <div class="iphone15-vol-down"></div>
+              <div class="iphone15-power"></div>
+              <div class="iphone15-screen">
+                <div class="dynamic-island"><div class="di-sensor"></div><div class="di-dot"></div></div>
+                <div class="phone-screen">
+                  <div class="app-status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                      <svg width="16" height="10" viewBox="0 0 16 10" fill="rgba(255,255,255,0.85)"><rect x="0" y="4" width="3" height="6" rx="1"/><rect x="4" y="2" width="3" height="8" rx="1"/><rect x="8" y="0" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="10" rx="1" opacity=".35"/></svg>
+                      <svg width="14" height="10" viewBox="0 0 24 12" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"><rect x="1" y="1" width="18" height="10" rx="3"/><path d="M20 4v4a2 2 0 000-4z" fill="rgba(255,255,255,0.85)" stroke="none"/><rect x="2.5" y="2.5" width="11" height="7" rx="2" fill="rgba(255,255,255,0.85)" stroke="none"/></svg>
+                    </div>
+                  </div>
+                  <div class="app-header">
+                    <span class="app-logo">bumble</span>
+                    <span class="app-notif">12 new</span>
+                  </div>
+                  <div class="profile-card-phone">
+                    <div class="profile-photo-ph">
+                      <div class="profile-initials">S</div>
+                      <div class="profile-overlay">
+                        <div class="profile-pname">Sarah, 27</div>
+                        <div class="profile-page">2 miles away</div>
+                      </div>
+                    </div>
+                    <div class="app-actions">
+                      <div class="app-btn pass"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                      <div class="app-btn like"><svg width="17" height="15" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="#FFD400"/></svg></div>
+                      <div class="app-btn super"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.9)" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></div>
+                    </div>
+                  </div>
+                  <div class="match-notif">
+                    <svg width="14" height="12" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="#FFD400"/></svg>
+                    <span class="match-text">It's a match!</span>
+                  </div>
+                  <div class="notif-stack">
+                    <div class="notif-badge"><div class="ni-icon"><svg width="11" height="10" viewBox="0 0 32 30"><path d="M16 27S4 19.5 4 11c0-3.87 3.13-7 7-7 1.93 0 3.68.78 4.95 2.05L16 6.1l.05-.05C17.32 4.78 19.07 4 21 4c3.87 0 7 3.13 7 7 0 8.5-12 16-12 16z" fill="#FFD400"/></svg></div><span class="nb">+8 matches today</span></div>
+                    <div class="notif-badge"><div class="ni-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="nb">Emma sent a message</span></div>
+                    <div class="notif-badge"><div class="ni-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.8)" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></div><span class="nb">3 SuperSwipes</span></div>
+                  </div>
+                </div>
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §6  THREE SIMULTANEOUS STREAMS DETAIL
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-darker">
+    <div class="inner wide">
+
+      <div class="split flip">
+
+        <!-- RIGHT (visually left via flip): STREAMS VISUAL -->
+        <div class="reveal">
+          <div class="streams-visual">
+            <!-- Stream 1: Apps -->
+            <div class="stream-col">
+              <div class="stream-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="17" r="1" fill="rgba(255,255,255,0.7)" stroke="none"/><line x1="9" y1="6" x2="15" y2="6"/></svg>
+              </div>
+              <span class="stream-label">Dating<br>Apps</span>
+              <div class="stream-track">
+                <div class="stream-dot-anim"></div>
+                <div class="stream-dot-anim"></div>
+                <div class="stream-dot-anim"></div>
+              </div>
+              <div class="stream-count">5–10</div>
+              <div class="stream-sub">leads/week</div>
+            </div>
+
+            <!-- Stream 2: Instagram -->
+            <div class="stream-col">
+              <div class="stream-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.7)" stroke="none"/></svg>
+              </div>
+              <span class="stream-label">Instagram</span>
+              <div class="stream-track" style="background:rgba(255,255,255,0.1);">
+                <div class="stream-dot-anim" style="animation-delay:0.4s;"></div>
+                <div class="stream-dot-anim" style="animation-delay:1.2s;"></div>
+                <div class="stream-dot-anim" style="animation-delay:2.0s;"></div>
+              </div>
+              <div class="stream-count">5–10</div>
+              <div class="stream-sub">leads/week</div>
+            </div>
+
+            <!-- Stream 3: Real Life -->
+            <div class="stream-col">
+              <div class="stream-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span class="stream-label">Real<br>Life</span>
+              <div class="stream-track">
+                <div class="stream-dot-anim" style="animation-delay:0.8s;"></div>
+                <div class="stream-dot-anim" style="animation-delay:1.6s;"></div>
+                <div class="stream-dot-anim" style="animation-delay:2.4s;"></div>
+              </div>
+              <div class="stream-count">3–5</div>
+              <div class="stream-sub">leads/week</div>
+            </div>
+          </div>
+
+          <div class="streams-merge">
+            <div class="merge-label">15–25 leads / week</div>
+            <div class="merge-sub">Three dates a week isn't a goal. It's just math.</div>
+          </div>
+        </div>
+
+        <!-- LEFT: TEXT -->
+        <div>
+          <h3 class="h-sm reveal" style="color:var(--w25);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Three Simultaneous Streams</h3>
+
+          <div class="pipeline-cards" style="grid-template-columns:1fr; gap:12px;">
+
+            <div class="pipe-card reveal reveal-d1">
+              <div class="pipe-card-label">Dating Apps</div>
+              <div class="pipe-card-title">We rebuild your profile from scratch — not tweak it.</div>
+              <p class="pipe-card-body">Female advisors review and rank every photo before we touch anything. Top-1% profile. Matches on autopilot from day one.</p>
+              <p class="pipe-proof">Spencer: 40+ Bumble matches in 24 hours of going live</p>
+            </div>
+
+            <div class="pipe-card reveal reveal-d2">
+              <div class="pipe-card-label">Instagram</div>
+              <div class="pipe-card-title">The best women aren't spending their evenings on Hinge.</div>
+              <p class="pipe-card-body">Set up once. Right profile, right signals. Runs itself. You don't need to become an influencer — you just need it set up right.</p>
+              <p class="pipe-proof">Aakash: women cold-DM'd him first after the rebuild</p>
+            </div>
+
+            <div class="pipe-card reveal reveal-d3">
+              <div class="pipe-card-label">Real Life</div>
+              <div class="pipe-card-title">74% of women say they wish they were approached more.</div>
+              <p class="pipe-card-body">Weekly gameplan for your city and schedule. Record your approaches, send them to us — we find exactly where you lost her.</p>
+              <p class="pipe-proof">Maneet: approached a model cold on the street</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §7  PHASE 2 — TURN MATCHES INTO DATES
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark">
+    <div class="inner wide">
+
+      <div class="split">
+
+        <!-- LEFT: TEXT -->
+        <div>
+          <div class="phase-tag reveal">
+            <div class="phase-num-box"><span>02</span></div>
+            <span class="phase-label">The Conversion Blueprint</span>
+          </div>
+
+          <h2 class="h-md reveal reveal-d1">Turn matches<br>into dates.</h2>
+
+          <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
+            You can have the best profile on the platform and still not convert. The conversation does the work.
+          </p>
+          <p class="body-lg reveal reveal-d3" style="margin-top:14px; color:var(--w45);">
+            We hand you the full database: every opening line, recovery text, date-setting framework, and first-date script built from thousands of client conversations. Our ghostproof texts increase response rates by 40%. Most clients book their first date by week two.
+          </p>
+
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px;" class="reveal reveal-d4">
+            <p style="font-size:16px;color:#fff;font-style:italic;line-height:1.7;margin-bottom:10px;">"Last night felt like a crowning milestone. Sitting across from a woman I always knew I deserved, but I finally got proof of it."</p>
+            <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--w25);">— Matt, Atlas Client</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: CHAT PHONE (iPhone 15 Pro Max) -->
+        <div class="reveal reveal-d2">
+          <div class="phone-wrap">
+            <div class="iphone15">
+              <div class="iphone15-action"></div>
+              <div class="iphone15-vol-up"></div>
+              <div class="iphone15-vol-down"></div>
+              <div class="iphone15-power"></div>
+              <div class="iphone15-screen">
+                <div class="dynamic-island"><div class="di-sensor"></div><div class="di-dot"></div></div>
+                <div class="phone-screen">
+                  <div class="app-status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                      <svg width="16" height="10" viewBox="0 0 16 10" fill="rgba(255,255,255,0.85)"><rect x="0" y="4" width="3" height="6" rx="1"/><rect x="4" y="2" width="3" height="8" rx="1"/><rect x="8" y="0" width="3" height="10" rx="1"/></svg>
+                      <svg width="14" height="10" viewBox="0 0 24 12" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"><rect x="1" y="1" width="18" height="10" rx="3"/><path d="M20 4v4a2 2 0 000-4z" fill="rgba(255,255,255,0.85)" stroke="none"/><rect x="2.5" y="2.5" width="11" height="7" rx="2" fill="rgba(255,255,255,0.85)" stroke="none"/></svg>
+                    </div>
+                  </div>
+                  <div class="chat-screen">
+                    <div class="chat-header">
+                      <div class="chat-avatar"></div>
+                      <div>
+                        <div class="chat-name">Emma</div>
+                        <div class="chat-active">Active now</div>
+                      </div>
+                    </div>
+                    <div class="bubble annotation">← Atlas opener deployed</div>
+                    <div class="bubble them">haha okay you're funny</div>
+                    <div class="bubble them">what do you do?</div>
+                    <div class="bubble me">I'll tell you over coffee. Thursday work?</div>
+                    <div class="bubble annotation">← date-set script</div>
+                    <div class="bubble them">omg yes where?</div>
+                    <div class="bubble me">Soho House, 7pm. I'll book it.</div>
+                    <div class="bubble annotation">✓ Date booked in 48 hrs</div>
+                    <div class="bubble them" style="display:flex;gap:0;">
+                      <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §8  PHASE 3 — THE FEEDBACK LAYER
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-darker">
+    <div class="inner wide">
+
+      <div class="split flip">
+
+        <!-- RIGHT (visually left): NETWORK VISUAL — 3x larger, fills column -->
+        <div class="reveal">
+          <div class="network-visual">
+            <!-- viewBox scaled 3x: 300→900, 260→780, all coords ×3 -->
+            <svg class="network-svg" viewBox="0 0 900 780" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Connection lines -->
+              <line x1="450" y1="150" x2="180" y2="390" stroke="rgba(255,255,255,0.09)" stroke-width="1.5"/>
+              <line x1="450" y1="150" x2="720" y2="390" stroke="rgba(255,255,255,0.09)" stroke-width="1.5"/>
+              <line x1="450" y1="150" x2="450" y2="540" stroke="rgba(255,255,255,0.09)" stroke-width="1.5"/>
+              <line x1="180" y1="390" x2="450" y2="540" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <line x1="720" y1="390" x2="450" y2="540" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <line x1="180" y1="390" x2="720" y2="390" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
+              <line x1="90"  y1="600" x2="180" y2="390" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <line x1="810" y1="600" x2="720" y2="390" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <line x1="450" y1="720" x2="450" y2="540" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <line x1="90"  y1="600" x2="450" y2="720" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <line x1="810" y1="600" x2="450" y2="720" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+              <!-- Central node — Atlas -->
+              <circle cx="450" cy="150" r="66" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+              <circle cx="450" cy="150" r="30" fill="rgba(255,255,255,0.55)"/>
+              <circle cx="450" cy="150" r="16" fill="#fff"/>
+              <text x="450" y="236" text-anchor="middle" font-size="20" fill="rgba(255,255,255,0.4)" font-family="Inter,sans-serif" font-weight="800" letter-spacing="3">ATLAS</text>
+
+              <!-- Major city nodes -->
+              <g>
+                <circle cx="180" cy="390" r="42" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <circle cx="180" cy="390" r="18" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="180" cy="390" r="8"  fill="rgba(255,255,255,0.7)"/>
+                <text x="180" y="450" text-anchor="middle" font-size="18" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-weight="700">NYC</text>
+              </g>
+              <g>
+                <circle cx="720" cy="390" r="42" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <circle cx="720" cy="390" r="18" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="720" cy="390" r="8"  fill="rgba(255,255,255,0.7)"/>
+                <text x="720" y="450" text-anchor="middle" font-size="18" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-weight="700">LA</text>
+              </g>
+              <g>
+                <circle cx="450" cy="540" r="42" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <circle cx="450" cy="540" r="18" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="450" cy="540" r="8"  fill="rgba(255,255,255,0.7)"/>
+                <text x="450" y="600" text-anchor="middle" font-size="18" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-weight="700">SF</text>
+              </g>
+              <!-- Minor nodes -->
+              <g>
+                <circle cx="90"  cy="600" r="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                <circle cx="90"  cy="600" r="10" fill="rgba(255,255,255,0.3)"/>
+                <text x="90" y="648" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.25)" font-family="Inter,sans-serif" font-weight="700">CHI</text>
+              </g>
+              <g>
+                <circle cx="810" cy="600" r="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                <circle cx="810" cy="600" r="10" fill="rgba(255,255,255,0.3)"/>
+                <text x="810" y="648" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.25)" font-family="Inter,sans-serif" font-weight="700">MIA</text>
+              </g>
+              <g>
+                <circle cx="450" cy="720" r="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                <circle cx="450" cy="720" r="10" fill="rgba(255,255,255,0.3)"/>
+                <text x="450" y="768" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.25)" font-family="Inter,sans-serif" font-weight="700">LDN</text>
+              </g>
+
+              <!-- Chat bubble overlays -->
+              <rect x="220" y="264" width="210" height="54" rx="16" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="325" y="296" text-anchor="middle" font-size="17" fill="rgba(255,255,255,0.5)" font-family="Inter,sans-serif">"20 dates in 30 days"</text>
+              <rect x="468" y="204" width="198" height="54" rx="16" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="567" y="236" text-anchor="middle" font-size="17" fill="rgba(255,255,255,0.5)" font-family="Inter,sans-serif">"40+ matches / 24hrs"</text>
+              <rect x="270" y="456" width="162" height="48" rx="14" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              <text x="351" y="484" text-anchor="middle" font-size="15" fill="rgba(255,255,255,0.38)" font-family="Inter,sans-serif">"First date, week 2"</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- LEFT: TEXT -->
+        <div>
+          <div class="phase-tag reveal">
+            <div class="phase-num-box"><span>03</span></div>
+            <span class="phase-label">The Feedback Layer</span>
+          </div>
+
+          <h2 class="h-md reveal reveal-d1">The system that<br>makes it permanent.</h2>
+
+          <p class="body-lg reveal reveal-d2" style="margin-top:20px; color:var(--w45);">
+            Dating is the only skill where you get no actionable feedback. When something goes wrong, she disappears. You don't know what you did. That's exactly why most men make no progress on their own.
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:36px;">
+            <div class="reveal reveal-d3" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;">
+              <div style="flex-shrink:0;width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Direct Line</div>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Screenshot any conversation. We tell you exactly what to say and why — so the skill stays with you after we're done.</p>
+              </div>
+            </div>
+            <div class="reveal reveal-d4" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;">
+              <div style="flex-shrink:0;width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Live Sessions</div>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Multiple live Q&amp;As per week. Date went sideways? We find the exact moment and send you out with a clear assignment.</p>
+              </div>
+            </div>
+            <div class="reveal reveal-d5" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;">
+              <div style="flex-shrink:0;width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Atlas Network</div>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">NDA-protected. High-performing men across 7 cities, sharing what's working in real time. You stop learning only from your own reps.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §9  TIMELINE
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black text-center" id="timeline">
+    <div class="inner">
+      <span class="eyebrow reveal">The Route</span>
+      <h2 class="h-md reveal reveal-d1">What your 90 days look like.</h2>
+
+      <div class="timeline" style="margin-top:52px; text-align:left;">
+        <div class="tl-row reveal reveal-d2">
+          <div class="tl-week">Week 1–2</div>
+          <div>
+            <div class="tl-title">Pipeline Live</div>
+            <p class="tl-body">Profiles rebuilt. Female advisory review complete. Instagram dialed. Approach gameplan ready. All three channels running simultaneously.</p>
+            <div class="tl-kicker">First matches. First conversations.</div>
+          </div>
+        </div>
+        <div class="tl-row reveal reveal-d3">
+          <div class="tl-week">Week 3–4</div>
+          <div>
+            <div class="tl-title">First Dates</div>
+            <p class="tl-body">Conversion Blueprint in play. Scripts deployed. Message support active for every situation that comes up. Most clients book their first date in this window.</p>
+            <div class="tl-kicker">The proof of concept.</div>
+          </div>
+        </div>
+        <div class="tl-row reveal reveal-d4">
+          <div class="tl-week">Weekly</div>
+          <div>
+            <div class="tl-title">Feedback Loop Running</div>
+            <p class="tl-body">Monday strategy review. Wednesday live Q&A. Friday approach audit. Throughout the week: 1:1 message support whenever something comes up.</p>
+          </div>
+        </div>
+        <div class="tl-row reveal reveal-d5">
+          <div class="tl-week">Day 90</div>
+          <div>
+            <div class="tl-title">Operating at Capacity</div>
+            <p class="tl-body">1-3 dates per week, consistently. The feedback loop is permanent. The skill is yours. You don't need us anymore. That's the goal.</p>
+            <div class="tl-kicker">Consistent pipeline. Permanent skill.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row center reveal reveal-d6" style="margin-top:52px;">
+        <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §10  ABOUT / FOUNDER
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark text-center" id="about">
+    <div class="inner narrow">
+      <span class="eyebrow reveal">Why Benjamin Seda. Why Atlas.</span>
+      <h2 class="h-md reveal reveal-d1">I walked away from<br>200 million views.</h2>
+      <p class="body-lg reveal reveal-d2" style="margin-top:24px;">Within two years of starting, I built the largest men's dating brand on YouTube. Nearly a decade later, it is still the most-followed men's dating platform in the world.</p>
+      <p class="body-lg reveal reveal-d3" style="margin-top:18px;">In 2022, I walked away from it. Not to start something new. To go deeper with fewer men.</p>
+      <p class="body-lg reveal reveal-d4" style="margin-top:18px; font-style:italic; color:var(--w45);">Fewer clients. More access. Guaranteed results. The only version of this I was willing to put my name on.</p>
+
+      <div class="stat-row reveal reveal-d5" style="margin-top:56px;">
+        <div class="stat-cell"><div class="stat-num">200M+</div><div class="stat-label">Views</div></div>
+        <div class="stat-cell"><div class="stat-num">2M+</div><div class="stat-label">Followers</div></div>
+        <div class="stat-cell"><div class="stat-num">10+</div><div class="stat-label">Years</div></div>
+        <div class="stat-cell"><div class="stat-num">1,000+</div><div class="stat-label">Clients</div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §11  RESULTS
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black" id="results">
+    <div class="inner wide">
+      <span class="eyebrow reveal">Real Men. Real Results.</span>
+      <h2 class="h-md reveal reveal-d1">These are not outliers.</h2>
+      <p class="body-lg reveal reveal-d2">This is what the system consistently produces.</p>
+
+      <!-- Tinder-style horizontal auto-scroll cards -->
+      <div class="tinder-scroll-wrap reveal reveal-d2">
+        <div class="tinder-row auto-scroll">
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g1">
+              <div class="tc-initial">T</div>
+              <div class="tc-stat-badge">20 dates · 30 days</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Todd, <span style="font-weight:400;opacity:0.7">54</span></div>
+                <div class="tc-job-title">Retired Investor</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Was paying a matchmaker. Got nowhere.</div>
+              <p class="tc-quote">"20 dates in 30 days, most with women in their 20s and 30s. Age was never the obstacle."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g2">
+              <div class="tc-initial">Y</div>
+              <div class="tc-stat-badge">20+ dates · month 1</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Yaro</div>
+                <div class="tc-job-title">Software Engineer · SF</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Zero quality matches before Atlas.</div>
+              <p class="tc-quote">"I had every box checked as a man except this one. 30 days after the pipeline, I had 20+ dates on my calendar."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g3">
+              <div class="tc-initial">S</div>
+              <div class="tc-stat-badge">40+ matches · 24 hrs</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Spencer</div>
+                <div class="tc-job-title">Cybersecurity Consultant</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Profile rebuilt by female advisors.</div>
+              <p class="tc-quote">"40+ Bumble matches in 24 hours of going live. More than I could realistically go on dates with."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g4">
+              <div class="tc-initial">A</div>
+              <div class="tc-stat-badge">Women DM'd first</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Aakash</div>
+                <div class="tc-job-title">Quant Trader · CA</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Instagram rebuilt once. Never posted again.</div>
+              <p class="tc-quote">"Women started cold-DMing me within weeks of going live. I did nothing differently."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g5">
+              <div class="tc-initial">B</div>
+              <div class="tc-stat-badge">4 dates · 2 weeks</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Ben</div>
+                <div class="tc-job-title">Private Equity</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Now in a relationship with his first pick.</div>
+              <p class="tc-quote">"I am a man now instead of a people pleaser. I take charge. It feels completely natural."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tinder-card">
+            <div class="tc-photo tc-g6">
+              <div class="tc-initial">H</div>
+              <div class="tc-stat-badge">10 dates · month 1</div>
+              <div class="tc-name-row">
+                <div class="tc-name">Hector</div>
+                <div class="tc-job-title">Post-Divorce Executive</div>
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-result-label">Never used a dating app before Atlas.</div>
+              <p class="tc-quote">"I've dated more women in 2 months than in my entire life. More than in 5 years of marriage."</p>
+              <div class="tc-footer">
+                <div class="tc-verified-dot"></div>
+                <span class="tc-footer-label">Atlas Client · Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duplicated set for seamless loop -->
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g1"><div class="tc-initial">T</div><div class="tc-stat-badge">20 dates · 30 days</div><div class="tc-name-row"><div class="tc-name">Todd, <span style="font-weight:400;opacity:0.7">54</span></div><div class="tc-job-title">Retired Investor</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Was paying a matchmaker. Got nowhere.</div><p class="tc-quote">"20 dates in 30 days, most with women in their 20s and 30s."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g2"><div class="tc-initial">Y</div><div class="tc-stat-badge">20+ dates · month 1</div><div class="tc-name-row"><div class="tc-name">Yaro</div><div class="tc-job-title">Software Engineer · SF</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Zero quality matches before Atlas.</div><p class="tc-quote">"I had every box checked as a man except this one."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g3"><div class="tc-initial">S</div><div class="tc-stat-badge">40+ matches · 24 hrs</div><div class="tc-name-row"><div class="tc-name">Spencer</div><div class="tc-job-title">Cybersecurity Consultant</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Profile rebuilt by female advisors.</div><p class="tc-quote">"40+ Bumble matches in 24 hours of going live."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g4"><div class="tc-initial">A</div><div class="tc-stat-badge">Women DM'd first</div><div class="tc-name-row"><div class="tc-name">Aakash</div><div class="tc-job-title">Quant Trader · CA</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Instagram rebuilt once. Never posted again.</div><p class="tc-quote">"Women started cold-DMing me within weeks."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g5"><div class="tc-initial">B</div><div class="tc-stat-badge">4 dates · 2 weeks</div><div class="tc-name-row"><div class="tc-name">Ben</div><div class="tc-job-title">Private Equity</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Now in a relationship with his first pick.</div><p class="tc-quote">"I am a man now instead of a people pleaser."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+          <div class="tinder-card" aria-hidden="true">
+            <div class="tc-photo tc-g6"><div class="tc-initial">H</div><div class="tc-stat-badge">10 dates · month 1</div><div class="tc-name-row"><div class="tc-name">Hector</div><div class="tc-job-title">Post-Divorce Executive</div></div></div>
+            <div class="tc-info"><div class="tc-result-label">Never used a dating app before Atlas.</div><p class="tc-quote">"More dates in 2 months than in my entire life."</p><div class="tc-footer"><div class="tc-verified-dot"></div><span class="tc-footer-label">Atlas Client · Verified</span></div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="cta-row center reveal reveal-d5" style="margin-top:52px;">
+        <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §12  COMPARISON
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark text-center">
+    <div class="inner">
+      <span class="eyebrow reveal">You've tried going it alone</span>
+      <h2 class="h-md reveal reveal-d1">Here's what<br>that costs.</h2>
+
+      <div class="cmp-wrap reveal reveal-d2">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Atlas</th>
+              <th>On Your Own</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Time to first date</td><td>Week 2 (average)</td><td>Months to years</td></tr>
+            <tr><td>Profile setup</td><td>Done by female advisors</td><td>Generic advice from a search</td></tr>
+            <tr><td>Messaging</td><td>Scripts + live coaching on every conversation</td><td>Guesswork. Repeat the same mistake.</td></tr>
+            <tr><td>Real-life approach</td><td>Weekly gameplan + audio audits</td><td>Freeze. Watch the window close.</td></tr>
+            <tr><td>When something goes wrong</td><td>Direct line. Dissected same day.</td><td>You never find out why.</td></tr>
+            <tr><td>End result</td><td>Consistent pipeline. Permanent skill.</td><td>Same place. Another year later.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="reveal reveal-d3" style="font-size:14px;color:var(--w25);margin-top:18px;">Every year you leave this unaddressed, the options narrow.</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §13  ENGAGEMENT + GUARANTEE
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black">
+    <div class="inner narrow text-center">
+      <span class="eyebrow reveal">The Engagement</span>
+      <h2 class="h-md reveal reveal-d1">What the engagement<br>looks like.</h2>
+      <p class="body-lg reveal reveal-d2" style="margin-top:20px;">Atlas is a 90-day private consulting engagement. We work closely with a small number of men at a time.</p>
+
+      <div class="reveal reveal-d3" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:44px;text-align:left;margin-top:44px;">
+        <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--w25);margin-bottom:28px;">What a Typical Week Looks Like</p>
+        <div class="week-grid">
+          <div class="week-row"><span class="week-day">MON</span><p class="week-copy">Weekly strategy review and gameplan.</p></div>
+          <div class="week-row"><span class="week-day">WED</span><p class="week-copy">Live group Q&A with me and the team.</p></div>
+          <div class="week-row"><span class="week-day">FRI</span><p class="week-copy">Approach audit review.</p></div>
+          <div class="week-row"><span class="week-day">DAILY</span><p class="week-copy">1:1 message support whenever a situation comes up.</p></div>
+        </div>
+        <p style="font-size:14px;color:var(--w25);border-top:1px solid var(--border);padding-top:24px;margin-top:24px;">Engagements start in the low five figures. If you qualify, we discuss specifics on your consultation call.</p>
+      </div>
+
+      <div class="gtee-block reveal reveal-d4">
+        <div class="gtee-icon">◆</div>
+        <div class="gtee-title">Our Guarantee</div>
+        <p class="gtee-body">Complete the program. Implement the system. If you're not averaging 1-3+ dates per week by day 90, we keep working at no additional charge until you are.</p>
+        <p class="gtee-note">We have never had to honor it with a client who showed up.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §14  QUALIFICATION
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark">
+    <div class="inner narrow text-center">
+      <span class="eyebrow reveal">Atlas Is Not for Everyone</span>
+      <h2 class="h-md reveal reveal-d1">Is this for you?</h2>
+
+      <div class="qual-grid reveal reveal-d2" style="margin-top:52px; text-align:left;">
+        <div class="q-card fit">
+          <div class="q-label yes">You're a fit if you are...</div>
+          <ul class="q-list">
+            <li>Already professionally successful</li>
+            <li>Value your time more than your money</li>
+            <li>Invest in expertise in every other area</li>
+            <li>Want consistent results with women you're actually attracted to</li>
+            <li>27 or older</li>
+          </ul>
+        </div>
+        <div class="q-card nofit">
+          <div class="q-label no">You're not a fit if you are...</div>
+          <ul class="q-list">
+            <li>Not yet financially established</li>
+            <li>Looking for theory, not execution</li>
+            <li>Expecting results without doing the work</li>
+            <li>Under 27</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §15  FAQ
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-black" id="faq">
+    <div class="inner narrow">
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="h-md reveal reveal-d1">Your questions,<br>answered.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item open reveal reveal-d2">
+          <div class="faq-q">Is this legit? Most dating coaches aren't.<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">The difference is infield footage and application-only access. 1,000+ private clients over a decade, less than 5% accepted. If it didn't work, the waiting list wouldn't exist.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-d2">
+          <div class="faq-q">What does it cost?<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">Engagements start in the low five figures. For most of the men we work with, that's under a week of income. One investment for a skill that compounds for the rest of your life.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-d3">
+          <div class="faq-q">I'm too busy.<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">So is everyone in Atlas. Your weekly gameplan takes 30 minutes to review, and message support fits around your schedule. You replace time on things that don't work with a process that does.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-d3">
+          <div class="faq-q">What if it doesn't work?<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">Complete the program, implement the system, and if you're not at 1-3+ dates per week by day 90, we keep working at no additional charge. We've never had to honor it with a client who showed up.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-d4">
+          <div class="faq-q">Isn't this pickup?<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">Pickup is manipulation. This is a system for meeting women you'd actually want to date, built around who you already are.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-d4">
+          <div class="faq-q">I'm older. Just got divorced. Never really dated much.<div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div></div>
+          <div class="faq-a-wrap"><p class="faq-a">Todd was 54. Hector was post-divorce, had never used a dating app. Both ran the same system. The pipeline responds to execution, not starting point.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §16  FINAL CTA
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark text-center" id="apply">
+    <div class="inner narrow">
+
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;padding:6px 18px;margin-bottom:36px;">
+        <div class="live-dot"></div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--w45);">ENROLLMENT OPEN · 4 SPOTS REMAINING</span>
+      </div>
+
+      <h2 class="h-lg reveal reveal-d1">Ready to have this<br>area of your life handled?</h2>
+
+      <p class="body-xl reveal reveal-d2" style="margin-top:24px; color:var(--w45);">Every year you leave this untouched, the gap gets more expensive to close.</p>
+
+      <div class="cta-row center reveal reveal-d3">
+        <a href="#" class="btn btn-white" style="font-size:15px;padding:18px 52px;">Apply for Your Consultation &rarr;</a>
+      </div>
+      <p class="sub-note reveal reveal-d4">Less than 5% accepted &nbsp;·&nbsp; NDA protected &nbsp;·&nbsp; Takes 2 minutes</p>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer style="background:var(--bg1);border-top:1px solid var(--border);padding:32px 48px;">
+    <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <span style="font-size:12px;font-weight:800;letter-spacing:0.32em;text-transform:uppercase;color:var(--w25);">ATLAS</span>
+      <div style="display:flex;gap:28px;flex-wrap:wrap;">
+        <a href="#how-it-works" style="font-size:12px;color:var(--w25);">System</a>
+        <a href="#results" style="font-size:12px;color:var(--w25);">Results</a>
+        <a href="#about" style="font-size:12px;color:var(--w25);">About</a>
+        <a href="#faq" style="font-size:12px;color:var(--w25);">FAQ</a>
+        <a href="#apply" style="font-size:12px;color:var(--w25);">Apply</a>
+      </div>
+      <p style="font-size:11px;color:var(--w25);opacity:0.5;width:100%;margin-top:4px;">Atlas Advisory · Private Dating Concierge · Application-Only · NDA Protected</p>
+    </div>
+  </footer>
+
+
+  <script>
+    // ─── FAQ ACCORDION ────────────────────────────────────────
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-q').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(fi => fi.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ─── DECK ENGINE (desktop only) ───────────────────────────
+    (function () {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        // Mobile: standard scroll reveal
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        return;
+      }
+
+      const TICKS    = 3;    // scroll events needed to advance
+      const DEBOUNCE = 380;  // ms — one physical scroll = one tick
+      const RESET_MS = 1600; // ms idle before tick counter resets
+
+      // ── Wrap all sections ──────────────────────────────────
+      const sections = Array.from(document.querySelectorAll('section'));
+      const N = sections.length;
+
+      const wrap = document.createElement('div');
+      wrap.id = 'deck-wrap';
+      document.body.insertBefore(wrap, sections[0]);
+      sections.forEach(s => wrap.appendChild(s));
+
+      // ── Progress fill (top bar) ────────────────────────────
+      const fill = document.getElementById('progress-fill');
+      function updateProgressBar(idx) {
+        if (fill) fill.style.width = ((idx / (N - 1)) * 100) + '%';
+      }
+
+      // ── Tick pips (bottom center) ──────────────────────────
+      const ticksEl = document.createElement('div');
+      ticksEl.id = 'deck-ticks';
+      for (let i = 0; i < TICKS; i++) {
+        const p = document.createElement('div');
+        p.className = 'dt-pip';
+        ticksEl.appendChild(p);
+      }
+      document.body.appendChild(ticksEl);
+      const pips = ticksEl.querySelectorAll('.dt-pip');
+
+      function updatePips(n) {
+        pips.forEach((p, i) => p.classList.toggle('lit', i < n));
+        ticksEl.classList.toggle('show', n > 0);
+      }
+
+      // ── Section nav dots (right side) ─────────────────────
+      const navDotsEl = document.createElement('div');
+      navDotsEl.id = 'deck-nav';
+      sections.forEach(() => {
+        const d = document.createElement('div');
+        d.className = 'dn-dot';
+        navDotsEl.appendChild(d);
+      });
+      document.body.appendChild(navDotsEl);
+      const navPips = navDotsEl.querySelectorAll('.dn-dot');
+
+      function updateNavDots(idx) {
+        navPips.forEach((d, i) => d.classList.toggle('cur', i === idx));
+      }
+
+      // ── Reveal ─────────────────────────────────────────────
+      function revealSection(idx) {
+        sections[idx].querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+
+      // ── Navigation ─────────────────────────────────────────
+      let cur = 0, tick = 0, busy = false;
+      let lastTickAt = 0, resetTimer;
+
+      function goTo(idx) {
+        if (idx < 0 || idx >= N) return;
+        busy = true;
+        cur = idx;
+        tick = 0;
+        lastTickAt = Date.now();
+        clearTimeout(resetTimer);
+        updatePips(0);
+        updateNavDots(idx);
+        updateProgressBar(idx);
+        wrap.style.transform = `translateY(-${idx * 100}vh)`;
+        revealSection(idx);
+        setTimeout(() => { busy = false; }, 850);
+      }
+
+      // ── Wheel handler ──────────────────────────────────────
+      window.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        if (busy) return;
+
+        const now = Date.now();
+        if (now - lastTickAt < DEBOUNCE) return;
+        lastTickAt = now;
+
+        const dir = e.deltaY > 0 ? 1 : -1;
+
+        if (dir > 0) {
+          tick = Math.min(tick + 1, TICKS);
+          updatePips(tick);
+          clearTimeout(resetTimer);
+          if (tick >= TICKS) {
+            goTo(cur + 1);
+          } else {
+            resetTimer = setTimeout(() => { tick = 0; updatePips(0); }, RESET_MS);
+          }
+        } else {
+          if (tick > 0) {
+            tick = Math.max(0, tick - 1);
+            updatePips(tick);
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(() => { tick = 0; updatePips(0); }, RESET_MS);
+          } else {
+            goTo(cur - 1);
+          }
+        }
+      }, { passive: false });
+
+      // ── Keyboard ──────────────────────────────────────────
+      window.addEventListener('keydown', function (e) {
+        if (busy) return;
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); goTo(cur + 1); }
+        if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); goTo(cur - 1); }
+      });
+
+      // ── Init ──────────────────────────────────────────────
+      goTo(0);
+    }());
+  </script>
+
+</body>
+</html>
