@@ -50,28 +50,10 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-brand {
-      display: flex; align-items: center; gap: 10px;
+    .nav-logo {
+      height: 42px; width: auto; display: block;
     }
-    .brand-mark {
-      width: 22px; height: 22px;
-      border: 1.5px solid rgba(255,255,255,0.55);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-      position: relative;
-      animation: beacon 2.4s ease-in-out infinite;
-    }
-    .brand-mark::after {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(255,255,255,0.22);
-    }
-    @keyframes beacon {
-      0%, 100% { box-shadow: none; opacity: 1; }
-      48% { box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 0 0 11px rgba(255,255,255,0.04); opacity: 0.7; }
-      52% { box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 0 0 11px rgba(255,255,255,0.04); opacity: 0.7; }
-    }
+    @media(max-width:768px) { .nav-logo { height: 34px; } }
     /* ─── QUALIFIER PILL ─────────────────────────────────────── */
     .qualifier-pill {
       display: inline-block;
@@ -83,27 +65,6 @@
       letter-spacing: 0.04em; color: var(--w70);
       margin-top: 28px;
     }
-    .brand-wordmark {
-      display: flex; flex-direction: column; gap: 1px;
-    }
-    .brand-name {
-      font-size: 14px; font-weight: 800;
-      letter-spacing: 0.22em; text-transform: uppercase; color: #fff;
-      line-height: 1;
-    }
-    .brand-sub {
-      font-size: 8px; font-weight: 500;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); line-height: 1;
-    }
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px; font-weight: 500; color: var(--w45);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: #fff; }
     .nav-apply {
       font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -114,7 +75,6 @@
     .nav-apply:hover { opacity: 0.88; transform: scale(1.02); }
     @media(max-width:768px){
       nav { padding: 0 24px; }
-      .nav-links { display: none; }
     }
 
     /* ─── ENROLLMENT TICKER ──────────────────────────────────── */
@@ -171,11 +131,11 @@
     /* ─── TYPOGRAPHY ─────────────────────────────────────────── */
     .eyebrow {
       font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--w25);
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
       display: block; margin-bottom: 22px;
     }
     .h-xl {
-      font-size: clamp(42px, 7.2vw, 88px);
+      font-size: clamp(52px, 8.5vw, 120px);
       font-weight: 900; line-height: 0.95;
       letter-spacing: -0.04em; color: #fff;
     }
@@ -324,8 +284,8 @@
       display: grid; grid-template-columns: 90px 1fr; gap: 32px; align-items: start;
     }
     .problem-num-wrap { display: flex; flex-direction: column; align-items: flex-start; padding-top: 4px; }
-    .problem-num-big { font-size: 44px; font-weight: 700; color: rgba(255,255,255,0.12); line-height: 1; letter-spacing: -0.04em; }
-    .problem-num-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w45); margin-top: 4px; }
+    .problem-num-big { font-size: 44px; font-weight: 700; color: rgba(255,255,255,0.28); line-height: 1; letter-spacing: -0.04em; }
+    .problem-num-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.70); margin-top: 4px; }
     .problem-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.01em; }
     .problem-body { font-size: 16px; color: rgba(255,255,255,0.62); line-height: 1.75; }
     /* Broken visuals — inline below body text */
@@ -378,7 +338,7 @@
     .tinder-scroll-wrap::-webkit-scrollbar { display: none; }
     .tinder-row { display: flex; gap: 18px; width: max-content; }
     .tinder-card {
-      width: 230px; height: 690px; /* ~3:1 ratio */
+      width: 299px; height: 780px;
       border-radius: 22px; overflow: hidden; flex-shrink: 0;
       background: var(--bg2); border: 1px solid var(--border);
       display: flex; flex-direction: column;
@@ -387,7 +347,7 @@
       cursor: default;
     }
     .tinder-card:hover { transform: scale(1.025) translateY(-6px); box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5); }
-    .tc-photo { flex: 0 0 490px; position: relative; overflow: hidden; }
+    .tc-photo { flex: 0 0 560px; position: relative; overflow: hidden; }
     .tc-photo::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 65%;
       background: linear-gradient(transparent, rgba(0,0,0,0.9));
@@ -941,20 +901,13 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-brand">
-      <div class="brand-mark"></div>
-      <div class="brand-wordmark">
-        <span class="brand-name">Atlas</span>
-        <span class="brand-sub">Advisory</span>
-      </div>
+    <div style="flex:1;"></div>
+    <a href="#hero">
+      <img src="logo.jpeg" class="nav-logo" alt="Atlas">
+    </a>
+    <div style="flex:1;display:flex;justify-content:flex-end;">
+      <a href="#apply" class="nav-apply">Apply Now</a>
     </div>
-    <ul class="nav-links">
-      <li><a href="#how-it-works">System</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <a href="#apply" class="nav-apply">Apply Now</a>
   </nav>
 
   <!-- ENROLLMENT BAR -->
@@ -979,7 +932,7 @@
       </div>
 
       <h1 class="h-xl reveal reveal-d2" style="margin-bottom:28px;">
-        You've built<br>everything.<br><em>Except this.</em>
+        You've built everything.<br><em>Except this.</em>
       </h1>
 
       <p class="body-xl reveal reveal-d3" style="max-width:620px;margin:0 auto;">
@@ -1125,9 +1078,9 @@
         </div>
       </div>
 
-      <div class="bridge-block reveal reveal-d5">
-        <p class="bridge-line1">None of this is a character problem. It's a system problem.</p>
-        <p class="bridge-line2">You've built everything else systematically. Nobody ever gave you a framework for this one area. That's what Atlas is.</p>
+      <div class="reveal reveal-d5" style="margin-top:44px;text-align:center;">
+        <p style="font-size:clamp(18px,2.5vw,24px);font-weight:700;color:#fff;margin-bottom:14px;">None of this is a character problem. It's a system problem.</p>
+        <p style="font-size:clamp(15px,1.8vw,18px);color:var(--w45);line-height:1.75;max-width:600px;margin:0 auto;">You've built everything else systematically. Nobody ever gave you a framework for this one area. That's what Atlas is.</p>
       </div>
     </div>
   </section>
@@ -1299,21 +1252,21 @@
             <div class="pipe-card reveal reveal-d1">
               <div class="pipe-card-label">Dating Apps</div>
               <div class="pipe-card-title">We rebuild your profile from scratch — not tweak it.</div>
-              <p class="pipe-card-body">Female advisors review and rank every photo before we touch anything. Top-1% profile. Matches on autopilot from day one.</p>
+              <p class="pipe-card-body">Female advisors rank every photo before we touch anything. Top-1% profile. Matches on autopilot.</p>
               <p class="pipe-proof">Spencer: 40+ Bumble matches in 24 hours of going live</p>
             </div>
 
             <div class="pipe-card reveal reveal-d2">
               <div class="pipe-card-label">Instagram</div>
               <div class="pipe-card-title">The best women aren't spending their evenings on Hinge.</div>
-              <p class="pipe-card-body">Set up once. Right profile, right signals. Runs itself. You don't need to become an influencer — you just need it set up right.</p>
+              <p class="pipe-card-body">Set up once. Right signals, right profile. Runs itself. You don't need to become an influencer.</p>
               <p class="pipe-proof">Aakash: women cold-DM'd him first after the rebuild</p>
             </div>
 
             <div class="pipe-card reveal reveal-d3">
               <div class="pipe-card-label">Real Life</div>
               <div class="pipe-card-title">74% of women say they wish they were approached more.</div>
-              <p class="pipe-card-body">Weekly gameplan for your city and schedule. Record your approaches, send them to us — we find exactly where you lost her.</p>
+              <p class="pipe-card-body">Weekly gameplan for your city and schedule. Send us your approaches — we find where you lost her.</p>
               <p class="pipe-proof">Maneet: approached a model cold on the street</p>
             </div>
 
@@ -1343,10 +1296,10 @@
           <h2 class="h-md reveal reveal-d1">Turn matches<br>into dates.</h2>
 
           <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
-            You can have the best profile on the platform and still not convert. The conversation does the work.
+            The best profile means nothing if you can't convert. The conversation does the work.
           </p>
           <p class="body-lg reveal reveal-d3" style="margin-top:14px; color:var(--w45);">
-            We hand you the full database: every opening line, recovery text, date-setting framework, and first-date script built from thousands of client conversations. Our ghostproof texts increase response rates by 40%. Most clients book their first date by week two.
+            We hand you the full database: every opening line, recovery text, and date-setting framework built from thousands of conversations. Response rates up 40%. Most clients book their first date by week two.
           </p>
 
           <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px;" class="reveal reveal-d4">
@@ -1508,7 +1461,7 @@
               </div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Direct Line</div>
-                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Screenshot any conversation. We tell you exactly what to say and why — so the skill stays with you after we're done.</p>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Screenshot any conversation. We tell you exactly what to say and why.</p>
               </div>
             </div>
             <div class="reveal reveal-d4" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;">
@@ -1517,7 +1470,7 @@
               </div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Live Sessions</div>
-                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Multiple live Q&amp;As per week. Date went sideways? We find the exact moment and send you out with a clear assignment.</p>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">Multiple live Q&amp;As per week. Date went sideways? We find the exact moment and fix it.</p>
               </div>
             </div>
             <div class="reveal reveal-d5" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;">
@@ -1526,7 +1479,7 @@
               </div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Atlas Network</div>
-                <p style="font-size:13px;color:var(--w45);line-height:1.7;">NDA-protected. High-performing men across 7 cities, sharing what's working in real time. You stop learning only from your own reps.</p>
+                <p style="font-size:13px;color:var(--w45);line-height:1.7;">NDA-protected. High-performing men across 7 cities sharing what works in real time.</p>
               </div>
             </div>
           </div>
@@ -1544,7 +1497,15 @@
     <div class="inner text-center" style="max-width:1100px;">
       <span class="eyebrow reveal">Why Benjamin Seda. Why Atlas.</span>
       <h2 class="h-md reveal reveal-d1">I walked away from<br>200 million views.</h2>
-      <p class="body-lg reveal reveal-d2" style="margin-top:24px;">Within two years, I built the largest men's dating brand on YouTube. Nearly a decade later, still the most-followed in the world.</p>
+
+      <div class="reveal reveal-d2" style="margin-top:36px;margin-bottom:36px;">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;max-width:900px;margin:0 auto;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;">
+          <img src="benjamin-photo.jpg" alt="Benjamin Seda" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+          <span style="font-size:13px;color:var(--w25);font-style:italic;position:absolute;">[ Benjamin Seda — photo ]</span>
+        </div>
+      </div>
+
+      <p class="body-lg reveal reveal-d3" style="margin-top:24px;">Within two years, I built the largest men's dating brand on YouTube. Nearly a decade later, still the most-followed in the world.</p>
       <p class="body-lg reveal reveal-d3" style="margin-top:18px;">In 2022, I walked away. To go deeper with fewer men.</p>
       <p class="body-lg reveal reveal-d4" style="margin-top:18px; font-style:italic; color:var(--w45);">Fewer clients. More access. The only version of this I was willing to put my name on.</p>
 
