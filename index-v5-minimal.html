@@ -175,7 +175,7 @@
       display: block; margin-bottom: 22px;
     }
     .h-xl {
-      font-size: clamp(52px, 9vw, 110px);
+      font-size: clamp(42px, 7.2vw, 88px);
       font-weight: 900; line-height: 0.95;
       letter-spacing: -0.04em; color: #fff;
     }
@@ -324,42 +324,42 @@
       display: grid; grid-template-columns: 90px 1fr; gap: 32px; align-items: start;
     }
     .problem-num-wrap { display: flex; flex-direction: column; align-items: flex-start; padding-top: 4px; }
-    .problem-num-big { font-size: 44px; font-weight: 700; color: rgba(255,255,255,0.1); line-height: 1; letter-spacing: -0.04em; }
-    .problem-num-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w25); margin-top: 4px; }
+    .problem-num-big { font-size: 44px; font-weight: 700; color: rgba(255,255,255,0.12); line-height: 1; letter-spacing: -0.04em; }
+    .problem-num-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w45); margin-top: 4px; }
     .problem-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.01em; }
-    .problem-body { font-size: 16px; color: var(--w45); line-height: 1.8; }
+    .problem-body { font-size: 16px; color: rgba(255,255,255,0.62); line-height: 1.75; }
     /* Broken visuals — inline below body text */
     .problem-visual {
-      margin-top: 20px; padding-top: 18px;
-      border-top: 1px solid var(--border2);
+      margin-top: 18px; padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       display: flex; flex-direction: column; gap: 8px;
     }
-    .pv-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w25); margin-bottom: 4px; }
+    .pv-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w45); margin-bottom: 6px; }
     /* Apps: disparity bars */
-    .pv-bar-row { display: flex; flex-direction: column; gap: 8px; }
-    .pv-row { display: flex; flex-direction: column; gap: 4px; }
-    .pv-name { font-size: 9px; color: var(--w25); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-    .pv-bar-track { height: 6px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; width: 100%; }
+    .pv-bar-row { display: flex; flex-direction: column; gap: 10px; }
+    .pv-row { display: flex; flex-direction: column; gap: 5px; }
+    .pv-name { font-size: 11px; color: var(--w45); font-weight: 600; letter-spacing: 0.04em; }
+    .pv-bar-track { height: 7px; background: rgba(255,255,255,0.07); border-radius: 999px; overflow: hidden; width: 100%; }
     .pv-bar-fill { height: 100%; border-radius: 999px; }
-    .pv-bar-fill.low  { width: 8%; background: rgba(239,68,68,0.6); }
-    .pv-bar-fill.high { width: 95%; background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.7)); }
-    .pv-val { font-size: 10px; font-weight: 700; color: var(--w45); }
+    .pv-bar-fill.low  { width: 8%; background: rgba(239,68,68,0.7); }
+    .pv-bar-fill.high { width: 95%; background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.75)); }
+    .pv-val { font-size: 12px; font-weight: 700; color: var(--w70); }
     /* Texts: ghosted chat */
-    .pv-chat { display: flex; flex-direction: column; gap: 5px; }
-    .pv-msg { font-size: 10px; padding: 6px 9px; border-radius: 10px; }
+    .pv-chat { display: flex; flex-direction: column; gap: 6px; }
+    .pv-msg { font-size: 12px; padding: 7px 10px; border-radius: 10px; }
     .pv-msg.sent { background: #0a84ff; color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; font-style: italic; }
-    .pv-msg.read { align-self: flex-end; font-size: 8px; color: rgba(239,68,68,0.7); font-weight: 600; display: flex; align-items: center; gap: 4px; }
-    .pv-silence { font-size: 8px; color: rgba(255,255,255,0.15); font-style: italic; text-align: center; padding: 4px 0; }
+    .pv-msg.read { align-self: flex-end; font-size: 10px; color: rgba(239,68,68,0.8); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .pv-silence { font-size: 10px; color: rgba(255,255,255,0.22); font-style: italic; text-align: center; padding: 4px 0; }
     /* Real life: countdown */
-    .pv-countdown { display: flex; flex-direction: column; gap: 6px; }
-    .pv-tick { font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .pv-tick .t-num { font-size: 16px; font-weight: 900; color: #fff; width: 32px; }
-    .pv-tick .t-bar { flex: 1; height: 3px; border-radius: 999px; }
-    .pv-tick.t1 .t-bar { background: rgba(255,255,255,0.5); }
-    .pv-tick.t2 .t-bar { background: rgba(255,255,255,0.25); width: 55%; }
-    .pv-tick.t3 .t-bar { background: rgba(239,68,68,0.5); width: 10%; }
-    .pv-closed { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(239,68,68,0.7); margin-top: 4px; }
-    @media(max-width:640px) { .problem-card { grid-template-columns: 1fr; gap: 16px; padding: 28px 24px; } }
+    .pv-countdown { display: flex; flex-direction: column; gap: 8px; }
+    .pv-tick { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .pv-tick .t-num { font-size: 17px; font-weight: 900; color: #fff; width: 36px; }
+    .pv-tick .t-bar { flex: 1; height: 4px; border-radius: 999px; }
+    .pv-tick.t1 .t-bar { background: rgba(255,255,255,0.55); }
+    .pv-tick.t2 .t-bar { background: rgba(255,255,255,0.28); width: 55%; }
+    .pv-tick.t3 .t-bar { background: rgba(239,68,68,0.6); width: 10%; }
+    .pv-closed { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(239,68,68,0.8); margin-top: 6px; }
+    @media(max-width:640px) { .problem-card { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; } }
 
     /* ─── NETWORK VISUAL (3x bigger) ────────────────────────── */
     .network-visual {
@@ -899,6 +899,32 @@
     .week-copy { font-size: 15px; color: var(--w70); line-height: 1.7; }
     @media(max-width:580px) { .week-grid { grid-template-columns: 1fr; } }
 
+    /* ─── MOBILE OVERRIDES ───────────────────────────────────── */
+    @media(max-width:860px) {
+      /* VSL centered */
+      .vsl-wrap { margin-left: auto; margin-right: auto; }
+      /* Phone: scale down, center, hide hearts overflow */
+      .phone-wrap { padding: 16px 0; overflow: visible; }
+      .iphone15 { width: 220px; height: 459px; border-radius: 38px; }
+      .iphone15-screen { border-radius: 30px; }
+      .hearts-container { right: -42px !important; }
+      /* Streams: horizontal scroll on mobile */
+      .streams-visual { overflow-x: auto; -webkit-overflow-scrolling: touch;
+        gap: 32px; padding-bottom: 12px; justify-content: flex-start; }
+      .stream-col { flex-shrink: 0; width: 120px; }
+      .stream-track { height: 320px; }
+    }
+    @media(max-width:640px) {
+      /* Tinder scroll: full bleed */
+      .tinder-scroll-wrap { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+      /* VSL label smaller */
+      .vsl-label { font-size: 12px; }
+      /* Phase split sections: center content */
+      .split > div { text-align: center; }
+      .split > div .phase-tag { justify-content: center; }
+      /* Problem cards single column handled above */
+    }
+
     /* ─── SCROLL PROGRESS BAR ────────────────────────────────── */
     #progress-bar {
       position: fixed; top: 90px; left: 0; z-index: 150;
@@ -946,7 +972,7 @@
        §1  HERO
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-black page-top" id="hero">
-    <div class="inner wide text-center">
+    <div class="inner text-center" style="max-width:1100px;">
 
       <div class="reveal reveal-d1" style="margin-bottom:32px;">
         <span class="qualifier-pill">For high-performing men who are done leaving this area of their life to chance.</span>
@@ -1037,7 +1063,7 @@
           </div>
           <div>
             <div class="problem-title">The algorithm has already made up its mind about you.</div>
-            <p class="problem-body">3-5 likes a week while men with half your credentials flood their inboxes. Nobody told you the setup was the problem. Nobody showed you what a top-1% profile looks like from the other side of the swipe.</p>
+            <p class="problem-body">3-5 likes a week while men with half your credentials flood their inboxes. The setup was the problem. Nobody told you.</p>
             <div class="problem-visual">
               <div class="pv-label">Algorithm reach — before Atlas</div>
               <div class="pv-bar-row">
@@ -1062,7 +1088,7 @@
           </div>
           <div>
             <div class="problem-title">You matched someone worth your time. She read it and vanished.</div>
-            <p class="problem-body">Overthought the reply. She read it, went cold, disappeared. You never found out what you did wrong, so the next match starts the same way.</p>
+            <p class="problem-body">Overthought the reply. She went cold. You never found out why, so the next match starts the same way.</p>
             <div class="problem-visual">
               <div class="pv-label">What you saw</div>
               <div class="pv-chat">
@@ -1085,7 +1111,7 @@
           </div>
           <div>
             <div class="problem-title">You see her. You have ten seconds. Something stops you.</div>
-            <p class="problem-body">The window closes. That specific opportunity does not come back. And you walk away knowing you had it and didn't take it.</p>
+            <p class="problem-body">The window closes. You walk away knowing you had it and didn't take it.</p>
             <div class="problem-visual">
               <div class="pv-label">Your window to act</div>
               <div class="pv-countdown">
@@ -1125,10 +1151,10 @@
           <h2 class="h-md reveal reveal-d1">Build your<br>pipeline.</h2>
 
           <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
-            A business without leads is not a business. We build three simultaneous streams so there is no single point of failure.
+            Three simultaneous streams. No single point of failure.
           </p>
           <p class="body-lg reveal reveal-d3" style="margin-top:14px; color:var(--w45);">
-            5-10 leads from apps. 5-10 from Instagram. 3-5 from real life. Three dates a week isn't a goal. It's just math.
+            5-10 leads from apps. 5-10 from Instagram. 3-5 from real life. Three dates a week is just math.
           </p>
         </div>
 
@@ -1512,7 +1538,28 @@
 
 
   <!-- ══════════════════════════════════════════════════════════
-       §9  TIMELINE
+       §10  ABOUT / FOUNDER
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section s-dark text-center" id="about">
+    <div class="inner text-center" style="max-width:1100px;">
+      <span class="eyebrow reveal">Why Benjamin Seda. Why Atlas.</span>
+      <h2 class="h-md reveal reveal-d1">I walked away from<br>200 million views.</h2>
+      <p class="body-lg reveal reveal-d2" style="margin-top:24px;">Within two years, I built the largest men's dating brand on YouTube. Nearly a decade later, still the most-followed in the world.</p>
+      <p class="body-lg reveal reveal-d3" style="margin-top:18px;">In 2022, I walked away. To go deeper with fewer men.</p>
+      <p class="body-lg reveal reveal-d4" style="margin-top:18px; font-style:italic; color:var(--w45);">Fewer clients. More access. The only version of this I was willing to put my name on.</p>
+
+      <div class="stat-row reveal reveal-d5" style="margin-top:56px;">
+        <div class="stat-cell"><div class="stat-num">200M+</div><div class="stat-label">Views</div></div>
+        <div class="stat-cell"><div class="stat-num">2M+</div><div class="stat-label">Followers</div></div>
+        <div class="stat-cell"><div class="stat-num">10+</div><div class="stat-label">Years</div></div>
+        <div class="stat-cell"><div class="stat-num">1,000+</div><div class="stat-label">Clients</div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       §9  TIMELINE (moved below About)
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-black text-center" id="timeline">
     <div class="inner">
@@ -1524,7 +1571,7 @@
           <div class="tl-week">Week 1–2</div>
           <div>
             <div class="tl-title">Pipeline Live</div>
-            <p class="tl-body">Profiles rebuilt. Female advisory review complete. Instagram dialed. Approach gameplan ready. All three channels running simultaneously.</p>
+            <p class="tl-body">Profiles rebuilt. Instagram dialed. All three channels running.</p>
             <div class="tl-kicker">First matches. First conversations.</div>
           </div>
         </div>
@@ -1532,7 +1579,7 @@
           <div class="tl-week">Week 3–4</div>
           <div>
             <div class="tl-title">First Dates</div>
-            <p class="tl-body">Conversion Blueprint in play. Scripts deployed. Message support active for every situation that comes up. Most clients book their first date in this window.</p>
+            <p class="tl-body">Scripts deployed. Message support active. Most clients book their first date in this window.</p>
             <div class="tl-kicker">The proof of concept.</div>
           </div>
         </div>
@@ -1540,44 +1587,19 @@
           <div class="tl-week">Weekly</div>
           <div>
             <div class="tl-title">Feedback Loop Running</div>
-            <p class="tl-body">Monday strategy review. Wednesday live Q&A. Friday approach audit. Throughout the week: 1:1 message support whenever something comes up.</p>
+            <p class="tl-body">Strategy review. Live Q&A. Approach audit. 1:1 message support throughout the week.</p>
           </div>
         </div>
         <div class="tl-row reveal reveal-d5">
           <div class="tl-week">Day 90</div>
           <div>
             <div class="tl-title">Operating at Capacity</div>
-            <p class="tl-body">1-3 dates per week, consistently. The feedback loop is permanent. The skill is yours. You don't need us anymore. That's the goal.</p>
+            <p class="tl-body">1-3 dates per week. The skill is yours. You don't need us anymore.</p>
             <div class="tl-kicker">Consistent pipeline. Permanent skill.</div>
           </div>
         </div>
       </div>
 
-      <div class="cta-row center reveal reveal-d6" style="margin-top:52px;">
-        <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       §10  ABOUT / FOUNDER
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-dark text-center" id="about">
-    <div class="inner narrow">
-      <span class="eyebrow reveal">Why Benjamin Seda. Why Atlas.</span>
-      <h2 class="h-md reveal reveal-d1">I walked away from<br>200 million views.</h2>
-      <p class="body-lg reveal reveal-d2" style="margin-top:24px;">Within two years of starting, I built the largest men's dating brand on YouTube. Nearly a decade later, it is still the most-followed men's dating platform in the world.</p>
-      <p class="body-lg reveal reveal-d3" style="margin-top:18px;">In 2022, I walked away from it. Not to start something new. To go deeper with fewer men.</p>
-      <p class="body-lg reveal reveal-d4" style="margin-top:18px; font-style:italic; color:var(--w45);">Fewer clients. More access. Guaranteed results. The only version of this I was willing to put my name on.</p>
-
-      <div class="stat-row reveal reveal-d5" style="margin-top:56px;">
-        <div class="stat-cell"><div class="stat-num">200M+</div><div class="stat-label">Views</div></div>
-        <div class="stat-cell"><div class="stat-num">2M+</div><div class="stat-label">Followers</div></div>
-        <div class="stat-cell"><div class="stat-num">10+</div><div class="stat-label">Years</div></div>
-        <div class="stat-cell"><div class="stat-num">1,000+</div><div class="stat-label">Clients</div></div>
-      </div>
     </div>
   </section>
 
@@ -1740,36 +1762,6 @@
 
       <div class="cta-row center reveal reveal-d5" style="margin-top:52px;">
         <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       §13  ENGAGEMENT + GUARANTEE
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-black">
-    <div class="inner narrow text-center">
-      <span class="eyebrow reveal">The Engagement</span>
-      <h2 class="h-md reveal reveal-d1">What the engagement<br>looks like.</h2>
-      <p class="body-lg reveal reveal-d2" style="margin-top:20px;">Atlas is a 90-day private consulting engagement. We work closely with a small number of men at a time.</p>
-
-      <div class="reveal reveal-d3" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:44px;text-align:left;margin-top:44px;">
-        <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--w25);margin-bottom:28px;">What a Typical Week Looks Like</p>
-        <div class="week-grid">
-          <div class="week-row"><span class="week-day">MON</span><p class="week-copy">Weekly strategy review and gameplan.</p></div>
-          <div class="week-row"><span class="week-day">WED</span><p class="week-copy">Live group Q&A with me and the team.</p></div>
-          <div class="week-row"><span class="week-day">FRI</span><p class="week-copy">Approach audit review.</p></div>
-          <div class="week-row"><span class="week-day">DAILY</span><p class="week-copy">1:1 message support whenever a situation comes up.</p></div>
-        </div>
-        <p style="font-size:14px;color:var(--w25);border-top:1px solid var(--border);padding-top:24px;margin-top:24px;">Engagements start in the low five figures. If you qualify, we discuss specifics on your consultation call.</p>
-      </div>
-
-      <div class="gtee-block reveal reveal-d4">
-        <div class="gtee-icon">◆</div>
-        <div class="gtee-title">Our Guarantee</div>
-        <p class="gtee-body">Complete the program. Implement the system. If you're not averaging 1-3+ dates per week by day 90, we keep working at no additional charge until you are.</p>
-        <p class="gtee-note">We have never had to honor it with a client who showed up.</p>
       </div>
     </div>
   </section>
