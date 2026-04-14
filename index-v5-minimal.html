@@ -295,31 +295,98 @@
       border-top: 1px solid rgba(255,255,255,0.08);
       display: flex; flex-direction: column; gap: 8px;
     }
-    .pv-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 6px; }
-    /* Apps: disparity bars */
-    .pv-bar-row { display: flex; flex-direction: column; gap: 10px; }
-    .pv-row { display: flex; flex-direction: column; gap: 5px; }
-    .pv-name { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 600; letter-spacing: 0.04em; }
-    .pv-bar-track { height: 7px; background: rgba(255,255,255,0.07); border-radius: 999px; overflow: hidden; width: 100%; }
-    .pv-bar-fill { height: 100%; border-radius: 999px; }
-    .pv-bar-fill.low  { width: 8%; background: rgba(239,68,68,0.7); }
-    .pv-bar-fill.high { width: 95%; background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.75)); }
-    .pv-val { font-size: 12px; font-weight: 700; color: var(--w70); }
-    /* Texts: ghosted chat */
-    .pv-chat { display: flex; flex-direction: column; gap: 6px; }
-    .pv-msg { font-size: 12px; padding: 7px 10px; border-radius: 10px; }
-    .pv-msg.sent { background: #0a84ff; color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; font-style: italic; }
-    .pv-msg.read { align-self: flex-end; font-size: 10px; color: rgba(239,68,68,0.8); font-weight: 600; display: flex; align-items: center; gap: 4px; }
-    .pv-silence { font-size: 10px; color: rgba(255,255,255,0.22); font-style: italic; text-align: center; padding: 4px 0; }
-    /* Real life: countdown */
-    .pv-countdown { display: flex; flex-direction: column; gap: 8px; }
-    .pv-tick { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-    .pv-tick .t-num { font-size: 17px; font-weight: 900; color: #fff; width: 36px; }
-    .pv-tick .t-bar { flex: 1; height: 4px; border-radius: 999px; }
-    .pv-tick.t1 .t-bar { background: rgba(255,255,255,0.55); }
-    .pv-tick.t2 .t-bar { background: rgba(255,255,255,0.28); width: 55%; }
-    .pv-tick.t3 .t-bar { background: rgba(239,68,68,0.6); width: 10%; }
-    .pv-closed { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(239,68,68,0.8); margin-top: 6px; }
+    .pv-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+
+    /* ── VISUAL A: Apps — count-up on scroll ─────────────────── */
+    .pv-two-nums { display: flex; align-items: baseline; gap: 20px; }
+    .pv-big { font-size: 42px; font-weight: 900; line-height: 1; letter-spacing: -0.04em; }
+    .pv-big.red { color: rgba(239,68,68,0.8); }
+    .pv-big.white { color: #fff; }
+    .pv-num-sub { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+    .pv-num-sub.red { color: rgba(239,68,68,0.45); }
+    .pv-num-sub.white { color: rgba(255,255,255,0.3); }
+    .pv-vs { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.2); }
+
+    /* ── VISUAL B: Texts — interactive chat demo ─────────────── */
+    .pv-choice { display: flex; flex-direction: column; gap: 8px; }
+    .pv-choice-btn {
+      width: 100%; padding: 11px 14px; border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: border-color .15s, background .15s;
+      text-align: left;
+    }
+    .pv-choice-btn.avg { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.65); }
+    .pv-choice-btn.avg:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+    .pv-choice-btn.atlas { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.2); }
+    .pv-choice-btn.atlas:hover { background: rgba(255,255,255,0.13); }
+    .pv-chat-thread { display: flex; flex-direction: column; gap: 5px; min-height: 72px; }
+    .pv-msg-out {
+      align-self: flex-end; max-width: 90%;
+      background: #0a84ff; color: #fff;
+      font-size: 13px; line-height: 1.5; padding: 8px 12px;
+      border-radius: 14px 14px 4px 14px;
+      opacity: 0; transform: translateY(6px);
+      animation: msgIn .3s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .pv-msg-in {
+      align-self: flex-start; max-width: 90%;
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85);
+      font-size: 13px; line-height: 1.5; padding: 8px 12px;
+      border-radius: 14px 14px 14px 4px;
+      opacity: 0; transform: translateY(6px);
+      animation: msgIn .3s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes msgIn { to { opacity:1; transform:translateY(0); } }
+    .pv-meta { font-size: 11px; font-weight: 600; letter-spacing: 0.03em; opacity: 0; animation: msgIn .3s forwards; }
+    .pv-meta.right { align-self: flex-end; color: rgba(239,68,68,0.7); }
+    .pv-meta.center { align-self: center; color: rgba(255,255,255,0.2); font-style: italic; }
+    .pv-meta.stamp {
+      align-self: center; color: rgba(239,68,68,0.55); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .pv-meta.win {
+      align-self: center; background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.22); border-radius: 999px;
+      color: #22c55e; padding: 4px 12px; font-size: 11px;
+      font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .pv-reset-btn {
+      margin-top: 8px; background: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.45); font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 6px; cursor: pointer;
+      transition: border-color .15s, color .15s; display: block;
+    }
+    .pv-reset-btn:hover { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.8); }
+
+    /* ── VISUAL C: Real Life — countdown timer ───────────────── */
+    .pv-timer { display: flex; flex-direction: column; gap: 10px; }
+    .pv-timer-top { display: flex; align-items: baseline; gap: 8px; }
+    .pv-timer-num {
+      font-size: 44px; font-weight: 900; line-height: 1; letter-spacing: -0.04em;
+      color: #fff; transition: color .4s;
+      font-variant-numeric: tabular-nums;
+    }
+    .pv-timer-num.warn { color: rgba(255,180,0,0.9); }
+    .pv-timer-num.danger { color: rgba(239,68,68,0.9); }
+    .pv-timer-seconds { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .pv-bar-track-t { height: 8px; background: rgba(255,255,255,0.07); border-radius: 999px; overflow: hidden; }
+    .pv-bar-fill-t { height: 100%; border-radius: 999px; width: 100%; background: rgba(255,255,255,0.55); transition: width 1s linear, background .4s; }
+    .pv-bar-fill-t.warn   { background: rgba(255,180,0,0.65); }
+    .pv-bar-fill-t.danger { background: rgba(239,68,68,0.7); }
+    .pv-timer-status { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(239,68,68,0.75); min-height: 16px; }
+    .pv-timer-btn {
+      background: none; border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.55); font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 14px; border-radius: 6px; cursor: pointer; align-self: flex-start;
+      transition: border-color .15s, color .15s;
+    }
+    .pv-timer-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.3); color: #fff; }
+    .pv-timer-btn:disabled { opacity: 0.25; cursor: default; }
     @media(max-width:640px) { .problem-card { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; } }
 
     /* ─── NETWORK VISUAL (3x bigger) ────────────────────────── */
@@ -1019,17 +1086,16 @@
             <div class="problem-title">The algorithm has already made up its mind about you.</div>
             <p class="problem-body">3-5 likes a week while men with half your credentials flood their inboxes. The setup was the problem. Nobody told you.</p>
             <div class="problem-visual">
-              <div class="pv-label">Algorithm reach — before Atlas</div>
-              <div class="pv-bar-row">
-                <div class="pv-row">
-                  <span class="pv-name">You (before)</span>
-                  <div class="pv-bar-track"><div class="pv-bar-fill low"></div></div>
-                  <span class="pv-val" style="color:rgba(239,68,68,0.8);">3 likes / wk</span>
+              <div class="pv-label">Weekly matches — same guy, different setup</div>
+              <div class="pv-two-nums">
+                <div>
+                  <div class="pv-big red">3</div>
+                  <div class="pv-num-sub red">Before</div>
                 </div>
-                <div class="pv-row" style="margin-top:10px;">
-                  <span class="pv-name">Top 1% profile</span>
-                  <div class="pv-bar-track"><div class="pv-bar-fill high"></div></div>
-                  <span class="pv-val">50+ / wk</span>
+                <div class="pv-vs">vs</div>
+                <div>
+                  <div class="pv-big white" id="apps-countup" data-target="50">0</div>
+                  <div class="pv-num-sub white">After Atlas</div>
                 </div>
               </div>
             </div>
@@ -1044,17 +1110,13 @@
             <div class="problem-title">You matched someone worth your time. She read it and vanished.</div>
             <p class="problem-body">Overthought the reply. She went cold. You never found out why, so the next match starts the same way.</p>
             <div class="problem-visual">
-              <div class="pv-label">What you saw</div>
-              <div class="pv-chat">
-                <div class="pv-msg sent">"Hey, want to grab coffee this week—"</div>
-                <div class="pv-msg read">
-                  <svg width="12" height="8" viewBox="0 0 18 12"><path d="M1 6l4 4L17 2" stroke="rgba(239,68,68,0.8)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M7 6l4 4" stroke="rgba(239,68,68,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-                  Read · 9:47pm
-                </div>
-                <div class="pv-silence">— 3 hours later —</div>
-                <div class="pv-silence">— next day —</div>
-                <div class="pv-silence" style="color:rgba(239,68,68,0.4); font-weight:600;">nothing.</div>
+              <div class="pv-label">Pick your opening move</div>
+              <div id="pv-choice" class="pv-choice">
+                <button class="pv-choice-btn avg" onclick="playChatAvg()">What most guys send &rarr;</button>
+                <button class="pv-choice-btn atlas" onclick="playChatAtlas()">The Atlas approach &rarr;</button>
               </div>
+              <div id="pv-thread" class="pv-chat-thread" style="display:none;"></div>
+              <button id="pv-reset" class="pv-reset-btn" style="display:none;" onclick="resetChat()">&#8635; Try the other way</button>
             </div>
           </div>
         </div>
@@ -1068,12 +1130,17 @@
             <p class="problem-body">The window closes. You walk away knowing you had it and didn't take it.</p>
             <div class="problem-visual">
               <div class="pv-label">Your window to act</div>
-              <div class="pv-countdown">
-                <div class="pv-tick t1"><span class="t-num">0:10</span><div class="t-bar"></div></div>
-                <div class="pv-tick t2"><span class="t-num">0:05</span><div class="t-bar"></div></div>
-                <div class="pv-tick t3"><span class="t-num">0:00</span><div class="t-bar"></div></div>
+              <div class="pv-timer">
+                <div class="pv-timer-top">
+                  <div class="pv-timer-num" id="timer-num">10</div>
+                  <div class="pv-timer-seconds">seconds</div>
+                </div>
+                <div class="pv-bar-track-t">
+                  <div class="pv-bar-fill-t" id="timer-bar"></div>
+                </div>
+                <div class="pv-timer-status" id="timer-status"></div>
+                <button class="pv-timer-btn" id="timer-btn" onclick="startTimer()">Watch it close &rarr;</button>
               </div>
-              <div class="pv-closed">Window closed. She's gone.</div>
             </div>
           </div>
         </div>
@@ -1874,6 +1941,141 @@
         document.querySelectorAll('.faq-item').forEach(fi => fi.classList.remove('open'));
         if (!isOpen) item.classList.add('open');
       });
+    });
+
+    // ─── VISUAL A: Apps count-up ──────────────────────────────
+    const countupEl = document.getElementById('apps-countup');
+    if (countupEl) {
+      let done = false;
+      const countObs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !done) {
+          done = true;
+          const target = parseInt(countupEl.dataset.target);
+          let current = 0;
+          const step = Math.ceil(target / 28);
+          const tick = setInterval(() => {
+            current = Math.min(current + step, target);
+            countupEl.textContent = current + (current >= target ? '+' : '');
+            if (current >= target) clearInterval(tick);
+          }, 40);
+        }
+      }, { threshold: 0.6 });
+      countObs.observe(countupEl);
+    }
+
+    // ─── VISUAL B: Interactive chat demo ─────────────────────
+    function addMsg(thread, html, cls, delay) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const el = document.createElement('div');
+          el.className = cls;
+          el.innerHTML = html;
+          thread.appendChild(el);
+          thread.scrollTop = thread.scrollHeight;
+          resolve();
+        }, delay);
+      });
+    }
+
+    async function playChatAvg() {
+      const choice = document.getElementById('pv-choice');
+      const thread = document.getElementById('pv-thread');
+      const reset  = document.getElementById('pv-reset');
+      choice.style.display = 'none';
+      thread.style.display = 'flex';
+      await addMsg(thread, 'Hey, how\'s your week going? 😊', 'pv-msg-out', 0);
+      await addMsg(thread, 'Read &nbsp;9:47 pm', 'pv-meta right', 700);
+      await addMsg(thread, '— 2 hours later —', 'pv-meta center', 1400);
+      await addMsg(thread, '— next day —', 'pv-meta center', 2000);
+      await addMsg(thread, 'No reply. Ever.', 'pv-meta stamp', 2600);
+      reset.style.display = 'block';
+    }
+
+    async function playChatAtlas() {
+      const choice = document.getElementById('pv-choice');
+      const thread = document.getElementById('pv-thread');
+      const reset  = document.getElementById('pv-reset');
+      choice.style.display = 'none';
+      thread.style.display = 'flex';
+      await addMsg(thread, 'Your photos stopped me. Coffee this week?', 'pv-msg-out', 0);
+      await addMsg(thread, 'Haha okay. I like that. What day?', 'pv-msg-in', 900);
+      await addMsg(thread, 'Thursday. Nobu at 7.', 'pv-msg-out', 1700);
+      await addMsg(thread, 'Done. See you there.', 'pv-msg-in', 2400);
+      await addMsg(thread, 'Date set ✓', 'pv-meta win', 3000);
+      reset.style.display = 'block';
+    }
+
+    function resetChat() {
+      document.getElementById('pv-choice').style.display = 'flex';
+      const thread = document.getElementById('pv-thread');
+      thread.style.display = 'none';
+      thread.innerHTML = '';
+      document.getElementById('pv-reset').style.display = 'none';
+    }
+
+    // ─── VISUAL C: Countdown timer ────────────────────────────
+    let timerRunning = false;
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerRunning) return;
+      timerRunning = true;
+      const numEl    = document.getElementById('timer-num');
+      const barEl    = document.getElementById('timer-bar');
+      const statusEl = document.getElementById('timer-status');
+      const btnEl    = document.getElementById('timer-btn');
+
+      btnEl.disabled = true;
+      statusEl.textContent = '';
+      numEl.className = 'pv-timer-num';
+      barEl.className = 'pv-bar-fill-t';
+      barEl.style.width = '100%';
+
+      let secs = 10;
+
+      // Force reflow so the initial width transition fires
+      void barEl.offsetWidth;
+
+      timerInterval = setInterval(() => {
+        secs--;
+        numEl.textContent = secs;
+        barEl.style.width = (secs / 10 * 100) + '%';
+
+        if (secs <= 5 && secs > 2) {
+          numEl.className = 'pv-timer-num warn';
+          barEl.className = 'pv-bar-fill-t warn';
+        }
+        if (secs <= 2) {
+          numEl.className = 'pv-timer-num danger';
+          barEl.className = 'pv-bar-fill-t danger';
+        }
+
+        if (secs <= 0) {
+          clearInterval(timerInterval);
+          barEl.style.width = '0%';
+          numEl.textContent = '0';
+          statusEl.textContent = 'Window closed. She\'s gone.';
+          btnEl.textContent = '↺ Watch again';
+          btnEl.disabled = false;
+          timerRunning = false;
+        }
+      }, 1000);
+    }
+
+    // Reset timer when "Watch again" is clicked
+    document.getElementById('timer-btn').addEventListener('click', () => {
+      if (!timerRunning && document.getElementById('timer-btn').textContent.includes('again')) {
+        const numEl    = document.getElementById('timer-num');
+        const barEl    = document.getElementById('timer-bar');
+        const statusEl = document.getElementById('timer-status');
+        const btnEl    = document.getElementById('timer-btn');
+        numEl.textContent = '10';
+        numEl.className = 'pv-timer-num';
+        barEl.className = 'pv-bar-fill-t';
+        barEl.style.width = '100%';
+        statusEl.textContent = '';
+        btnEl.textContent = 'Watch it close →';
+      }
     });
   </script>
 
