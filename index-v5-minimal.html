@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Typeform embed — replace YOUR_FORM_ID in the button's data-tf-popup attribute -->
+  <link rel="stylesheet" href="//embed.typeform.com/next/css/popup.css">
+  <script src="//embed.typeform.com/next/embed.js"></script>
   <style>
     /* ─── RESET + BASE ───────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -133,18 +136,20 @@
     .enroll-bar a { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
 
     /* ─── LAYOUT ─────────────────────────────────────────────── */
-    .page-top { padding-top: 90px; }
+    .page-top { padding-top: 140px; }
     .section {
-      min-height: 100vh;
+      min-height: auto;
       display: flex; align-items: center; justify-content: center;
       padding: 100px 48px;
       position: relative;
     }
-    .section.tight { min-height: auto; padding: 80px 48px; }
-    .inner { width: 100%; max-width: 900px; margin: 0 auto; }
-    .inner.wide { max-width: 1140px; }
+    .section.tall { min-height: 100vh; }
+    .section.tight { padding: 80px 48px; }
+    .inner { width: 100%; max-width: 980px; margin: 0 auto; }
+    .inner.wide { max-width: 1200px; }
     .inner.narrow { max-width: 680px; }
     @media(max-width:640px) {
+      .page-top { padding-top: 110px; }
       .section { padding: 80px 24px; }
     }
 
@@ -220,9 +225,23 @@
     .cta-row.center { justify-content: center; }
     .sub-note { font-size: 12px; color: var(--w25); margin-top: 14px; letter-spacing: 0.03em; }
 
+    /* ─── TYPEFORM BUTTON ───────────────────────────────────── */
+    .tf-apply-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #000;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 18px 44px; border-radius: 6px;
+      border: none; cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 44px;
+    }
+    .tf-apply-btn:hover { opacity: 0.88; }
+
     /* ─── VSL PLACEHOLDER ────────────────────────────────────── */
     .vsl-wrap {
-      width: 100%; max-width: 720px;
+      width: 100%; max-width: 1100px;
       aspect-ratio: 16/9;
       background: var(--bg2);
       border: 1px solid var(--border);
@@ -926,19 +945,23 @@
   <!-- ══════════════════════════════════════════════════════════
        §1  HERO
   ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-black page-top" id="hero" style="min-height:100vh;">
-    <div class="inner text-center">
+  <section class="section s-black page-top" id="hero">
+    <div class="inner wide text-center">
 
-      <h1 class="h-xl reveal reveal-d1" style="margin-bottom:28px;">
+      <div class="reveal reveal-d1" style="margin-bottom:32px;">
+        <span class="qualifier-pill">For high-performing men who are done leaving this area of their life to chance.</span>
+      </div>
+
+      <h1 class="h-xl reveal reveal-d2" style="margin-bottom:28px;">
         You've built<br>everything.<br><em>Except this.</em>
       </h1>
 
-      <p class="body-xl reveal reveal-d2" style="max-width:580px;margin:0 auto;">
+      <p class="body-xl reveal reveal-d3" style="max-width:620px;margin:0 auto;">
         We rebuild your profiles, dial in your messaging, and coach every conversation in real time. You just show up to the dates.
       </p>
 
       <!-- VSL -->
-      <div class="vsl-wrap reveal reveal-d3">
+      <div class="vsl-wrap reveal reveal-d4">
         <div class="vsl-corner">WATCH FIRST · CONFIDENTIAL</div>
         <div class="vsl-inner">
           <div class="vsl-play-btn">
@@ -948,17 +971,15 @@
         </div>
       </div>
 
-      <div class="cta-row center reveal reveal-d4">
-        <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
-        <a href="#how-it-works" class="btn btn-outline">See how it works &darr;</a>
-      </div>
-      <p class="sub-note reveal reveal-d5">Less than 5% accepted &nbsp;·&nbsp; NDA protected &nbsp;·&nbsp; Takes 2 minutes</p>
-      <div class="reveal reveal-d5" style="margin-top:20px;">
-        <span class="qualifier-pill">For high-performing men who are done leaving this area of their life to chance.</span>
+      <!-- TYPEFORM APPLY BUTTON — replace YOUR_FORM_ID with actual Typeform ID -->
+      <div class="reveal reveal-d5">
+        <button class="tf-apply-btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100" data-tf-medium="snippet">
+          Apply for Your Consultation &rarr;
+        </button>
       </div>
 
       <!-- Stats bar -->
-      <div class="stat-row reveal reveal-d5" style="margin-top:72px;">
+      <div class="stat-row reveal reveal-d6" style="margin-top:72px;">
         <div class="stat-cell">
           <div class="stat-num">200M+</div>
           <div class="stat-label">Views</div>
@@ -998,19 +1019,6 @@
       <span class="marquee-item"><strong>"18 matches in one night"</strong> Parker · Business Analyst</span>
     </div>
   </div>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       §2  THE GAP
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-black text-center">
-    <div class="inner narrow">
-      <span class="eyebrow reveal">The Gap</span>
-      <h2 class="h-lg reveal reveal-d1">Most men spend<br>years on this.</h2>
-      <p class="body-xl reveal reveal-d2" style="margin-top:24px;">Our clients spend 90 days.</p>
-      <p class="body-lg reveal reveal-d3" style="margin-top:20px; color:var(--w45);">You can diagnose a problem in your business before your team notices it. Your dating life is different. No feedback. No data. Just a pattern that keeps repeating.</p>
-    </div>
-  </section>
 
 
   <!-- ══════════════════════════════════════════════════════════
@@ -1100,21 +1108,9 @@
 
 
   <!-- ══════════════════════════════════════════════════════════
-       §4  HOW IT WORKS — INTRO
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-black text-center" id="how-it-works">
-    <div class="inner narrow">
-      <span class="eyebrow reveal">The Atlas System</span>
-      <h2 class="h-lg reveal reveal-d1">Three phases.<br>Ninety days.</h2>
-      <p class="body-xl reveal reveal-d2" style="margin-top:24px;">A business without leads is not a business. Your dating life works the same way. Three simultaneous streams. No single point of failure.</p>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
        §5  PHASE 1 — BUILD YOUR PIPELINE
   ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-dark">
+  <section class="section s-dark" id="how-it-works">
     <div class="inner wide">
 
       <div class="split">
@@ -1745,38 +1741,6 @@
       <div class="cta-row center reveal reveal-d5" style="margin-top:52px;">
         <a href="#apply" class="btn btn-white">Apply for Your Consultation &rarr;</a>
       </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       §12  COMPARISON
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section s-dark text-center">
-    <div class="inner">
-      <span class="eyebrow reveal">You've tried going it alone</span>
-      <h2 class="h-md reveal reveal-d1">Here's what<br>that costs.</h2>
-
-      <div class="cmp-wrap reveal reveal-d2">
-        <table class="cmp">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Atlas</th>
-              <th>On Your Own</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Time to first date</td><td>Week 2 (average)</td><td>Months to years</td></tr>
-            <tr><td>Profile setup</td><td>Done by female advisors</td><td>Generic advice from a search</td></tr>
-            <tr><td>Messaging</td><td>Scripts + live coaching on every conversation</td><td>Guesswork. Repeat the same mistake.</td></tr>
-            <tr><td>Real-life approach</td><td>Weekly gameplan + audio audits</td><td>Freeze. Watch the window close.</td></tr>
-            <tr><td>When something goes wrong</td><td>Direct line. Dissected same day.</td><td>You never find out why.</td></tr>
-            <tr><td>End result</td><td>Consistent pipeline. Permanent skill.</td><td>Same place. Another year later.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="reveal reveal-d3" style="font-size:14px;color:var(--w25);margin-top:18px;">Every year you leave this unaddressed, the options narrow.</p>
     </div>
   </section>
 
