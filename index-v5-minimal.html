@@ -97,7 +97,7 @@
     .enroll-bar a { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
 
     /* ─── LAYOUT ─────────────────────────────────────────────── */
-    .page-top { padding-top: 140px; }
+    .page-top { padding-top: 100px; }
     .section {
       min-height: auto;
       display: flex; align-items: center; justify-content: center;
@@ -955,7 +955,7 @@
 
     /* ─── SCROLL PROGRESS BAR ────────────────────────────────── */
     #progress-bar {
-      position: fixed; top: 90px; left: 0; z-index: 150;
+      position: fixed; top: 58px; left: 0; z-index: 150;
       height: 2px; background: rgba(255,255,255,0.15);
       width: 100%; pointer-events: none;
     }
@@ -973,17 +973,8 @@
     <a href="#hero">
       <img src="logo.jpeg" class="nav-logo" alt="Atlas">
     </a>
-    <div style="flex:1;display:flex;justify-content:flex-end;">
-      <a href="#apply" class="nav-apply">Apply Now</a>
-    </div>
+    <div style="flex:1;"></div>
   </nav>
-
-  <!-- ENROLLMENT BAR -->
-  <div class="enroll-bar">
-    <div class="live-dot"></div>
-    <span>ENROLLMENT: OPEN &nbsp;·&nbsp; 4 SPOTS REMAINING</span>
-    <a href="#apply" style="margin-left:8px;">&rarr;</a>
-  </div>
 
   <!-- SCROLL PROGRESS -->
   <div id="progress-bar"><div id="progress-fill"></div></div>
@@ -999,11 +990,11 @@
         <span class="qualifier-pill">For high-performing men who are done leaving this area of their life to chance.</span>
       </div>
 
-      <h1 class="h-xl reveal reveal-d2" style="margin-bottom:28px;">
+      <h1 class="h-xl reveal reveal-d2" style="margin-bottom:28px;font-size:clamp(27px,3.57vw,51px);">
         You've built everything.<br><em>Except this.</em>
       </h1>
 
-      <p class="body-xl reveal reveal-d3" style="max-width:620px;margin:0 auto;">
+      <p class="body-xl reveal reveal-d3" style="max-width:620px;margin:0 auto;font-size:clamp(16px,2.16vw,22px);">
         We rebuild your profiles, dial in your messaging, and coach every conversation in real time. You just show up to the dates.
       </p>
 
@@ -1073,20 +1064,17 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-dark">
     <div class="inner">
-      <span class="eyebrow reveal">Where High-Performing Men Get Stuck</span>
       <h2 class="h-md reveal reveal-d1">Three channels.<br>All broken.</h2>
 
       <div class="problem-stack">
         <div class="problem-card reveal reveal-d2">
           <div class="problem-num-wrap">
             <div class="problem-num-big">01</div>
-            <div class="problem-num-tag">Apps</div>
           </div>
           <div>
             <div class="problem-title">The algorithm has already made up its mind about you.</div>
             <p class="problem-body">3-5 likes a week while men with half your credentials flood their inboxes. The setup was the problem. Nobody told you.</p>
             <div class="problem-visual">
-              <div class="pv-label">Weekly matches — same guy, different setup</div>
               <div class="pv-two-nums">
                 <div>
                   <div class="pv-big red">3</div>
@@ -1104,13 +1092,11 @@
         <div class="problem-card reveal reveal-d3">
           <div class="problem-num-wrap">
             <div class="problem-num-big">02</div>
-            <div class="problem-num-tag">Texts</div>
           </div>
           <div>
             <div class="problem-title">You matched someone worth your time. She read it and vanished.</div>
             <p class="problem-body">Overthought the reply. She went cold. You never found out why, so the next match starts the same way.</p>
             <div class="problem-visual">
-              <div class="pv-label">Pick your opening move</div>
               <div id="pv-choice" class="pv-choice">
                 <button class="pv-choice-btn avg" onclick="playChatAvg()">What most guys send &rarr;</button>
                 <button class="pv-choice-btn atlas" onclick="playChatAtlas()">The Atlas approach &rarr;</button>
@@ -1123,13 +1109,11 @@
         <div class="problem-card reveal reveal-d4">
           <div class="problem-num-wrap">
             <div class="problem-num-big">03</div>
-            <div class="problem-num-tag">Real Life</div>
           </div>
           <div>
             <div class="problem-title">You see her. You have ten seconds. Something stops you.</div>
             <p class="problem-body">The window closes. You walk away knowing you had it and didn't take it.</p>
             <div class="problem-visual">
-              <div class="pv-label">Your window to act</div>
               <div class="pv-timer">
                 <div class="pv-timer-top">
                   <div class="pv-timer-num" id="timer-num">10</div>
@@ -1138,8 +1122,9 @@
                 <div class="pv-bar-track-t">
                   <div class="pv-bar-fill-t" id="timer-bar"></div>
                 </div>
+                <div id="timer-thread" class="pv-chat-thread" style="display:none;min-height:0;margin-top:8px;"></div>
                 <div class="pv-timer-status" id="timer-status"></div>
-                <button class="pv-timer-btn" id="timer-btn" onclick="startTimer()">Watch it close &rarr;</button>
+                <button class="pv-timer-btn" id="timer-btn" style="display:none;">&#8635; Watch again</button>
               </div>
             </div>
           </div>
@@ -1164,11 +1149,6 @@
 
         <!-- LEFT: TEXT -->
         <div>
-          <div class="phase-tag reveal">
-            <div class="phase-num-box"><span>01</span></div>
-            <span class="phase-label">The 3-Part Pipeline</span>
-          </div>
-
           <h2 class="h-md reveal reveal-d1">Build your<br>pipeline.</h2>
 
           <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
@@ -1313,29 +1293,21 @@
 
         <!-- LEFT: TEXT -->
         <div>
-          <h3 class="h-sm reveal" style="color:var(--w25);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Three Simultaneous Streams</h3>
-
           <div class="pipeline-cards" style="grid-template-columns:1fr; gap:12px;">
 
             <div class="pipe-card reveal reveal-d1">
-              <div class="pipe-card-label">Dating Apps</div>
               <div class="pipe-card-title">We rebuild your profile from scratch — not tweak it.</div>
               <p class="pipe-card-body">Female advisors rank every photo before we touch anything. Top-1% profile. Matches on autopilot.</p>
-              <p class="pipe-proof">Spencer: 40+ Bumble matches in 24 hours of going live</p>
             </div>
 
             <div class="pipe-card reveal reveal-d2">
-              <div class="pipe-card-label">Instagram</div>
               <div class="pipe-card-title">The best women aren't spending their evenings on Hinge.</div>
               <p class="pipe-card-body">Set up once. Right signals, right profile. Runs itself. You don't need to become an influencer.</p>
-              <p class="pipe-proof">Aakash: women cold-DM'd him first after the rebuild</p>
             </div>
 
             <div class="pipe-card reveal reveal-d3">
-              <div class="pipe-card-label">Real Life</div>
               <div class="pipe-card-title">74% of women say they wish they were approached more.</div>
               <p class="pipe-card-body">Weekly gameplan for your city and schedule. Send us your approaches — we find where you lost her.</p>
-              <p class="pipe-proof">Maneet: approached a model cold on the street</p>
             </div>
 
           </div>
@@ -1356,11 +1328,6 @@
 
         <!-- LEFT: TEXT -->
         <div>
-          <div class="phase-tag reveal">
-            <div class="phase-num-box"><span>02</span></div>
-            <span class="phase-label">The Conversion Blueprint</span>
-          </div>
-
           <h2 class="h-md reveal reveal-d1">Turn matches<br>into dates.</h2>
 
           <p class="body-lg reveal reveal-d2" style="margin-top:20px;">
@@ -1517,11 +1484,6 @@
 
         <!-- LEFT: TEXT -->
         <div>
-          <div class="phase-tag reveal">
-            <div class="phase-num-box"><span>03</span></div>
-            <span class="phase-label">The Feedback Layer</span>
-          </div>
-
           <h2 class="h-md reveal reveal-d1">The system that<br>makes it permanent.</h2>
 
           <p class="body-lg reveal reveal-d2" style="margin-top:20px; color:var(--w45);">
@@ -1569,7 +1531,6 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-dark text-center" id="about">
     <div class="inner text-center" style="max-width:1100px;">
-      <span class="eyebrow reveal">Why Benjamin Seda. Why Atlas.</span>
       <h2 class="h-md reveal reveal-d1">I walked away from<br>200 million views.</h2>
 
       <div class="reveal reveal-d2" style="margin-top:36px;margin-bottom:36px;">
@@ -1598,7 +1559,6 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-black text-center" id="timeline">
     <div class="inner">
-      <span class="eyebrow reveal">The Route</span>
       <h2 class="h-md reveal reveal-d1">What your 90 days look like.</h2>
 
       <div class="timeline" style="margin-top:52px; text-align:left;">
@@ -1607,7 +1567,6 @@
           <div>
             <div class="tl-title">Pipeline Live</div>
             <p class="tl-body">Profiles rebuilt. Instagram dialed. All three channels running.</p>
-            <div class="tl-kicker">First matches. First conversations.</div>
           </div>
         </div>
         <div class="tl-row reveal reveal-d3">
@@ -1615,7 +1574,6 @@
           <div>
             <div class="tl-title">First Dates</div>
             <p class="tl-body">Scripts deployed. Message support active. Most clients book their first date in this window.</p>
-            <div class="tl-kicker">The proof of concept.</div>
           </div>
         </div>
         <div class="tl-row reveal reveal-d4">
@@ -1630,7 +1588,6 @@
           <div>
             <div class="tl-title">Operating at Capacity</div>
             <p class="tl-body">1-3 dates per week. The skill is yours. You don't need us anymore.</p>
-            <div class="tl-kicker">Consistent pipeline. Permanent skill.</div>
           </div>
         </div>
       </div>
@@ -1644,9 +1601,7 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-black" id="results">
     <div class="inner wide">
-      <span class="eyebrow reveal">Real Men. Real Results.</span>
       <h2 class="h-md reveal reveal-d1">These are not outliers.</h2>
-      <p class="body-lg reveal reveal-d2">This is what the system consistently produces.</p>
 
       <!-- Tinder-style horizontal auto-scroll cards -->
       <div class="tinder-scroll-wrap reveal reveal-d2">
@@ -1807,7 +1762,6 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-dark">
     <div class="inner narrow text-center">
-      <span class="eyebrow reveal">Atlas Is Not for Everyone</span>
       <h2 class="h-md reveal reveal-d1">Is this for you?</h2>
 
       <div class="qual-grid reveal reveal-d2" style="margin-top:52px; text-align:left;">
@@ -1840,7 +1794,6 @@
   ══════════════════════════════════════════════════════════════ -->
   <section class="section s-black" id="faq">
     <div class="inner narrow">
-      <span class="eyebrow reveal">FAQ</span>
       <h2 class="h-md reveal reveal-d1">Your questions,<br>answered.</h2>
 
       <div class="faq-list">
@@ -2013,9 +1966,22 @@
       document.getElementById('pv-reset').style.display = 'none';
     }
 
-    // ─── VISUAL C: Countdown timer ────────────────────────────
+    // ─── VISUAL C: Countdown timer (auto-start on scroll) ─────
     let timerRunning = false;
     let timerInterval = null;
+    let timerStarted = false;
+
+    // Auto-start when the timer number scrolls into view
+    const _timerNumEl = document.getElementById('timer-num');
+    if (_timerNumEl) {
+      const timerObs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !timerStarted) {
+          timerStarted = true;
+          setTimeout(startTimer, 600);
+        }
+      }, { threshold: 0.8 });
+      timerObs.observe(_timerNumEl);
+    }
 
     function startTimer() {
       if (timerRunning) return;
@@ -2023,17 +1989,19 @@
       const numEl    = document.getElementById('timer-num');
       const barEl    = document.getElementById('timer-bar');
       const statusEl = document.getElementById('timer-status');
+      const threadEl = document.getElementById('timer-thread');
       const btnEl    = document.getElementById('timer-btn');
 
-      btnEl.disabled = true;
+      btnEl.style.display = 'none';
       statusEl.textContent = '';
+      threadEl.innerHTML = '';
+      threadEl.style.display = 'none';
       numEl.className = 'pv-timer-num';
       barEl.className = 'pv-bar-fill-t';
+      barEl.style.background = '';
       barEl.style.width = '100%';
 
       let secs = 10;
-
-      // Force reflow so the initial width transition fires
       void barEl.offsetWidth;
 
       timerInterval = setInterval(() => {
@@ -2050,31 +2018,50 @@
           barEl.className = 'pv-bar-fill-t danger';
         }
 
-        if (secs <= 0) {
+        // Auto-act at 8 — show the win path
+        if (secs === 8) {
           clearInterval(timerInterval);
-          barEl.style.width = '0%';
-          numEl.textContent = '0';
-          statusEl.textContent = 'Window closed. She\'s gone.';
-          btnEl.textContent = '↺ Watch again';
-          btnEl.disabled = false;
           timerRunning = false;
+          playTimerWin(numEl, barEl, statusEl, threadEl, btnEl);
         }
       }, 1000);
     }
 
-    // Reset timer when "Watch again" is clicked
+    async function playTimerWin(numEl, barEl, statusEl, threadEl, btnEl) {
+      // Freeze the bar at 80%, flip to green
+      numEl.className = 'pv-timer-num';
+      barEl.style.background = 'rgba(34,197,94,0.7)';
+
+      threadEl.style.display = 'flex';
+      await addMsg(threadEl, 'You moved at 8.', 'pv-meta win', 300);
+      await addMsg(threadEl, 'She looked up. You held it.', 'pv-msg-in', 900);
+      await addMsg(threadEl, 'You got the number.', 'pv-meta win', 1700);
+
+      setTimeout(() => {
+        btnEl.style.display = 'block';
+      }, 2400);
+    }
+
+    // Restart button
     document.getElementById('timer-btn').addEventListener('click', () => {
-      if (!timerRunning && document.getElementById('timer-btn').textContent.includes('again')) {
+      if (!timerRunning) {
         const numEl    = document.getElementById('timer-num');
         const barEl    = document.getElementById('timer-bar');
         const statusEl = document.getElementById('timer-status');
+        const threadEl = document.getElementById('timer-thread');
         const btnEl    = document.getElementById('timer-btn');
+
         numEl.textContent = '10';
         numEl.className = 'pv-timer-num';
         barEl.className = 'pv-bar-fill-t';
+        barEl.style.background = '';
         barEl.style.width = '100%';
         statusEl.textContent = '';
-        btnEl.textContent = 'Watch it close →';
+        threadEl.innerHTML = '';
+        threadEl.style.display = 'none';
+        btnEl.style.display = 'none';
+
+        setTimeout(startTimer, 300);
       }
     });
   </script>
