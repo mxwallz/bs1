@@ -6,11 +6,6 @@
 <title>Atlas Advisory. Private Dating Consulting for High-Performing Men.</title>
 <meta name="description" content="Application-only dating consulting for professionally successful men. A system for consistent dates with women you actually want. Run by a team of female advisors.">
 
-<!-- Mid-luxury typography. Cormorant Garamond for headlines, Inter for body. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <script src="//embed.typeform.com/next/embed.js"></script>
 
 <style>
@@ -50,10 +45,9 @@
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg0); color: var(--w100);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, sans-serif;
   font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; overflow-x: hidden;
-  font-feature-settings: "ss01", "cv01", "cv11";
 }
 a { color: inherit; text-decoration: none; }
 
@@ -67,14 +61,11 @@ a { color: inherit; text-decoration: none; }
 .s-dark { background: var(--bg1); }
 .s-darker { background: var(--bg2); }
 
-h1, h2, h3 {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-weight: 600; letter-spacing: -0.012em; line-height: 1.05;
-}
-h1 { font-size: clamp(40px, 6.2vw, 68px); font-weight: 600; }
-h2 { font-size: clamp(32px, 4.6vw, 52px); font-weight: 600; }
-h3 { font-size: clamp(21px, 1.9vw, 27px); font-weight: 600; }
-h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; color: var(--w55); }
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
+h1 { font-size: clamp(34px, 5.4vw, 60px); font-weight: 750; }
+h2 { font-size: clamp(28px, 4vw, 44px); }
+h3 { font-size: clamp(18px, 1.7vw, 22px); font-weight: 600; }
+h1 em, h2 em { font-style: italic; font-weight: 450; color: var(--w55); }
 p { color: var(--w75); }
 .body-lg { font-size: clamp(15px, 1.4vw, 18px); }
 .body-xl { font-size: clamp(16px, 1.6vw, 20px); }
@@ -113,20 +104,10 @@ p { color: var(--w75); }
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
 }
-.nav-logo {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 17px; font-weight: 600; letter-spacing: 0.26em;
-  display: flex; align-items: center; gap: 10px;
-}
-.nav-compass {
-  width: 20px; height: 20px; flex-shrink: 0;
-  animation: compassSpin 32s linear infinite;
-  transform-origin: center;
-}
-@keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.nav-logo { font-size: 13px; font-weight: 800; letter-spacing: 0.38em; }
 
 /* Hero */
-.hero { padding-top: clamp(120px, 14vw, 170px); }
+.hero { padding-top: clamp(48px, 6vw, 80px); }
 .hero .pill {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--gold-soft); border: 1px solid rgba(201,168,76,0.28);
@@ -334,11 +315,7 @@ p { color: var(--w75); }
 @keyframes mpBadge { 0%,3% { opacity: 0; transform: scale(0.7); } 8% { opacity: 1; transform: scale(1.15); } 12%,88% { opacity: 1; transform: scale(1); } 95%,100% { opacity: 0; } }
 
 /* Mockup: Pipeline (Apple-grade) */
-.pipe2 { width: 100%; height: 100%; padding: 0; max-width: 620px; margin: 0 auto; }
-/* Pipeline and WWYS cards use taller aspect so the SVG/phone fit fully */
-.deliv.pipeline-big .deliv-mock-wrap { aspect-ratio: 1 / 1; min-height: 520px; }
-.deliv.wwys-big .deliv-mock-wrap,
-.deliv.profile-big .deliv-mock-wrap { aspect-ratio: auto; min-height: 580px; padding: 20px; }
+.pipe2 { width: 100%; height: 100%; padding: 24px; }
 .pipe2 svg { width: 100%; height: 100%; display: block; }
 .pipe2-flow { fill: none; stroke: rgba(201,168,76,0.18); stroke-width: 1.5; stroke-linecap: round; }
 .pipe2-trunk { fill: none; stroke: rgba(201,168,76,0.32); stroke-width: 2.2; stroke-linecap: round; }
@@ -402,39 +379,14 @@ p { color: var(--w75); }
 .mc-footer { margin-top: 16px; font-size: 11px; color: var(--w35); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
 .mc-footer strong { color: var(--gold); font-weight: 700; }
 
-/* Mockup: Debrief (clickable voice note v16) */
+/* Mockup: Debrief (animated) */
 .mock-debrief {
   width: 78%; max-width: 360px; background: var(--card-solid); border: 1px solid var(--border-2);
   border-radius: 16px; padding: 26px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 .md-label { font-size: 10px; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
-.md-voicenote {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px; background: rgba(201,168,76,0.08);
-  border-radius: 12px; margin-bottom: 18px;
-  border: 1px solid rgba(201,168,76,0.18);
-  cursor: pointer; transition: background 0.2s, transform 0.15s;
-}
-.md-voicenote:hover { background: rgba(201,168,76,0.12); transform: translateY(-1px); }
-.md-play {
-  width: 36px; height: 36px; border-radius: 50%; background: var(--gold);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: background 0.2s;
-}
-.md-play::before {
-  content: ""; width: 0; height: 0; margin-left: 3px;
-  border-top: 7px solid transparent; border-bottom: 7px solid transparent;
-  border-left: 10px solid #0a0a0a;
-  transition: all 0.2s;
-}
-.md-voicenote.playing .md-play::before {
-  margin-left: 0; border: 0; width: 8px; height: 10px;
-  background: linear-gradient(to right, #0a0a0a 0%, #0a0a0a 35%, transparent 35%, transparent 65%, #0a0a0a 65%);
-}
-.md-wave { flex: 1; display: flex; gap: 2px; align-items: center; height: 28px; }
-.md-wave .bar { width: 2px; background: rgba(201,168,76,0.4); border-radius: 2px; transition: background 0.2s; }
-.md-voicenote.playing .md-wave .bar { background: var(--gold); animation: wave 1s ease-in-out infinite; }
-.md-duration { font-size: 11px; color: var(--w55); font-weight: 600; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.md-wave { display: flex; gap: 3px; align-items: center; justify-content: center; height: 48px; margin-bottom: 20px; padding: 10px 4px; background: rgba(201,168,76,0.06); border-radius: 10px; }
+.md-wave .bar { width: 3px; background: var(--gold); border-radius: 2px; animation: wave 1.2s ease-in-out infinite; }
 .md-wave .bar:nth-child(1) { height: 18%; animation-delay: 0s; }
 .md-wave .bar:nth-child(2) { height: 48%; animation-delay: 0.1s; }
 .md-wave .bar:nth-child(3) { height: 30%; animation-delay: 0.2s; }
@@ -615,47 +567,16 @@ p { color: var(--w75); }
 
 /* Footer */
 footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: center; }
-.footer-logo {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 16px; font-weight: 600; letter-spacing: 0.26em; color: var(--w55);
-  margin-bottom: 12px;
-  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
-}
-.footer-logo svg { width: 18px; height: 18px; opacity: 0.7; }
+.footer-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.38em; color: var(--w55); margin-bottom: 12px; }
 .footer-line { font-size: 11px; color: var(--w20); }
 
 /* ══════════════════════════════════════════════════════════
    v13 NEW: What Would You Say (interactive two-path chat)
    ══════════════════════════════════════════════════════════ */
-.wwys-phone {
-  width: auto; height: 100%; max-height: 520px; aspect-ratio: 9/19.5;
-  background: #0a0a0a; border: 3px solid #1a1a1a;
-  border-radius: 42px;
-  padding: 12px 8px; position: relative;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
-  display: flex; flex-direction: column;
-  flex-shrink: 0;
-}
-.wwys-phone::before {
-  content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-  width: 88px; height: 22px; background: #000; border-radius: 12px;
-  z-index: 3;
-}
-.wwys-phone::after {
-  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-  width: 120px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px;
-}
-.wwys-status {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 22px; margin-top: 4px; margin-bottom: 10px;
-  font-size: 12px; font-weight: 600; color: #fff;
-}
-.wwys-status .stat-time { letter-spacing: 0.02em; }
-.wwys-status .stat-icons { display: flex; gap: 4px; font-size: 10px; }
 .wwys {
-  flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 24px;
-  background: var(--card-solid); border-radius: 28px;
-  overflow: hidden;
+  width: 78%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; padding: 24px;
+  background: var(--card-solid); border: 1px solid var(--border-2); border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5); min-height: 380px;
 }
 .wwys-head {
   display: flex; align-items: center; gap: 10px; padding-bottom: 12px;
@@ -663,7 +584,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 }
 .wwys-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #d62976); flex-shrink: 0; }
 .wwys-name { font-size: 12px; font-weight: 600; color: var(--w100); }
-.wwys-status-pill { font-size: 10px; color: var(--ok); }
+.wwys-status { font-size: 10px; color: var(--ok); }
 .wwys-prompt {
   padding: 10px 12px; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid var(--border);
   font-size: 11px; color: var(--w55); margin-bottom: 10px; text-align: center; font-style: italic;
@@ -796,284 +717,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 }
 
 /* ══════════════════════════════════════════════════════════
-   v18 REDESIGN. Profile Rebuild progressive animation.
-   Phone cycles between Hinge and Instagram. Within each stage,
-   elements appear progressively ("the rebuild happening").
-   ══════════════════════════════════════════════════════════ */
-.reb-phone {
-  width: auto; height: 100%; max-height: 540px; aspect-ratio: 9/19.5;
-  margin: 0 auto; flex-shrink: 0;
-  background: #0a0a0a; border: 3px solid #1a1a1a; border-radius: 42px;
-  padding: 12px 8px; position: relative; overflow: hidden;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.6);
-}
-.reb-phone::before {
-  content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-  width: 88px; height: 22px; background: #000; border-radius: 12px; z-index: 10;
-}
-.reb-phone::after {
-  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-  width: 110px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px; z-index: 10;
-}
-.reb-screen {
-  position: absolute; top: 38px; left: 8px; right: 8px; bottom: 24px;
-  background: #0f1220; border-radius: 30px; overflow: hidden;
-}
-.reb-stage {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  padding: 10px; gap: 6px;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-.reb-stage.active { opacity: 1; pointer-events: auto; }
-.reb-stage.reb-ig { background: #0a0b16; }
-
-.reb-header {
-  display: flex; justify-content: center; align-items: baseline; gap: 6px;
-  padding: 4px 0 10px; border-bottom: 1px solid var(--border);
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 15px; font-weight: 700; color: #fff;
-  letter-spacing: -0.01em;
-}
-.reb-header small {
-  font-family: 'Inter', sans-serif;
-  font-size: 9px; color: var(--w35); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
-}
-
-/* Hinge stage content */
-.reb-hero-photo {
-  aspect-ratio: 4/3; border-radius: 12px;
-  background: linear-gradient(135deg, #3a2a5a, #6a2a4a); position: relative;
-  flex-shrink: 0;
-}
-.reb-hero-photo::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.7));
-  border-radius: 12px;
-}
-.reb-hero-label {
-  position: absolute; left: 12px; bottom: 10px; z-index: 2;
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 14px; font-weight: 700; color: #fff;
-}
-.reb-prompt-card {
-  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-  border-radius: 10px; padding: 9px 12px; position: relative;
-  flex-shrink: 0;
-}
-.reb-prompt-label { font-size: 9px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-.reb-prompt-text { font-size: 11px; color: #fff; line-height: 1.4; }
-.reb-like {
-  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 14px;
-}
-.reb-badge {
-  align-self: center; margin-top: auto;
-  background: var(--gold); color: #0a0a0a;
-  font-family: 'Inter', sans-serif;
-  font-size: 9px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 99px;
-  flex-shrink: 0;
-}
-
-/* IG stage content */
-.reb-ig-head { display: flex; gap: 10px; align-items: center; padding: 4px 2px 8px; flex-shrink: 0; }
-.reb-ig-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, #6a2a5a, #fa7e1e); flex-shrink: 0;
-  border: 2px solid rgba(255,255,255,0.06);
-}
-.reb-ig-meta { flex: 1; }
-.reb-ig-handle {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 700; color: #fff;
-}
-.reb-ig-counts { display: flex; gap: 10px; font-size: 9px; color: var(--w75); margin-top: 2px; }
-.reb-ig-counts strong { color: #fff; font-weight: 700; }
-.reb-ig-bio {
-  font-size: 10px; color: var(--w75); line-height: 1.4;
-  padding: 0 2px 6px; border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.reb-ig-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-  margin-top: 4px;
-  flex-shrink: 0;
-}
-.reb-ig-cell {
-  aspect-ratio: 1/1; border-radius: 3px;
-}
-.reb-ig-cell.c1 { background: linear-gradient(135deg, #2a3140, #4f5bd5); }
-.reb-ig-cell.c2 { background: linear-gradient(135deg, #3a1f1f, #d62976); }
-.reb-ig-cell.c3 { background: linear-gradient(135deg, #1f2a1f, #30D158); }
-.reb-ig-cell.c4 { background: linear-gradient(135deg, #3a2a1f, #fa7e1e); }
-.reb-ig-cell.c5 { background: linear-gradient(135deg, #1f2a3a, #4f5bd5); }
-.reb-ig-cell.c6 { background: linear-gradient(135deg, #2a1f3a, #962fbf); }
-.reb-ig-cell.c7 { background: linear-gradient(135deg, #3a3a1f, #F4C430); }
-.reb-ig-cell.c8 { background: linear-gradient(135deg, #1f3a2a, #30D158); }
-.reb-ig-cell.c9 { background: linear-gradient(135deg, #3a1f2a, #fd5068); }
-
-/* Progressive reveal via JS-driven .show class. Reliable + mobile-safe. */
-.reb-el {
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reb-stage.active.animate .reb-el { opacity: 1; transform: translateY(0); }
-.reb-stage.active.animate .reb-el.h1, .reb-stage.active.animate .reb-el.i1 { transition-delay: 0.1s; }
-.reb-stage.active.animate .reb-el.h2, .reb-stage.active.animate .reb-el.i2 { transition-delay: 0.5s; }
-.reb-stage.active.animate .reb-el.h3, .reb-stage.active.animate .reb-el.i3 { transition-delay: 0.9s; }
-.reb-stage.active.animate .reb-el.h4, .reb-stage.active.animate .reb-el.i4 { transition-delay: 1.1s; }
-.reb-stage.active.animate .reb-el.h5, .reb-stage.active.animate .reb-el.i5 { transition-delay: 1.4s; }
-.reb-stage.active.animate .reb-el.i6 { transition-delay: 1.6s; }
-.reb-stage.active.animate .reb-el.i7 { transition-delay: 1.8s; }
-.reb-stage.active.animate .reb-el.i8 { transition-delay: 2.0s; }
-.reb-stage.active.animate .reb-el.i9 { transition-delay: 2.2s; }
-.reb-stage.active.animate .reb-el.i10 { transition-delay: 2.4s; }
-.reb-stage.active.animate .reb-el.i11 { transition-delay: 2.6s; }
-.reb-stage.active.animate .reb-el.i12 { transition-delay: 3.0s; }
-
-/* ══════════════════════════════════════════════════════════
-   v16 LEGACY. Profile Rebuild phone swiper (now replaced by v18 progressive).
-   Kept for reference; unused.
-   ══════════════════════════════════════════════════════════ */
-.prof-swiper {
-  width: auto; height: 100%; max-height: 540px; aspect-ratio: 9/19.5;
-  margin: 0 auto; flex-shrink: 0;
-  background: #0a0a0a; border: 3px solid #1a1a1a; border-radius: 42px;
-  padding: 12px 8px; position: relative; overflow: hidden;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.6);
-}
-.prof-swiper::before {
-  content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-  width: 88px; height: 22px; background: #000; border-radius: 12px; z-index: 10;
-}
-.prof-swiper::after {
-  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-  width: 110px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px; z-index: 10;
-}
-.prof-inner {
-  position: absolute; top: 38px; left: 8px; right: 8px; bottom: 24px;
-  background: #0f1220; border-radius: 30px; overflow: hidden;
-  display: flex; flex-direction: column;
-}
-.prof-title {
-  padding: 12px 16px; text-align: center;
-  font-size: 13px; font-weight: 700; color: #fff;
-  letter-spacing: -0.01em; border-bottom: 1px solid var(--border);
-  position: relative;
-}
-.prof-title .prof-brand {
-  font-size: 10px; color: var(--w35); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 2px;
-}
-.prof-slides {
-  flex: 1; display: flex;
-  overflow-x: auto; scroll-snap-type: x mandatory;
-  scroll-behavior: smooth; scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.prof-slides::-webkit-scrollbar { display: none; }
-.prof-slide {
-  flex: 0 0 100%; scroll-snap-align: center;
-  padding: 12px; display: flex; flex-direction: column; gap: 8px;
-  overflow: hidden;
-}
-.ps-photo-big {
-  aspect-ratio: 1/1; border-radius: 14px;
-  background: linear-gradient(135deg, #4f5bd5, #d62976);
-  position: relative; flex-shrink: 0;
-}
-.ps-photo-big::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.7));
-  border-radius: 14px;
-}
-.ps-photo-big .ps-photo-label {
-  position: absolute; left: 12px; bottom: 10px; z-index: 2;
-  font-size: 13px; font-weight: 700; color: #fff;
-}
-.ps-bar { height: 5px; background: rgba(255,255,255,0.14); border-radius: 3px; flex-shrink: 0; }
-.ps-bar.short { width: 78%; }
-.ps-bar.shorter { width: 60%; }
-.ps-ig-head { display: flex; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-.ps-ig-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--bg3)); flex-shrink: 0; }
-.ps-ig-name { font-size: 12px; font-weight: 700; color: #fff; }
-.ps-ig-handle { font-size: 10px; color: var(--w55); }
-.ps-ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 2px; flex: 1; }
-.ps-ig-cell { aspect-ratio: 1/1; border-radius: 4px; }
-.ps-ig-cell.c1 { background: linear-gradient(135deg, #2a3140, #4f5bd5); }
-.ps-ig-cell.c2 { background: linear-gradient(135deg, #3a1f1f, #d62976); }
-.ps-ig-cell.c3 { background: linear-gradient(135deg, #1f2a1f, #30D158); }
-.ps-ig-cell.c4 { background: linear-gradient(135deg, #3a2a1f, #fa7e1e); }
-.ps-ig-cell.c5 { background: linear-gradient(135deg, #1f2a3a, #4f5bd5); }
-.ps-ig-cell.c6 { background: linear-gradient(135deg, #2a1f3a, #962fbf); }
-.ps-ig-cell.c7 { background: linear-gradient(135deg, #3a3a1f, #F4C430); }
-.ps-ig-cell.c8 { background: linear-gradient(135deg, #1f3a2a, #30D158); }
-.ps-ig-cell.c9 { background: linear-gradient(135deg, #3a1f2a, #fd5068); }
-.ps-ward-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; flex: 1; }
-.ps-ward-item {
-  border-radius: 8px; position: relative; overflow: hidden;
-  display: flex; align-items: flex-end;
-}
-.ps-ward-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.7)); }
-.ps-ward-item span {
-  position: relative; z-index: 2; padding: 6px 8px;
-  font-size: 10px; font-weight: 600; color: #fff;
-}
-.ps-ward-item.w1 { background: linear-gradient(135deg, #1a1a22, #3a3a44); }
-.ps-ward-item.w2 { background: linear-gradient(135deg, #2a2018, #5a4830); }
-.ps-ward-item.w3 { background: linear-gradient(135deg, #1a2a2a, #385050); }
-.ps-ward-item.w4 { background: linear-gradient(135deg, #22181a, #4a3030); }
-.ps-bio-card {
-  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-  border-radius: 10px; padding: 10px 12px;
-}
-.ps-bio-label { font-size: 9px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
-.ps-bio-text { font-size: 11px; color: #fff; line-height: 1.45; }
-.ps-hinge-prompt { position: relative; padding-right: 38px; }
-.ps-like-btn {
-  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-  width: 28px; height: 28px; border-radius: 50%;
-  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 16px; font-weight: 400;
-}
-.prof-slide-ig { background: #0a0b16; }
-.ps-ig-meta .ps-ig-handle { display: flex; gap: 10px; font-size: 10px; color: var(--w75); }
-.ps-ig-handle strong { color: #fff; font-weight: 700; }
-.ps-ig-bio { font-size: 10px; color: var(--w75); line-height: 1.4; padding: 8px 0 4px; }
-.ps-ig-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding-top: 4px; margin-bottom: 2px; }
-.ps-ig-tab { flex: 1; text-align: center; padding: 6px 0; font-size: 12px; color: var(--w35); border-bottom: 1.5px solid transparent; }
-.ps-ig-tab.active { color: #fff; border-bottom-color: #fff; }
-.ps-color-row { display: flex; gap: 6px; justify-content: center; margin-top: 4px; }
-.ps-color {
-  width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
-  flex-shrink: 0;
-}
-.prof-footer {
-  padding: 8px 12px 12px;
-  display: flex; flex-direction: column; gap: 8px;
-  border-top: 1px solid var(--border);
-}
-.prof-dots { display: flex; justify-content: center; gap: 5px; }
-.prof-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(255,255,255,0.16); transition: all 0.3s;
-}
-.prof-dot.active { background: var(--gold); width: 16px; border-radius: 3px; }
-.prof-hint {
-  text-align: center; font-size: 9px; color: var(--w35);
-  letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
-}
-.prof-hint::before { content: "←  "; color: var(--gold); }
-.prof-hint::after { content: "  →"; color: var(--gold); }
-
-/* ══════════════════════════════════════════════════════════
    v15 UPDATED. iPhone-stacking notifications above hero.
    Single vertical column. New notifs slide up from bottom.
    Older ones shift up, oldest fades out at top.
@@ -1095,10 +738,10 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   animation: pulse 2s infinite;
 }
 .iphone-stack {
-  max-width: 380px; margin: 0 auto;
-  display: flex; flex-direction: column; justify-content: center;
+  max-width: 400px; margin: 0 auto;
+  display: flex; flex-direction: column; justify-content: flex-end;
   gap: 8px;
-  min-height: 72px;
+  min-height: 320px;
   position: relative;
 }
 .iphone-notif {
@@ -1145,124 +788,9 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 .iphone-text strong { color: var(--gold); font-weight: 700; }
 
 /* ══════════════════════════════════════════════════════════
-   v16 REDESIGN. Before / After as narrative phone animation.
-   Single iPhone, content morphs: before matches → "Atlas method"
-   overlay → after matches. Loops. V5-minimal aesthetic.
-   ══════════════════════════════════════════════════════════ */
-.ba-phone-wrap {
-  display: flex; justify-content: center; align-items: center;
-  margin-top: 56px; padding: 20px 0 40px;
-}
-.ba-phone {
-  width: 300px; aspect-ratio: 9/19.5;
-  background: #0a0a0a; border: 3px solid #1a1a1a;
-  border-radius: 44px;
-  padding: 14px 10px; position: relative; overflow: hidden;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.6);
-}
-.ba-phone::before {
-  content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-  width: 88px; height: 22px; background: #000; border-radius: 12px; z-index: 10;
-}
-.ba-phone::after {
-  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-  width: 110px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px; z-index: 10;
-}
-.ba-screen {
-  position: relative; height: 100%;
-  background: var(--card-solid); border-radius: 28px;
-  padding: 44px 14px 24px; overflow: hidden;
-}
-.ba-appbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 6px 8px 12px; border-bottom: 1px solid var(--border);
-  font-size: 14px; font-weight: 700; color: #fff;
-}
-.ba-appbar .ba-app-title { flex: 1; text-align: center; }
-.ba-appbar .ba-app-heart { color: var(--gold); font-size: 18px; }
-.ba-state {
-  position: absolute; top: 94px; left: 14px; right: 14px; bottom: 20px;
-  display: flex; flex-direction: column; gap: 10px; padding: 10px 2px;
-  opacity: 0;
-}
-.ba-state.before { animation: baCycleBefore 8s ease-in-out infinite; }
-.ba-state.after { animation: baCycleAfter 8s ease-in-out infinite; }
-@keyframes baCycleBefore {
-  0%, 45% { opacity: 1; }
-  55%, 95% { opacity: 0; }
-  100% { opacity: 1; }
-}
-@keyframes baCycleAfter {
-  0%, 45% { opacity: 0; }
-  55%, 95% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.ba-match-card {
-  display: flex; flex-direction: column; gap: 6px;
-  padding: 0; background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border); border-radius: 12px;
-  overflow: hidden;
-}
-.ba-match-photo {
-  aspect-ratio: 3/2; position: relative; overflow: hidden;
-  flex-shrink: 0;
-  display: flex; align-items: flex-end;
-}
-.ba-match-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ba-match-photo .photo-placeholder {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; color: rgba(255,255,255,0.35);
-  letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
-  font-family: 'Inter', sans-serif;
-}
-.ba-match-photo .photo-gradient {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.75));
-  z-index: 1;
-}
-.ba-match-photo .photo-label {
-  position: relative; z-index: 2;
-  padding: 6px 10px;
-  display: flex; justify-content: space-between; align-items: center;
-  width: 100%;
-}
-.ba-state.before .ba-match-photo.p1 { background: linear-gradient(135deg, #2a2a30, #3a3a40); }
-.ba-state.before .ba-match-photo.p2 { background: linear-gradient(135deg, #35303a, #45404a); }
-.ba-state.before .ba-match-photo.p3 { background: linear-gradient(135deg, #2e3238, #3e4248); }
-.ba-state.after .ba-match-photo.p1 { background: linear-gradient(135deg, #6a2345, #c9387a); }
-.ba-state.after .ba-match-photo.p2 { background: linear-gradient(135deg, #5a2878, #7b45d5); }
-.ba-state.after .ba-match-photo.p3 { background: linear-gradient(135deg, #8a1a2a, #e04860); }
-.ba-match-name { font-size: 11px; font-weight: 700; color: #fff; }
-.ba-match-sub { font-size: 10px; color: var(--w55); line-height: 1.35; padding: 4px 10px 8px; }
-.ba-match-rating {
-  font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px;
-  letter-spacing: 0.04em; flex-shrink: 0;
-}
-.ba-state.before .ba-match-rating { color: var(--w35); background: rgba(255,255,255,0.06); }
-.ba-state.after .ba-match-rating { color: #0a0a0a; background: var(--gold); }
-.ba-overlay-label { font-size: 10px; color: var(--gold); letter-spacing: 0.26em; text-transform: uppercase; font-weight: 800; }
-.ba-overlay-title { font-size: 22px; font-weight: 750; color: #fff; letter-spacing: -0.02em; line-height: 1.15; padding: 0 8px; }
-.ba-overlay-sub { font-size: 12px; color: var(--w55); font-style: italic; line-height: 1.4; padding: 0 8px; }
-.ba-overlay-hearts { display: flex; gap: 6px; margin-top: 8px; }
-.ba-overlay-hearts span { color: var(--gold); font-size: 22px; animation: heartBeat 1.6s ease-in-out infinite; }
-.ba-overlay-hearts span:nth-child(2) { animation-delay: 0.3s; }
-.ba-overlay-hearts span:nth-child(3) { animation-delay: 0.6s; }
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  20% { transform: scale(1.3); }
-  40% { transform: scale(1); }
-}
-.ba-label-tag {
-  display: inline-block; padding: 4px 10px; border-radius: 99px;
-  font-size: 9px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
-  position: absolute; top: 64px; left: 14px; z-index: 5;
-}
-.ba-state.before .ba-label-tag { background: rgba(248,113,113,0.15); color: var(--no); border: 1px solid rgba(248,113,113,0.3); }
-.ba-state.after .ba-label-tag { background: var(--gold); color: #0a0a0a; }
-
-/* ══════════════════════════════════════════════════════════
-   v15 LEGACY. Before/After grid (kept for reference, unused in v16).
+   v15 NEW. Before / After Atlas (replaces notifications wall).
+   VSL-grounded: "struggled to get any high-quality matches" vs
+   "model-quality women", "women you're actually attracted to".
    ══════════════════════════════════════════════════════════ */
 .ba-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
@@ -1353,27 +881,10 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   overflow: hidden;
   display: flex; flex-direction: column;
   position: relative;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-  cursor: grab;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.swipe-card:hover { transform: translateY(-6px) rotate(-1.2deg); box-shadow: 0 40px 80px rgba(0,0,0,0.65); }
-.swipe-card:active { cursor: grabbing; }
-/* Tinder-style swipe cue stamps. Visible on hover. */
-.sc-stamp-nope, .sc-stamp-like {
-  position: absolute; top: 28px; z-index: 5;
-  border: 3px solid currentColor;
-  padding: 6px 14px; border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 18px; font-weight: 900; letter-spacing: 0.14em;
-  opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.sc-stamp-nope { left: 22px; color: #ff4458; transform: rotate(-18deg) scale(0.85); }
-.sc-stamp-like { right: 22px; color: #4ade80; transform: rotate(18deg) scale(0.85); }
-.swipe-card:hover .sc-stamp-nope { opacity: 0.9; transform: rotate(-12deg) scale(1); }
-.swipe-card:hover .sc-stamp-like { opacity: 0; }
-.swipe-card.card-client:hover .sc-stamp-nope { opacity: 0; }
-.swipe-card.card-client:hover .sc-stamp-like { opacity: 0.9; transform: rotate(12deg) scale(1); }
+.swipe-card:hover { transform: translateY(-4px); }
 .sc-photo {
   height: 280px; position: relative; overflow: hidden;
 }
@@ -1446,10 +957,9 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   margin-bottom: 36px;
 }
 .fn-quote {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 19px; color: var(--w100); font-style: italic;
-  line-height: 1.5; margin: 0; font-weight: 400;
-  letter-spacing: -0.005em;
+  font-size: 17px; color: var(--w100); font-style: italic;
+  line-height: 1.5; margin: 0; font-weight: 450;
+  letter-spacing: -0.01em;
 }
 .fn-attr {
   font-size: 11px; color: var(--gold); margin-top: 12px;
@@ -1544,10 +1054,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   .testi-columns { grid-template-columns: 1fr; height: 500px; }
   .swipe-track { padding: 0 calc(50vw - 140px); }
   .swipe-card { flex: 0 0 280px; height: 500px; }
-  .deliv.wwys-big .deliv-mock-wrap,
-  .deliv.profile-big .deliv-mock-wrap { min-height: 500px; padding: 12px; }
-  .wwys-phone, .reb-phone, .prof-swiper { max-height: 460px; }
-  .ba-phone { width: 260px; }
 }
 </style>
 </head>
@@ -1555,19 +1061,19 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
 <!-- NAV. Apply button removed per feedback. -->
 <nav class="nav">
-  <a href="#hero" class="nav-logo">
-    <svg class="nav-compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atlas">
-      <circle cx="12" cy="12" r="10" stroke="#C9A84C" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#C9A84C"/>
-      <polygon points="12,5 10,12 12,12" fill="#D4B968" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#C9A84C" stroke-width="1"/>
-    </svg>
-    <span>ATLAS</span>
-  </a>
+  <a href="#hero" class="nav-logo">ATLAS</a>
 </nav>
 
 
-<!-- §0.5 NOTIFICATIONS LIVE FEED removed per v17 feedback. Proof marquee under hero is the sole moving banner. -->
+<!-- §0.5 NOTIFICATIONS LIVE FEED above hero. Single-column iPhone stack. -->
+<section class="notif-feed">
+  <div class="notif-feed-label">
+    <span><span class="ldot"></span>Live · this hour · Atlas client inbox</span>
+  </div>
+  <div class="iphone-stack" id="iphoneStack">
+    <!-- Notifications inserted dynamically by JS -->
+  </div>
+</section>
 
 
 <!-- §1 HERO -->
@@ -1630,9 +1136,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
     <div class="swipe-track" id="swipe-track">
 
       <!-- Card 1: Todd intro -->
-      <div class="swipe-card card-client" data-idx="0">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-stamp-like">LIKE</div>
+      <div class="swipe-card" data-idx="0">
         <div class="sc-photo sp-todd">
           <div class="sc-photo-emoji">👤</div>
           <div class="sc-badge gold">Our Client</div>
@@ -1649,7 +1153,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
       <!-- Card 2: Matchmakers -->
       <div class="swipe-card" data-idx="1">
-        <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-match">
           <div class="sc-photo-emoji">💼</div>
           <div class="sc-badge red">Failed</div>
@@ -1666,7 +1169,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
       <!-- Card 3: Dating apps -->
       <div class="swipe-card" data-idx="2">
-        <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-apps">
           <div class="sc-photo-emoji">🔥</div>
           <div class="sc-badge red">Failed</div>
@@ -1683,7 +1185,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
       <!-- Card 4: Instagram -->
       <div class="swipe-card" data-idx="3">
-        <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-ig">
           <div class="sc-photo-emoji">◉</div>
           <div class="sc-badge red">Failed</div>
@@ -1700,7 +1201,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
       <!-- Card 5: Real life / Winging it -->
       <div class="swipe-card" data-idx="4">
-        <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-irl">
           <div class="sc-photo-emoji">👥</div>
           <div class="sc-badge red">Failed</div>
@@ -1826,191 +1326,42 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
     <div class="deliv-list">
 
-      <!-- 01: Profile Rebuild. Progressive auto-animation. v18. -->
-      <div class="deliv profile-big reveal d1">
+      <!-- 01: Profile Rebuild -->
+      <div class="deliv reveal d1">
         <div class="deliv-mock-wrap">
-          <div class="reb-phone">
-            <div class="reb-screen">
-
-              <!-- Stage 1: Hinge rebuild -->
-              <div class="reb-stage reb-hinge">
-                <div class="reb-header reb-el h1">Hinge <small>Dating Profile</small></div>
-                <div class="reb-hero-photo reb-el h2">
-                  <span class="reb-hero-label">Benjamin, 34</span>
-                  <!-- COPY_TODO: image. Hero photo placeholder for Hinge. -->
-                </div>
-                <div class="reb-prompt-card reb-el h3">
-                  <div class="reb-prompt-label">Typical Sunday</div>
-                  <div class="reb-prompt-text">Run. Coffee. Nothing before noon.</div>
-                </div>
-                <div class="reb-prompt-card reb-el h4">
-                  <div class="reb-prompt-label">A green flag</div>
-                  <div class="reb-prompt-text">You can order the whole menu and not apologize for it.</div>
-                  <div class="reb-like">♡</div>
-                </div>
-                <div class="reb-badge reb-el h5">Rebuilt by Atlas</div>
-              </div>
-
-              <!-- Stage 2: Instagram rebuild -->
-              <div class="reb-stage reb-ig">
-                <div class="reb-header reb-el i1">Instagram <small>Profile</small></div>
-                <div class="reb-ig-head reb-el i2">
-                  <div class="reb-ig-avatar"><!-- COPY_TODO: image. IG avatar placeholder. --></div>
-                  <div class="reb-ig-meta">
-                    <div class="reb-ig-handle">benjaminseda</div>
-                    <div class="reb-ig-counts"><span><strong>142</strong> posts</span><span><strong>2,431</strong> followers</span></div>
-                  </div>
-                </div>
-                <div class="reb-ig-bio reb-el i2">NY · Founder · Morning runs and Saturday cooking.</div>
-                <div class="reb-ig-grid">
-                  <div class="reb-ig-cell c1 reb-el i3"></div>
-                  <div class="reb-ig-cell c2 reb-el i4"></div>
-                  <div class="reb-ig-cell c3 reb-el i5"></div>
-                  <div class="reb-ig-cell c4 reb-el i6"></div>
-                  <div class="reb-ig-cell c5 reb-el i7"></div>
-                  <div class="reb-ig-cell c6 reb-el i8"></div>
-                  <div class="reb-ig-cell c7 reb-el i9"></div>
-                  <div class="reb-ig-cell c8 reb-el i10"></div>
-                  <div class="reb-ig-cell c9 reb-el i11"></div>
-                </div>
-                <div class="reb-badge reb-el i12">Rebuilt by Atlas</div>
-              </div>
-
+          <div class="mock-profile">
+            <div class="mp-photo"></div>
+            <div class="mp-name-row">
+              <div><span class="mp-name">Benjamin</span> <span class="mp-age">34</span></div>
+              <div class="mp-check">✓</div>
             </div>
+            <div class="mp-bio">
+              <div class="mp-bio-bar b1"></div>
+              <div class="mp-bio-bar b2"></div>
+              <div class="mp-bio-bar b3"></div>
+            </div>
+            <div class="mp-photos-row"><div></div><div></div><div></div><div></div></div>
+            <div class="mp-prompt"><div class="mp-prompt-label">Prompt</div><div class="mp-prompt-bar"></div></div>
+            <div class="mp-badge">REBUILT · ATLAS</div>
           </div>
         </div>
         <div class="deliv-copy">
-          <h3>Done-For-You Profile Rebuild</h3>
-          <p>We rebuild your dating apps and Instagram from the ground up. Photo selection. Bio. Prompts. Grid. Wardrobe and image direction before we touch a single profile. Same man. Different presentation. Different outcome.</p>
+          <h3>Done-For-You Profile + IG Rebuild</h3>
+          <p>Our female advisor team rebuilds your dating apps and Instagram from photo selection to bio to prompts to grid. Same man. Different presentation. Different outcome.</p>
           <div class="deliv-testi">
             <p class="dt-quote">"Profile rebuilt by the female advisors. <strong>40+ Bumble matches in 24 hours of going live.</strong> More than I could realistically date."</p>
             <div class="dt-attr">Spencer · Cybersecurity Consultant</div>
           </div>
           <div class="spec">
-            <div class="spec-item"><div class="k">Surfaces</div><div class="v">Hinge · Bumble · Tinder · IG</div></div>
             <div class="spec-item"><div class="k">Timeline</div><div class="v">Weeks 1–2</div></div>
+            <div class="spec-item"><div class="k">Platforms</div><div class="v">Hinge · Bumble · Tinder · IG</div></div>
             <div class="spec-item"><div class="k">Done by</div><div class="v">Female advisors</div></div>
           </div>
         </div>
       </div>
 
-      <!-- OLD profile swiper removed in v18. Hidden block preserved here for reference. -->
-      <div style="display:none;">
-        <div class="deliv-mock-wrap">
-          <div class="prof-swiper">
-            <div class="prof-inner">
-              <div class="prof-title" id="prof-title">
-                <span class="prof-brand">Hinge</span>
-                Dating App Profile
-              </div>
-              <div class="prof-slides" id="prof-slides">
-
-                <!-- Slide 1: Dating App Profile (Hinge-style with hero photo + prompt card) -->
-                <div class="prof-slide">
-                  <div class="ps-photo-big"><span class="ps-photo-label">Benjamin, 34</span></div>
-                  <div class="ps-bio-card ps-hinge-prompt">
-                    <div class="ps-bio-label">Typical Sunday</div>
-                    <div class="ps-bio-text">Run. Coffee. Nothing on the calendar before noon.</div>
-                    <div class="ps-like-btn">♡</div>
-                  </div>
-                </div>
-
-                <!-- Slide 2: Instagram Grid (realistic IG profile) -->
-                <div class="prof-slide prof-slide-ig">
-                  <div class="ps-ig-head">
-                    <div class="ps-ig-avatar"></div>
-                    <div class="ps-ig-meta">
-                      <div class="ps-ig-name">benjaminseda</div>
-                      <div class="ps-ig-handle">
-                        <span><strong>142</strong> posts</span>
-                        <span><strong>2,431</strong> followers</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ps-ig-bio">
-                    NY · Founder · Morning runs and Saturday cooking.
-                  </div>
-                  <div class="ps-ig-tabs">
-                    <div class="ps-ig-tab active">▦</div>
-                    <div class="ps-ig-tab">▶</div>
-                    <div class="ps-ig-tab">☰</div>
-                  </div>
-                  <div class="ps-ig-grid">
-                    <div class="ps-ig-cell c1"></div><div class="ps-ig-cell c2"></div><div class="ps-ig-cell c3"></div>
-                    <div class="ps-ig-cell c4"></div><div class="ps-ig-cell c5"></div><div class="ps-ig-cell c6"></div>
-                    <div class="ps-ig-cell c7"></div><div class="ps-ig-cell c8"></div><div class="ps-ig-cell c9"></div>
-                  </div>
-                </div>
-
-                <!-- Slide 3: Wardrobe + Image Overhaul -->
-                <div class="prof-slide">
-                  <div class="ps-bio-card">
-                    <div class="ps-bio-label">Image &amp; Wardrobe</div>
-                    <div class="ps-bio-text">Built around the life you actually live.</div>
-                  </div>
-                  <div class="ps-ward-grid">
-                    <div class="ps-ward-item w1"><span>Date night</span></div>
-                    <div class="ps-ward-item w2"><span>Business casual</span></div>
-                    <div class="ps-ward-item w3"><span>Workout</span></div>
-                    <div class="ps-ward-item w4"><span>Weekend</span></div>
-                  </div>
-                  <div class="ps-color-row">
-                    <span class="ps-color" style="background:#1a1a1a;"></span>
-                    <span class="ps-color" style="background:#2a2018;"></span>
-                    <span class="ps-color" style="background:#3a4a5a;"></span>
-                    <span class="ps-color" style="background:#8a8070;"></span>
-                    <span class="ps-color" style="background:#f0e8d8;"></span>
-                  </div>
-                </div>
-
-                <!-- Slide 4: Bio & Prompts (stacked Hinge-style) -->
-                <div class="prof-slide">
-                  <div class="ps-bio-card">
-                    <div class="ps-bio-label">A green flag I look for</div>
-                    <div class="ps-bio-text">You can order the whole menu and not apologize for it.</div>
-                  </div>
-                  <div class="ps-bio-card">
-                    <div class="ps-bio-label">The way to win me over is</div>
-                    <div class="ps-bio-text">Be direct. I don't read between lines and I won't make you either.</div>
-                  </div>
-                  <div class="ps-bio-card">
-                    <div class="ps-bio-label">Two truths and a lie</div>
-                    <div class="ps-bio-text">I've had coffee on five continents. I was benched in JV basketball. I can't cook eggs.</div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="prof-footer">
-                <div class="prof-dots" id="prof-dots">
-                  <span class="prof-dot active"></span>
-                  <span class="prof-dot"></span>
-                  <span class="prof-dot"></span>
-                  <span class="prof-dot"></span>
-                </div>
-                <div class="prof-hint">Swipe</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="deliv-copy">
-          <h3>Done-For-You Profile Rebuild</h3>
-          <p>Everything from image and wardrobe to dating apps to Instagram to bio and prompts. Built for you by our female advisor team. Same man. Different presentation. Different outcome.</p>
-          <div class="deliv-testi">
-            <p class="dt-quote">"Profile rebuilt by the female advisors. <strong>40+ Bumble matches in 24 hours of going live.</strong> More than I could realistically date."</p>
-            <div class="dt-attr">Spencer · Cybersecurity Consultant</div>
-          </div>
-          <div class="spec">
-            <div class="spec-item"><div class="k">Aspects</div><div class="v">Dating · IG · Wardrobe · Bio</div></div>
-            <div class="spec-item"><div class="k">Timeline</div><div class="v">Weeks 1–2</div></div>
-            <div class="spec-item"><div class="k">Done by</div><div class="v">Female advisors</div></div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <!-- End of hidden legacy block. -->
-
-      <!-- 02: Pipeline (Apple-grade animated, bigger per v16) -->
-      <div class="deliv pipeline-big reveal d1">
+      <!-- 02: Pipeline (Apple-grade animated) -->
+      <div class="deliv reveal d1">
         <div class="deliv-mock-wrap">
           <div class="pipe2">
             <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
@@ -2087,18 +1438,17 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
               <path class="pipe2-trunk" d="M 400,465 L 400,640"/>
               <path d="M 400,672 L 388,652 L 412,652 Z" fill="#C9A84C"/>
 
-              <text class="pipe2-leads" x="400" y="732">DATES</text>
+              <text class="pipe2-leads" x="400" y="732">LEADS</text>
               <text class="pipe2-subtitle" x="400" y="758">THE 3 PART PIPELINE</text>
 
-              <!-- Heart-shaped traveling dots (Unicode ♥ for unambiguous shape) -->
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#C9A84C" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#D4B968" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#D4B968" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></circle>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></circle>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></circle>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></circle>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></circle>
+              <circle class="pipe2-dot" r="4.5" filter="url(#v12SoftGlow)"><animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></circle>
+              <circle class="pipe2-dot-bright" r="6" filter="url(#v12SoftGlow)"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></circle>
+              <circle class="pipe2-dot-bright" r="6" filter="url(#v12SoftGlow)"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></circle>
             </svg>
           </div>
         </div>
@@ -2112,29 +1462,26 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
           <div class="spec">
             <div class="spec-item"><div class="k">Channels</div><div class="v">3 in parallel</div></div>
             <div class="spec-item"><div class="k">Redundancy</div><div class="v">No single point of failure</div></div>
-            <div class="spec-item"><div class="k">Output</div><div class="v">Consistent dates</div></div>
+            <div class="spec-item"><div class="k">Output</div><div class="v">Consistent leads</div></div>
           </div>
         </div>
       </div>
 
-      <!-- 03: What Would You Say (interactive, in phone frame) -->
-      <div class="deliv wwys-big reveal d1">
+      <!-- 03: What Would You Say (interactive two-path chat, v5-inspired) -->
+      <div class="deliv reveal d1">
         <div class="deliv-mock-wrap">
-          <div class="wwys-phone">
-            <div class="wwys-status"><span class="stat-time">9:41</span><span class="stat-icons">● ● ●</span></div>
-            <div class="wwys" id="wwys">
-              <div class="wwys-head">
-                <div class="wwys-avatar"></div>
-                <div><div class="wwys-name">Maya · 27</div><div class="wwys-status-pill">● matched 6m ago</div></div>
-              </div>
-              <div class="wwys-prompt">You just matched. What do you send?</div>
-              <div class="wwys-choice" id="wwys-choice">
-                <button class="wwys-choice-btn" onclick="playAvg()">What most guys send</button>
-                <button class="wwys-choice-btn atlas" onclick="playAtlas()">The Atlas approach</button>
-              </div>
-              <div class="wwys-thread" id="wwys-thread"></div>
-              <button class="wwys-reset" id="wwys-reset" onclick="resetWwys()">Try the other way</button>
+          <div class="wwys" id="wwys">
+            <div class="wwys-head">
+              <div class="wwys-avatar"></div>
+              <div><div class="wwys-name">Maya · 27</div><div class="wwys-status">● matched 6m ago</div></div>
             </div>
+            <div class="wwys-prompt">You just matched. What do you send?</div>
+            <div class="wwys-choice" id="wwys-choice">
+              <button class="wwys-choice-btn" onclick="playAvg()">What most guys send</button>
+              <button class="wwys-choice-btn atlas" onclick="playAtlas()">The Atlas approach</button>
+            </div>
+            <div class="wwys-thread" id="wwys-thread"></div>
+            <button class="wwys-reset" id="wwys-reset" onclick="resetWwys()">Try the other way</button>
           </div>
         </div>
         <div class="deliv-copy">
@@ -2177,38 +1524,15 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
         </div>
       </div>
 
-      <!-- 05: Debrief Loop (clickable voice note v16) -->
+      <!-- 05: Debrief Loop -->
       <div class="deliv reveal d1">
         <div class="deliv-mock-wrap">
           <div class="mock-debrief">
             <div class="md-label">Debrief · Thursday</div>
-            <div class="md-voicenote" id="voicenote" onclick="toggleVoicenote()">
-              <div class="md-play"></div>
-              <div class="md-wave">
-                <div class="bar" style="height: 30%;"></div>
-                <div class="bar" style="height: 55%;"></div>
-                <div class="bar" style="height: 40%;"></div>
-                <div class="bar" style="height: 72%;"></div>
-                <div class="bar" style="height: 60%;"></div>
-                <div class="bar" style="height: 82%;"></div>
-                <div class="bar" style="height: 48%;"></div>
-                <div class="bar" style="height: 65%;"></div>
-                <div class="bar" style="height: 38%;"></div>
-                <div class="bar" style="height: 55%;"></div>
-                <div class="bar" style="height: 72%;"></div>
-                <div class="bar" style="height: 42%;"></div>
-                <div class="bar" style="height: 68%;"></div>
-                <div class="bar" style="height: 30%;"></div>
-                <div class="bar" style="height: 52%;"></div>
-                <div class="bar" style="height: 75%;"></div>
-                <div class="bar" style="height: 45%;"></div>
-                <div class="bar" style="height: 60%;"></div>
-                <div class="bar" style="height: 34%;"></div>
-                <div class="bar" style="height: 50%;"></div>
-                <div class="bar" style="height: 70%;"></div>
-                <div class="bar" style="height: 42%;"></div>
-              </div>
-              <div class="md-duration" id="voicenote-time">0:00 / 2:47</div>
+            <div class="md-wave">
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
             </div>
             <div class="md-lines">
               <div class="md-line l1"></div>
@@ -2261,11 +1585,11 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
               <circle class="net-sat" cx="70" cy="240" r="26"/>
               <circle class="net-sat" cx="330" cy="240" r="26"/>
               <text class="net-label" x="70" y="63">ADVISOR</text>
-              <text class="net-label" x="330" y="63">COACH</text>
-              <text class="net-label" x="40" y="153">HNW · 8-FIG</text>
-              <text class="net-label" x="360" y="153">7-FIG FOUNDER</text>
-              <text class="net-label" x="70" y="243">HEDGE FUND</text>
-              <text class="net-label" x="330" y="243">VC · PE</text>
+              <text class="net-label" x="330" y="63">ADVISOR</text>
+              <text class="net-label" x="40" y="153">COACH</text>
+              <text class="net-label" x="360" y="153">COACH</text>
+              <text class="net-label" x="70" y="243">COACH</text>
+              <text class="net-label" x="330" y="243">CLIENTS</text>
               <circle class="net-center" cx="200" cy="150" r="42"/>
               <text class="net-label-center" x="200" y="147">YOU</text>
               <text x="200" y="162" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#0a0a0a" text-anchor="middle" letter-spacing="0.08em" opacity="0.7">ATLAS CLIENT</text>
@@ -2370,87 +1694,84 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 </section>
 
 
-<!-- §5c YOU'LL GET USED TO THIS. Before/After narrative phone (v16). -->
+<!-- §5c YOU'LL GET USED TO THIS. Before / After Atlas. -->
 <section class="section s-dark">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">You'll Get Used to This</p>
     <h2 class="reveal d1 text-center">Before Atlas.<br><em>After Atlas.</em></h2>
     <p class="body-lg reveal d2 text-center" style="max-width:620px; margin:24px auto 0; color:var(--w55);">
-      Same man. Same phone. Different system. Watch what changes.
+      The type of women you match with changes when your profile, your pipeline, and your conversations change. Todd's words, not ours. "Age was never the obstacle."
     </p>
 
-    <div class="ba-phone-wrap reveal d3">
-      <div class="ba-phone">
-        <div class="ba-screen">
-          <div class="ba-appbar">
-            <span class="ba-app-heart">♡</span>
-            <span class="ba-app-title">Matches</span>
-            <span style="width: 18px;"></span>
-          </div>
+    <div class="ba-grid reveal d3">
 
-          <!-- State 1: BEFORE. Image placeholders ready for real photos. -->
-          <div class="ba-state before">
-            <span class="ba-label-tag">Before</span>
-            <div class="ba-match-card">
-              <div class="ba-match-photo p1">
-                <!-- COPY_TODO: image. Placeholder for "before" match photo #1. Drop src into the img tag below. -->
-                <span class="photo-placeholder">Photo</span>
-                <div class="photo-gradient"></div>
-                <div class="photo-label">
-                  <span class="ba-match-name">Match · 34</span>
-                  <span class="ba-match-rating">5/10</span>
-                </div>
-              </div>
-              <div class="ba-match-sub">Convo fizzles in 4 messages.</div>
-            </div>
-            <div class="ba-match-card">
-              <div class="ba-match-photo p2">
-                <!-- COPY_TODO: image. Placeholder for "before" match photo #2. -->
-                <span class="photo-placeholder">Photo</span>
-                <div class="photo-gradient"></div>
-                <div class="photo-label">
-                  <span class="ba-match-name">Match · 31</span>
-                  <span class="ba-match-rating">6/10</span>
-                </div>
-              </div>
-              <div class="ba-match-sub">No chemistry in person.</div>
-            </div>
-          </div>
-
-          <!-- State 2: AFTER. Image placeholders for aspirational match photos. -->
-          <div class="ba-state after">
-            <span class="ba-label-tag">After</span>
-            <div class="ba-match-card">
-              <div class="ba-match-photo p1">
-                <!-- COPY_TODO: image. Placeholder for "after" aspirational match photo #1. Drop src into an img tag or set background-image. -->
-                <span class="photo-placeholder">Photo</span>
-                <div class="photo-gradient"></div>
-                <div class="photo-label">
-                  <span class="ba-match-name">Maya · 27</span>
-                  <span class="ba-match-rating">9/10</span>
-                </div>
-              </div>
-              <div class="ba-match-sub">"Tuesday after work?"</div>
-            </div>
-            <div class="ba-match-card">
-              <div class="ba-match-photo p2">
-                <!-- COPY_TODO: image. Placeholder for "after" aspirational match photo #2. -->
-                <span class="photo-placeholder">Photo</span>
-                <div class="photo-gradient"></div>
-                <div class="photo-label">
-                  <span class="ba-match-name">Sarah · 29</span>
-                  <span class="ba-match-rating">10/10</span>
-                </div>
-              </div>
-              <div class="ba-match-sub">"Thursday. Nobu at 7."</div>
-            </div>
-          </div>
-
+      <!-- BEFORE -->
+      <div class="ba-col before">
+        <div class="ba-header">
+          <span class="ba-tag">Before Atlas</span>
+          <span class="ba-sub">Struggling for high-quality matches</span>
         </div>
+        <div class="ba-cards">
+          <div class="ba-card">
+            <div class="ba-photo p1">?</div>
+            <div class="ba-info">
+              <div class="ba-name">Match · 34 <span class="ba-rating">5/10</span></div>
+              <div class="ba-tagline">Vague mutual interests. Convo fizzles in 4 messages.</div>
+            </div>
+          </div>
+          <div class="ba-card">
+            <div class="ba-photo p2">?</div>
+            <div class="ba-info">
+              <div class="ba-name">Match · 31 <span class="ba-rating">6/10</span></div>
+              <div class="ba-tagline">Looked good in the photos. No chemistry in person.</div>
+            </div>
+          </div>
+          <div class="ba-card">
+            <div class="ba-photo p3">?</div>
+            <div class="ba-info">
+              <div class="ba-name">Match · 29 <span class="ba-rating">5/10</span></div>
+              <div class="ba-tagline">Seen it all before. Doesn't write back.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-footer">Maybe 1 date every few weeks. No second dates.</div>
       </div>
+
+      <!-- AFTER -->
+      <div class="ba-col after">
+        <div class="ba-header">
+          <span class="ba-tag">After Atlas</span>
+          <span class="ba-sub">Model-caliber women, your actual type</span>
+        </div>
+        <div class="ba-cards">
+          <div class="ba-card">
+            <div class="ba-photo p1">M</div>
+            <div class="ba-info">
+              <div class="ba-name">Maya · 27 <span class="ba-rating">9/10</span></div>
+              <div class="ba-tagline">Pilates instructor. "Tuesday after work?"</div>
+            </div>
+          </div>
+          <div class="ba-card">
+            <div class="ba-photo p2">S</div>
+            <div class="ba-info">
+              <div class="ba-name">Sarah · 29 <span class="ba-rating">10/10</span></div>
+              <div class="ba-tagline">Model. In town for the week. "Thursday. Nobu at 7."</div>
+            </div>
+          </div>
+          <div class="ba-card">
+            <div class="ba-photo p3">N</div>
+            <div class="ba-info">
+              <div class="ba-name">Nora · 26 <span class="ba-rating">9/10</span></div>
+              <div class="ba-tagline">Writer. Just moved here. "Coffee this weekend."</div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-footer">2 to 3 dates per week. Women you're genuinely attracted to.</div>
+      </div>
+
     </div>
 
-    <p class="sub-note text-center" style="margin-top:24px;">Illustrative of client outcomes. Individual results depend on execution and profile.</p>
+    <p class="sub-note text-center" style="margin-top:32px;">Illustrative of client outcomes. Individual results depend on execution and profile.</p>
   </div>
 </section>
 
@@ -2666,7 +1987,41 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 </section>
 
 
-<!-- §10 QUALIFICATION removed per v16 feedback. -->
+<!-- §10 QUALIFICATION (tiers section deleted) -->
+<section class="section s-black">
+  <div class="inner narrow">
+    <p class="eyebrow text-center reveal d1">Fit Filter</p>
+    <h2 class="reveal d1 text-center">Atlas is not for everyone.</h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:580px; margin:24px auto 0; color:var(--w55);">
+      Fair warning. We accept less than 5% of applicants. That's by design.
+    </p>
+    <div class="qual">
+      <div class="q-card fit reveal d2">
+        <div class="q-label yes">A fit if you are...</div>
+        <ul>
+          <li>Already professionally successful</li>
+          <li>Value your time more than your money</li>
+          <li>Invest in expertise in every other area of your life</li>
+          <li>Want consistent results with women you're actually attracted to</li>
+          <li>27 or older</li>
+        </ul>
+      </div>
+      <div class="q-card nofit reveal d3">
+        <div class="q-label no">Not a fit if you are...</div>
+        <ul>
+          <li>Not yet financially established</li>
+          <li>Looking for pickup lines or manipulation</li>
+          <li>Expecting results without doing the work</li>
+          <li>Under 27</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta-block">
+      <button class="btn reveal d1" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <div class="cta-friction"><strong>&lt;5% accepted</strong> · takes 2 minutes · NDA protected</div>
+    </div>
+  </div>
+</section>
 
 
 <!-- §11 FAQ -->
@@ -2751,15 +2106,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="#C9A84C" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#C9A84C"/>
-      <polygon points="12,5 10,12 12,12" fill="#D4B968" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#050608" stroke="#C9A84C" stroke-width="1"/>
-    </svg>
-    <span>ATLAS</span>
-  </div>
+  <div class="footer-logo">ATLAS</div>
   <p class="footer-line">Atlas Advisory · Private Dating Consulting · Application-Only · NDA Protected</p>
 </footer>
 
@@ -2864,50 +2211,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
     wwys.reset.classList.remove('active');
   }
 
-  // Profile Rebuild progressive animation cycle. JS-driven, reliable on mobile.
-  const rebStages = document.querySelectorAll('.reb-stage');
-  if (rebStages.length) {
-    let rebIdx = 0;
-    const STAGE_MS = 6500;
-    function rebTick() {
-      rebStages.forEach((s, i) => {
-        s.classList.remove('animate');
-        s.classList.toggle('active', i === rebIdx);
-      });
-      // Trigger reveals on next frame
-      requestAnimationFrame(() => {
-        rebStages[rebIdx].classList.add('animate');
-      });
-      rebIdx = (rebIdx + 1) % rebStages.length;
-    }
-    rebTick();
-    setInterval(rebTick, STAGE_MS);
-  }
-
-  // Voice note toggle (debrief deliverable).
-  let vnPlaying = false;
-  let vnSeconds = 0;
-  let vnInterval = null;
-  const vnTotal = 167; // 2:47
-  function toggleVoicenote() {
-    const el = document.getElementById('voicenote');
-    const timeEl = document.getElementById('voicenote-time');
-    if (!el || !timeEl) return;
-    vnPlaying = !vnPlaying;
-    el.classList.toggle('playing', vnPlaying);
-    if (vnPlaying) {
-      vnInterval = setInterval(() => {
-        vnSeconds++;
-        if (vnSeconds >= vnTotal) { vnSeconds = 0; vnPlaying = false; el.classList.remove('playing'); clearInterval(vnInterval); }
-        const m = Math.floor(vnSeconds / 60);
-        const s = String(vnSeconds % 60).padStart(2, '0');
-        timeEl.textContent = `${m}:${s} / 2:47`;
-      }, 1000);
-    } else {
-      clearInterval(vnInterval);
-    }
-  }
-
   // iPhone-stacking notifications above hero.
   const iphoneStack = document.getElementById('iphoneStack');
   if (iphoneStack) {
@@ -2923,9 +2226,8 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
       { app: 'bumble', icon: 'B', name: 'Bumble', time: '45m ago', text: 'Nora wants to meet up' },
       { app: 'tinder', icon: '🔥', name: 'Tinder', time: '1h ago', text: '<strong>7</strong> new Likes waiting' }
     ];
-    const MAX_VISIBLE = 1;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const INTERVAL_MS = isMobile ? 5200 : 3800;
+    const MAX_VISIBLE = 4;
+    const INTERVAL_MS = 2400;
     let poolIdx = 0;
 
     function addNotif() {
@@ -2947,37 +2249,9 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
       }
     }
 
-    // Seed first notification immediately, cycle at interval
-    addNotif();
+    // Seed initial stack (prefill with 3 before cycle starts)
+    for (let i = 0; i < 3; i++) { setTimeout(addNotif, i * 400); }
     setInterval(addNotif, INTERVAL_MS);
-  }
-
-  // Profile Rebuild phone swiper (deliverable 01).
-  const profSlides = document.getElementById('prof-slides');
-  const profTitleEl = document.getElementById('prof-title');
-  const profDots = document.querySelectorAll('#prof-dots .prof-dot');
-  const profTitles = [
-    { brand: 'Hinge', title: 'Dating App Profile' },
-    { brand: 'Instagram', title: 'Profile Grid' },
-    { brand: 'Atlas', title: 'Image &amp; Wardrobe' },
-    { brand: 'Hinge', title: 'Bio &amp; Prompts' }
-  ];
-  if (profSlides && profTitleEl && profDots.length) {
-    profSlides.addEventListener('scroll', () => {
-      const rect = profSlides.getBoundingClientRect();
-      const center = rect.left + rect.width / 2;
-      let closest = 0; let closestDist = Infinity;
-      profSlides.querySelectorAll('.prof-slide').forEach((s, i) => {
-        const sRect = s.getBoundingClientRect();
-        const sCenter = sRect.left + sRect.width / 2;
-        const dist = Math.abs(sCenter - center);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      profDots.forEach((d, i) => d.classList.toggle('active', i === closest));
-      if (profTitles[closest]) {
-        profTitleEl.innerHTML = `<span class="prof-brand">${profTitles[closest].brand}</span>${profTitles[closest].title}`;
-      }
-    }, { passive: true });
   }
 
   // Tinder-style swipe cards. Update pagination dots.
