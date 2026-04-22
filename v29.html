@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Atlas Advisory. Private Dating Consulting for High-Performing Men.</title>
 <meta name="description" content="Application-only dating consulting for professionally successful men. A system for consistent dates with women you actually want. Run by a team of female advisors.">
 
@@ -110,7 +110,7 @@ p { color: var(--w75); }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center;
-  padding: 16px 32px; background: rgba(5,6,8,0.78); backdrop-filter: saturate(180%) blur(20px);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) calc(32px + env(safe-area-inset-right, 0px)) 16px calc(32px + env(safe-area-inset-left, 0px)); background: rgba(5,6,8,0.92); backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -895,7 +895,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
    v26. Profile Rebuild. JS-driven refresh. Bulletproof.
    ══════════════════════════════════════════════════════════ */
 .rp-phone {
-  width: auto; height: 100%; max-height: 560px; aspect-ratio: 9/19.5;
+  width: 268px; height: 581px; max-width: 100%;
   margin: 0 auto; flex-shrink: 0;
   background: #0a0a0a; border: 3px solid #1a1a1a; border-radius: 42px;
   padding: 12px 8px; position: relative; overflow: hidden;
@@ -2244,6 +2244,12 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   .deliv,
   .testi-grid,
   .problem-grid { grid-template-columns: 1fr; gap: 28px; }
+  .pipe2 { display: block; margin: 0 auto; width: 100%; max-width: 420px; }
+  .pipe2 svg { display: block; margin: 0 auto; width: 100%; height: auto; }
+  .mock-net2 { padding: 12px; }
+  .mock-net2 svg { display: block; margin: 0 auto; }
+  .deliv.pipeline-big .deliv-mock-wrap { aspect-ratio: auto; min-height: auto; padding: 12px; display: flex; align-items: center; justify-content: center; }
+  .deliv.network-big .deliv-mock-wrap { aspect-ratio: auto; min-height: auto; padding: 12px; display: flex; align-items: center; justify-content: center; }
   .deliv:nth-child(even) { direction: ltr; }
   .founder-portrait { max-width: 400px; margin: 0 auto; }
   .module { grid-template-columns: 64px 1fr; gap: 24px; padding: 32px; }
@@ -2321,7 +2327,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   .deliv.wwys-big .deliv-mock-wrap,
   .deliv.profile-big .deliv-mock-wrap,
   .deliv.pipeline-big .deliv-mock-wrap { min-height: 440px; padding: 8px; }
-  .wwys-phone, .reb-phone, .prof-swiper, .rp-phone { max-height: 420px; }
+  .wwys-phone, .reb-phone, .prof-swiper { max-height: 420px; } .rp-phone { width: 220px; height: 476px; }
   .board { min-height: auto; padding: 22px 18px; }
   .board-wrap { grid-template-columns: 1fr; gap: 20px; }
   .board.after .board-tack-grid { gap: 12px 10px; }
@@ -2767,7 +2773,14 @@ section, .inner { max-width: 100%; }
             <div class="rp-screen">
               <div class="rp-stage-label bad" id="rpStageLabel">Before</div>
               <div class="rp-content" id="rpContent">
-                <!-- Content injected by JS. Initial state: bad Hinge. -->
+                <div class="rpc-header">Hinge <small>Dating Profile</small></div>
+                <div class="rpc-photo bad"><span class="rpc-photo-name">Benjamin, 34</span></div>
+                <div class="rpc-line bad"></div>
+                <div class="rpc-line bad short"></div>
+                <div class="rpc-card bad">
+                  <div class="rpc-card-q">Bio</div>
+                  <div class="rpc-card-a">I like traveling, good food, and dogs.</div>
+                </div>
               </div>
               <div class="rp-overlay" id="rpOverlay">
                 <div class="rp-spinner"></div>
@@ -3331,7 +3344,7 @@ section, .inner { max-width: 100%; }
 
       <!-- BEFORE BOARD: muted unattractive photo placeholders tacked up -->
       <div class="board before">
-        <div class="board-title">Before · Your likes</div>
+        <div class="board-title">Before</div>
         <div class="board-tack-grid">
           <div class="tacked tilt-l"><div class="tacked-photo p1"><!-- COPY_TODO: unattractive match photo 1 --></div><div class="tacked-caption">Match · 5/10</div></div>
           <div class="tacked tilt-r"><div class="tacked-photo p2"><!-- COPY_TODO: unattractive match photo 2 --></div><div class="tacked-caption">Match · 6/10</div></div>
