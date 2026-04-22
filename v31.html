@@ -3131,6 +3131,83 @@ body.deliv-modal-open { overflow: hidden; }
 .swipe-card .sc-stamp-like,
 .swipe-card .sc-footer { display: none !important; }
 
+/* v31 · Strip everything after the body in desktop deliverable cards.
+   No testimonial quote boxes, no channels/redundancy/output or
+   includes/support/target spec grids. Just the h3 + paragraph. */
+.deliv-copy .deliv-testi,
+.deliv-copy .spec { display: none !important; }
+
+/* v31 · Todd standalone card above the failed-attempts swipe */
+.todd-intro-wrap {
+  display: flex; justify-content: center;
+  margin: 48px auto 28px;
+  padding: 0 24px;
+}
+.swipe-card.todd-standalone {
+  flex: 0 0 auto !important;
+  width: 100%;
+  max-width: 440px;
+  scroll-snap-align: none !important;
+  margin: 0 !important;
+}
+@media (max-width: 768px) {
+  .todd-intro-wrap { margin: 32px auto 20px; padding: 0 16px; }
+  .swipe-card.todd-standalone { max-width: 100%; }
+}
+
+/* v31 · Video testimonial carousel */
+.vt-swipe { position: relative; margin-top: 48px; }
+.vt-swipe-track {
+  display: flex; gap: 20px;
+  overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; -ms-overflow-style: none;
+  padding: 8px 24px 32px;
+  margin: 0 -24px;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.vt-swipe-track::-webkit-scrollbar { display: none; }
+.vt-swipe-track > .vt-card {
+  flex: 0 0 calc(100% - 64px);
+  max-width: 440px;
+  scroll-snap-align: center;
+}
+@media (min-width: 900px) {
+  .vt-swipe-track > .vt-card { flex: 0 0 calc(33.333% - 14px); }
+}
+.vt-meta { padding: 18px 20px 22px; }
+.vt-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 18px; font-weight: 500; color: #fff;
+  margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.vt-quote {
+  font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.66);
+}
+.vt-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(167,181,232,0.22);
+  border: 1px solid rgba(167,181,232,0.55);
+  color: #fff; font-size: 22px;
+  cursor: pointer; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s ease, background 0.25s;
+  padding: 0 0 0 4px;
+}
+.vt-play:hover { background: rgba(167,181,232,0.36); transform: translate(-50%, -50%) scale(1.08); }
+.vt-dots {
+  display: flex; justify-content: center; gap: 6px;
+  margin-top: 8px;
+}
+.vt-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  transition: all 0.3s ease;
+}
+.vt-dot.active { background: var(--blue); width: 18px; border-radius: 3px; }
+
 /* ══════════════════════════════════════════════════════════
    v30.4 · Accordion final fix — full horizontal room, reliable
    hide/show, visuals only appear when card is tapped
@@ -3415,27 +3492,27 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
   </div>
 
-  <div class="swipe-stack reveal d3">
+  <!-- v31 · Todd standalone above the failed-attempts swipe -->
+  <div class="todd-intro-wrap reveal d3">
+    <div class="swipe-card intro-hint todd-standalone">
+      <div class="sc-photo sp-todd">
+        <div class="sc-photo-emoji">👤</div>
+      </div>
+      <div class="sc-info">
+        <div class="sc-name">Todd, 54 <span class="sc-verified">✓</span></div>
+        <div class="sc-title">Retired Investor · $20M+ net worth</div>
+      </div>
+      <div class="sc-bio">
+        Has every box checked. Career. Fitness. Home. Portfolio. The only thing he hasn't figured out is this one. <strong>Not because he's broken. Because he never built a system for it.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="swipe-stack reveal d4">
     <div class="swipe-track" id="swipe-track">
 
-      <!-- Card 1: Todd intro. No swipe stamps on Our Client card. -->
-      <div class="swipe-card intro-hint" data-idx="0">
-        <div class="sc-photo sp-todd">
-          <div class="sc-photo-emoji">👤</div>
-          <div class="sc-badge gold">Our Client</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Todd, 54 <span class="sc-verified">✓</span></div>
-          <div class="sc-title">Retired Investor · $20M+ net worth</div>
-        </div>
-        <div class="sc-bio">
-          Has every box checked. Career. Fitness. Home. Portfolio. The only thing he hasn't figured out is this one. <strong>Not because he's broken. Because he never built a system for it.</strong>
-        </div>
-        <div class="sc-footer">Today's state <span class="sc-footer-right">Before Atlas</span></div>
-      </div>
-
-      <!-- Card 2: Matchmakers -->
-      <div class="swipe-card" data-idx="1">
+      <!-- Card 1: Matchmakers -->
+      <div class="swipe-card" data-idx="0">
         <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-match">
           <div class="sc-photo-emoji">💼</div>
@@ -3451,8 +3528,8 @@ body.deliv-modal-open { overflow: hidden; }
         <div class="sc-footer">Attempt 1 <span class="sc-footer-right">Cost: $20K/yr</span></div>
       </div>
 
-      <!-- Card 3: Dating apps -->
-      <div class="swipe-card" data-idx="2">
+      <!-- Card 2: Dating apps -->
+      <div class="swipe-card" data-idx="1">
         <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-apps">
           <div class="sc-photo-emoji">🔥</div>
@@ -3468,8 +3545,8 @@ body.deliv-modal-open { overflow: hidden; }
         <div class="sc-footer">Attempt 2 <span class="sc-footer-right">Match rate: 4.5%</span></div>
       </div>
 
-      <!-- Card 4: Instagram -->
-      <div class="swipe-card" data-idx="3">
+      <!-- Card 3: Instagram -->
+      <div class="swipe-card" data-idx="2">
         <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-ig">
           <div class="sc-photo-emoji">◉</div>
@@ -3485,8 +3562,8 @@ body.deliv-modal-open { overflow: hidden; }
         <div class="sc-footer">Attempt 3 <span class="sc-footer-right">Last post: 4 months ago</span></div>
       </div>
 
-      <!-- Card 5: Real life / Winging it -->
-      <div class="swipe-card" data-idx="4">
+      <!-- Card 4: Real life / Winging it -->
+      <div class="swipe-card" data-idx="3">
         <div class="sc-stamp-nope">NOPE</div>
         <div class="sc-photo sp-irl">
           <div class="sc-photo-emoji">👥</div>
@@ -3509,9 +3586,71 @@ body.deliv-modal-open { overflow: hidden; }
       <span class="swipe-dot"></span>
       <span class="swipe-dot"></span>
       <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
     </div>
   </div>
+  </div>
+</section>
+
+
+<!-- §3.5 VIDEO TESTIMONIALS · Horizontal swipe carousel. 3 videos. -->
+<section class="section s-black" id="video-testimonials">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">In their own words</p>
+    <h2 class="reveal d1 text-center">Clients on camera.</h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:580px; margin:20px auto 0; color:var(--w55);">
+      Swipe through. Three clients. Three before-and-afters. Three systems that now run without them.
+    </p>
+
+    <div class="vt-swipe reveal d3" id="vtSwipe">
+      <div class="vt-swipe-track">
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g1">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">2:47</span>
+            <button class="vt-play" aria-label="Play Todd testimonial">▶</button>
+            <span class="vt-thumb-label">Todd · Retired Investor</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Todd, 54</div>
+            <div class="vt-quote">"20 dates in 30 days. Most in their 20s and 30s. Age was never the obstacle."</div>
+          </div>
+        </div>
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g2">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">3:12</span>
+            <button class="vt-play" aria-label="Play Yaro testimonial">▶</button>
+            <span class="vt-thumb-label">Yaro · Software Engineer</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Yaro</div>
+            <div class="vt-quote">"Every box checked except this one. 30 days in, 20+ dates on the calendar."</div>
+          </div>
+        </div>
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g3">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">2:21</span>
+            <button class="vt-play" aria-label="Play Spencer testimonial">▶</button>
+            <span class="vt-thumb-label">Spencer · Cybersecurity</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Spencer</div>
+            <div class="vt-quote">"40+ Bumble matches in the first 24 hours. More than I could realistically date."</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="vt-dots" id="vtDots">
+        <span class="vt-dot active"></span>
+        <span class="vt-dot"></span>
+        <span class="vt-dot"></span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -5061,6 +5200,26 @@ body.deliv-modal-open { overflow: hidden; }
         if (dist < closestDist) { closestDist = dist; closestIdx = i; }
       });
       swipeDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+    }, { passive: true });
+  }
+
+  // v31 · Video testimonial carousel — update dots on horizontal scroll.
+  const vtTrack = document.querySelector('.vt-swipe-track');
+  const vtDots = document.querySelectorAll('#vtDots .vt-dot');
+  if (vtTrack && vtDots.length) {
+    const vtCards = vtTrack.querySelectorAll('.vt-card');
+    vtTrack.addEventListener('scroll', () => {
+      const trackRect = vtTrack.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closestIdx = 0;
+      let closestDist = Infinity;
+      vtCards.forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+      vtDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
     }, { passive: true });
   }
 
