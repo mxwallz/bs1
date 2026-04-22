@@ -2711,6 +2711,118 @@ body { overflow-x: hidden; touch-action: pan-y; }
   .module-body { font-size: 14px !important; }
 }
 
+
+/* ══════════════════════════════════════════════════════════
+   v30.1 · Mobile clickable-modal pattern for deliverables
+   ══════════════════════════════════════════════════════════ */
+.deliv-m-cards { display: none; }
+
+@media (max-width: 768px) {
+  /* Hide full inline deliverable layout on mobile */
+  .deliv-list { display: none !important; }
+
+  /* Show mobile compact cards instead */
+  .deliv-m-cards {
+    display: flex; flex-direction: column; gap: 14px;
+    margin: 40px auto 32px; max-width: 560px;
+  }
+  .deliv-m-card {
+    display: flex; gap: 16px; padding: 18px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.25s;
+    text-align: left;
+  }
+  .deliv-m-card:active { transform: scale(0.98); }
+  .deliv-m-card:hover { border-color: var(--blue); box-shadow: 0 10px 24px rgba(0,0,0,0.3); }
+  .deliv-m-thumb {
+    width: 72px; height: 72px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px; font-weight: 800; letter-spacing: 0.14em;
+    color: #fff; text-align: center; padding: 6px;
+  }
+  .deliv-m-thumb.thumb-profile { background: linear-gradient(135deg, #6a2a5a, #d62976, #fa7e1e); }
+  .deliv-m-thumb.thumb-pipeline { background: linear-gradient(135deg, #0d1128, var(--blue), #DC2626); }
+  .deliv-m-thumb.thumb-wwys { background: linear-gradient(135deg, #0d1128, #4f5bd5); }
+  .deliv-m-thumb.thumb-debrief { background: linear-gradient(135deg, #2a2018, var(--blue)); }
+  .deliv-m-thumb.thumb-network { background: linear-gradient(135deg, #0d1128, var(--blue-hi)); }
+  .deliv-m-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .deliv-m-text h3 {
+    font-family: 'Spectral', serif; font-size: 17px; font-weight: 500;
+    color: var(--w100); letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .deliv-m-text p {
+    font-size: 13px; color: var(--w55); line-height: 1.45;
+  }
+  .deliv-m-tap {
+    font-size: 11px; font-weight: 700; color: var(--blue);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;
+  }
+}
+
+/* Modal (mobile only) */
+.deliv-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 10000;
+}
+.deliv-modal.active { display: block; }
+.deliv-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  animation: dmFadeBg 0.3s ease;
+}
+@keyframes dmFadeBg { from { opacity: 0; } to { opacity: 1; } }
+.deliv-modal-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--bg1);
+  border-top: 1px solid var(--border-2);
+  border-radius: 20px 20px 0 0;
+  padding: 24px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+  padding-top: 56px;
+  max-height: 94vh;
+  overflow-y: auto;
+  animation: dmSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes dmSlideUp {
+  from { transform: translateY(40%); opacity: 0.5; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.deliv-modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-2);
+  color: #fff; font-size: 24px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  z-index: 2;
+}
+.deliv-modal-close:hover, .deliv-modal-close:active { background: rgba(255,255,255,0.14); }
+.deliv-modal-sheet h2 {
+  font-family: 'Spectral', serif; font-size: 26px; font-weight: 500;
+  color: var(--w100); margin-bottom: 10px; letter-spacing: -0.015em; line-height: 1.15;
+}
+.deliv-modal-sub {
+  font-size: 14px; color: var(--w55); line-height: 1.55;
+  margin-bottom: 28px;
+}
+.deliv-modal-visual {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 420px; padding: 20px 0;
+}
+/* When a mock-wrap is inside the modal, force it to show cleanly */
+.deliv-modal-visual > .deliv-mock-wrap {
+  display: flex !important;
+  min-height: 500px !important;
+  width: 100% !important; max-width: 540px !important;
+  aspect-ratio: auto !important;
+  padding: 16px !important;
+  border: 1px solid var(--border) !important; border-radius: 16px !important;
+}
+body.deliv-modal-open { overflow: hidden; }
+
 </style>
 </head>
 <body>
@@ -3043,11 +3155,56 @@ body { overflow-x: hidden; touch-action: pan-y; }
       What you keep after the 90-day engagement.
     </p>
 
-    <div class="deliv-list">
+    
+    <!-- v30.1 Mobile compact cards. Visible only on mobile. Click to open modal. -->
+    <div class="deliv-m-cards" id="delivMCards">
+      <div class="deliv-m-card" data-deliv="profile" data-title="Done-For-You Profile Rebuild" data-sub="Our female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different outcome.">
+        <div class="deliv-m-thumb thumb-profile"><span>REBUILD</span></div>
+        <div class="deliv-m-text">
+          <h3>Profile Rebuild</h3>
+          <p>Dating apps + Instagram rebuilt by female advisors.</p>
+          <span class="deliv-m-tap">Tap to see →</span>
+        </div>
+      </div>
+      <div class="deliv-m-card" data-deliv="pipeline" data-title="The 3 Part Pipeline" data-sub="Three channels running in parallel. Apps, Instagram, real life. When one cools, another is already warm.">
+        <div class="deliv-m-thumb thumb-pipeline"><span>PIPELINE</span></div>
+        <div class="deliv-m-text">
+          <h3>The 3 Part Pipeline</h3>
+          <p>Three channels running in parallel. No single point of failure.</p>
+          <span class="deliv-m-tap">Tap to see →</span>
+        </div>
+      </div>
+      <div class="deliv-m-card" data-deliv="wwys" data-title="The Conversion Blueprint" data-sub="Scripts, texting system, date frames. Click either path to see how most guys fail vs what Atlas clients send.">
+        <div class="deliv-m-thumb thumb-wwys"><span>MESSAGES</span></div>
+        <div class="deliv-m-text">
+          <h3>What Would You Say</h3>
+          <p>Scripts + frames that turn matches into booked calendar time.</p>
+          <span class="deliv-m-tap">Tap to see →</span>
+        </div>
+      </div>
+      <div class="deliv-m-card" data-deliv="debrief" data-title="Date Debrief Feedback Loop" data-sub="After every date, a voice-note debrief with your advisor. Under 24-hour turnaround.">
+        <div class="deliv-m-thumb thumb-debrief"><span>DEBRIEF</span></div>
+        <div class="deliv-m-text">
+          <h3>Date Debrief Loop</h3>
+          <p>Voice-note feedback from your advisor after every date.</p>
+          <span class="deliv-m-tap">Tap to see →</span>
+        </div>
+      </div>
+      <div class="deliv-m-card" data-deliv="network" data-title="The Atlas Network" data-sub="Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men.">
+        <div class="deliv-m-thumb thumb-network"><span>TEAM</span></div>
+        <div class="deliv-m-text">
+          <h3>The Atlas Network</h3>
+          <p>A team of experts right in your pocket.</p>
+          <span class="deliv-m-tap">Tap to see →</span>
+        </div>
+      </div>
+    </div>
+
+<div class="deliv-list">
 
       <!-- 01: Profile Rebuild. v26 JS-driven refresh. -->
       <div class="deliv profile-big">
-        <div class="deliv-mock-wrap">
+        <div class="deliv-mock-wrap" data-deliv-id="profile">
           <div class="rp-phone" id="rpPhone">
             <div class="rp-screen">
               <div class="rp-stage-label bad" id="rpStageLabel">Before</div>
@@ -3247,7 +3404,7 @@ body { overflow-x: hidden; touch-action: pan-y; }
 
       <!-- 02: Pipeline (Apple-grade animated, bigger per v16) -->
       <div class="deliv pipeline-big reveal d1">
-        <div class="deliv-mock-wrap">
+        <div class="deliv-mock-wrap" data-deliv-id="pipeline">
           <div class="pipe2">
             <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
               <defs>
@@ -3355,7 +3512,7 @@ body { overflow-x: hidden; touch-action: pan-y; }
 
       <!-- 03: What Would You Say (interactive, in phone frame) -->
       <div class="deliv wwys-big reveal d1">
-        <div class="deliv-mock-wrap">
+        <div class="deliv-mock-wrap" data-deliv-id="wwys">
           <div class="wwys-phone">
             <div class="wwys-status"><span class="stat-time">9:41</span><span class="stat-icons">● ● ●</span></div>
             <div class="wwys" id="wwys">
@@ -3386,7 +3543,7 @@ body { overflow-x: hidden; touch-action: pan-y; }
 
       <!-- 05: Debrief = client message + advisor voice note (v25) -->
       <div class="deliv reveal d1">
-        <div class="deliv-mock-wrap">
+        <div class="deliv-mock-wrap" data-deliv-id="debrief">
           <div class="debrief-thread">
             <div class="debrief-head">
               <div class="debrief-head-avatar">A</div>
@@ -3443,7 +3600,7 @@ body { overflow-x: hidden; touch-action: pan-y; }
 
       <!-- 06: Atlas Network -->
       <div class="deliv network-big reveal d1">
-        <div class="deliv-mock-wrap">
+        <div class="deliv-mock-wrap" data-deliv-id="network">
           <div class="mock-net2">
             <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -4340,6 +4497,18 @@ body { overflow-x: hidden; touch-action: pan-y; }
     }, { passive: true });
   }
 </script>
+
+
+<!-- v30.1 Deliverable modal (mobile only) -->
+<div class="deliv-modal" id="delivModal" aria-hidden="true">
+  <div class="deliv-modal-backdrop" id="delivModalBackdrop"></div>
+  <div class="deliv-modal-sheet">
+    <button class="deliv-modal-close" id="delivModalClose" aria-label="Close">×</button>
+    <h2 id="delivModalTitle"></h2>
+    <p class="deliv-modal-sub" id="delivModalSub"></p>
+    <div class="deliv-modal-visual" id="delivModalVisual"></div>
+  </div>
+</div>
 
 </body>
 </html>
