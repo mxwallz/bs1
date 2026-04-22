@@ -2823,6 +2823,117 @@ body { overflow-x: hidden; touch-action: pan-y; }
 }
 body.deliv-modal-open { overflow: hidden; }
 
+
+/* ══════════════════════════════════════════════════════════
+   v30.2 · Accordion expand-in-place + hero-notif restored +
+   simple mobile testimonials + no-carousel
+   ══════════════════════════════════════════════════════════ */
+
+/* Accordion expand slot inside mobile cards */
+.deliv-m-preview { display: flex; gap: 16px; flex: 1; width: 100%; }
+.deliv-m-expand {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), margin 0.4s ease;
+  width: 100%;
+}
+.deliv-m-card.expanded .deliv-m-expand {
+  max-height: 800px; margin-top: 18px;
+  padding-top: 18px; border-top: 1px solid var(--border);
+}
+.deliv-m-card { flex-direction: column; align-items: stretch; }
+.deliv-m-card.expanded { border-color: var(--blue); }
+.deliv-m-expand > .deliv-mock-wrap {
+  display: flex !important;
+  min-height: 500px !important;
+  width: 100% !important; max-width: 100% !important;
+  aspect-ratio: auto !important;
+  padding: 14px !important;
+  background: var(--card-solid) !important;
+  border: 1px solid var(--border) !important; border-radius: 12px !important;
+  overflow: visible !important;
+  align-items: center; justify-content: center;
+}
+.deliv-m-card.expanded .deliv-m-tap::after { content: " — close"; }
+
+/* Mobile-friendly testimonial cards (kill the horizontal carousel, stack vertically) */
+@media (max-width: 640px) {
+  .testi-columns {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    gap: 16px !important;
+    padding: 0 !important;
+    touch-action: auto !important;
+  }
+  .testi-col { flex: 1 1 auto !important; }
+  .testi-col-track {
+    animation: none !important;
+    transform: none !important;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .testi-col-track > .tc-card:nth-child(n+2) { display: none !important; }
+  .tc-card {
+    padding: 24px !important;
+    font-size: 15px;
+  }
+  .tc-quote { font-size: 14px !important; line-height: 1.55; }
+}
+
+/* Hide any remaining .tc-result / .testi-result that slipped through */
+.tc-result, .testi-result { display: none !important; }
+
+/* Hero notif styling (restored from v25) */
+.hero-notif-slot {
+  height: 52px; max-width: 340px;
+  margin: 0 auto 24px; position: relative;
+}
+.hero-notif {
+  position: absolute; inset: 0;
+  display: flex; gap: 10px; align-items: center;
+  background: rgba(28,28,32,0.82); backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 10px 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  opacity: 0; transform: translateY(-8px) scale(0.96);
+}
+.hero-notif.in { animation: hnIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards; }
+.hero-notif.out { animation: hnOut 0.3s cubic-bezier(0.4,0,1,1) forwards; }
+@keyframes hnIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hnOut { to { opacity: 0; transform: translateY(-4px) scale(0.98); } }
+.hn-icon {
+  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: #fff; font-family: Georgia, serif;
+}
+.hn-icon.tinder { background: #fd5068; }
+.hn-icon.bumble { background: #F4C430; color: #0a0a0a; }
+.hn-icon.hinge { background: #fff; color: #0a0a0a; }
+.hn-icon.ig { background: linear-gradient(135deg, #feda75, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5); color: #fff; }
+.hn-icon.msg { background: #30D158; color: #fff; }
+.hn-body { line-height: 1.25; min-width: 0; flex: 1; }
+.hn-app { font-size: 9px; color: var(--w35); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+.hn-text { font-size: 12px; color: var(--w100); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hn-text strong { color: var(--gold, #6B8AFF); font-weight: 700; }
+
+/* Notification wall layout fix on mobile */
+@media (max-width: 640px) {
+  .notif-wall {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    max-width: 460px !important;
+    margin: 48px auto 0 !important;
+  }
+}
+
+/* Kill old modal CSS that's now unused */
+.deliv-modal { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -2847,7 +2958,8 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- §1 HERO -->
 <section class="section s-black hero text-center" id="hero">
   <div class="inner">
-        <div class="pill reveal d1">Enrollment open. 4 spots remaining.</div>
+        <!-- Enrollment pill removed per v30.2 feedback -->
+    <div class="hero-notif-slot" id="heroNotifSlot"></div>
     <h1 class="reveal d1">You've built everything.<br><em>Except this.</em></h1>
     <p class="qualifier reveal d2">
       Private dating consulting for professionally successful men. We rebuild your profiles, dial in your messaging, and coach every conversation in real time. You just show up to the dates.
@@ -2866,24 +2978,7 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §2 PROOF MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item"><strong>"20 dates in 30 days"</strong> Todd · Retired Investor, 54</span>
-    <span class="marquee-item"><strong>"40+ Bumble matches in 24 hrs"</strong> Spencer · Cybersecurity</span>
-    <span class="marquee-item"><strong>"Women cold-DM'd me first"</strong> Aakash · Quant Trader</span>
-    <span class="marquee-item"><strong>"10 dates in first month"</strong> Hector · Post-Divorce Executive</span>
-    <span class="marquee-item"><strong>"4 dates in 2 weeks"</strong> Ben · Private Equity</span>
-    <span class="marquee-item"><strong>"18 matches in one night"</strong> Parker · Business Analyst</span>
-    <span class="marquee-item"><strong>"20 dates in 30 days"</strong> Todd · Retired Investor, 54</span>
-    <span class="marquee-item"><strong>"40+ Bumble matches in 24 hrs"</strong> Spencer · Cybersecurity</span>
-    <span class="marquee-item"><strong>"Women cold-DM'd me first"</strong> Aakash · Quant Trader</span>
-    <span class="marquee-item"><strong>"10 dates in first month"</strong> Hector · Post-Divorce Executive</span>
-    <span class="marquee-item"><strong>"4 dates in 2 weeks"</strong> Ben · Private Equity</span>
-    <span class="marquee-item"><strong>"18 matches in one night"</strong> Parker · Business Analyst</span>
-  </div>
-</div>
-
+<!-- Marquee removed per v30.2 feedback -->
 
 <!-- §3 PROBLEM. Tinder-style swipe cards. Todd intro + 4 problem cards. -->
 <section class="section s-dark">
@@ -2993,68 +3088,6 @@ body.deliv-modal-open { overflow: hidden; }
       <span class="swipe-dot"></span>
     </div>
   </div>
-
-  <!-- Video testimonials underneath swipe section (v23) -->
-  <div class="swipe-heading-wrap" style="margin-top: 72px;">
-    <p class="eyebrow reveal d1">Watch the clients</p>
-    <h3 class="reveal d1" style="margin-top: 8px;">Men who ran the system.<br><em>In their own words.</em></h3>
-  </div>
-  <div class="inner" style="padding: 0 24px;">
-    <div class="video-testis">
-      <div class="vt-card reveal d2">
-        <div class="vt-thumb vt-g1">
-          <span class="vt-badge">Verified Client</span>
-          <span class="vt-duration">2:47</span>
-          <div class="vt-play"></div>
-          <span class="vt-thumb-label">Todd · Retired Investor, 54</span>
-          <!-- COPY_TODO: video thumb image / real video embed. -->
-        </div>
-        <div class="vt-body">
-          <div class="vt-head">
-            <div class="vt-avatar">T</div>
-            <div><div class="vt-name">Todd</div><div class="vt-title">Retired Investor, 54</div></div>
-          </div>
-          <div class="vt-result">20 dates · 30 days</div>
-          <p class="vt-quote">"Was paying a matchmaker. Got nowhere. 20 dates in 30 days, most with women in their 20s and 30s."</p>
-        </div>
-      </div>
-
-      <div class="vt-card reveal d3">
-        <div class="vt-thumb vt-g2">
-          <span class="vt-badge">Verified Client</span>
-          <span class="vt-duration">3:14</span>
-          <div class="vt-play"></div>
-          <span class="vt-thumb-label">Yaro · Software Engineer</span>
-          <!-- COPY_TODO: video thumb image / real video embed. -->
-        </div>
-        <div class="vt-body">
-          <div class="vt-head">
-            <div class="vt-avatar">Y</div>
-            <div><div class="vt-name">Yaro</div><div class="vt-title">Software Engineer · SF</div></div>
-          </div>
-          <div class="vt-result">20+ dates · month 1</div>
-          <p class="vt-quote">"I had every box checked as a man except this one. 30 days later, 20+ dates on my calendar."</p>
-        </div>
-      </div>
-
-      <div class="vt-card reveal d4">
-        <div class="vt-thumb vt-g3">
-          <span class="vt-badge">Verified Client</span>
-          <span class="vt-duration">4:08</span>
-          <div class="vt-play"></div>
-          <span class="vt-thumb-label">Hector · Post-Divorce Executive</span>
-          <!-- COPY_TODO: video thumb image / real video embed. -->
-        </div>
-        <div class="vt-body">
-          <div class="vt-head">
-            <div class="vt-avatar">H</div>
-            <div><div class="vt-name">Hector</div><div class="vt-title">Post-Divorce Executive</div></div>
-          </div>
-          <div class="vt-result">10 dates · month 1</div>
-          <p class="vt-quote">"Never used a dating app before Atlas. More dates in 2 months than in my entire life."</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -3158,46 +3191,41 @@ body.deliv-modal-open { overflow: hidden; }
     
     <!-- v30.1 Mobile compact cards. Visible only on mobile. Click to open modal. -->
     <div class="deliv-m-cards" id="delivMCards">
-      <div class="deliv-m-card" data-deliv="profile" data-title="Done-For-You Profile Rebuild" data-sub="Our female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different outcome.">
+      <div class="deliv-m-card" data-deliv="profile" data-title="Done-For-You Profile Rebuild" data-sub="Our female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different outcome."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-profile"><span>REBUILD</span></div>
         <div class="deliv-m-text">
           <h3>Profile Rebuild</h3>
           <p>Dating apps + Instagram rebuilt by female advisors.</p>
           <span class="deliv-m-tap">Tap to see →</span>
-        </div>
-      </div>
-      <div class="deliv-m-card" data-deliv="pipeline" data-title="The 3 Part Pipeline" data-sub="Three channels running in parallel. Apps, Instagram, real life. When one cools, another is already warm.">
+        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
+      <div class="deliv-m-card" data-deliv="pipeline" data-title="The 3 Part Pipeline" data-sub="Three channels running in parallel. Apps, Instagram, real life. When one cools, another is already warm."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-pipeline"><span>PIPELINE</span></div>
         <div class="deliv-m-text">
           <h3>The 3 Part Pipeline</h3>
           <p>Three channels running in parallel. No single point of failure.</p>
           <span class="deliv-m-tap">Tap to see →</span>
-        </div>
-      </div>
-      <div class="deliv-m-card" data-deliv="wwys" data-title="The Conversion Blueprint" data-sub="Scripts, texting system, date frames. Click either path to see how most guys fail vs what Atlas clients send.">
+        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
+      <div class="deliv-m-card" data-deliv="wwys" data-title="The Conversion Blueprint" data-sub="Scripts, texting system, date frames. Click either path to see how most guys fail vs what Atlas clients send."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-wwys"><span>MESSAGES</span></div>
         <div class="deliv-m-text">
           <h3>What Would You Say</h3>
           <p>Scripts + frames that turn matches into booked calendar time.</p>
           <span class="deliv-m-tap">Tap to see →</span>
-        </div>
-      </div>
-      <div class="deliv-m-card" data-deliv="debrief" data-title="Date Debrief Feedback Loop" data-sub="After every date, a voice-note debrief with your advisor. Under 24-hour turnaround.">
+        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
+      <div class="deliv-m-card" data-deliv="debrief" data-title="Date Debrief Feedback Loop" data-sub="After every date, a voice-note debrief with your advisor. Under 24-hour turnaround."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-debrief"><span>DEBRIEF</span></div>
         <div class="deliv-m-text">
           <h3>Date Debrief Loop</h3>
           <p>Voice-note feedback from your advisor after every date.</p>
           <span class="deliv-m-tap">Tap to see →</span>
-        </div>
-      </div>
-      <div class="deliv-m-card" data-deliv="network" data-title="The Atlas Network" data-sub="Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men.">
+        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
+      <div class="deliv-m-card" data-deliv="network" data-title="The Atlas Network" data-sub="Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-network"><span>TEAM</span></div>
         <div class="deliv-m-text">
           <h3>The Atlas Network</h3>
           <p>A team of experts right in your pocket.</p>
           <span class="deliv-m-tap">Tap to see →</span>
-        </div>
-      </div>
+        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
     </div>
 
 <div class="deliv-list">
@@ -3665,66 +3693,88 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §5c YOU'LL GET USED TO THIS. Cork board vision + notification popups (v25). -->
+<!-- §5c BEFORE/AFTER replaced with notification wall (v30.2) -->
 <section class="section s-dark">
   <div class="inner">
-    <p class="eyebrow text-center reveal d1">You'll Get Used to This</p>
-    <h2 class="reveal d1 text-center">Your likes.<br><em>Before and after Atlas.</em></h2>
-    <p class="body-lg reveal d2 text-center" style="max-width:620px; margin:24px auto 0; color:var(--w55);">
-      Same man. Different system. Different board.
+    <p class="eyebrow text-center reveal d1">The Outcome</p>
+    <h2 class="reveal d1 text-center">This is what<br><em>your phone looks like.</em></h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:560px; margin:24px auto 0; color:var(--w55);">
+      When all three channels are running. Notifications become noise.
     </p>
 
-    <div class="board-wrap reveal d3">
-
-      <!-- BEFORE BOARD: muted unattractive photo placeholders tacked up -->
-      <div class="board before">
-        <div class="board-title">Before</div>
-        <div class="board-tack-grid">
-          <div class="tacked tilt-l"><div class="tacked-photo p1"><!-- COPY_TODO: unattractive match photo 1 --></div><div class="tacked-caption">Match · 5/10</div></div>
-          <div class="tacked tilt-r"><div class="tacked-photo p2"><!-- COPY_TODO: unattractive match photo 2 --></div><div class="tacked-caption">Match · 6/10</div></div>
-          <div class="tacked tilt-m"><div class="tacked-photo p3"><!-- COPY_TODO: unattractive match photo 3 --></div><div class="tacked-caption">Match · 5/10</div></div>
-          <div class="tacked tilt-r"><div class="tacked-photo p4"><!-- COPY_TODO: unattractive match photo 4 --></div><div class="tacked-caption">Match · 6/10</div></div>
-          <div class="tacked tilt-l"><div class="tacked-photo p5"><!-- COPY_TODO: unattractive match photo 5 --></div><div class="tacked-caption">Match · 5/10</div></div>
-          <div class="tacked tilt-m"><div class="tacked-photo p6"><!-- COPY_TODO: unattractive match photo 6 --></div><div class="tacked-caption">Match · 6/10</div></div>
+    <div class="notif-wall reveal d3" style="margin-top: 56px;">
+      <div class="notif n1">
+        <div class="notif-icon tinder">🔥</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">now</span></div>
+          <div class="notif-title"><span class="notif-count">12</span>new matches</div>
+          <div class="notif-text">Three women super-liked you today.</div>
         </div>
       </div>
-
-      <!-- AFTER BOARD: vivid attractive photos + floating notification popups -->
-      <div class="board after">
-        <div class="board-title">After · They're liking you</div>
-        <div class="board-tack-grid">
-          <div class="tacked tilt-r"><div class="tacked-photo p1"><!-- COPY_TODO: attractive match photo 1 --></div><div class="tacked-caption">Maya · 9/10</div></div>
-          <div class="tacked tilt-l"><div class="tacked-photo p2"><!-- COPY_TODO: attractive match photo 2 --></div><div class="tacked-caption">Sarah · 10/10</div></div>
-          <div class="tacked tilt-m"><div class="tacked-photo p3"><!-- COPY_TODO: attractive match photo 3 --></div><div class="tacked-caption">Nora · 9/10</div></div>
-          <div class="tacked tilt-l"><div class="tacked-photo p4"><!-- COPY_TODO: attractive match photo 4 --></div><div class="tacked-caption">Lauren · 10/10</div></div>
-          <div class="tacked tilt-r"><div class="tacked-photo p5"><!-- COPY_TODO: attractive match photo 5 --></div><div class="tacked-caption">Anna · 9/10</div></div>
-          <div class="tacked tilt-m"><div class="tacked-photo p6"><!-- COPY_TODO: attractive match photo 6 --></div><div class="tacked-caption">Eva · 10/10</div></div>
-        </div>
-        <!-- Floating notification popups over the board -->
-        <div class="board-popups">
-          <div class="board-pop pop1">
-            <div class="bp-icon">🔥</div>
-            <div class="bp-text"><strong>Maya</strong> liked you</div>
-          </div>
-          <div class="board-pop pop2">
-            <div class="bp-icon">◉</div>
-            <div class="bp-text"><strong>2</strong> DMs from women</div>
-          </div>
-          <div class="board-pop pop3">
-            <div class="bp-icon">H</div>
-            <div class="bp-text"><strong>8</strong> likes waiting</div>
-          </div>
+      <div class="notif n2">
+        <div class="notif-icon hinge">H</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">2m ago</span></div>
+          <div class="notif-title">Sarah liked your prompt</div>
+          <div class="notif-text">"The story about the dog made me laugh."</div>
         </div>
       </div>
-
+      <div class="notif n3">
+        <div class="notif-icon bumble">B</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Bumble</span><span class="notif-time">8m ago</span></div>
+          <div class="notif-title"><strong>Maya</strong> sent a message</div>
+          <div class="notif-text">"Okay Thursday works. Pick the place."</div>
+        </div>
+      </div>
+      <div class="notif n4">
+        <div class="notif-icon ig">◉</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">12m ago</span></div>
+          <div class="notif-title">2 new DMs from women</div>
+          <div class="notif-text">Both opened with a question about the trip photo.</div>
+        </div>
+      </div>
+      <div class="notif n5">
+        <div class="notif-icon tinder">🔥</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">25m ago</span></div>
+          <div class="notif-title">You have a new Super Like</div>
+          <div class="notif-text">Someone couldn't wait to swipe.</div>
+        </div>
+      </div>
+      <div class="notif n6">
+        <div class="notif-icon hinge">H</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">1h ago</span></div>
+          <div class="notif-title"><span class="notif-count">8</span>Likes You</div>
+          <div class="notif-text">Tap to see who's waiting.</div>
+        </div>
+      </div>
+      <div class="notif n7">
+        <div class="notif-icon messages">💬</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">1h ago</span></div>
+          <div class="notif-title">Lauren</div>
+          <div class="notif-text">"Had a great time last week. Free Friday?"</div>
+        </div>
+      </div>
+      <div class="notif n8">
+        <div class="notif-icon ig">◉</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">2h ago</span></div>
+          <div class="notif-title">Story viewer: Anna</div>
+          <div class="notif-text">She's been watching every one this week.</div>
+        </div>
+      </div>
     </div>
 
-    <p class="sub-note text-center" style="margin-top:32px;">Illustrative of client outcomes. Individual results depend on execution and profile.</p>
+    <p class="sub-note text-center" style="margin-top:32px;">Illustrative. Individual results depend on execution and profile.</p>
   </div>
 </section>
 
 
-<!-- Legacy wall hidden -->
+<!-- Legacy wall hidden (v23) -->
 <div style="display:none;">
     <div class="ba-wall-wrap reveal d3">
 
@@ -3829,7 +3879,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">T</div>
               <div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div>
             </div>
-            <div class="tc-result">20 dates · 30 days</div>
             <p class="tc-quote">"Was paying a matchmaker. Got nowhere. <strong>20 dates in 30 days</strong>, most with women in their 20s and 30s. Age was never the obstacle."</p>
           </div>
           <div class="tc-card">
@@ -3837,7 +3886,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">Y</div>
               <div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div>
             </div>
-            <div class="tc-result">20+ dates · month 1</div>
             <p class="tc-quote">"I had every box checked as a man except this one. <strong>30 days after the pipeline went live, I had 20+ dates on my calendar.</strong>"</p>
           </div>
           <!-- Duplicate for seamless loop -->
@@ -3846,7 +3894,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">T</div>
               <div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div>
             </div>
-            <div class="tc-result">20 dates · 30 days</div>
             <p class="tc-quote">"Was paying a matchmaker. Got nowhere. <strong>20 dates in 30 days</strong>, most with women in their 20s and 30s. Age was never the obstacle."</p>
           </div>
           <div class="tc-card">
@@ -3854,7 +3901,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">Y</div>
               <div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div>
             </div>
-            <div class="tc-result">20+ dates · month 1</div>
             <p class="tc-quote">"I had every box checked as a man except this one. <strong>30 days after the pipeline went live, I had 20+ dates on my calendar.</strong>"</p>
           </div>
         </div>
@@ -3868,7 +3914,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">S</div>
               <div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div>
             </div>
-            <div class="tc-result">40+ matches · 24 hrs</div>
             <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
           </div>
           <div class="tc-card">
@@ -3876,7 +3921,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">A</div>
               <div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div>
             </div>
-            <div class="tc-result">Women DM'd first</div>
             <p class="tc-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
           </div>
           <div class="tc-card">
@@ -3884,7 +3928,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">S</div>
               <div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div>
             </div>
-            <div class="tc-result">40+ matches · 24 hrs</div>
             <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
           </div>
           <div class="tc-card">
@@ -3892,7 +3935,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">A</div>
               <div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div>
             </div>
-            <div class="tc-result">Women DM'd first</div>
             <p class="tc-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
           </div>
         </div>
@@ -3906,7 +3948,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">B</div>
               <div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div>
             </div>
-            <div class="tc-result">4 dates · 2 weeks</div>
             <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
           </div>
           <div class="tc-card">
@@ -3914,7 +3955,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">H</div>
               <div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div>
             </div>
-            <div class="tc-result">10 dates · month 1</div>
             <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
           </div>
           <div class="tc-card">
@@ -3922,7 +3962,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">B</div>
               <div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div>
             </div>
-            <div class="tc-result">4 dates · 2 weeks</div>
             <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
           </div>
           <div class="tc-card">
@@ -3930,7 +3969,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tc-photo">H</div>
               <div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div>
             </div>
-            <div class="tc-result">10 dates · month 1</div>
             <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
           </div>
         </div>
@@ -4499,16 +4537,6 @@ body.deliv-modal-open { overflow: hidden; }
 </script>
 
 
-<!-- v30.1 Deliverable modal (mobile only) -->
-<div class="deliv-modal" id="delivModal" aria-hidden="true">
-  <div class="deliv-modal-backdrop" id="delivModalBackdrop"></div>
-  <div class="deliv-modal-sheet">
-    <button class="deliv-modal-close" id="delivModalClose" aria-label="Close">×</button>
-    <h2 id="delivModalTitle"></h2>
-    <p class="deliv-modal-sub" id="delivModalSub"></p>
-    <div class="deliv-modal-visual" id="delivModalVisual"></div>
-  </div>
-</div>
 
 </body>
 </html>
