@@ -3,607 +3,436 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>The 3-Message Texting System · Atlas Advisory</title>
-<meta name="description" content="The exact openers, replies, and date-frame scripts used by Atlas clients. Learn to turn a match into a booked date in three messages. Free.">
+<title>Free Texting Course · Atlas Advisory</title>
+<meta name="description" content="Free texting course. The 3 best opening lines for dating apps and the exact blueprint for getting dates.">
 <meta name="robots" content="noindex">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ══════════════════════════════════════════════════════════
    Atlas · Free Texting Course opt-in.
-   Design tokens and components cloned from the confirmation-page
-   design guidelines. Structure mirrors the legacy benseda.com
-   texting-course-opt-in page.
+   Rendered as a centered modal over a dim, blurred backdrop.
+   Brand tokens + components lifted from the confirmation-page
+   design guidelines (same set used in v33).
    ══════════════════════════════════════════════════════════ */
 :root {
   --bg0: #050608;
   --bg1: #0a0d1f;
   --bg2: #08101c;
-  --bg3: #0d1128;
-  --card: rgba(255,255,255,0.025);
+  --card: rgba(255,255,255,0.04);
   --card-solid: #0d1020;
-  --border: rgba(255,255,255,0.06);
-  --border-2: rgba(255,255,255,0.10);
-  --border-hi: rgba(255,255,255,0.15);
+  --border: rgba(255,255,255,0.08);
+  --border-2: rgba(255,255,255,0.12);
+  --border-hi: rgba(255,255,255,0.18);
   --w100: #ffffff;
   --w75: rgba(255,255,255,0.72);
   --w55: rgba(255,255,255,0.55);
   --w35: rgba(255,255,255,0.35);
   --w20: rgba(255,255,255,0.18);
-  --accent: #7AA0FF;
-  --accent-soft: rgba(122,160,255,0.14);
   --gold: #A7B5E8;
   --gold-hi: #C4CEF5;
   --gold-hover: #8896D5;
   --gold-soft: rgba(167,181,232,0.14);
   --ok: #4ade80;
   --ok-soft: rgba(74,222,128,0.12);
-  --no: #f87171;
-  --tg-bg: #0E1621;
-  --tg-msg-in: #182533;
-  --tg-msg-out: #2B5278;
 }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg0); color: var(--w100);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
-  font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; overflow-x: hidden;
+
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
+body {
+  background: var(--bg0);
+  color: var(--w100);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100svh;
+}
+
 a { color: inherit; text-decoration: none; }
 
-.section { padding: clamp(72px, 9vw, 120px) 24px; border-top: 1px solid var(--border); }
-.section:first-of-type { border-top: none; }
-.inner { max-width: 1100px; margin: 0 auto; }
-.inner.mid { max-width: 820px; margin: 0 auto; }
-.inner.narrow { max-width: 660px; margin: 0 auto; }
-.s-black { background: var(--bg0); }
-.s-dark { background: var(--bg1); }
-.s-darker { background: var(--bg2); }
-.text-center { text-align: center; }
+/* ═══ Backdrop ═══ */
+.backdrop {
+  position: fixed; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(167,181,232,0.12), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(122,160,255,0.10), transparent 55%),
+    linear-gradient(135deg, #040509 0%, #0a0d1f 50%, #040509 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+}
+.backdrop::before {
+  content: "";
+  position: absolute; inset: -40px;
+  background:
+    radial-gradient(2px 2px at 23% 18%, rgba(255,255,255,0.25) 50%, transparent 50%),
+    radial-gradient(2px 2px at 71% 42%, rgba(255,255,255,0.18) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 40% 74%, rgba(255,255,255,0.22) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 88% 86%, rgba(255,255,255,0.18) 50%, transparent 50%);
+  opacity: 0.55;
+  pointer-events: none;
+}
 
-h1, h2, h3 {
+/* ═══ Modal card ═══ */
+.modal {
+  position: relative; z-index: 2;
+  background: rgba(10,13,31,0.86);
+  backdrop-filter: saturate(160%) blur(24px);
+  -webkit-backdrop-filter: saturate(160%) blur(24px);
+  border: 1px solid var(--border-2);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 48px);
+  max-height: calc(100svh - 48px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 0 60px rgba(167,181,232,0.08);
+  animation: modalIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+.modal::-webkit-scrollbar { width: 6px; }
+.modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-inner {
+  padding: clamp(24px, 3.5vw, 36px);
+  display: flex; flex-direction: column;
+  gap: 18px;
+}
+
+/* Brand header */
+.brand {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.brand-mark {
+  display: flex; align-items: center; gap: 10px;
   font-family: 'Spectral', Georgia, serif;
-  font-weight: 500; letter-spacing: -0.015em; line-height: 1.08;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--w75);
+  text-transform: uppercase;
 }
-h1 { font-size: clamp(34px, 5.2vw, 56px); }
-h2 { font-size: clamp(26px, 3.8vw, 42px); }
-h3 { font-size: clamp(18px, 1.7vw, 22px); }
-h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; color: var(--w55); }
-p { color: var(--w75); }
-.body-lg { font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; color: var(--w75); }
-
-.eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.20em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
-  display: inline-block;
-}
-
-/* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-.reveal.in { opacity: 1; transform: none; }
-.d1 { transition-delay: 0.05s; } .d2 { transition-delay: 0.15s; }
-.d3 { transition-delay: 0.25s; } .d4 { transition-delay: 0.35s; }
-.d5 { transition-delay: 0.45s; }
-
-/* Status pill (confirmation badge pattern) */
+.compass { width: 18px; height: 18px; animation: compassSpin 32s linear infinite; }
+@keyframes compassSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 .status-pill {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 7px;
   background: var(--ok-soft);
   border: 1px solid rgba(74,222,128,0.28);
   color: var(--ok);
-  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 7px 16px; border-radius: 99px;
-  margin-bottom: 22px;
+  padding: 5px 12px; border-radius: 99px;
 }
 .status-pill::before {
   content: "";
-  width: 6px; height: 6px; border-radius: 50%;
+  width: 5px; height: 5px; border-radius: 50%;
   background: var(--ok);
-  box-shadow: 0 0 10px rgba(74,222,128,0.8);
+  box-shadow: 0 0 8px rgba(74,222,128,0.8);
   animation: pulseDot 2s ease-in-out infinite;
 }
 @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
 
-/* Step labels */
-.step-label {
-  display: inline-flex; align-items: center; gap: 10px;
-  margin-top: 28px;
+/* Headlines */
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
 }
-.step-num {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--gold-soft);
-  color: var(--gold);
-  font-size: 12px; font-weight: 700;
-  display: inline-flex; align-items: center; justify-content: center;
+h1.modal-h {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 500; line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--w100);
+}
+h1.modal-h em {
+  font-style: italic; font-weight: 400;
+  color: var(--w55);
+  display: block;
+}
+.modal-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; line-height: 1.5;
+  color: var(--w55);
+}
+.modal-sub strong { color: var(--w100); font-weight: 600; }
+
+/* Form */
+.form {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.form-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--w35);
+}
+.form input[type="email"] {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-2);
+  color: var(--w100);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 13px 14px;
+  border-radius: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.06);
+}
+.form input::placeholder { color: var(--w35); }
+
+.consent {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-top: 4px;
+}
+.consent input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--gold);
+  margin-top: 2px;
   flex-shrink: 0;
+  cursor: pointer;
 }
-.step-text {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
+.consent label {
+  font-size: 12px; line-height: 1.5;
+  color: var(--w75);
+  cursor: pointer;
+}
+.consent-fine {
+  font-size: 10.5px; line-height: 1.5;
   color: var(--w35);
 }
 
 /* Primary button */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px; width: 100%;
   background: var(--gold); color: #fff;
   font-family: 'Inter', sans-serif;
-  font-size: 15px; font-weight: 700; letter-spacing: 0.005em;
-  padding: 17px 36px; border: none; border-radius: 4px;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.01em;
+  text-transform: none;
+  padding: 15px 24px; border: none; border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.3s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.25s;
   box-shadow: 0 4px 24px rgba(167,181,232,0.30);
-  width: 100%;
 }
 .btn:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(167,181,232,0.40); }
-.btn::after { content: "→"; font-size: 17px; }
+.btn::after { content: "→"; font-size: 16px; }
 
-/* Ghost button */
-.btn-ghost {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: transparent; border: 1px solid var(--border-2); color: var(--w75);
-  font-family: 'Inter', sans-serif;
-  font-size: 13px; font-weight: 600;
-  padding: 12px 22px; border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+/* Divider */
+.rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 2px 0;
 }
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-/* Nav */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: calc(16px + env(safe-area-inset-top, 0px)) 32px 16px;
-  background: rgba(5,6,8,0.92);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  display: flex; align-items: center; gap: 12px;
+/* Promise block */
+.promise .eyebrow { margin-bottom: 6px; }
+.promise h2 {
   font-family: 'Spectral', Georgia, serif;
-  font-size: 17px; font-weight: 500;
-  letter-spacing: 0.26em; color: var(--w100);
-  text-transform: uppercase;
-}
-.nav-compass { width: 22px; height: 22px; animation: compassSpin 32s linear infinite; }
-@keyframes compassSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-.nav-status {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
-  color: var(--w55); text-transform: uppercase;
-}
-.nav-status::before {
-  content: "";
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--ok);
-  box-shadow: 0 0 10px rgba(74,222,128,0.8);
-  animation: pulseDot 2s ease-in-out infinite;
-}
-@media (max-width: 640px) { .nav-status { display: none; } }
-
-/* ══════════════════════════════════════════════════════════
-   HERO · opt-in card
-   ══════════════════════════════════════════════════════════ */
-.hero {
-  padding-top: calc(120px + env(safe-area-inset-top, 0px));
-  padding-bottom: clamp(72px, 9vw, 120px);
-}
-.hero h1 em { display: block; }
-.hero-sub {
-  font-size: clamp(15px, 1.4vw, 17px);
-  color: var(--w55);
-  max-width: 560px;
-  margin: 20px auto 0;
-  line-height: 1.6;
-}
-
-.opt-card {
-  background: var(--card);
-  border: 1px solid var(--border-2);
-  border-radius: 18px;
-  padding: clamp(28px, 4vw, 44px);
-  max-width: 560px;
-  margin: 40px auto 0;
-  text-align: left;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.opt-card .form-label {
-  display: block;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--w35);
-  margin-bottom: 10px;
-}
-.opt-card input[type="email"],
-.opt-card input[type="tel"] {
-  width: 100%;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border-2);
+  font-weight: 500; line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-size: clamp(16px, 2vw, 19px);
   color: var(--w100);
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  padding: 15px 16px;
-  border-radius: 8px;
-  transition: border-color 0.2s, background 0.2s;
-  margin-bottom: 18px;
 }
-.opt-card input:focus {
-  outline: none;
-  border-color: var(--gold);
-  background: rgba(255,255,255,0.05);
-}
-.opt-card input::placeholder { color: var(--w35); }
+.promise h2 em { font-style: italic; font-weight: 400; color: var(--w55); }
 
-.consent {
-  display: flex; align-items: flex-start; gap: 12px;
-  margin: 10px 0 22px;
+/* Bullets */
+.learn {
+  display: flex; flex-direction: column; gap: 9px;
 }
-.consent input[type="checkbox"] {
-  width: 18px; height: 18px;
-  accent-color: var(--gold);
-  margin-top: 3px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.consent label {
-  font-size: 13px; line-height: 1.55;
-  color: var(--w75);
-  cursor: pointer;
-}
-.consent-fine {
-  font-size: 11px; line-height: 1.55;
-  color: var(--w35);
-  margin-top: 10px;
-}
-.sub-note {
-  font-size: 12px; color: var(--w35);
-  margin-top: 14px; text-align: center;
-}
-.sub-note strong { color: var(--gold); font-weight: 600; }
-
-/* ══════════════════════════════════════════════════════════
-   WHAT YOU'LL LEARN
-   ══════════════════════════════════════════════════════════ */
-.learn-list {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 18px 32px;
-  margin-top: 48px;
-  text-align: left;
-}
-@media (max-width: 720px) { .learn-list { grid-template-columns: 1fr; gap: 14px; } }
 .learn-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 18px 20px;
-  background: var(--card);
-  border: 1px solid var(--border-2);
-  border-radius: 12px;
+  display: flex; align-items: flex-start; gap: 10px;
 }
 .learn-check {
   flex-shrink: 0;
-  width: 24px; height: 24px; border-radius: 50%;
+  width: 18px; height: 18px; border-radius: 50%;
   background: var(--gold-soft);
   color: var(--gold);
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 800;
+  font-size: 10px; font-weight: 800;
   margin-top: 1px;
 }
 .learn-text {
-  font-size: 14px; color: var(--w75); line-height: 1.55;
+  font-size: 12.5px; line-height: 1.5;
+  color: var(--w75);
 }
 .learn-text strong { color: var(--w100); font-weight: 600; }
 
-/* ══════════════════════════════════════════════════════════
-   PREVIEW · Telegram-style peek at the kind of scripts inside
-   ══════════════════════════════════════════════════════════ */
-.preview-wrap { margin-top: 56px; display: flex; justify-content: center; }
-.tg-card {
-  max-width: 420px; width: 100%;
-  background: var(--tg-bg);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.04);
-}
-.tg-head {
-  background: #17212B;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  display: flex; align-items: center; gap: 10px;
-}
-.tg-head-avatar {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: linear-gradient(135deg, #3a5a8a, #2a3a60);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700;
-  flex-shrink: 0;
-}
-.tg-head-meta { line-height: 1.25; text-align: left; }
-.tg-head-name { font-size: 13px; font-weight: 600; color: #fff; }
-.tg-head-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
-.tg-body { padding: 14px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
-.tg-msg {
-  max-width: 82%;
-  padding: 8px 11px;
-  font-size: 13px; line-height: 1.45;
-  color: #fff;
-  border-radius: 12px;
-}
-.tg-msg.tg-in { align-self: flex-start; background: var(--tg-msg-in); border-bottom-left-radius: 4px; }
-.tg-msg.tg-out { align-self: flex-end; background: var(--tg-msg-out); border-bottom-right-radius: 4px; }
-.tg-msg-time { display: block; font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 3px; }
-.tg-foot {
-  padding: 10px 14px;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); text-align: left;
-}
-
-/* ══════════════════════════════════════════════════════════
-   PROOF STRIP · one quote, no marquee
-   ══════════════════════════════════════════════════════════ */
-.proof-strip {
-  background: var(--card);
-  border: 1px solid var(--border-2);
-  border-radius: 14px;
-  padding: 28px clamp(24px, 3vw, 36px);
-  margin: 48px auto 0;
-  max-width: 720px;
-  text-align: left;
-}
-.proof-quote {
-  font-family: 'Spectral', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(16px, 1.7vw, 19px);
-  line-height: 1.5;
-  color: var(--w100);
-  letter-spacing: -0.005em;
-}
-.proof-attr {
-  margin-top: 14px;
+/* Secondary CTA (ghost link) */
+.secondary-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
   font-size: 11px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gold);
-}
-
-/* ══════════════════════════════════════════════════════════
-   FOOTER
-   ══════════════════════════════════════════════════════════ */
-footer {
-  padding: 40px 24px 36px;
-  border-top: 1px solid var(--border);
-  background: var(--bg0);
-  text-align: center;
-}
-.footer-logo {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: 14px; letter-spacing: 0.26em;
-  color: var(--w55); text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.footer-links {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 24px; margin-bottom: 16px;
-}
-.footer-links a {
-  font-size: 12px; color: var(--w35);
+  padding: 10px 0;
+  cursor: pointer;
+  background: none; border: none;
+  width: 100%;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--gold); }
-.footer-copy {
-  font-size: 11px; color: var(--w20);
-  line-height: 1.6;
+.secondary-cta:hover { color: var(--gold-hi); }
+
+/* Footer strip inside modal */
+.modal-foot {
+  display: flex; flex-wrap: wrap; gap: 4px 14px;
+  justify-content: center;
+  font-size: 10px; color: var(--w20);
+  margin-top: 2px;
+}
+.modal-foot a {
+  color: var(--w35);
+  transition: color 0.2s;
+}
+.modal-foot a:hover { color: var(--gold); }
+
+/* Short viewport behavior: let content scroll inside card. */
+@media (max-height: 780px) {
+  .modal-inner { gap: 14px; }
+  .learn { gap: 7px; }
 }
 
-/* ══════════════════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════════════════ */
-@media (max-width: 640px) {
-  .btn { padding: 18px 30px !important; font-size: 15px !important; }
-  .opt-card { padding: 26px 22px; }
-  .step-label { justify-content: flex-start; }
+/* Narrow mobile */
+@media (max-width: 420px) {
+  .backdrop { padding: 12px; }
+  .modal-inner { padding: 22px 20px; }
+  h1.modal-h { font-size: 22px; }
+  .brand { flex-wrap: wrap; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="/" class="nav-logo" aria-label="Atlas">
-    <svg class="nav-compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
-      <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#A7B5E8" stroke-width="1"/>
-    </svg>
-    <span>ATLAS</span>
-  </a>
-  <span class="nav-status">Free access · no card</span>
-</nav>
+<div class="backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-headline">
 
+    <div class="modal-inner">
 
-<!-- §1 HERO + OPT-IN -->
-<section class="section s-black hero text-center" id="hero">
-  <div class="inner mid">
-    <span class="status-pill reveal d1">Free · 3-part texting course</span>
-    <h1 class="reveal d1">Turn a match into a dinner.<br><em>In three messages.</em></h1>
-    <p class="hero-sub reveal d2">
-      The exact openers, replies, and date-frame scripts Atlas clients use on Hinge, Bumble and Instagram. Free. Delivered by email the moment you sign up.
-    </p>
-
-    <form class="opt-card reveal d3" id="optInForm" method="post" action="#" novalidate>
-      <div class="step-label" style="margin-top: 0;">
-        <span class="step-num">01</span>
-        <span class="step-text">Where should we send it?</span>
-      </div>
-
-      <label class="form-label" for="email" style="margin-top: 18px;">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
-
-      <label class="form-label" for="phone">Mobile (for course access text)</label>
-      <input type="tel" id="phone" name="phone" placeholder="+1 555 000 0000" autocomplete="tel">
-
-      <div class="consent">
-        <input type="checkbox" id="sms-consent" name="sms_consent" required>
-        <label for="sms-consent">
-          I agree to receive an SMS from Atlas with the course link. Reply STOP to opt out. Msg &amp; data rates may apply.
-        </label>
-      </div>
-
-      <input type="hidden" name="source" id="optSource" value="direct">
-      <button type="submit" class="btn">Send me the course</button>
-      <p class="sub-note">No spam. Unsubscribe anytime. <strong>&lt;2 minutes to read.</strong></p>
-    </form>
-  </div>
-</section>
-
-
-<!-- §2 PROMISE -->
-<section class="section s-dark text-center">
-  <div class="inner narrow">
-    <p class="eyebrow reveal d1">What's inside</p>
-    <h2 class="reveal d1">A 3-message system.<br><em>Not another swipe hack.</em></h2>
-    <p class="body-lg reveal d2" style="max-width:560px; margin:24px auto 0;">
-      Three short lessons. Delivered over three days. The opener, the reply that books the date, and the frame that makes the place feel like her idea. The same scripts we run for private clients.
-    </p>
-  </div>
-</section>
-
-
-<!-- §3 WHAT YOU'LL LEARN -->
-<section class="section s-darker">
-  <div class="inner">
-    <div class="text-center">
-      <p class="eyebrow reveal d1">What you'll learn</p>
-      <h2 class="reveal d1">Six moves.<br><em>Worked out on real clients.</em></h2>
-    </div>
-
-    <div class="learn-list reveal d2">
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>Three openers that get replies.</strong> Without sounding like every other match in her inbox.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>Match to dinner in under 48 hours.</strong> The exact sequence. Copy, send, book.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>The restart message.</strong> What to send when she's reading but not replying.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>Frame-setting lines.</strong> Make picking the place feel obvious to her, not heavy on you.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>Spotting the low-effort match.</strong> The tells that save you two weeks and a dinner bill.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-check">✓</div>
-        <div class="learn-text"><strong>Real screenshots, unedited.</strong> The full threads that booked. The ones that didn't. Why.</div>
-      </div>
-    </div>
-
-    <!-- Preview peek: a Telegram-styled exchange showing the tone of what's inside -->
-    <div class="preview-wrap reveal d3">
-      <div class="tg-card">
-        <div class="tg-head">
-          <div class="tg-head-avatar">A</div>
-          <div class="tg-head-meta">
-            <div class="tg-head-name">Lesson 01 · The opener</div>
-            <div class="tg-head-sub">Preview · 2 of 6 moves</div>
-          </div>
+      <!-- Brand + status -->
+      <div class="brand">
+        <div class="brand-mark">
+          <svg class="compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
+            <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
+            <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
+            <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#A7B5E8" stroke-width="1"/>
+          </svg>
+          <span>Atlas</span>
         </div>
-        <div class="tg-body">
-          <div class="tg-msg tg-out">
-            Your photos stopped me. Coffee this week?
-            <span class="tg-msg-time">9:14 PM</span>
-          </div>
-          <div class="tg-msg tg-in">
-            Haha okay. I like that. What day?
-            <span class="tg-msg-time">9:22 PM</span>
-          </div>
-          <div class="tg-msg tg-out">
-            Thursday. Nobu at 7.
-            <span class="tg-msg-time">9:23 PM</span>
-          </div>
-          <div class="tg-msg tg-in">
-            Done. See you there.
-            <span class="tg-msg-time">9:24 PM</span>
-          </div>
-        </div>
-        <div class="tg-foot">Three messages · dinner booked</div>
+        <span class="status-pill">Free access</span>
       </div>
+
+      <!-- Headline -->
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px;">Free texting course</p>
+        <h1 class="modal-h" id="modal-headline">
+          Yes, send me the free course now.
+          <em>The 3 best opening lines and the exact blueprint for getting dates.</em>
+        </h1>
+        <p class="modal-sub" style="margin-top:10px;">Sign up with the email you'd like to use to log in.</p>
+      </div>
+
+      <!-- Opt-in form -->
+      <form class="form" id="optInForm" method="post" action="#" novalidate>
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+
+        <div class="consent">
+          <input type="checkbox" id="sms-consent" name="sms_consent" required>
+          <label for="sms-consent">
+            I agree and consent to SMS text confirmation in order to receive the course.
+          </label>
+        </div>
+
+        <p class="consent-fine">
+          By checking this box and submitting, I consent to receive automated SMS/MMS messages from Benjamin Seda at the number I provided, including confirmation and access instructions for the video and course and occasional promotional or informational messages. Reply STOP to opt out. Msg and data rates may apply.
+        </p>
+
+        <input type="hidden" name="source" id="optSource" value="direct">
+        <button type="submit" class="btn">Send me the course</button>
+      </form>
+
+      <div class="rule"></div>
+
+      <!-- Promise -->
+      <div class="promise">
+        <p class="eyebrow">What's inside</p>
+        <h2>The exact scripts.<br><em>Without wasting hours texting, getting flaked on, or ghosted.</em></h2>
+      </div>
+
+      <!-- What you'll learn -->
+      <div class="learn">
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">How to get a first date in <strong>3 messages or less</strong>.</div>
+        </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">The types of text messages that make women respond, and text you first.</div>
+        </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">Copy and paste text sequences that save you hours and get you more dates.</div>
+        </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">How to beat out the other guys in her phone and get her attention locked on you.</div>
+        </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">Fire-and-forget text messages. Send and be confident you'll get a response.</div>
+        </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
+          <div class="learn-text">Never-before-seen screenshots of real conversations that led to dates.</div>
+        </div>
+      </div>
+
+      <!-- Secondary CTA -->
+      <button type="button" class="secondary-cta" onclick="document.getElementById('email').focus(); document.getElementById('email').scrollIntoView({block:'center', behavior:'smooth'});">
+        Watch the free course ↑
+      </button>
+
+      <!-- Footer links -->
+      <div class="modal-foot">
+        <a href="/terms.html">Terms</a>
+        <span>·</span>
+        <a href="/privacy.html">Privacy</a>
+        <span>·</span>
+        <a href="mailto:hello@atlasadvisory.co">Support</a>
+        <span>·</span>
+        <span>Atlas Advisory · &copy; <span id="yr">2026</span></span>
+      </div>
+
     </div>
   </div>
-</section>
-
-
-<!-- §4 PROOF -->
-<section class="section s-dark">
-  <div class="inner narrow text-center">
-    <p class="eyebrow reveal d1">From the room</p>
-
-    <div class="proof-strip reveal d2">
-      <p class="proof-quote">"I ran the opener exactly as written. She replied in six minutes. Booked dinner the same night. I have not gone back to my old style once."</p>
-      <div class="proof-attr">Yaro · Software Engineer</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- §5 SECONDARY CTA -->
-<section class="section s-black text-center">
-  <div class="inner narrow">
-    <p class="eyebrow reveal d1">Last step</p>
-    <h2 class="reveal d1">Send it to my inbox.</h2>
-    <p class="body-lg reveal d2" style="max-width:520px; margin:20px auto 28px; color: var(--w55);">
-      Lesson one lands within two minutes. Lesson two the next morning. Lesson three the day after. Then you can decide if you want to keep going.
-    </p>
-    <div class="reveal d3" style="max-width: 420px; margin: 0 auto;">
-      <button class="btn" onclick="document.getElementById('email').focus(); window.scrollTo({top: 0, behavior: 'smooth'});">Send me the course</button>
-      <p class="sub-note" style="margin-top: 16px;">Scrolls back up. No checkout. No catch.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">ATLAS</div>
-  <div class="footer-links">
-    <a href="/terms.html">Terms</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="mailto:hello@atlasadvisory.co">Support</a>
-  </div>
-  <p class="footer-copy">
-    Atlas Advisory · Private Dating Consulting<br>
-    Copyright &copy; <span id="yr">2026</span>. All rights reserved.
-  </p>
-</footer>
-
+</div>
 
 <script>
-// Reveal on scroll
-const io = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
-  { threshold: 0.10 }
-);
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
 // Year stamp
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Attribution capture — read ?el=... into the hidden source field
+// Attribution capture — read ?el=, ?utm_source= or ?ref= into the hidden source field
 (function captureSource() {
   const params = new URLSearchParams(window.location.search);
   const src = params.get('el') || params.get('utm_source') || params.get('ref');
@@ -611,15 +440,22 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   if (src && hidden) hidden.value = src;
 })();
 
-// Basic client-side form handler (wire to your ESP / webhook later).
-// For now: validate, show a success state, keep the user oriented.
+// Form handler — validate, then show an inline success state.
+// Swap the body for your ESP / webhook (ConvertKit, Klaviyo, Mailchimp) when ready.
 document.getElementById('optInForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
   const consent = document.getElementById('sms-consent').checked;
   if (!email || !consent) return;
-  const card = e.target;
-  card.innerHTML = '<div style="text-align:center; padding:24px 0;"><div style="display:inline-flex; align-items:center; gap:8px; background:var(--ok-soft); border:1px solid rgba(74,222,128,0.28); color:var(--ok); font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:7px 16px; border-radius:99px; margin-bottom:18px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--ok);"></span>Check your inbox</div><p style="font-family:Spectral, Georgia, serif; font-size:22px; color:#fff; margin-bottom:10px;">Lesson one is on the way.</p><p style="color:var(--w55); font-size:14px;">Sent to <strong style="color:var(--gold);">' + email + '</strong>. Watch the next few days. Lesson two lands tomorrow morning.</p></div>';
+  const modal = document.querySelector('.modal-inner');
+  modal.innerHTML =
+    '<div style="text-align:center; padding:40px 8px;">' +
+      '<div style="display:inline-flex; align-items:center; gap:7px; background:var(--ok-soft); border:1px solid rgba(74,222,128,0.28); color:var(--ok); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:5px 12px; border-radius:99px; margin-bottom:20px;">' +
+        '<span style="width:5px; height:5px; border-radius:50%; background:var(--ok);"></span>Check your inbox' +
+      '</div>' +
+      '<h1 style="font-family:Spectral, Georgia, serif; font-weight:500; font-size:26px; line-height:1.15; letter-spacing:-0.015em; color:#fff; margin-bottom:12px;">Lesson one is on the way.</h1>' +
+      '<p style="font-family:Inter, sans-serif; font-size:14px; line-height:1.55; color:var(--w55); max-width:380px; margin:0 auto;">Sent to <strong style="color:var(--gold); font-weight:600;">' + email + '</strong>. Lesson two lands tomorrow morning. Lesson three the day after.</p>' +
+    '</div>';
 });
 </script>
 
