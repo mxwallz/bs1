@@ -2432,16 +2432,16 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 }
 
 /* Prevent horizontal overflow universally */
-html, body { max-width: 100%; overflow-x: hidden; }
-section, .inner { max-width: 100%; }
+body { overflow-x: hidden; }
+
 
 /* ══════════════════════════════════════════════════════════
    v26.1 mobile batch fixes
    ══════════════════════════════════════════════════════════ */
 
 /* (9) Prevent content leaking above fixed nav */
-html, body { background: var(--bg0); overscroll-behavior-y: none; }
-body { -webkit-tap-highlight-color: transparent; }
+html, body { background: var(--bg0); }
+
 .nav { z-index: 100; background: rgba(5,6,8,0.98) !important; }
 
 /* (11) Nav slightly bigger on mobile */
