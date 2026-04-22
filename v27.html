@@ -2570,6 +2570,41 @@ html, body { background: var(--bg0); }
   50% { transform: translateX(4px); opacity: 1; }
 }
 
+
+/* ══════════════════════════════════════════════════════════
+   v26.2 scroll + deliverable-card sizing fixes
+   ══════════════════════════════════════════════════════════ */
+/* Lock page to vertical-only swipes (kills stray side-to-side scroll) */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; touch-action: pan-y; }
+/* Opt horizontal scroll BACK IN only on the elements that need it */
+.swipe-track, .testi-columns { touch-action: pan-x; }
+
+/* Make deliverable cards that hold tall phones longer on mobile so phones fit fully */
+@media (max-width: 960px) {
+  .deliv.wwys-big .deliv-mock-wrap,
+  .deliv.profile-big .deliv-mock-wrap { min-height: 620px; padding: 24px; }
+  .wwys-phone { max-height: 560px; }
+  .rp-phone { width: 244px; height: 528px; }
+}
+@media (max-width: 640px) {
+  .deliv.wwys-big .deliv-mock-wrap,
+  .deliv.profile-big .deliv-mock-wrap { min-height: 600px; padding: 20px; }
+  .wwys-phone { max-height: 540px; }
+  .rp-phone { width: 232px; height: 500px; }
+  /* Pipeline + Network cards also get enough room */
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 520px; padding: 18px; }
+  .deliv.network-big .deliv-mock-wrap { min-height: 480px; padding: 18px; }
+}
+@media (max-width: 480px) {
+  .deliv.wwys-big .deliv-mock-wrap,
+  .deliv.profile-big .deliv-mock-wrap { min-height: 580px; padding: 16px; }
+  .wwys-phone { max-height: 520px; }
+  .rp-phone { width: 220px; height: 476px; }
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 460px; padding: 12px; }
+  .deliv.network-big .deliv-mock-wrap { min-height: 440px; padding: 12px; }
+}
+
 </style>
 </head>
 <body>
