@@ -647,7 +647,7 @@ p { color: var(--w75); }
 .guarantee-box .gbar-label { font-size: 10px; color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
 .guarantee-box .gbar-body { font-size: 13px; color: var(--w75); margin-top: 4px; }
 
-/* v21 Sticky mobile CTA bar. Hidden under the fold; slides up after hero. */
+/* v21 Sticky mobile CTA bar. Hidden under the fold; slides up once hero is out of view. */
 .sticky-apply {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 45;
   background: rgba(10,10,10,0.94); backdrop-filter: saturate(180%) blur(20px);
@@ -657,13 +657,22 @@ p { color: var(--w75); }
   display: none;
   align-items: center; justify-content: space-between; gap: 12px;
   box-shadow: 0 -8px 32px rgba(0,0,0,0.4);
-  transform: translateY(110%);
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(120%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease,
+              visibility 0s linear 0.35s;
   pointer-events: none;
 }
 .sticky-apply.visible {
   transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease,
+              visibility 0s linear 0s;
 }
 .sticky-apply .sa-info { font-size: 11px; color: var(--w55); line-height: 1.3; }
 .sticky-apply .sa-info strong { color: var(--gold); display: block; font-size: 12px; }
@@ -3120,6 +3129,10 @@ body.deliv-modal-open { overflow: hidden; }
     margin: 0 !important;
   }
   .deliv-m-card.expanded .deliv-m-tap { display: none; }
+  /* When expanded, collapse the short preview so the full copy in the
+     .deliv is the only content. Keeps a clean single-source read. */
+  .deliv-m-card.expanded .deliv-m-text { display: none !important; }
+  .deliv-m-card.expanded .deliv-m-preview { padding-right: 48px; min-height: 0; }
 
   /* + / × toggle button top-right. Non-overlapping. Clear affordance. */
   .deliv-m-card::after {
@@ -3158,27 +3171,113 @@ body.deliv-modal-open { overflow: hidden; }
                 margin 0.4s, padding 0.4s;
   }
   .deliv-m-card.expanded .deliv-m-expand {
-    max-height: 2400px !important;
+    max-height: 3200px !important;
     opacity: 1;
     margin-top: 20px !important;
     padding-top: 20px !important;
     border-top: 1px solid var(--border) !important;
   }
 
-  /* When a .deliv-mock-wrap is placed inside the expand slot, render it cleanly */
-  .deliv-m-expand > .deliv-mock-wrap {
+  /* Expanded content: full .deliv (visual + all copy) stacks inside the card.
+     Background matches the card itself so it reads as one continuous panel. */
+  .deliv-m-expand > .deliv {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    align-items: center;
+    text-align: center;
+  }
+  .deliv-m-expand > .deliv > .deliv-mock-wrap {
     display: flex !important;
     width: 100% !important;
     max-width: 100% !important;
-    min-height: 520px !important;
+    min-height: 440px !important;
     aspect-ratio: auto !important;
+    margin: 0 !important;
     padding: 16px !important;
-    background: var(--card-solid) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 12px !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
     overflow: visible !important;
     align-items: center;
     justify-content: center;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 4px 4px 6px !important;
+    text-align: center !important;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy h3 {
+    font-family: 'Spectral', Georgia, serif !important;
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.015em !important;
+    color: #fff !important;
+    margin: 0 0 12px !important;
+    line-height: 1.25 !important;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy p {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    color: rgba(255,255,255,0.72) !important;
+    margin: 0 auto 16px !important;
+    max-width: 40ch;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .deliv-testi {
+    margin: 16px auto !important;
+    max-width: 100% !important;
+    padding: 14px 16px !important;
+    background: rgba(167,181,232,0.06) !important;
+    border: 1px solid rgba(167,181,232,0.22) !important;
+    border-radius: 10px !important;
+    text-align: left;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .deliv-testi .dt-quote {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    color: rgba(255,255,255,0.86) !important;
+    margin: 0 0 6px !important;
+    max-width: none;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .deliv-testi .dt-attr {
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    color: var(--blue) !important;
+    text-transform: uppercase;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .spec {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin: 14px 0 0 !important;
+    text-align: left;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .spec-item {
+    padding: 10px 12px !important;
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .spec-item .k {
+    font-size: 9px !important;
+    letter-spacing: 0.16em !important;
+    color: rgba(255,255,255,0.42) !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+  }
+  .deliv-m-expand > .deliv > .deliv-copy .spec-item .v {
+    font-size: 12px !important;
+    color: #fff !important;
+    line-height: 1.35 !important;
   }
 }
 
@@ -4494,37 +4593,34 @@ body.deliv-modal-open { overflow: hidden; }
   });
 
   // Scroll-animated 90-day timeline.
-  // Fill line progresses continuously with scroll. Only ONE entry is active —
-  // the one whose center is closest to the viewport anchor line.
+  // Fill line progresses smoothly with scroll. Only the entry whose dot the
+  // fill has passed is active — one at a time. Matches the line's light-up.
   const timelineSection = document.querySelector('.timeline-section');
   if (timelineSection) {
+    const rail = timelineSection.querySelector('.timeline-rail');
     const fill = timelineSection.querySelector('.timeline-fill');
     const entries = Array.from(timelineSection.querySelectorAll('.phase-entry'));
 
     const updateTimeline = () => {
-      const rect = timelineSection.getBoundingClientRect();
       const vh = window.innerHeight;
-      const anchor = vh * 0.5; // viewport middle
+      const anchor = vh * 0.5; // viewport midline — the "playhead"
 
-      // Fill progresses from 0 when section top hits bottom of viewport
-      // to 1 when section bottom hits top of viewport.
-      const total = rect.height + vh;
-      const scrolled = vh - rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / total));
-      if (fill) fill.style.transform = 'scaleY(' + progress + ')';
+      // Fill line: progress from 0 → 1 as the rail traverses the anchor line.
+      if (rail && fill) {
+        const railRect = rail.getBoundingClientRect();
+        const raw = (anchor - railRect.top) / railRect.height;
+        const progress = Math.max(0, Math.min(1, raw));
+        fill.style.transform = 'scaleY(' + progress + ')';
+      }
 
-      // Find the single entry whose center is closest to the anchor line.
+      // Active entry: last one whose dot (top: 42px within entry) has crossed
+      // the anchor line. This advances one-at-a-time as you scroll.
       let activeIdx = -1;
-      let closestDist = Infinity;
-      entries.forEach((entry, i) => {
-        const eRect = entry.getBoundingClientRect();
-        const eCenter = eRect.top + eRect.height / 2;
-        // Only consider entries that have entered the viewport (center has reached anchor or passed it)
-        if (eRect.top < vh && eRect.bottom > 0) {
-          const dist = Math.abs(eCenter - anchor);
-          if (dist < closestDist) { closestDist = dist; activeIdx = i; }
-        }
-      });
+      for (let i = 0; i < entries.length; i++) {
+        const eRect = entries[i].getBoundingClientRect();
+        const dotY = eRect.top + 42 + 9; // dot top offset + half dot size
+        if (dotY <= anchor) activeIdx = i;
+      }
       entries.forEach((entry, i) => entry.classList.toggle('active', i === activeIdx));
     };
 
@@ -4533,19 +4629,20 @@ body.deliv-modal-open { overflow: hidden; }
     updateTimeline();
   }
 
-  // Sticky mobile apply bar — only visible after scrolling past the hero.
+  // Sticky mobile apply bar — appears only after the hero leaves the viewport.
+  // Uses IntersectionObserver so it's robust against images-not-loaded races.
   (function initStickyApply() {
     const bar = document.querySelector('.sticky-apply');
     const hero = document.getElementById('hero');
     if (!bar || !hero) return;
-    const onScroll = () => {
-      const threshold = hero.offsetTop + hero.offsetHeight - 80;
-      if (window.scrollY > threshold) bar.classList.add('visible');
-      else bar.classList.remove('visible');
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    onScroll();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // Show bar when hero is no longer visible in the viewport.
+        if (entry.isIntersecting) bar.classList.remove('visible');
+        else bar.classList.add('visible');
+      });
+    }, { threshold: 0, rootMargin: '-40px 0px 0px 0px' });
+    io.observe(hero);
   })();
 
   // What Would You Say. Interactive two-path chat.
@@ -4864,18 +4961,19 @@ body.deliv-modal-open { overflow: hidden; }
     }, { passive: true });
   }
 
-  // v30.5 · Deliverable accordion — event delegation + placeholder DOM move.
-  // Delegated on document so no attachment race exists. Each desktop .deliv-mock-wrap
-  // has data-deliv-id matching a card's data-deliv. On tap, we move the matching
-  // visual (profile rebuild, 3 part pipeline, WWYS chat, debrief, atlas network)
-  // into the tapped card's .deliv-m-expand slot. On re-tap we restore it.
+  // v30.6 · Deliverable accordion — moves the FULL .deliv (visual + copy)
+  // into the tapped card's expand slot. Event delegation on document so
+  // attachment can't race. Each .deliv-mock-wrap[data-deliv-id] shares an id
+  // with a card's data-deliv; the `.deliv` parent is what we lift.
   (function initDelivAccordion() {
     const homes = {};
-    document.querySelectorAll('.deliv-mock-wrap[data-deliv-id]').forEach(el => {
-      const id = el.dataset.delivId;
-      const placeholder = document.createComment('mock-' + id);
-      el.parentNode.insertBefore(placeholder, el);
-      homes[id] = { placeholder, el };
+    document.querySelectorAll('.deliv-mock-wrap[data-deliv-id]').forEach(mock => {
+      const id = mock.dataset.delivId;
+      const deliv = mock.closest('.deliv');
+      if (!deliv) return;
+      const placeholder = document.createComment('deliv-' + id);
+      deliv.parentNode.insertBefore(placeholder, deliv);
+      homes[id] = { placeholder, el: deliv };
     });
     let currentId = null;
     function restore(id) {
