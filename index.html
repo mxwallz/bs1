@@ -4845,6 +4845,47 @@ body.deliv-modal-open { overflow: hidden; }
       swipeDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
     }, { passive: true });
   }
+
+  // v30.4 · Deliverable accordion — placeholder-based DOM move.
+  // Each mobile card has an empty .deliv-m-expand slot. Each desktop .deliv-mock-wrap
+  // (profile-rebuild animation, 3-part pipeline, WWYS chat, debrief, atlas network)
+  // has data-deliv-id matching a card's data-deliv. On tap, we move the visual into
+  // the expanded card body. On collapse, we put it back in its placeholder.
+  (function initDelivAccordion() {
+    const cards = document.querySelectorAll('.deliv-m-card');
+    if (!cards.length) return;
+    const homes = {};
+    document.querySelectorAll('.deliv-mock-wrap[data-deliv-id]').forEach(el => {
+      const id = el.dataset.delivId;
+      const placeholder = document.createComment('mock-' + id);
+      el.parentNode.insertBefore(placeholder, el);
+      homes[id] = { placeholder, el };
+    });
+    let currentId = null;
+    function collapse() {
+      if (!currentId) return;
+      const card = document.querySelector('.deliv-m-card[data-deliv="' + currentId + '"]');
+      const home = homes[currentId];
+      if (card) card.classList.remove('expanded');
+      if (home && home.placeholder.parentNode) {
+        home.placeholder.parentNode.insertBefore(home.el, home.placeholder);
+      }
+      currentId = null;
+    }
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.dataset.deliv;
+        if (currentId === id) { collapse(); return; }
+        if (currentId) collapse();
+        const home = homes[id];
+        const body = card.querySelector('.deliv-m-expand');
+        if (!home || !body) { card.classList.toggle('expanded'); return; }
+        body.appendChild(home.el);
+        card.classList.add('expanded');
+        currentId = id;
+      });
+    });
+  })();
 </script>
 
 
