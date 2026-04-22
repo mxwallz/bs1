@@ -3061,6 +3061,131 @@ body.deliv-modal-open { overflow: hidden; }
   .notif-wall .notif-track { animation-duration: 28s; }
 }
 
+
+/* ══════════════════════════════════════════════════════════
+   v30.4 · Accordion final fix — full horizontal room, reliable
+   hide/show, visuals only appear when card is tapped
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Hide ALL inline deliverable markup on mobile.
+     Nothing in the deliverable section should render except the mobile cards + expanded visuals. */
+  .deliv-list,
+  .deliv-list > .deliv,
+  .deliv-list > .deliv > .deliv-copy,
+  .deliv-list > .deliv > .deliv-mock-wrap { display: none !important; }
+
+  /* Mobile card: one full-width row. Clean layout. No thumbnail squeezing text. */
+  .deliv-m-cards { display: flex; flex-direction: column; gap: 12px; margin: 40px 0 24px; max-width: 100%; }
+  .deliv-m-card {
+    display: block !important;
+    width: 100% !important;
+    padding: 22px 22px !important;
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 14px !important;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .deliv-m-card.expanded { border-color: var(--blue) !important; background: rgba(167,181,232,0.04) !important; }
+  .deliv-m-preview {
+    display: block !important;
+    width: 100%;
+    padding-right: 48px; /* clear the toggle button */
+  }
+  .deliv-m-thumb { display: none !important; } /* Kill thumbnail on mobile so text has full width */
+  .deliv-m-text {
+    display: block !important;
+    width: 100%;
+  }
+  .deliv-m-text h3 {
+    font-family: 'Spectral', Georgia, serif !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    color: #fff !important;
+    margin-bottom: 8px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em !important;
+  }
+  .deliv-m-text p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: rgba(255,255,255,0.62) !important;
+    margin-bottom: 10px !important;
+    padding: 0 !important;
+  }
+  .deliv-m-tap {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: var(--blue) !important;
+    margin: 0 !important;
+  }
+  .deliv-m-card.expanded .deliv-m-tap { display: none; }
+
+  /* + / × toggle button top-right. Non-overlapping. Clear affordance. */
+  .deliv-m-card::after {
+    content: "+";
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(167,181,232,0.14);
+    border: 1px solid rgba(167,181,232,0.35);
+    color: var(--blue);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px; font-weight: 300; line-height: 28px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s, color 0.3s;
+    pointer-events: none;
+  }
+  .deliv-m-card.expanded::after {
+    content: "×";
+    font-size: 22px;
+    background: var(--blue);
+    color: #fff;
+    transform: rotate(0deg);
+  }
+
+  /* Expand body — only visible when .expanded is set */
+  .deliv-m-expand {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.4s ease 0.1s,
+                margin 0.4s, padding 0.4s;
+  }
+  .deliv-m-card.expanded .deliv-m-expand {
+    max-height: 2400px !important;
+    opacity: 1;
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid var(--border) !important;
+  }
+
+  /* When a .deliv-mock-wrap is placed inside the expand slot, render it cleanly */
+  .deliv-m-expand > .deliv-mock-wrap {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 520px !important;
+    aspect-ratio: auto !important;
+    padding: 16px !important;
+    background: var(--card-solid) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    overflow: visible !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 </style>
 </head>
 <body>
