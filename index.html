@@ -3130,9 +3130,17 @@ body.deliv-modal-open { overflow: hidden; }
   }
   .deliv-m-card.expanded .deliv-m-tap { display: none; }
   /* When expanded, collapse the short preview so the full copy in the
-     .deliv is the only content. Keeps a clean single-source read. */
+     .deliv is the only content. Kill the right-padding that was reserved
+     for the + toggle so the expanded content fills the whole card width. */
   .deliv-m-card.expanded .deliv-m-text { display: none !important; }
-  .deliv-m-card.expanded .deliv-m-preview { padding-right: 48px; min-height: 0; }
+  .deliv-m-card.expanded .deliv-m-preview {
+    padding: 0 !important;
+    min-height: 0;
+    width: 100% !important;
+    display: block !important;
+  }
+  /* Give the card a bit more breathing room for the × button when expanded */
+  .deliv-m-card.expanded { padding: 22px 18px 26px !important; }
 
   /* + / × toggle button top-right. Non-overlapping. Clear affordance. */
   .deliv-m-card::after {
