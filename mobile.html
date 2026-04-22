@@ -8,21 +8,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="//embed.typeform.com/next/embed.js"></script>
 
 <style>
 /* ══════════════════════════════════════════════════════════
-   ATLAS · mobile.html
-   Consulting.com minimalism. No mockups, no swipes, no animations
-   beyond simple fades. Mobile-first. Scales up cleanly on desktop.
+   ATLAS · mobile.html (v2)
+   Consulting.com minimalism + 35% visual add-back.
+   One subheader per section. Clean hierarchy. Three key visuals:
+   pipeline SVG, profile rebuild refresh phone, Before/After photo grid.
    ══════════════════════════════════════════════════════════ */
 :root {
   --bg0: #050608;
   --bg1: #0a0d1f;
   --bg2: #08101c;
+  --bg3: #0d1128;
   --card: rgba(255,255,255,0.025);
+  --card-solid: #0d1020;
   --border: rgba(255,255,255,0.08);
   --border-2: rgba(255,255,255,0.14);
   --w100: #ffffff;
@@ -38,7 +41,7 @@
   --no: #f87171;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   background: var(--bg0); color: var(--w100);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -47,16 +50,16 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 
-/* Typography */
-h1, h2, h3 {
+/* Typography — one hierarchy, no repeated subheaders */
+h1, h2 {
   font-family: 'Spectral', Georgia, serif;
-  font-weight: 500; letter-spacing: -0.015em; line-height: 1.1;
+  font-weight: 500; letter-spacing: -0.015em; line-height: 1.08;
 }
 h1 { font-size: clamp(34px, 7vw, 54px); }
 h2 { font-size: clamp(28px, 5.5vw, 40px); }
-h3 { font-size: clamp(19px, 3.5vw, 22px); font-weight: 600; }
 h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--w55); }
 p { color: var(--w75); }
+
 .eyebrow {
   font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
@@ -88,7 +91,7 @@ p { color: var(--w75); }
   padding: 8px 16px; border-radius: 3px;
   transition: background 0.2s, color 0.2s;
 }
-.nav-apply:hover, .nav-apply:active { background: var(--blue); color: #0a0a0a; }
+.nav-apply:hover, .nav-apply:active { background: var(--blue); color: #fff; }
 
 /* Buttons */
 .btn {
@@ -98,8 +101,8 @@ p { color: var(--w75); }
   font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
   padding: 18px 32px; border: none; border-radius: 4px;
   cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.3s;
-  font-family: inherit; width: 100%; max-width: 340px;
-  box-shadow: 0 4px 24px rgba(107,138,255,0.2);
+  width: 100%; max-width: 340px;
+  box-shadow: 0 4px 24px rgba(107,138,255,0.22);
 }
 .btn:hover { background: var(--blue-hover); transform: translateY(-1px); }
 .btn::after { content: "→"; font-size: 17px; }
@@ -108,10 +111,10 @@ p { color: var(--w75); }
 .cta-sub strong { color: var(--blue); font-weight: 600; }
 
 /* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
-/* Hero */
+/* HERO */
 .hero { padding-top: 130px; padding-bottom: 64px; }
 .hero .qualifier {
   font-size: clamp(16px, 3.5vw, 18px); color: var(--w55);
@@ -146,7 +149,8 @@ p { color: var(--w75); }
 
 /* Establishment strip */
 .establishment {
-  padding: 18px 24px; background: var(--bg1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 18px 24px; background: var(--bg1);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
   text-align: center;
 }
 .establishment-line {
@@ -154,57 +158,230 @@ p { color: var(--w75); }
 }
 .establishment-line strong { color: var(--blue); font-weight: 700; }
 
-/* Problem section */
-.problem-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
-.problem-item {
-  padding: 20px 0; border-bottom: 1px solid var(--border);
+/* Problem — simple paragraph list, no sub-titles */
+.problem-body-list { margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+.problem-line {
+  font-size: 15px; color: var(--w75); line-height: 1.65;
+  padding: 18px 20px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px;
 }
-.problem-item:last-child { border-bottom: none; }
-.problem-title {
-  font-family: 'Spectral', serif;
-  font-size: 19px; font-weight: 500; color: var(--w100);
-  margin-bottom: 8px; letter-spacing: -0.01em;
-}
-.problem-body { font-size: 14px; color: var(--w55); line-height: 1.6; }
+.problem-line strong { color: var(--w100); font-family: 'Spectral', serif; font-weight: 500; font-style: italic; margin-right: 4px; }
 
-/* Pillars */
-.pillars { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
-.pillar {
-  padding: 24px 0; border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start;
+/* System + Pipeline */
+.system-intro {
+  font-size: 15px; color: var(--w55); margin-top: 18px;
+  max-width: 560px;
 }
-.pillar:last-child { border-bottom: none; }
+
+/* Pipeline SVG — the key branded visual */
+.pipe-viz {
+  margin: 40px auto 32px;
+  max-width: 520px; aspect-ratio: 1 / 1;
+  background: linear-gradient(160deg, #0d1128 0%, #08101c 100%);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 24px; position: relative; overflow: hidden;
+}
+.pipe-viz svg { width: 100%; height: 100%; display: block; }
+.pipe-flow { fill: none; stroke: rgba(107,138,255,0.22); stroke-width: 2; stroke-linecap: round; }
+.pipe-trunk { fill: none; stroke: rgba(107,138,255,0.34); stroke-width: 2.5; stroke-linecap: round; }
+.pipe-label { fill: var(--w55); font-size: 24px; font-weight: 600; letter-spacing: 0.16em; text-anchor: middle; font-family: 'Inter', sans-serif; }
+.pipe-dates { fill: var(--blue-hi); font-size: 54px; font-weight: 600; letter-spacing: 0.12em; text-anchor: middle; font-family: 'Inter', sans-serif; }
+.pipe-sub { fill: var(--w35); font-size: 14px; font-weight: 600; letter-spacing: 0.24em; text-anchor: middle; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+.pipe-node { fill: rgba(255,255,255,0.03); stroke: rgba(107,138,255,0.4); stroke-width: 1.5; }
+
+/* Pillars — one-line rows, no subheaders */
+.pillars { margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
+.pillar-row {
+  display: flex; gap: 14px; align-items: baseline;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+}
+.pillar-row:last-child { border-bottom: none; }
 .pillar-num {
   font-family: 'Spectral', serif;
-  font-size: 22px; font-weight: 500; color: var(--blue);
-  padding-top: 2px; letter-spacing: -0.02em;
+  font-size: 18px; font-weight: 500; color: var(--blue);
+  flex-shrink: 0; min-width: 28px;
 }
-.pillar-name {
-  font-family: 'Spectral', serif;
-  font-size: 19px; font-weight: 500; color: var(--w100);
-  margin-bottom: 6px; letter-spacing: -0.01em;
-}
-.pillar-body { font-size: 14px; color: var(--w75); line-height: 1.55; }
+.pillar-line { font-size: 15px; color: var(--w75); line-height: 1.55; }
+.pillar-line strong { color: var(--w100); font-family: 'Spectral', serif; font-weight: 500; font-style: italic; }
 
-/* Deliverables */
-.delivs { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+/* Deliverables + Profile Rebuild phone */
+.rp-phone-wrap {
+  display: flex; justify-content: center;
+  margin: 40px auto 32px;
+}
+.rp-phone {
+  width: 240px; height: 520px;
+  background: #0a0a0a; border: 3px solid #1a1a1a; border-radius: 42px;
+  padding: 12px 8px; position: relative; overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0,0,0,0.6);
+}
+.rp-phone::before {
+  content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 84px; height: 20px; background: #000; border-radius: 11px; z-index: 10;
+}
+.rp-phone::after {
+  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px; z-index: 10;
+}
+.rp-screen {
+  position: absolute; top: 36px; left: 8px; right: 8px; bottom: 22px;
+  border-radius: 28px; overflow: hidden;
+  background: #0f1220;
+}
+.rp-content {
+  position: absolute; inset: 0; padding: 12px; padding-top: 36px;
+  display: flex; flex-direction: column; gap: 7px;
+  transition: opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
+}
+.rp-content.refreshing { opacity: 0.18; filter: blur(3px); transform: scale(0.98); }
+.rp-overlay {
+  position: absolute; inset: 0; z-index: 20;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.rp-overlay.active { opacity: 1; }
+.rp-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(107,138,255,0.2);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: rpSpin 0.9s linear infinite;
+}
+@keyframes rpSpin { to { transform: rotate(360deg); } }
+.rp-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--blue-hi);
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.rp-stage-label {
+  position: absolute; top: 42px; left: 50%; transform: translateX(-50%);
+  z-index: 15; font-family: 'Inter', sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 99px;
+  background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+}
+.rp-stage-label.bad { border-color: rgba(248,113,113,0.4); color: var(--no); background: rgba(248,113,113,0.08); }
+.rp-stage-label.good { border-color: var(--blue); color: var(--blue-hi); background: rgba(107,138,255,0.14); }
+.rpc-header {
+  padding: 4px 0 8px; text-align: center;
+  font-family: 'Spectral', serif;
+  font-size: 12px; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: var(--w75); margin-top: 16px;
+}
+.rpc-photo {
+  aspect-ratio: 5/4; border-radius: 10px; flex-shrink: 0; position: relative;
+}
+.rpc-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.6));
+  border-radius: 10px;
+}
+.rpc-photo.bad { background: #2a2a2a; filter: grayscale(0.8) brightness(0.55); }
+.rpc-photo.good { background: linear-gradient(135deg, #6a2a5a, #fa7e1e 55%, #d62976); }
+.rpc-photo-name {
+  position: absolute; left: 10px; bottom: 7px; z-index: 2;
+  font-family: 'Spectral', serif;
+  font-size: 13px; font-weight: 500; color: #fff;
+}
+.rpc-line { height: 5px; border-radius: 3px; flex-shrink: 0; background: rgba(255,255,255,0.12); }
+.rpc-line.bad { background: #333; width: 42%; }
+.rpc-line.bad.short { width: 28%; }
+.rpc-line.short { width: 72%; }
+.rpc-line.shorter { width: 50%; }
+.rpc-card {
+  border-radius: 8px; padding: 8px 10px; flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.rpc-card.bad { background: #222; border-color: #333; }
+.rpc-card-q { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+.rpc-card.bad .rpc-card-q { color: #555; }
+.rpc-card.good .rpc-card-q { color: var(--blue); }
+.rpc-card-a { font-size: 10px; line-height: 1.4; }
+.rpc-card.bad .rpc-card-a { color: #666; }
+.rpc-card.good .rpc-card-a { color: #fff; }
+
+/* Deliverables list */
+.delivs { margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
 .deliv-item {
-  padding: 22px 0; border-bottom: 1px solid var(--border);
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: baseline;
 }
 .deliv-item:last-child { border-bottom: none; }
+.deliv-item::before {
+  content: "✓"; color: var(--blue); font-weight: 700;
+  font-family: 'Inter', sans-serif; font-size: 15px;
+}
+.deliv-item > div { display: flex; flex-direction: column; gap: 4px; }
 .deliv-name {
   font-family: 'Spectral', serif;
-  font-size: 17px; font-weight: 500; color: var(--w100);
-  margin-bottom: 6px;
+  font-size: 16px; font-weight: 500; color: var(--w100);
+  font-style: italic;
 }
-.deliv-name::before {
-  content: "✓"; color: var(--blue); font-weight: 700; margin-right: 8px;
-  display: inline-block; width: 18px; font-family: 'Inter', sans-serif;
+.deliv-body { font-size: 13px; color: var(--w55); line-height: 1.5; }
+
+/* Before / After photo grid */
+.ba-title-row {
+  display: flex; gap: 20px; margin-top: 28px;
+  justify-content: space-between; align-items: center;
 }
-.deliv-body { font-size: 13px; color: var(--w55); line-height: 1.55; padding-left: 26px; }
+.ba-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 99px;
+}
+.ba-tag.before { background: rgba(248,113,113,0.12); color: var(--no); border: 1px solid rgba(248,113,113,0.3); }
+.ba-tag.after { background: var(--blue); color: #fff; }
+.ba-grid-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-top: 28px;
+}
+.ba-side { display: flex; flex-direction: column; gap: 8px; }
+.ba-side-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 99px; align-self: flex-start;
+  margin-bottom: 4px;
+}
+.ba-side-tag.before { background: rgba(248,113,113,0.12); color: var(--no); border: 1px solid rgba(248,113,113,0.3); }
+.ba-side-tag.after { background: var(--blue); color: #fff; }
+.ba-photo-row {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
+}
+.ba-photo {
+  aspect-ratio: 3/4; border-radius: 8px; position: relative; overflow: hidden;
+}
+.ba-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.6));
+}
+.ba-photo-name {
+  position: absolute; left: 8px; bottom: 6px; z-index: 2;
+  font-size: 10px; font-weight: 700; color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+.ba-rating {
+  position: absolute; right: 8px; bottom: 6px; z-index: 2;
+  font-size: 8px; font-weight: 800; padding: 2px 5px; border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+.ba-side.before .ba-rating { color: var(--w35); background: rgba(255,255,255,0.08); }
+.ba-side.after .ba-rating { color: #fff; background: var(--blue); }
+.ba-side.before .ba-photo.p1 { background: linear-gradient(135deg, #2a2a30, #40404a); }
+.ba-side.before .ba-photo.p2 { background: linear-gradient(135deg, #35303a, #4a4550); }
+.ba-side.before .ba-photo.p3 { background: linear-gradient(135deg, #2e3238, #424a56); }
+.ba-side.before .ba-photo.p4 { background: linear-gradient(135deg, #333038, #4a454e); }
+.ba-side.after .ba-photo.p1 { background: linear-gradient(135deg, #6a2345, #c9387a); }
+.ba-side.after .ba-photo.p2 { background: linear-gradient(135deg, #5a2878, #7b45d5); }
+.ba-side.after .ba-photo.p3 { background: linear-gradient(135deg, #8a1a2a, #e04860); }
+.ba-side.after .ba-photo.p4 { background: linear-gradient(135deg, #4a1a5a, #9c2a8c); }
 
 /* Testimonials */
-.testi-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+.testi-list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
 .testi {
   padding: 22px; background: var(--card); border: 1px solid var(--border);
   border-radius: 12px;
@@ -223,9 +400,11 @@ p { color: var(--w75); }
 .testi-quote strong { color: var(--w100); }
 
 /* Founder */
+.founder-body { margin-top: 24px; }
+.founder-body p { font-size: 15px; color: var(--w75); line-height: 1.65; margin-bottom: 16px; }
 .founder-stats-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  margin-top: 40px; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  margin-top: 32px; padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
 .founder-stat-big {
   font-family: 'Spectral', serif;
@@ -233,29 +412,23 @@ p { color: var(--w75); }
   letter-spacing: -0.02em; text-align: center;
 }
 .founder-stat-lab { font-size: 10px; color: var(--w35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; text-align: center; }
-.founder-body p { font-size: 15px; color: var(--w75); line-height: 1.65; margin-bottom: 16px; }
 
-/* Timeline */
-.phases { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
-.phase-item {
-  padding: 20px 0; border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 90px 1fr; gap: 14px; align-items: start;
+/* Timeline — tight rows, no subheaders */
+.phases { margin-top: 32px; display: flex; flex-direction: column; gap: 0; }
+.phase-row {
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 90px 1fr; gap: 14px; align-items: baseline;
 }
-.phase-item:last-child { border-bottom: none; }
+.phase-row:last-child { border-bottom: none; }
 .phase-week {
   font-size: 10px; color: var(--blue); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  padding-top: 4px;
 }
-.phase-title {
-  font-family: 'Spectral', serif;
-  font-size: 17px; font-weight: 500; color: var(--w100);
-  margin-bottom: 4px;
-}
-.phase-body { font-size: 13px; color: var(--w55); line-height: 1.5; }
+.phase-line { font-size: 15px; color: var(--w75); line-height: 1.5; }
+.phase-line strong { color: var(--w100); font-family: 'Spectral', serif; font-weight: 500; font-style: italic; }
 
 /* Qualification */
-.qual-list { margin-top: 40px; }
-.qual-section { padding: 24px 0; border-bottom: 1px solid var(--border); }
+.qual-list { margin-top: 32px; }
+.qual-section { padding: 22px 0; border-bottom: 1px solid var(--border); }
 .qual-section:last-child { border-bottom: none; }
 .qual-label {
   font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
@@ -300,6 +473,7 @@ p { color: var(--w75); }
   background: var(--blue-soft); border: 1px solid rgba(107,138,255,0.22);
   border-radius: 8px;
   font-size: 13px; color: var(--w75);
+  max-width: 340px;
 }
 .guarantee strong { color: var(--blue); font-weight: 600; }
 
@@ -311,11 +485,15 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
 }
 .footer-line { font-size: 10px; color: var(--w20); }
 
-/* Tablet + up: slightly wider for breathing room */
+/* Tablet + up */
 @media (min-width: 720px) {
   .inner { max-width: 760px; }
   .section { padding: 96px 32px; }
   .hero { padding-top: 150px; padding-bottom: 80px; }
+}
+@media (max-width: 420px) {
+  .rp-phone { width: 216px; height: 468px; }
+  .ba-grid-pair { gap: 10px; }
 }
 </style>
 </head>
@@ -360,9 +538,9 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
 </section>
 
 
-<!-- ESTABLISHMENT -->
+<!-- ESTABLISHMENT STRIP -->
 <div class="establishment">
-  <div class="establishment-line">Established 2016 · <strong>1,000+ private clients</strong> · The most-followed men's dating brand on YouTube</div>
+  <div class="establishment-line">Established 2016 · <strong>1,000+ private clients</strong> · Most-followed men's dating brand on YouTube</div>
 </div>
 
 
@@ -371,97 +549,224 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
   <div class="inner">
     <p class="eyebrow reveal">The Problem</p>
     <h2 class="reveal">Three channels.<br><em>All broken.</em></h2>
-    <div class="problem-list">
-      <div class="problem-item reveal">
-        <div class="problem-title">Dating apps</div>
-        <p class="problem-body">Photos your friends took on a random Tuesday. A bio you wrote in three minutes. You match with women you're not attracted to. Silence from the ones you are.</p>
-      </div>
-      <div class="problem-item reveal">
-        <div class="problem-title">Instagram</div>
-        <p class="problem-body">You built a career. You didn't build a presence. Women are doing more research than ever. Your feed is telling them nothing.</p>
-      </div>
-      <div class="problem-item reveal">
-        <div class="problem-title">Real life</div>
-        <p class="problem-body">74% of women wish they were approached more. 55% of men haven't approached in the last year. You're not out of options. You've been winging it.</p>
-      </div>
+    <div class="problem-body-list">
+      <div class="problem-line reveal"><strong>Dating apps.</strong> Photos your friends took on a random Tuesday. A bio you wrote in three minutes. You match with women you're not attracted to. Silence from the ones you are.</div>
+      <div class="problem-line reveal"><strong>Instagram.</strong> You built a career. You didn't build a presence. Women are doing more research than ever. Your feed is telling them nothing.</div>
+      <div class="problem-line reveal"><strong>Real life.</strong> 74% of women wish they were approached more. 55% of men haven't approached in the last year. You're not out of options. You've been winging it.</div>
     </div>
   </div>
 </section>
 
 
-<!-- THE SYSTEM (pillars) -->
+<!-- THE SYSTEM + PIPELINE VISUAL -->
 <section class="section">
   <div class="inner">
     <p class="eyebrow reveal">The System</p>
     <h2 class="reveal">A framework.<br><em>Not tips.</em></h2>
+    <p class="system-intro reveal">Four components. Each fixes a specific failure point. No single point of failure.</p>
+
+    <!-- Pipeline animated SVG: the centerpiece visual -->
+    <div class="pipe-viz reveal">
+      <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
+        <defs>
+          <radialGradient id="mbNodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(107,138,255,0.16)"/>
+            <stop offset="100%" stop-color="rgba(107,138,255,0)"/>
+          </radialGradient>
+          <radialGradient id="mbCenterGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(107,138,255,0.32)"/>
+            <stop offset="100%" stop-color="rgba(107,138,255,0)"/>
+          </radialGradient>
+          <filter id="mbSoft" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3.5"/>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <path id="mbPathApps" d="M 180,260 C 180,380 280,430 400,460"/>
+          <path id="mbPathIg" d="M 400,260 L 400,460"/>
+          <path id="mbPathIrl" d="M 620,260 C 620,380 520,430 400,460"/>
+          <path id="mbPathTrunk" d="M 400,460 L 400,640"/>
+        </defs>
+
+        <circle cx="180" cy="170" r="90" fill="url(#mbNodeGlow)"/>
+        <circle cx="400" cy="170" r="90" fill="url(#mbNodeGlow)"/>
+        <circle cx="620" cy="170" r="90" fill="url(#mbNodeGlow)"/>
+
+        <!-- APPS node -->
+        <rect x="120" y="110" width="120" height="120" rx="26" class="pipe-node"/>
+        <text x="180" y="180" font-size="40" fill="#fff" text-anchor="middle" dominant-baseline="central" font-family="Georgia, serif">🔥</text>
+        <text class="pipe-label" x="180" y="280">APPS</text>
+
+        <!-- INSTAGRAM node -->
+        <rect x="340" y="110" width="120" height="120" rx="26" class="pipe-node"/>
+        <rect x="366" y="136" width="68" height="68" rx="16" fill="url(#mbIgGrad)" stroke="none"/>
+        <defs>
+          <linearGradient id="mbIgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#feda75"/>
+            <stop offset="25%" stop-color="#fa7e1e"/>
+            <stop offset="50%" stop-color="#d62976"/>
+            <stop offset="75%" stop-color="#962fbf"/>
+            <stop offset="100%" stop-color="#4f5bd5"/>
+          </linearGradient>
+        </defs>
+        <circle cx="400" cy="170" r="14" fill="none" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="420" cy="150" r="2.5" fill="#fff"/>
+        <text class="pipe-label" x="400" y="280">INSTAGRAM</text>
+
+        <!-- REAL LIFE node -->
+        <rect x="560" y="110" width="120" height="120" rx="26" class="pipe-node"/>
+        <text x="620" y="180" font-size="38" fill="#fff" text-anchor="middle" dominant-baseline="central">👥</text>
+        <text class="pipe-label" x="620" y="280">REAL LIFE</text>
+
+        <!-- Flow paths -->
+        <path class="pipe-flow" d="M 180,260 C 180,380 280,430 400,460"/>
+        <path class="pipe-flow" d="M 400,260 L 400,460"/>
+        <path class="pipe-flow" d="M 620,260 C 620,380 520,430 400,460"/>
+
+        <!-- Junction + trunk -->
+        <circle cx="400" cy="460" r="60" fill="url(#mbCenterGlow)"/>
+        <circle cx="400" cy="460" r="8" fill="#6B8AFF" opacity="0.9" filter="url(#mbSoft)"/>
+        <path class="pipe-trunk" d="M 400,460 L 400,640"/>
+        <polygon points="388,630 412,630 400,662" fill="#6B8AFF"/>
+
+        <text class="pipe-dates" x="400" y="720">DATES</text>
+        <text class="pipe-sub" x="400" y="745">THE 3 PART PIPELINE</text>
+
+        <!-- Traveling hearts -->
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s"><mpath href="#mbPathApps"/></animateMotion></text>
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s"><mpath href="#mbPathApps"/></animateMotion></text>
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s"><mpath href="#mbPathIg"/></animateMotion></text>
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2s"><mpath href="#mbPathIg"/></animateMotion></text>
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1s"><mpath href="#mbPathIrl"/></animateMotion></text>
+        <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#DC2626" filter="url(#mbSoft)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s"><mpath href="#mbPathIrl"/></animateMotion></text>
+        <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#EF4444" filter="url(#mbSoft)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s"><mpath href="#mbPathTrunk"/></animateMotion></text>
+        <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#EF4444" filter="url(#mbSoft)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#mbPathTrunk"/></animateMotion></text>
+      </svg>
+    </div>
+
+    <!-- 4 Pillars: one-line rows -->
     <div class="pillars">
-      <div class="pillar reveal">
+      <div class="pillar-row reveal">
         <div class="pillar-num">01</div>
-        <div>
-          <div class="pillar-name">The 3 Part Pipeline</div>
-          <p class="pillar-body">Apps, Instagram, real life rebuilt in parallel. When one channel cools, another is already running.</p>
-        </div>
+        <div class="pillar-line"><strong>The 3 Part Pipeline.</strong> Apps, Instagram, real life rebuilt in parallel. When one cools, another is already running.</div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar-row reveal">
         <div class="pillar-num">02</div>
-        <div>
-          <div class="pillar-name">The Conversion Blueprint</div>
-          <p class="pillar-body">From match to date. The specific mechanics that turn attention into booked calendar time.</p>
-        </div>
+        <div class="pillar-line"><strong>The Conversion Blueprint.</strong> From match to date. The specific mechanics that turn attention into booked calendar time.</div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar-row reveal">
         <div class="pillar-num">03</div>
-        <div>
-          <div class="pillar-name">The Feedback Layer</div>
-          <p class="pillar-body">Dating is the one skill where rejection doesn't explain itself. We close that loop after every date.</p>
-        </div>
+        <div class="pillar-line"><strong>The Feedback Layer.</strong> Dating is the one skill where rejection doesn't explain itself. We close that loop after every date.</div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar-row reveal">
         <div class="pillar-num">04</div>
-        <div>
-          <div class="pillar-name">The Atlas Network</div>
-          <p class="pillar-body">A team of female advisors on the profile side. Six coaches on strategy. Not a public Discord.</p>
-        </div>
+        <div class="pillar-line"><strong>The Atlas Network.</strong> Female advisors on the profile side. Six coaches on strategy. Not a public Discord.</div>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- DELIVERABLES -->
+<!-- DELIVERABLES + PROFILE REBUILD PHONE -->
 <section class="section">
   <div class="inner">
     <p class="eyebrow reveal">Everything You Get</p>
     <h2 class="reveal">What's included.</h2>
-    <div class="delivs">
-      <div class="deliv-item reveal">
-        <div class="deliv-name">Done-For-You Profile + IG Rebuild</div>
-        <p class="deliv-body">Female advisors rebuild your dating apps and Instagram from photo selection to bio to grid.</p>
-      </div>
-      <div class="deliv-item reveal">
-        <div class="deliv-name">The 3 Part Pipeline</div>
-        <p class="deliv-body">Three channels running in parallel. No single point of failure.</p>
-      </div>
-      <div class="deliv-item reveal">
-        <div class="deliv-name">The Conversion Blueprint</div>
-        <p class="deliv-body">Texting scripts, escalation frameworks, date blueprints. Match to date in under seven days.</p>
-      </div>
-      <div class="deliv-item reveal">
-        <div class="deliv-name">Weekly Strategy Calls + 1:1 Support</div>
-        <p class="deliv-body">Your week mapped. Strategy call Monday. Message support Tuesday through Friday.</p>
-      </div>
-      <div class="deliv-item reveal">
-        <div class="deliv-name">Date Debrief Feedback Loop</div>
-        <p class="deliv-body">After every date, a voice-note debrief with your advisor. Under 24-hour turnaround.</p>
-      </div>
-      <div class="deliv-item reveal">
-        <div class="deliv-name">The Atlas Network</div>
-        <p class="deliv-body">Female advisors, rotating coaches, and a private NDA-protected room of other high-performing men.</p>
+
+    <!-- Profile Rebuild refresh phone: the transformational visual -->
+    <div class="rp-phone-wrap reveal">
+      <div class="rp-phone">
+        <div class="rp-screen">
+          <div class="rp-stage-label bad" id="rpStageLabel">Before</div>
+          <div class="rp-content" id="rpContent">
+            <div class="rpc-header">Hinge · Profile</div>
+            <div class="rpc-photo bad"><span class="rpc-photo-name">Benjamin, 34</span></div>
+            <div class="rpc-line bad"></div>
+            <div class="rpc-line bad short"></div>
+            <div class="rpc-card bad">
+              <div class="rpc-card-q">Bio</div>
+              <div class="rpc-card-a">I like traveling, good food, and dogs.</div>
+            </div>
+          </div>
+          <div class="rp-overlay" id="rpOverlay">
+            <div class="rp-spinner"></div>
+            <div class="rp-text">Rebuilding</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="delivs">
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">Done-For-You Profile + IG Rebuild</div>
+          <p class="deliv-body">Female advisors rebuild your dating apps and Instagram from photo selection to bio to grid.</p>
+        </div>
+      </div>
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">The 3 Part Pipeline</div>
+          <p class="deliv-body">Three channels running in parallel. No single point of failure.</p>
+        </div>
+      </div>
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">The Conversion Blueprint</div>
+          <p class="deliv-body">Texting scripts, escalation frameworks, date blueprints. Match to date in under seven days.</p>
+        </div>
+      </div>
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">Weekly Strategy Calls + 1:1 Support</div>
+          <p class="deliv-body">Your week mapped. Strategy call Monday. Message support Tuesday through Friday.</p>
+        </div>
+      </div>
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">Date Debrief Feedback Loop</div>
+          <p class="deliv-body">After every date, a voice-note debrief with your advisor. Under 24-hour turnaround.</p>
+        </div>
+      </div>
+      <div class="deliv-item reveal">
+        <div>
+          <div class="deliv-name">The Atlas Network</div>
+          <p class="deliv-body">Female advisors, rotating coaches, a private NDA-protected room of high-performing men.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="cta-block">
       <button class="btn reveal" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
       <div class="cta-sub"><strong>&lt;5% accepted</strong> · 2 minutes</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BEFORE / AFTER PHOTO GRID -->
+<section class="section">
+  <div class="inner">
+    <p class="eyebrow reveal">The Outcome</p>
+    <h2 class="reveal">Before Atlas.<br><em>After Atlas.</em></h2>
+
+    <div class="ba-grid-pair reveal">
+      <div class="ba-side before">
+        <div class="ba-side-tag before">Before</div>
+        <div class="ba-photo-row">
+          <div class="ba-photo p1"><span class="ba-photo-name">Match · 34</span><span class="ba-rating">5</span></div>
+          <div class="ba-photo p2"><span class="ba-photo-name">Match · 31</span><span class="ba-rating">6</span></div>
+          <div class="ba-photo p3"><span class="ba-photo-name">Match · 29</span><span class="ba-rating">5</span></div>
+          <div class="ba-photo p4"><span class="ba-photo-name">Match · 36</span><span class="ba-rating">6</span></div>
+        </div>
+      </div>
+      <div class="ba-side after">
+        <div class="ba-side-tag after">After</div>
+        <div class="ba-photo-row">
+          <div class="ba-photo p1"><span class="ba-photo-name">Maya · 27</span><span class="ba-rating">9</span></div>
+          <div class="ba-photo p2"><span class="ba-photo-name">Sarah · 29</span><span class="ba-rating">10</span></div>
+          <div class="ba-photo p3"><span class="ba-photo-name">Nora · 26</span><span class="ba-rating">9</span></div>
+          <div class="ba-photo p4"><span class="ba-photo-name">Lauren · 28</span><span class="ba-rating">10</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -496,22 +801,6 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
         </div>
         <div class="testi-result">40+ matches · 24 hrs</div>
         <p class="testi-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-head">
-          <div class="testi-photo">A</div>
-          <div><div class="testi-name">Aakash</div><div class="testi-title">Quant Trader · CA</div></div>
-        </div>
-        <div class="testi-result">Women DM'd first</div>
-        <p class="testi-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-head">
-          <div class="testi-photo">B</div>
-          <div><div class="testi-name">Ben</div><div class="testi-title">Private Equity</div></div>
-        </div>
-        <div class="testi-result">4 dates · 2 weeks</div>
-        <p class="testi-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
       </div>
       <div class="testi reveal">
         <div class="testi-head">
@@ -551,33 +840,21 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
     <p class="eyebrow reveal">The First 90 Days</p>
     <h2 class="reveal">What the engagement<br><em>looks like.</em></h2>
     <div class="phases">
-      <div class="phase-item reveal">
+      <div class="phase-row reveal">
         <div class="phase-week">Weeks 1–2</div>
-        <div>
-          <div class="phase-title">Pipeline live</div>
-          <p class="phase-body">Profiles rebuilt. Instagram dialed. All three channels running in parallel.</p>
-        </div>
+        <div class="phase-line"><strong>Pipeline live.</strong> Profiles rebuilt. Instagram dialed. All three channels running in parallel.</div>
       </div>
-      <div class="phase-item reveal">
+      <div class="phase-row reveal">
         <div class="phase-week">Weeks 3–4</div>
-        <div>
-          <div class="phase-title">First dates</div>
-          <p class="phase-body">Scripts deployed. Message support active. Most clients book their first date in this window.</p>
-        </div>
+        <div class="phase-line"><strong>First dates.</strong> Scripts deployed. Message support active. Most clients book their first date in this window.</div>
       </div>
-      <div class="phase-item reveal">
+      <div class="phase-row reveal">
         <div class="phase-week">Weekly</div>
-        <div>
-          <div class="phase-title">Feedback layer</div>
-          <p class="phase-body">Strategy review. Date debriefs. Approach audits. 1:1 message support throughout the week.</p>
-        </div>
+        <div class="phase-line"><strong>Feedback layer.</strong> Strategy review. Date debriefs. Approach audits. 1:1 message support throughout the week.</div>
       </div>
-      <div class="phase-item reveal">
+      <div class="phase-row reveal">
         <div class="phase-week">Day 90</div>
-        <div>
-          <div class="phase-title">Operating at capacity</div>
-          <p class="phase-body">1 to 3 dates per week. The skill is yours. You don't need us anymore.</p>
-        </div>
+        <div class="phase-line"><strong>Operating at capacity.</strong> 1 to 3 dates per week. The skill is yours. You don't need us anymore.</div>
       </div>
     </div>
   </div>
@@ -672,6 +949,7 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
 
 
 <script>
+  // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
@@ -679,9 +957,62 @@ footer { padding: 32px 24px; border-top: 1px solid var(--border); text-align: ce
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  // FAQ toggle
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => { item.classList.toggle('open'); });
   });
+
+  // Profile Rebuild refresh animation — the one marquee visual for deliverables
+  (function initRebuild(){
+    const rpContent = document.getElementById('rpContent');
+    const rpOverlay = document.getElementById('rpOverlay');
+    const rpStage = document.getElementById('rpStageLabel');
+    if (!rpContent || !rpOverlay || !rpStage) return;
+    const states = [
+      { tag: 'Before', tagClass: 'bad', html: `
+        <div class="rpc-header">Hinge · Profile</div>
+        <div class="rpc-photo bad"><span class="rpc-photo-name">Benjamin, 34</span></div>
+        <div class="rpc-line bad"></div>
+        <div class="rpc-line bad short"></div>
+        <div class="rpc-card bad">
+          <div class="rpc-card-q">Bio</div>
+          <div class="rpc-card-a">I like traveling, good food, and dogs.</div>
+        </div>` },
+      { tag: 'Rebuilt', tagClass: 'good', html: `
+        <div class="rpc-header">Hinge · Profile</div>
+        <div class="rpc-photo good"><span class="rpc-photo-name">Benjamin, 34</span></div>
+        <div class="rpc-line short"></div>
+        <div class="rpc-line shorter"></div>
+        <div class="rpc-card good">
+          <div class="rpc-card-q">A green flag I look for</div>
+          <div class="rpc-card-a">You can order the whole menu and not apologize for it.</div>
+        </div>
+        <div class="rpc-card good">
+          <div class="rpc-card-q">Typical Sunday</div>
+          <div class="rpc-card-a">Run. Coffee. Nothing before noon.</div>
+        </div>` }
+    ];
+    let idx = 0;
+    function render(i) {
+      const s = states[i];
+      rpContent.innerHTML = s.html;
+      rpStage.textContent = s.tag;
+      rpStage.className = 'rp-stage-label ' + s.tagClass;
+    }
+    function tick() {
+      rpOverlay.classList.add('active');
+      rpContent.classList.add('refreshing');
+      setTimeout(() => {
+        idx = (idx + 1) % states.length;
+        render(idx);
+      }, 600);
+      setTimeout(() => {
+        rpOverlay.classList.remove('active');
+        rpContent.classList.remove('refreshing');
+      }, 1250);
+    }
+    setInterval(tick, 4000);
+  })();
 </script>
 
 </body>
