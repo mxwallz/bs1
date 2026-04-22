@@ -3158,24 +3158,29 @@ body.deliv-modal-open { overflow: hidden; }
     transform: rotate(0deg);
   }
 
-  /* Expand body — only visible when .expanded is set */
+  /* Expand body — hidden by default, snaps visible when .expanded is set.
+     Skipped the max-height transition entirely: it was silently keeping the
+     computed max-height stuck at 0 on some browsers, which was the reason the
+     content never appeared. Instant display:block is boring but reliable. */
   .deliv-m-expand {
-    max-height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0;
+    display: none !important;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 0 !important;
-    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.4s ease 0.1s,
-                margin 0.4s, padding 0.4s;
+    max-height: none !important;
+    overflow: visible !important;
   }
   .deliv-m-card.expanded .deliv-m-expand {
-    max-height: 3200px !important;
-    opacity: 1;
+    display: block !important;
     margin-top: 20px !important;
     padding-top: 20px !important;
     border-top: 1px solid var(--border) !important;
+    animation: delivExpandIn 0.28s ease both;
+  }
+  @keyframes delivExpandIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* Expanded content: full .deliv (visual + all copy) stacks inside the card.
