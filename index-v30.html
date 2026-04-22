@@ -39,10 +39,10 @@
   --w20: rgba(255,255,255,0.18);
   --accent: #7AA0FF;
   --accent-soft: rgba(122,160,255,0.14);
-  --gold: #6B8AFF;
-  --gold-hi: #8CA5FF;
-  --gold-hover: #5A7FFF;
-  --gold-soft: rgba(107,138,255,0.14);
+  --gold: #A7B5E8;
+  --gold-hi: #C4CEF5;
+  --gold-hover: #8896D5;
+  --gold-soft: rgba(167,181,232,0.14);
   --ok: #4ade80;
   --no: #f87171;
 }
@@ -91,9 +91,9 @@ p { color: var(--w75); }
   padding: 18px 40px; border: none; border-radius: 4px;
   cursor: pointer; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
   font-family: inherit;
-  box-shadow: 0 4px 24px rgba(107,138,255,0.24);
+  box-shadow: 0 4px 24px rgba(167,181,232,0.24);
 }
-.btn:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(107,138,255,0.36); }
+.btn:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(167,181,232,0.36); }
 .btn::after { content: "→"; font-size: 17px; }
 .cta-block { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 44px; }
 .cta-friction { font-size: 12px; color: var(--w35); letter-spacing: 0.02em; }
@@ -129,7 +129,7 @@ p { color: var(--w75); }
 .hero { padding-top: clamp(120px, 14vw, 170px); }
 .hero .pill {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gold-soft); border: 1px solid rgba(107,138,255,0.36);
+  background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.36);
   color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; padding: 7px 16px; border-radius: 99px; margin-bottom: 28px;
 }
@@ -145,7 +145,7 @@ p { color: var(--w75); }
   width: 72px; height: 72px; border-radius: 50%; background: var(--gold);
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.2s;
-  box-shadow: 0 8px 32px rgba(107,138,255,0.40);
+  box-shadow: 0 8px 32px rgba(167,181,232,0.40);
 }
 .vsl-wrap:hover .vsl-play { transform: scale(1.08); }
 .vsl-play::after {
@@ -221,7 +221,7 @@ p { color: var(--w75); }
 .module:hover { border-color: var(--border-hi); }
 .module-icon {
   width: 64px; height: 64px; border-radius: 16px;
-  background: var(--gold-soft); border: 1px solid rgba(107,138,255,0.30);
+  background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.30);
   display: flex; align-items: center; justify-content: center; color: var(--gold);
 }
 .module-icon svg { width: 32px; height: 32px; }
@@ -261,7 +261,7 @@ p { color: var(--w75); }
 /* Client testimonial pull-quote inside deliverable card */
 .deliv-testi {
   margin-top: 24px; padding: 16px 20px;
-  background: rgba(107,138,255,0.10); border-left: 2px solid var(--gold);
+  background: rgba(167,181,232,0.10); border-left: 2px solid var(--gold);
   border-radius: 0 8px 8px 0;
 }
 .deliv-testi .dt-quote { font-size: 13px; color: var(--w75); font-style: italic; line-height: 1.55; margin: 0; }
@@ -286,7 +286,7 @@ p { color: var(--w75); }
 }
 .mp-photo::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(79,126,255,0.6), rgba(107,138,255,0.40));
+  background: linear-gradient(135deg, rgba(79,126,255,0.6), rgba(167,181,232,0.40));
 }
 .mp-name-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -341,8 +341,8 @@ p { color: var(--w75); }
 .deliv.wwys-big .deliv-mock-wrap,
 .deliv.profile-big .deliv-mock-wrap { aspect-ratio: auto; min-height: 580px; padding: 20px; }
 .pipe2 svg { width: 100%; height: 100%; display: block; }
-.pipe2-flow { fill: none; stroke: rgba(107,138,255,0.24); stroke-width: 1.5; stroke-linecap: round; }
-.pipe2-trunk { fill: none; stroke: rgba(107,138,255,0.42); stroke-width: 2.2; stroke-linecap: round; }
+.pipe2-flow { fill: none; stroke: rgba(167,181,232,0.24); stroke-width: 1.5; stroke-linecap: round; }
+.pipe2-trunk { fill: none; stroke: rgba(167,181,232,0.42); stroke-width: 2.2; stroke-linecap: round; }
 .pipe2-label { fill: var(--w75); font-size: 20px; font-weight: 600; letter-spacing: 0.18em; text-anchor: middle; font-family: "Inter", system-ui, sans-serif; }
 .pipe2-leads { fill: var(--gold-hi); font-size: 48px; font-weight: 600; letter-spacing: 0.14em; text-anchor: middle; font-family: "Inter", system-ui, sans-serif; }
 .pipe2-subtitle { fill: var(--w55); font-size: 14px; font-weight: 600; letter-spacing: 0.24em; text-anchor: middle; text-transform: uppercase; }
@@ -443,12 +443,12 @@ p { color: var(--w75); }
 .md-label { font-size: 10px; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
 .md-voicenote {
   display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px; background: rgba(107,138,255,0.12);
+  padding: 12px 14px; background: rgba(167,181,232,0.12);
   border-radius: 12px; margin-bottom: 18px;
-  border: 1px solid rgba(107,138,255,0.24);
+  border: 1px solid rgba(167,181,232,0.24);
   cursor: pointer; transition: background 0.2s, transform 0.15s;
 }
-.md-voicenote:hover { background: rgba(107,138,255,0.18); transform: translateY(-1px); }
+.md-voicenote:hover { background: rgba(167,181,232,0.18); transform: translateY(-1px); }
 .md-play {
   width: 36px; height: 36px; border-radius: 50%; background: var(--gold);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -465,7 +465,7 @@ p { color: var(--w75); }
   background: linear-gradient(to right, #0a0a0a 0%, #0a0a0a 35%, transparent 35%, transparent 65%, #0a0a0a 65%);
 }
 .md-wave { flex: 1; display: flex; gap: 2px; align-items: center; height: 28px; }
-.md-wave .bar { width: 2px; background: rgba(107,138,255,0.50); border-radius: 2px; transition: background 0.2s; }
+.md-wave .bar { width: 2px; background: rgba(167,181,232,0.50); border-radius: 2px; transition: background 0.2s; }
 .md-voicenote.playing .md-wave .bar { background: var(--gold); animation: wave 1s ease-in-out infinite; }
 .md-duration { font-size: 11px; color: var(--w55); font-weight: 600; font-variant-numeric: tabular-nums; flex-shrink: 0; }
 .md-wave .bar:nth-child(1) { height: 18%; animation-delay: 0s; }
@@ -496,7 +496,7 @@ p { color: var(--w75); }
 .mock-net2 { width: 100%; height: 100%; padding: 16px; display: flex; align-items: center; justify-content: center; }
 .mock-net2 svg { width: 100%; max-width: 560px; height: auto; }
 .deliv.network-big .deliv-mock-wrap { aspect-ratio: 1 / 1; min-height: 480px; }
-.net-spoke { stroke: rgba(107,138,255,0.34); stroke-width: 1; fill: none; stroke-dasharray: 3 3; animation: netDash 6s linear infinite; }
+.net-spoke { stroke: rgba(167,181,232,0.34); stroke-width: 1; fill: none; stroke-dasharray: 3 3; animation: netDash 6s linear infinite; }
 @keyframes netDash { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -24; } }
 .net-sat { fill: rgba(255,255,255,0.025); stroke: rgba(79,126,255,0.35); stroke-width: 1; }
 .net-sat-pulse { fill: var(--accent); opacity: 0; animation: netPulse 4s ease-in-out infinite; }
@@ -515,7 +515,7 @@ p { color: var(--w75); }
   position: relative; overflow: hidden;
   box-shadow: 0 24px 48px rgba(0,0,0,0.4);
 }
-.founder-portrait::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(107,138,255,0.20), transparent 60%); }
+.founder-portrait::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(167,181,232,0.20), transparent 60%); }
 .founder-body .eyebrow { margin-bottom: 18px; }
 .founder-body h2 { margin-bottom: 28px; }
 .founder-body p { margin-bottom: 18px; font-size: 16px; }
@@ -576,7 +576,7 @@ p { color: var(--w75); }
   background: linear-gradient(to bottom, var(--gold), var(--gold-hi));
   transform: scaleY(0); transform-origin: top;
   transition: transform 0.18s linear;
-  box-shadow: 0 0 18px rgba(107,138,255,0.50);
+  box-shadow: 0 0 18px rgba(167,181,232,0.50);
 }
 .phase-entry {
   position: relative;
@@ -592,7 +592,7 @@ p { color: var(--w75); }
 }
 .phase-entry.active .phase-dot {
   background: var(--gold); border-color: var(--gold);
-  box-shadow: 0 0 0 6px rgba(107,138,255,0.18), 0 0 28px rgba(107,138,255,0.65);
+  box-shadow: 0 0 0 6px rgba(167,181,232,0.18), 0 0 28px rgba(167,181,232,0.65);
 }
 .phase-card {
   background: var(--card); border: 1px solid var(--border); border-radius: 16px;
@@ -643,7 +643,7 @@ p { color: var(--w75); }
 .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 .final-scarcity span { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w55); }
-.guarantee-box { display: inline-block; margin-top: 20px; background: var(--gold-soft); border: 1px solid rgba(107,138,255,0.34); border-radius: 10px; padding: 14px 22px; }
+.guarantee-box { display: inline-block; margin-top: 20px; background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.34); border-radius: 10px; padding: 14px 22px; }
 .guarantee-box .gbar-label { font-size: 10px; color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
 .guarantee-box .gbar-body { font-size: 13px; color: var(--w75); margin-top: 4px; }
 
@@ -666,7 +666,7 @@ p { color: var(--w75); }
   font-family: 'Inter', sans-serif;
   font-size: 13px; font-weight: 700; letter-spacing: 0.01em;
   cursor: pointer; white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(107,138,255,0.40);
+  box-shadow: 0 4px 16px rgba(167,181,232,0.40);
 }
 @media (max-width: 768px) {
   .sticky-apply { display: flex; }
@@ -772,8 +772,8 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   font-family: inherit; display: flex; justify-content: space-between; align-items: center;
 }
 .wwys-choice-btn:hover { border-color: var(--border-hi); color: var(--w100); background: rgba(255,255,255,0.07); }
-.wwys-choice-btn.atlas { border-color: rgba(107,138,255,0.45); color: var(--gold); background: var(--gold-soft); }
-.wwys-choice-btn.atlas:hover { background: rgba(107,138,255,0.22); }
+.wwys-choice-btn.atlas { border-color: rgba(167,181,232,0.45); color: var(--gold); background: var(--gold-soft); }
+.wwys-choice-btn.atlas:hover { background: rgba(167,181,232,0.22); }
 .wwys-choice-btn::after { content: "→"; font-size: 13px; margin-left: 8px; }
 .wwys-thread { display: none; flex-direction: column; gap: 6px; }
 .wwys-thread.active { display: flex; }
@@ -821,7 +821,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   text-align: center;
 }
 .event-card {
-  background: rgba(107,138,255,0.10);
+  background: rgba(167,181,232,0.10);
   border-left: 2px solid var(--gold);
   border-radius: 0 8px 8px 0;
   padding: 10px 12px;
@@ -835,7 +835,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   margin-top: 28px; font-size: 12px; color: var(--w35); text-align: center;
   letter-spacing: 0.04em;
 }
-.events-footnote a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(107,138,255,0.40); text-underline-offset: 3px; }
+.events-footnote a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(167,181,232,0.40); text-underline-offset: 3px; }
 .events-footnote a:hover { text-decoration-color: var(--gold); }
 
 /* ══════════════════════════════════════════════════════════
@@ -933,7 +933,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 .rp-overlay.active { opacity: 1; }
 .rp-spinner {
   width: 40px; height: 40px;
-  border: 3px solid rgba(107,138,255,0.2);
+  border: 3px solid rgba(167,181,232,0.2);
   border-top-color: var(--gold);
   border-radius: 50%;
   animation: rpSpin 0.9s linear infinite;
@@ -955,7 +955,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   transition: opacity 0.3s ease;
 }
 .rp-stage-label.bad { border-color: rgba(248,113,113,0.4); color: var(--no); background: rgba(248,113,113,0.08); }
-.rp-stage-label.good { border-color: var(--gold); color: var(--gold-hi); background: rgba(107,138,255,0.14); }
+.rp-stage-label.good { border-color: var(--gold); color: var(--gold-hi); background: rgba(167,181,232,0.14); }
 .rpc-header {
   padding: 6px 0 10px; text-align: center;
   font-family: 'Spectral', serif;
@@ -1074,7 +1074,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 .rs-scan {
   position: absolute; left: 0; right: 0; top: 0; height: 4px;
   background: linear-gradient(to right, transparent, var(--gold), transparent);
-  box-shadow: 0 0 24px rgba(107,138,255,0.95);
+  box-shadow: 0 0 24px rgba(167,181,232,0.95);
   z-index: 5; opacity: 0;
   animation: rsScanLine 9s ease-in-out infinite;
 }
@@ -1100,7 +1100,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 }
 .rs-loader {
   width: 36px; height: 36px; border-radius: 50%;
-  border: 2.5px solid rgba(107,138,255,0.28);
+  border: 2.5px solid rgba(167,181,232,0.28);
   border-top-color: var(--gold);
   animation: rsSpin 1s linear infinite;
 }
@@ -1174,7 +1174,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   overflow: hidden; position: relative;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.7s ease, transform 0.7s ease;
 }
-.reb-panel:hover { border-color: rgba(107,138,255,0.40); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.reb-panel:hover { border-color: rgba(167,181,232,0.40); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
 .reb-panel-label {
   font-family: 'Inter', sans-serif;
   font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
@@ -1301,7 +1301,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 .reb-like {
   position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
   width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(107,138,255,0.20); border: 1px solid rgba(107,138,255,0.50);
+  background: rgba(167,181,232,0.20); border: 1px solid rgba(167,181,232,0.50);
   display: flex; align-items: center; justify-content: center;
   color: var(--gold); font-size: 14px;
 }
@@ -1471,7 +1471,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 .ps-like-btn {
   position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
   width: 28px; height: 28px; border-radius: 50%;
-  background: rgba(107,138,255,0.20); border: 1px solid rgba(107,138,255,0.50);
+  background: rgba(167,181,232,0.20); border: 1px solid rgba(167,181,232,0.50);
   display: flex; align-items: center; justify-content: center;
   color: var(--gold); font-size: 16px; font-weight: 400;
 }
@@ -1909,7 +1909,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   display: flex; flex-direction: column; gap: 16px;
 }
-.ba-col.after { border-color: rgba(107,138,255,0.36); background: var(--gold-soft); }
+.ba-col.after { border-color: rgba(167,181,232,0.36); background: var(--gold-soft); }
 .ba-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 .ba-header .ba-tag {
   font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
@@ -1985,7 +1985,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
   color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
   text-transform: uppercase; padding: 4px 10px; border-radius: 99px;
-  border: 1px solid rgba(107,138,255,0.45);
+  border: 1px solid rgba(167,181,232,0.45);
 }
 .vt-duration {
   position: absolute; top: 12px; right: 12px; z-index: 2;
@@ -2003,7 +2003,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   display: flex; align-items: center; justify-content: center;
   z-index: 3; transition: transform 0.3s, background 0.3s;
 }
-.vt-card:hover .vt-play { transform: translate(-50%, -50%) scale(1.1); background: rgba(107,138,255,0.34); border-color: var(--gold); }
+.vt-card:hover .vt-play { transform: translate(-50%, -50%) scale(1.1); background: rgba(167,181,232,0.34); border-color: var(--gold); }
 .vt-play::after {
   content: ""; width: 0; height: 0; margin-left: 4px;
   border-top: 9px solid transparent;
@@ -2113,7 +2113,7 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   z-index: 2;
 }
 .sc-badge.red { background: rgba(248,113,113,0.85); border-color: transparent; color: #fff; }
-.sc-badge.gold { background: rgba(107,138,255,0.92); color: #ffffff; border-color: transparent; }
+.sc-badge.gold { background: rgba(167,181,232,0.92); color: #ffffff; border-color: transparent; }
 .sc-info { padding: 20px 24px 14px; position: relative; z-index: 2; margin-top: -70px; }
 .sc-name {
   font-size: 26px; font-weight: 750; color: #fff; letter-spacing: -0.02em;
@@ -2918,7 +2918,7 @@ body.deliv-modal-open { overflow: hidden; }
 .hn-body { line-height: 1.25; min-width: 0; flex: 1; }
 .hn-app { font-size: 9px; color: var(--w35); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
 .hn-text { font-size: 12px; color: var(--w100); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.hn-text strong { color: var(--gold, #6B8AFF); font-weight: 700; }
+.hn-text strong { color: var(--gold, #A7B5E8); font-weight: 700; }
 
 /* Notification wall layout fix on mobile */
 @media (max-width: 640px) {
@@ -2934,6 +2934,133 @@ body.deliv-modal-open { overflow: hidden; }
 /* Kill old modal CSS that's now unused */
 .deliv-modal { display: none !important; }
 
+
+/* ══════════════════════════════════════════════════════════
+   v30.3 · Final mobile fixes: Tinder stack, timeline static,
+   notif-scroll, label font, accordion better
+   ══════════════════════════════════════════════════════════ */
+
+/* Apply thumb-label font treatment globally to eyebrows + caps labels */
+.eyebrow, .ba-side-tag, .event-day, .ba-tag, .deliv-m-tap, .phase-week,
+.module-num, .stat-lab, .hero-stat-lab, .footer-logo, .nav-logo,
+.pipe2-label, .pipe2-subtitle {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Accordion — use bigger max-height to fit tallest visuals (Atlas Network) */
+.deliv-m-card.expanded .deliv-m-expand {
+  max-height: 2000px !important;
+  margin-top: 18px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+/* Deliverable card UX: clearer "tap to expand" signal */
+.deliv-m-card {
+  position: relative;
+  border: 1px solid var(--border);
+}
+.deliv-m-card::after {
+  content: "+";
+  position: absolute; top: 18px; right: 20px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(167,181,232,0.14);
+  border: 1px solid rgba(167,181,232,0.3);
+  color: var(--blue);
+  font-size: 20px; font-weight: 300; line-height: 26px;
+  text-align: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+  pointer-events: none;
+}
+.deliv-m-card.expanded::after {
+  content: "−";
+  background: var(--blue);
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE: Tinder swipe → simple vertical stack
+   Solves swipe/scroll conflict completely.
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .swipe-stack { overflow: visible !important; padding: 0 20px !important; }
+  .swipe-track {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+    padding: 0 !important;
+    gap: 16px !important;
+    touch-action: auto !important;
+  }
+  .swipe-card {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    height: auto !important;
+    min-height: 440px;
+    scroll-snap-align: none !important;
+    margin: 0 auto !important;
+    transform: none !important;
+  }
+  .swipe-card:hover { transform: none !important; }
+  .swipe-card.intro-hint { animation: none !important; }
+  .sc-stamp-nope, .sc-stamp-like { display: none !important; }
+  .swipe-dots { display: none !important; }
+  .swipe-hint { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE: Timeline animation disabled — static with all dots lit
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .timeline-fill { transform: scaleY(1) !important; }
+  .phase-entry .phase-dot {
+    background: var(--blue) !important;
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 4px rgba(167,181,232,0.18) !important;
+  }
+  .phase-entry .phase-card {
+    opacity: 1 !important;
+    transform: none !important;
+    border-color: var(--border) !important;
+  }
+  .phase-entry.active .phase-card {
+    border-color: var(--blue) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   NOTIFICATION WALL — auto-scrolling vertical feed
+   ══════════════════════════════════════════════════════════ */
+.notif-wall {
+  max-height: 560px;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.notif-wall .notif-track {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  grid-template-columns: none !important;
+  animation: notifScrollV 32s linear infinite;
+}
+.notif-wall .notif-track:hover {
+  animation-play-state: paused;
+}
+@keyframes notifScrollV {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+/* Mobile: slightly faster feed + narrower */
+@media (max-width: 640px) {
+  .notif-wall { max-height: 480px; max-width: 420px; margin: 48px auto 0; }
+  .notif-wall .notif-track { animation-duration: 28s; }
+}
+
 </style>
 </head>
 <body>
@@ -2942,10 +3069,10 @@ body.deliv-modal-open { overflow: hidden; }
 <nav class="nav">
   <a href="#hero" class="nav-logo">
     <svg class="nav-compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atlas">
-      <circle cx="12" cy="12" r="10" stroke="#6B8AFF" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#6B8AFF"/>
-      <polygon points="12,5 10,12 12,12" fill="#8CA5FF" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#6B8AFF" stroke-width="1"/>
+      <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
+      <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
+      <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
+      <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#A7B5E8" stroke-width="1"/>
     </svg>
     <span>ATLAS</span>
   </a>
@@ -3452,8 +3579,8 @@ body.deliv-modal-open { overflow: hidden; }
                   <stop offset="100%" stop-color="rgba(79,126,255,0)"/>
                 </radialGradient>
                 <radialGradient id="v12CenterGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(107,138,255,0.36)"/>
-                  <stop offset="100%" stop-color="rgba(107,138,255,0)"/>
+                  <stop offset="0%" stop-color="rgba(167,181,232,0.36)"/>
+                  <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
                 </radialGradient>
                 <filter id="v12SoftGlow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="3.5"/>
@@ -3503,23 +3630,23 @@ body.deliv-modal-open { overflow: hidden; }
               <path class="pipe2-flow" d="M 600,260 C 600,380 520,430 400,465"/>
 
               <circle cx="400" cy="465" r="56" fill="url(#v12CenterGlow)"/>
-              <circle cx="400" cy="465" r="7" fill="#6B8AFF" opacity="0.85" filter="url(#v12SoftGlow)"/>
+              <circle cx="400" cy="465" r="7" fill="#A7B5E8" opacity="0.85" filter="url(#v12SoftGlow)"/>
 
               <path class="pipe2-trunk" d="M 400,465 L 400,640"/>
-              <path d="M 400,672 L 388,652 L 412,652 Z" fill="#6B8AFF"/>
+              <path d="M 400,672 L 388,652 L 412,652 Z" fill="#A7B5E8"/>
 
               <text class="pipe2-leads" x="400" y="732">DATES</text>
               <text class="pipe2-subtitle" x="400" y="758">THE 3 PART PIPELINE</text>
 
               <!-- Heart-shaped traveling dots (Unicode ♥ for unambiguous shape) -->
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#6B8AFF" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#8CA5FF" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#8CA5FF" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
+              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
+              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
             </svg>
           </div>
         </div>
@@ -3633,8 +3760,8 @@ body.deliv-modal-open { overflow: hidden; }
             <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <radialGradient id="v12NetGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(107,138,255,0.32)"/>
-                  <stop offset="100%" stop-color="rgba(107,138,255,0)"/>
+                  <stop offset="0%" stop-color="rgba(167,181,232,0.32)"/>
+                  <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
                 </radialGradient>
               </defs>
               <circle cx="200" cy="150" r="80" fill="url(#v12NetGlow)"/>
@@ -3702,7 +3829,7 @@ body.deliv-modal-open { overflow: hidden; }
       When all three channels are running. Notifications become noise.
     </p>
 
-    <div class="notif-wall reveal d3" style="margin-top: 56px;">
+    <div class="notif-wall reveal d3" style="margin-top: 56px;"><div class="notif-track">
       <div class="notif n1">
         <div class="notif-icon tinder">🔥</div>
         <div class="notif-body">
@@ -3767,7 +3894,72 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="notif-text">She's been watching every one this week.</div>
         </div>
       </div>
-    </div>
+    
+      <div class="notif n1">
+        <div class="notif-icon tinder">🔥</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">now</span></div>
+          <div class="notif-title"><span class="notif-count">12</span>new matches</div>
+          <div class="notif-text">Three women super-liked you today.</div>
+        </div>
+      </div>
+      <div class="notif n2">
+        <div class="notif-icon hinge">H</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">2m ago</span></div>
+          <div class="notif-title">Sarah liked your prompt</div>
+          <div class="notif-text">"The story about the dog made me laugh."</div>
+        </div>
+      </div>
+      <div class="notif n3">
+        <div class="notif-icon bumble">B</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Bumble</span><span class="notif-time">8m ago</span></div>
+          <div class="notif-title"><strong>Maya</strong> sent a message</div>
+          <div class="notif-text">"Okay Thursday works. Pick the place."</div>
+        </div>
+      </div>
+      <div class="notif n4">
+        <div class="notif-icon ig">◉</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">12m ago</span></div>
+          <div class="notif-title">2 new DMs from women</div>
+          <div class="notif-text">Both opened with a question about the trip photo.</div>
+        </div>
+      </div>
+      <div class="notif n5">
+        <div class="notif-icon tinder">🔥</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">25m ago</span></div>
+          <div class="notif-title">You have a new Super Like</div>
+          <div class="notif-text">Someone couldn't wait to swipe.</div>
+        </div>
+      </div>
+      <div class="notif n6">
+        <div class="notif-icon hinge">H</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">1h ago</span></div>
+          <div class="notif-title"><span class="notif-count">8</span>Likes You</div>
+          <div class="notif-text">Tap to see who's waiting.</div>
+        </div>
+      </div>
+      <div class="notif n7">
+        <div class="notif-icon messages">💬</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">1h ago</span></div>
+          <div class="notif-title">Lauren</div>
+          <div class="notif-text">"Had a great time last week. Free Friday?"</div>
+        </div>
+      </div>
+      <div class="notif n8">
+        <div class="notif-icon ig">◉</div>
+        <div class="notif-body">
+          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">2h ago</span></div>
+          <div class="notif-title">Story viewer: Anna</div>
+          <div class="notif-text">She's been watching every one this week.</div>
+        </div>
+      </div>
+    </div></div>
 
     <p class="sub-note text-center" style="margin-top:32px;">Illustrative. Individual results depend on execution and profile.</p>
   </div>
@@ -3843,12 +4035,6 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
     <div class="founder-body reveal d2">
       <p class="eyebrow">Meet the founder</p>
-
-      <div class="founder-note">
-        <p class="fn-quote">"The men I work with don't have a broken life. They have every other area dialed in. They just don't have an optimized system for this one. That's the only gap."</p>
-        <p class="fn-attr">Benjamin Seda, founder</p>
-      </div>
-
       <h2>I walked away from<br><em>200 million views.</em></h2>
       <p>Within two years, I built the largest men's dating brand on YouTube. Nearly a decade later, still the most-followed in the world.</p>
       <p>In 2022, I walked away. Not because the audience wasn't there. Because I didn't want to put my name on the version of this that scales. Atlas is the only version I'll sign.</p>
@@ -4154,10 +4340,10 @@ body.deliv-modal-open { overflow: hidden; }
 <footer>
   <div class="footer-logo">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="#6B8AFF" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#6B8AFF"/>
-      <polygon points="12,5 10,12 12,12" fill="#8CA5FF" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#050608" stroke="#6B8AFF" stroke-width="1"/>
+      <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
+      <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
+      <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
+      <circle cx="12" cy="12" r="1.5" fill="#050608" stroke="#A7B5E8" stroke-width="1"/>
     </svg>
     <span>ATLAS</span>
   </div>
