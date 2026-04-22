@@ -2428,6 +2428,142 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
 /* Prevent horizontal overflow universally */
 html, body { max-width: 100%; overflow-x: hidden; }
 section, .inner { max-width: 100%; }
+
+/* ══════════════════════════════════════════════════════════
+   v26.1 mobile batch fixes
+   ══════════════════════════════════════════════════════════ */
+
+/* (9) Prevent content leaking above fixed nav */
+html, body { background: var(--bg0); overscroll-behavior-y: none; }
+body { -webkit-tap-highlight-color: transparent; }
+.nav { z-index: 100; background: rgba(5,6,8,0.98) !important; }
+
+/* (11) Nav slightly bigger on mobile */
+@media (max-width: 640px) {
+  .nav { padding-top: calc(18px + env(safe-area-inset-top, 0px)) !important;
+         padding-bottom: 16px !important;
+         padding-left: calc(20px + env(safe-area-inset-left, 0px)) !important;
+         padding-right: calc(20px + env(safe-area-inset-right, 0px)) !important; }
+  .nav-logo { font-size: 16px; letter-spacing: 0.22em; }
+  .nav-compass { width: 22px; height: 22px; }
+}
+
+/* (2) Pipeline bigger on mobile */
+@media (max-width: 960px) {
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 480px; padding: 16px; }
+  .pipe2 { max-width: 560px; width: 100%; padding: 0; }
+  .pipe2 svg { width: 100%; height: auto; }
+}
+@media (max-width: 480px) {
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 420px; padding: 8px; }
+}
+
+/* (4) Atlas Network bigger */
+.mock-net2 svg { max-width: 640px; }
+.deliv.network-big .deliv-mock-wrap { min-height: 540px; }
+@media (max-width: 960px) {
+  .deliv.network-big .deliv-mock-wrap { min-height: 440px; padding: 16px; }
+  .mock-net2 svg { max-width: 480px; }
+}
+
+/* (3) WWYS messages bigger + phone bigger */
+.mock-msg2 { font-size: 14px; padding: 10px 16px; line-height: 1.4; }
+.wwys-phone { max-height: 600px; }
+@media (max-width: 640px) {
+  .wwys-phone { max-height: 540px; }
+  .mock-msg2 { font-size: 13px; padding: 9px 14px; }
+}
+
+/* (1) Rebuild phone fits mobile — bigger + content fits */
+@media (max-width: 480px) {
+  .rp-phone { width: 240px; height: 520px; }
+  .rp-content { padding-top: 34px; gap: 6px; }
+  .rpc-header { margin-top: 18px; font-size: 12px; }
+  .rp-stage-label { top: 44px; font-size: 9px; padding: 4px 10px; }
+  .rpc-photo { aspect-ratio: 5/4; }
+  .rpc-card { padding: 7px 10px; }
+  .rpc-card-a { font-size: 10px; line-height: 1.3; }
+}
+
+/* (6) Weekly events 1 col on mobile */
+@media (max-width: 640px) {
+  .events-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .event-col { min-height: auto; padding: 20px 22px; }
+}
+
+/* (7) Testimonials horizontal carousel on mobile */
+@media (max-width: 640px) {
+  .testi-columns {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    height: auto !important;
+    max-height: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    gap: 16px;
+    padding: 12px 20px 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .testi-columns::-webkit-scrollbar { display: none; }
+  .testi-col {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    overflow: visible;
+  }
+  .testi-col-track {
+    animation: none !important;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  /* Hide duplicated items on mobile (each col had 2x duplication for infinite scroll) */
+  .testi-col-track > .tc-card:nth-child(n+3) { display: none; }
+}
+
+/* (8) Timeline scroll fixes for mobile */
+@media (max-width: 640px) {
+  .timeline-section { padding: 80px 20px; }
+  .timeline-container { padding-left: 40px; }
+  .timeline-rail { left: 16px; top: 24px; bottom: 24px; }
+  .phase-dot { left: -36px; top: 40px; width: 14px; height: 14px; border-width: 2px; }
+  .phase-card { padding: 22px 24px; }
+  .phase-entry { padding: 20px 0; }
+}
+
+/* (10) Apply CTA bigger on mobile */
+@media (max-width: 640px) {
+  .btn { padding: 20px 32px !important; font-size: 16px !important; }
+  .sticky-apply button { padding: 14px 22px !important; font-size: 13px !important; }
+}
+
+/* (12) Swipe intro hint runs 3 times with longer pauses (visible on mobile) */
+.swipe-card.intro-hint {
+  animation: swipeHint 3s cubic-bezier(0.22, 1, 0.36, 1) 0.8s 3 !important;
+}
+@keyframes swipeHint {
+  0%, 12% { transform: rotate(0deg) translateX(0); }
+  20% { transform: rotate(-6deg) translateX(-16px); }
+  28% { transform: rotate(0deg) translateX(0); }
+  36% { transform: rotate(6deg) translateX(16px); }
+  44%, 100% { transform: rotate(0deg) translateX(0); }
+}
+
+/* (12 addendum) Swipe hint arrows visible always on mobile */
+@media (max-width: 640px) {
+  .swipe-hint { display: inline-flex !important; font-size: 10px; margin-top: 18px; }
+  .swipe-hint .sh-arrow { animation: shArrowPulse 1.5s ease-in-out infinite; }
+}
+@keyframes shArrowPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
 </style>
 </head>
 <body>
@@ -3242,7 +3378,7 @@ section, .inner { max-width: 100%; }
           <div class="spec">
             <div class="spec-item"><div class="k">Advisors</div><div class="v">Female profile team</div></div>
             <div class="spec-item"><div class="k">Coaches</div><div class="v">6 on rotation</div></div>
-            <div class="spec-item"><div class="k">Community</div><div class="v"><a href="https://digitalblackbelt.com" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:underline; text-decoration-color:rgba(107,138,255,0.40); text-underline-offset:2px;">Digital Black Belt</a></div></div>
+            <div class="spec-item"><div class="k">Community</div><div class="v">a private Atlas-only community</div></div>
           </div>
         </div>
       </div>
@@ -3323,9 +3459,7 @@ section, .inner { max-width: 100%; }
       </div>
     </div>
 
-    <p class="events-footnote reveal d4">
-      Part of the network via <a href="https://digitalblackbelt.com" target="_blank" rel="noopener">Digital Black Belt</a>. Private rooms for Atlas clients only.
-    </p>
+    <p class="events-footnote reveal d4">Private rooms for Atlas clients only. NDA-protected.</p>
   </div>
 </section>
 
