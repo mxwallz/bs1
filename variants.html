@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas — A/B Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #050608; --card: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.08); --gold: #6B8AFF; --w100: #fff; --w75: rgba(255,255,255,0.72); --w55: rgba(255,255,255,0.55); --w35: rgba(255,255,255,0.35); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--w100); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 64px 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  h1 { font-family: 'Spectral', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 500; letter-spacing: -0.015em; margin-bottom: 18px; }
+  .sub { font-size: 16px; color: var(--w55); max-width: 620px; margin-bottom: 56px; line-height: 1.6; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px; text-decoration: none; color: inherit;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+  .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  h2 { font-family: 'Spectral', serif; font-size: 26px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 10px; }
+  h2 em { font-style: italic; color: var(--w55); font-weight: 400; }
+  .card p { font-size: 14px; color: var(--w75); line-height: 1.6; margin-bottom: 20px; }
+  .spec { display: flex; gap: 16px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .spec-item { font-size: 11px; color: var(--w35); }
+  .spec-item strong { display: block; color: var(--w100); font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .live { color: var(--gold); font-weight: 700; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; }
+  .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Atlas · A/B Variants</p>
+  <h1>Four versions.<br><em>Same offer. Different hypothesis.</em></h1>
+  <p class="sub">Each variant runs a ~20% variance on the same underlying site. Same brand voice, same deliverables, same proof — different conversion strategy. Open each to compare.</p>
+
+  <div class="grid">
+
+    <a href="./index.html" class="card">
+      <div class="tag">Base · v26</div>
+      <h2>Atlas <em>(current live)</em></h2>
+      <p>The baseline. JS-driven Profile Rebuild refresh animation, cork-free Before/After boards, lighter luxury sapphire blue, red hearts, Tinder swipe with intro wiggle, client-message + voice-note debrief.</p>
+      <div class="spec">
+        <div class="spec-item"><strong>Palette</strong>Sapphire #6B8AFF</div>
+        <div class="spec-item"><strong>Typography</strong>Spectral + Inter</div>
+        <div class="spec-item"><strong>Vibe</strong>Modern luxury</div>
+      </div>
+      <span class="live">Live baseline</span>
+    </a>
+
+    <a href="./v27.html" class="card">
+      <div class="tag">Variant A · v27</div>
+      <h2>Conversion-Max <em>(urgency stack)</em></h2>
+      <p>Live cohort countdown in hero (dd hh mm ticking), "last applied X min ago" rotating ticker, pulsing-glow primary CTA, enrollment filled counter. Reads like a launch page.</p>
+      <div class="spec">
+        <div class="spec-item"><strong>Hypothesis</strong>Scarcity drives applies</div>
+        <div class="spec-item"><strong>Risk</strong>Reads sales-y to premium ICP</div>
+        <div class="spec-item"><strong>Best if</strong>Cold paid traffic</div>
+      </div>
+    </a>
+
+    <a href="./v28.html" class="card">
+      <div class="tag">Variant B · v28</div>
+      <h2>Concierge <em>(premium minimal)</em></h2>
+      <p>Quieter silver-blue palette (#A7B5E8). No hero notification popup, no Tinder swipe stamps, no floating hearts. CTA reads "Request a Consultation" (advisory tone). Less noise, more white space.</p>
+      <div class="spec">
+        <div class="spec-item"><strong>Hypothesis</strong>Understatement converts HNW</div>
+        <div class="spec-item"><strong>Risk</strong>Loses attention on cold traffic</div>
+        <div class="spec-item"><strong>Best if</strong>Referred / warm traffic</div>
+      </div>
+    </a>
+
+    <a href="./v29.html" class="card">
+      <div class="tag">Variant C · v29</div>
+      <h2>Bold Editorial <em>(burgundy display)</em></h2>
+      <p>Warm rose/burgundy accent (#B23850). Dramatic oversized display type (h1 up to 96px). Magazine-cover feel. Same structure, very different emotional register.</p>
+      <div class="spec">
+        <div class="spec-item"><strong>Hypothesis</strong>Visual distinction wins attention</div>
+        <div class="spec-item"><strong>Risk</strong>Off-brand for dating consulting</div>
+        <div class="spec-item"><strong>Best if</strong>Retargeting / brand awareness</div>
+      </div>
+    </a>
+
+  </div>
+
+  <p style="margin-top: 56px; font-size: 13px; color: var(--w35); text-align: center;">All four versions live at the same root. Swap <code>index.html</code> to rotate the default. For proper A/B, serve with UTM-based routing or a client-side splitter.</p>
+</div>
+</body>
+</html>
