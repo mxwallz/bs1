@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Free Course · Atlas Advisory</title>
+<meta name="description" content="Steal the exact blueprint top 1% men are using to get 2-3+ dates per week with girlfriend-quality women.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════
+   Atlas · Free Course opt-in.
+   Single-viewport layout matching benseda.com/free-course-opt:
+   headline + subhead on top, video thumbnail left, "what you'll
+   learn" bullets + CTA right. Clicking play opens an opt-in
+   pop-up (Name / Email / Phone).
+   ══════════════════════════════════════════════════════════ */
+:root {
+  --bg0: #050608;
+  --bg1: #0a0d1f;
+  --bg2: #08101c;
+  --bg3: #0d1128;
+  --card: rgba(255,255,255,0.025);
+  --card-solid: #0d1020;
+  --border: rgba(255,255,255,0.06);
+  --border-2: rgba(255,255,255,0.10);
+  --border-hi: rgba(255,255,255,0.15);
+  --w100: #ffffff;
+  --w75: rgba(255,255,255,0.72);
+  --w55: rgba(255,255,255,0.55);
+  --w35: rgba(255,255,255,0.35);
+  --w20: rgba(255,255,255,0.18);
+  --gold: #A7B5E8;
+  --gold-hi: #C4CEF5;
+  --gold-hover: #8896D5;
+  --gold-soft: rgba(167,181,232,0.14);
+  --ok: #4ade80;
+  --ok-soft: rgba(74,222,128,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg0); color: var(--w100);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+
+.shell {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(167,181,232,0.10), transparent 50%),
+    radial-gradient(ellipse at 85% 100%, rgba(122,160,255,0.08), transparent 55%),
+    var(--bg0);
+}
+
+/* Nav */
+.nav {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) clamp(18px, 3vw, 32px) 14px;
+  background: rgba(5,6,8,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 15px; font-weight: 500;
+  letter-spacing: 0.26em; color: var(--w100);
+  text-transform: uppercase;
+}
+.compass { width: 20px; height: 20px; animation: compassSpin 32s linear infinite; }
+@keyframes compassSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.nav-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  color: var(--w55); text-transform: uppercase;
+}
+.nav-status::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 10px rgba(74,222,128,0.8);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@media (max-width: 640px) { .nav-status { display: none; } }
+
+/* Hero fills remaining viewport */
+.hero {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: clamp(16px, 2.4vh, 28px) clamp(18px, 3vw, 40px);
+  gap: clamp(14px, 2vh, 22px);
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Header block */
+.header {
+  text-align: center;
+  max-width: 920px; margin: 0 auto;
+}
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ok-soft);
+  border: 1px solid rgba(74,222,128,0.28);
+  color: var(--ok);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px;
+  margin-bottom: 12px;
+}
+.status-pill::before {
+  content: "";
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 8px rgba(74,222,128,0.8);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+.header h1 {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 500; line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-size: clamp(22px, 3.2vw, 34px);
+  color: var(--w100);
+}
+.header h1 em {
+  display: block;
+  font-style: italic; font-weight: 400;
+  color: var(--w55);
+  font-size: 0.78em;
+  margin-top: 6px;
+}
+.header .sub {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(13px, 1.3vw, 15px);
+  color: var(--w55);
+  line-height: 1.5;
+  max-width: 640px; margin: 10px auto 0;
+}
+
+/* Two-column body */
+.cols {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+  max-width: 1100px; margin: 0 auto;
+  width: 100%;
+}
+
+/* Video thumbnail */
+.thumb-col { min-width: 0; }
+.video-thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0d1128 0%, #080a18 45%, #050608 100%);
+  border: 1px solid var(--border-2);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s, border-color 0.3s;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03);
+}
+.video-thumb:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 60px rgba(167,181,232,0.14); }
+.video-thumb::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 55%, rgba(167,181,232,0.22) 0%, transparent 55%);
+  pointer-events: none;
+}
+.vt-frame {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.vt-frame svg { width: 70%; height: auto; opacity: 0.42; }
+.vt-play {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(56px, 8.5vw, 72px);
+  height: clamp(56px, 8.5vw, 72px);
+  border-radius: 50%;
+  background: var(--gold);
+  color: #0a0d1f;
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(16px, 2vw, 20px);
+  padding-left: 5px;
+  box-shadow:
+    0 0 0 7px rgba(167,181,232,0.16),
+    0 0 36px rgba(167,181,232,0.45),
+    0 10px 28px rgba(0,0,0,0.4);
+  transition: transform 0.25s, background 0.25s;
+  z-index: 2;
+}
+.video-thumb:hover .vt-play { transform: translate(-50%, -50%) scale(1.08); background: var(--gold-hi); }
+.vt-caption {
+  position: absolute; left: 12px; right: 12px; bottom: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 2; pointer-events: none;
+}
+.vt-cap-label {
+  font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--w75);
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+  padding: 4px 10px; border-radius: 99px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.vt-cap-dur {
+  font-size: 10px; color: var(--w75);
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+  padding: 4px 8px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Right column: bullets + CTA */
+.learn-col {
+  display: flex; flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.learn-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
+}
+.learn-list {
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+.learn-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+}
+.learn-check {
+  flex-shrink: 0;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  margin-top: 1px;
+}
+.learn-text {
+  font-size: 14px; color: var(--w75); line-height: 1.5;
+}
+.learn-text strong { color: var(--w100); font-weight: 600; }
+
+.learn-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--gold); color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.005em;
+  padding: 15px 28px; border: none; border-radius: 4px;
+  cursor: pointer; width: 100%;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 4px 24px rgba(167,181,232,0.30);
+  margin-top: 4px;
+}
+.learn-cta:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(167,181,232,0.40); }
+.learn-cta::after { content: "→"; font-size: 15px; }
+
+.cta-friction {
+  font-size: 11px; color: var(--w35); text-align: center;
+  letter-spacing: 0.01em;
+}
+.cta-friction strong { color: var(--gold); font-weight: 600; }
+
+/* Mini footer */
+.mini-foot {
+  flex-shrink: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px;
+  font-size: 10px; color: var(--w20);
+  padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.mini-foot a { color: var(--w35); transition: color 0.2s; }
+.mini-foot a:hover { color: var(--gold); }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .cols { grid-template-columns: 1fr; gap: 16px; }
+  .video-thumb { aspect-ratio: 16/9; }
+  .header h1 { font-size: clamp(22px, 5vw, 28px); }
+}
+@media (max-height: 780px) {
+  .hero { gap: 12px; padding: 12px 24px; }
+  .status-pill { margin-bottom: 8px; }
+  .header h1 { font-size: clamp(20px, 3vw, 28px); }
+  .header .sub { font-size: 12.5px; margin-top: 6px; }
+  .video-thumb { aspect-ratio: 16/9; }
+  .learn-list { gap: 8px; }
+  .learn-item { padding: 11px 14px; }
+  .learn-text { font-size: 13.5px; line-height: 1.45; }
+  .learn-cta { padding: 12px 22px; font-size: 13px; }
+}
+@media (max-height: 640px) {
+  .mini-foot { display: none; }
+  .header h1 em { margin-top: 4px; font-size: 0.76em; }
+  .learn-list { gap: 6px; }
+  .learn-item { padding: 9px 12px; }
+}
+@media (max-width: 640px) {
+  html, body { overflow: auto; height: auto; }
+  .shell { min-height: 100svh; }
+  .mini-foot { display: none; }
+  .nav { padding-top: 10px; padding-bottom: 10px; padding-left: 16px; padding-right: 16px; }
+  .nav-logo { font-size: 14px; }
+  .compass { width: 18px; height: 18px; }
+  .hero {
+    justify-content: flex-start;
+    padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+    gap: 14px;
+  }
+  .status-pill { margin-bottom: 6px; padding: 4px 12px; font-size: 9.5px; }
+  .header h1 { font-size: 22px; line-height: 1.12; }
+  .header h1 em { font-size: 0.78em; margin-top: 4px; }
+  .header .sub { font-size: 13px; margin-top: 8px; line-height: 1.5; }
+  .cols { max-width: 100%; gap: 14px; }
+  .video-thumb { aspect-ratio: 16/10; }
+  .learn-col { gap: 10px; }
+  .learn-eyebrow { font-size: 9.5px; }
+  .learn-list { gap: 8px; }
+  .learn-item { padding: 11px 14px; border-radius: 10px; }
+  .learn-check { width: 20px; height: 20px; font-size: 11px; }
+  .learn-text { font-size: 13px; line-height: 1.45; }
+  .learn-cta { padding: 14px 22px; font-size: 13px; }
+  .cta-friction { font-size: 10.5px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   OPT-IN POP-UP — Name / Email / Phone
+   ══════════════════════════════════════════════════════════ */
+.popup-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(4, 5, 9, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.popup-overlay.open { display: flex; opacity: 1; }
+.popup-card {
+  position: relative;
+  background: rgba(10,13,31,0.92);
+  border: 1px solid var(--border-2);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 440px;
+  padding: clamp(24px, 3.5vw, 32px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 60px rgba(167,181,232,0.10);
+  transform: translateY(12px) scale(0.97);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s;
+  max-height: calc(100vh - 48px);
+  max-height: calc(100svh - 48px);
+  overflow: auto;
+}
+.popup-overlay.open .popup-card { transform: translateY(0) scale(1); opacity: 1; }
+.popup-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-2);
+  color: var(--w55);
+  font-size: 17px; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.popup-close:hover { background: rgba(255,255,255,0.08); color: var(--w100); border-color: var(--border-hi); }
+
+.popup-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 10px;
+}
+.popup-h {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 500; line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-size: clamp(20px, 2.4vw, 24px);
+  color: var(--w100);
+  margin-bottom: 8px;
+}
+.popup-h em { font-style: italic; font-weight: 400; color: var(--w55); }
+.popup-sub {
+  font-size: 13px; line-height: 1.5;
+  color: var(--w55);
+  margin-bottom: 18px;
+}
+
+.popup-form { display: flex; flex-direction: column; gap: 10px; }
+.popup-form .form-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--w35);
+}
+.popup-form input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-2);
+  color: var(--w100);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; padding: 12px 14px;
+  border-radius: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.popup-form input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.06); }
+.popup-form input::placeholder { color: var(--w35); }
+
+.popup-consent {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-top: 4px;
+}
+.popup-consent input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--gold);
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.popup-consent label {
+  font-size: 12px; line-height: 1.5;
+  color: var(--w75);
+  cursor: pointer;
+}
+.popup-fine {
+  font-size: 10px; line-height: 1.5;
+  color: var(--w35);
+  margin-top: 2px;
+}
+
+.popup-form .popup-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%;
+  background: var(--gold); color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 700;
+  padding: 14px 22px; border: none; border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 4px 24px rgba(167,181,232,0.30);
+  margin-top: 6px;
+}
+.popup-form .popup-btn:hover { background: var(--gold-hover); transform: translateY(-1px); }
+.popup-form .popup-btn::after { content: "→"; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-logo" aria-label="Atlas">
+      <svg class="compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
+        <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
+        <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
+        <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#A7B5E8" stroke-width="1"/>
+      </svg>
+      <span>ATLAS</span>
+    </a>
+    <span class="nav-status">Free · no card</span>
+  </nav>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="header">
+      <span class="status-pill">Free course · limited access</span>
+      <h1>
+        Steal The Exact Blueprint Top 1% Men Are Using to Get 2-3+ Dates Per Week
+        <em>With Girlfriend-Quality Women</em>
+      </h1>
+      <p class="sub">
+        Without needing to waste hours swiping, getting awkwardly rejected, and with minimal work required.
+      </p>
+    </div>
+
+    <div class="cols">
+
+      <!-- LEFT · Video thumbnail -->
+      <div class="thumb-col">
+        <div class="video-thumb" id="videoThumb" role="button" tabindex="0" aria-label="Watch the free course">
+          <div class="vt-frame" aria-hidden="true">
+            <svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="phoneGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1a2140"/>
+                  <stop offset="1" stop-color="#0a0d1f"/>
+                </linearGradient>
+                <linearGradient id="bubbleIn" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#182533"/>
+                  <stop offset="1" stop-color="#0f1a25"/>
+                </linearGradient>
+                <linearGradient id="bubbleOut" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#2B5278"/>
+                  <stop offset="1" stop-color="#1F3E5E"/>
+                </linearGradient>
+              </defs>
+              <!-- two phones side-by-side to suggest a multi-channel system -->
+              <rect x="90" y="28" width="180" height="284" rx="22" fill="url(#phoneGrad)" stroke="#A7B5E8" stroke-opacity="0.30" stroke-width="1"/>
+              <rect x="330" y="28" width="180" height="284" rx="22" fill="url(#phoneGrad)" stroke="#A7B5E8" stroke-opacity="0.30" stroke-width="1"/>
+              <!-- left phone bubbles -->
+              <rect x="104" y="80" width="130" height="30" rx="10" fill="url(#bubbleIn)"/>
+              <rect x="128" y="126" width="130" height="30" rx="10" fill="url(#bubbleOut)"/>
+              <rect x="104" y="172" width="110" height="30" rx="10" fill="url(#bubbleIn)"/>
+              <rect x="142" y="218" width="116" height="30" rx="10" fill="url(#bubbleOut)"/>
+              <!-- right phone — IG grid hint -->
+              <rect x="346" y="70" width="148" height="20" rx="6" fill="#182533"/>
+              <rect x="346" y="100" width="40" height="40" rx="6" fill="#2B5278"/>
+              <rect x="392" y="100" width="40" height="40" rx="6" fill="#1F3E5E"/>
+              <rect x="438" y="100" width="40" height="40" rx="6" fill="#2B5278"/>
+              <rect x="346" y="146" width="40" height="40" rx="6" fill="#1F3E5E"/>
+              <rect x="392" y="146" width="40" height="40" rx="6" fill="#2B5278"/>
+              <rect x="438" y="146" width="40" height="40" rx="6" fill="#1F3E5E"/>
+              <rect x="346" y="192" width="40" height="40" rx="6" fill="#2B5278"/>
+              <rect x="392" y="192" width="40" height="40" rx="6" fill="#1F3E5E"/>
+              <rect x="438" y="192" width="40" height="40" rx="6" fill="#2B5278"/>
+              <rect x="346" y="244" width="148" height="30" rx="8" fill="#182533"/>
+            </svg>
+          </div>
+          <div class="vt-play" aria-hidden="true">▶</div>
+          <div class="vt-caption">
+            <span class="vt-cap-label">Free course · full blueprint</span>
+            <span class="vt-cap-dur">11:42</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT · What you'll learn + CTA -->
+      <div class="learn-col">
+        <p class="learn-eyebrow">What you'll learn</p>
+        <div class="learn-list">
+          <div class="learn-item">
+            <div class="learn-check">✓</div>
+            <div class="learn-text">The <strong>6 BEST Tinder openers</strong> for getting dates (word-for-word scripts).</div>
+          </div>
+          <div class="learn-item">
+            <div class="learn-check">✓</div>
+            <div class="learn-text">The <strong>copy/paste formula</strong> for getting hundreds of matches on dating apps.</div>
+          </div>
+          <div class="learn-item">
+            <div class="learn-check">✓</div>
+            <div class="learn-text">How to <strong>confidently approach women in person</strong> and land dates, without being a creepy "pickup artist."</div>
+          </div>
+          <div class="learn-item">
+            <div class="learn-check">✓</div>
+            <div class="learn-text">Why <strong>Instagram is the best dating app ever created</strong> and how to use it to date top 1% women.</div>
+          </div>
+        </div>
+        <button class="learn-cta" id="primaryCta">Send me the course</button>
+        <p class="cta-friction"><strong>Free</strong> · no card · takes 2 minutes</p>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="mini-foot">
+    <a href="/terms.html">Terms</a>
+    <span>·</span>
+    <a href="/privacy.html">Privacy</a>
+    <span>·</span>
+    <a href="mailto:hello@atlasadvisory.co">Support</a>
+    <span>·</span>
+    <span>Atlas Advisory · &copy; <span id="yr">2026</span></span>
+  </div>
+</div>
+
+
+<!-- OPT-IN POP-UP · Name / Email / Phone -->
+<div class="popup-overlay" id="popupOverlay" role="dialog" aria-labelledby="popup-h" aria-modal="true">
+  <div class="popup-card">
+    <button class="popup-close" id="popupClose" aria-label="Close">×</button>
+
+    <p class="popup-eyebrow">Unlock the course</p>
+    <h2 class="popup-h" id="popup-h">Tell us where to send it.</h2>
+    <p class="popup-sub">Sign up with the email you'd like to use to log in.</p>
+
+    <form class="popup-form" id="optInForm" method="post" action="#" novalidate>
+      <label class="form-label" for="p-name">Name</label>
+      <input type="text" id="p-name" name="name" placeholder="First name" required autocomplete="given-name">
+
+      <label class="form-label" for="p-email">Email</label>
+      <input type="email" id="p-email" name="email" placeholder="you@example.com" required autocomplete="email">
+
+      <label class="form-label" for="p-phone">Phone</label>
+      <input type="tel" id="p-phone" name="phone" placeholder="+1 555 000 0000" required autocomplete="tel">
+
+      <div class="popup-consent">
+        <input type="checkbox" id="p-consent" name="sms_consent" required>
+        <label for="p-consent">
+          I agree and consent to SMS text confirmation in order to receive the course.
+        </label>
+      </div>
+
+      <p class="popup-fine">
+        By checking this box and submitting, I consent to receive automated SMS/MMS messages from Benjamin Seda at the number I provided, including confirmation and access instructions for the video and course and occasional promotional or informational messages. Reply STOP to opt out or HELP for assistance. Msg and data rates may apply.
+      </p>
+
+      <input type="hidden" name="source" id="optSource" value="direct">
+      <button type="submit" class="popup-btn">Send Me The Course</button>
+    </form>
+  </div>
+</div>
+
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Attribution capture — ?el= / ?utm_source= / ?ref= → hidden source field
+(function captureSource() {
+  const params = new URLSearchParams(window.location.search);
+  const src = params.get('el') || params.get('utm_source') || params.get('ref');
+  const hidden = document.getElementById('optSource');
+  if (src && hidden) hidden.value = src;
+})();
+
+// Pop-up wiring
+(function optInPopup() {
+  const overlay = document.getElementById('popupOverlay');
+  const closeBtn = document.getElementById('popupClose');
+  const thumb = document.getElementById('videoThumb');
+  const primaryCta = document.getElementById('primaryCta');
+  const firstField = document.getElementById('p-name');
+
+  function openPopup() {
+    overlay.classList.add('open');
+    setTimeout(() => firstField && firstField.focus(), 250);
+  }
+  function closePopup() { overlay.classList.remove('open'); }
+
+  thumb.addEventListener('click', openPopup);
+  thumb.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPopup(); }
+  });
+  primaryCta.addEventListener('click', openPopup);
+  closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closePopup(); });
+})();
+
+// Submit handler — validates + shows success state. Wire to ESP / webhook.
+document.getElementById('optInForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('p-name').value.trim();
+  const email = document.getElementById('p-email').value.trim();
+  const consent = document.getElementById('p-consent').checked;
+  if (!name || !email || !consent) return;
+  const card = document.querySelector('.popup-card');
+  card.innerHTML =
+    '<div style="text-align:center; padding:16px 8px;">' +
+      '<div style="display:inline-flex; align-items:center; gap:7px; background:var(--ok-soft); border:1px solid rgba(74,222,128,0.28); color:var(--ok); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:5px 12px; border-radius:99px; margin-bottom:18px;">' +
+        '<span style="width:5px; height:5px; border-radius:50%; background:var(--ok);"></span>Check your inbox' +
+      '</div>' +
+      '<h2 style="font-family:Spectral, Georgia, serif; font-weight:500; font-size:22px; line-height:1.15; letter-spacing:-0.015em; color:#fff; margin-bottom:10px;">The course is on the way.</h2>' +
+      '<p style="font-family:Inter, sans-serif; font-size:13px; line-height:1.55; color:var(--w55); max-width:320px; margin:0 auto;">Sent to <strong style="color:var(--gold); font-weight:600;">' + email + '</strong>. Check your inbox in the next two minutes.</p>' +
+    '</div>';
+});
+</script>
+
+</body>
+</html>
