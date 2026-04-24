@@ -3581,6 +3581,158 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   §5b · Video testimonials (below Deliverables).
+   3 selfie-style vertical videos with click-to-play.
+   Placeholder state shows gradient + play button until
+   user drops files into img/videos/.
+   ══════════════════════════════════════════════════════════ */
+.video-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.video-testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.vt-frame {
+  position: relative;
+  aspect-ratio: 9/16;
+  background: #0d0f16;
+  overflow: hidden;
+  cursor: pointer;
+}
+.vt-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+.vt-poster {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 110% 60% at 50% 105%, rgba(0,0,0,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 60% at 50% 35%, rgba(167,181,232,0.12) 0%, transparent 70%),
+    linear-gradient(180deg, #1a1d2c 0%, #0e1018 100%);
+}
+.vt-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+.vtp-1::after { background-image: var(--vt-poster-1, none); }
+.vtp-2::after { background-image: var(--vt-poster-2, none); }
+.vtp-3::after { background-image: var(--vt-poster-3, none); }
+.vt-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: #fff;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+.vt-play-btn:hover { transform: translate(-50%, -50%) scale(1.08); }
+.vt-play-btn svg {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+}
+.vt-runtime {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 4px 8px;
+  border-radius: 5px;
+  z-index: 2;
+}
+.vt-placeholder-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(167,181,232,0.14);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+.vt-meta {
+  padding: 18px 20px 22px;
+}
+.vt-name-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.vt-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--w90);
+  letter-spacing: -0.01em;
+}
+.vt-age {
+  font-size: 15px;
+  color: var(--w55);
+  font-weight: 500;
+}
+.vt-verified {
+  color: var(--gold);
+  font-size: 13px;
+  margin-left: 2px;
+}
+.vt-occupation {
+  font-size: 13px;
+  color: var(--w55);
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+.vt-tldr {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--w90);
+  font-style: italic;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .video-testi-grid { grid-template-columns: 1fr; gap: 20px; max-width: 420px; }
+  .vt-frame { aspect-ratio: 9/14; }
+  .vt-play-btn svg { width: 64px; height: 64px; }
+}
+
+/* ══════════════════════════════════════════════════════════
    §7 · Real Clients — 3 horizontal auto-scrolling rows
    Each row scrolls at a slow constant speed. Rows 1 and 3
    scroll left, row 2 scrolls right. Fade mask on edges.
@@ -4609,6 +4761,95 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
+<!-- §5b · VIDEO TESTIMONIALS (selfie-style, click-to-play).
+     Placeholders until 3 video files land in img/videos/v1.mp4, v2.mp4, v3.mp4. -->
+<section class="section s-dark" id="video-testimonials">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">Client Videos</p>
+    <h2 class="reveal d1 text-center">Real clients.<br><em>On camera.</em></h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:560px; margin:20px auto 0; color:var(--w55);">
+      Unscripted. Filmed on their phone. 90 days in.
+    </p>
+
+    <div class="video-testi-grid reveal d3">
+
+      <!-- Video 1 -->
+      <div class="video-testi-card" data-video="img/videos/v1.mp4">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-1"></div>
+          <span class="vt-placeholder-tag">Video 1</span>
+          <button class="vt-play-btn" aria-label="Play Video 1">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">0:47</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 1 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-testi-card" data-video="img/videos/v2.mp4">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-2"></div>
+          <span class="vt-placeholder-tag">Video 2</span>
+          <button class="vt-play-btn" aria-label="Play Video 2">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">1:12</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 2 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-testi-card" data-video="img/videos/v3.mp4">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-3"></div>
+          <span class="vt-placeholder-tag">Video 3</span>
+          <button class="vt-play-btn" aria-label="Play Video 3">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">0:58</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 3 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- §5c relocated to §3.6 (after video testimonials) per v32→main feedback 2026-04-23 -->
 
 
@@ -4894,116 +5135,8 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §10.5 PROBLEM (relocated before FAQ 2026-04-23). Tinder-style swipe cards. -->
-<section class="section s-dark">
-  <div class="swipe-heading-wrap">
-    <h2 class="reveal d1">Four things he tried.<br><em>None of them worked.</em></h2>
-    <div class="swipe-hint reveal d2">
-      <span class="sh-arrow">←</span>
-      <span>Swipe to see what went wrong</span>
-      <span class="sh-arrow">→</span>
-    </div>
-  </div>
-
-  <div class="swipe-stack reveal d3">
-    <div class="swipe-track" id="swipe-track">
-
-      <!-- Card 1: Todd intro. No swipe stamps on Our Client card. -->
-      <div class="swipe-card intro-hint" data-idx="0">
-        <div class="sc-photo sp-todd">
-          <div class="sc-photo-emoji">👤</div>
-          <div class="sc-badge gold">Our Client</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Todd, 54 <span class="sc-verified">✓</span></div>
-          <div class="sc-title">Retired Investor · $20M+ net worth</div>
-        </div>
-        <div class="sc-bio">
-          Has every box checked. Career. Fitness. Home. Portfolio. The only thing he hasn't figured out is this one. <strong>Not because he's broken. Because he never built a system for it.</strong>
-        </div>
-        <div class="sc-footer">Today's state <span class="sc-footer-right">Before Atlas</span></div>
-      </div>
-
-      <!-- Card 2: Matchmakers -->
-      <div class="swipe-card" data-idx="1">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-match">
-          <div class="sc-photo-emoji">💼</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Matchmakers</div>
-          <div class="sc-title">$10K to $30K/yr · The "premium" option</div>
-        </div>
-        <div class="sc-bio">
-          Outsource the whole thing. You hope their taste matches yours. It rarely does. <strong>No feedback. No compounding skill. Six months and zero quality dates.</strong>
-        </div>
-        <div class="sc-footer">Attempt 1 <span class="sc-footer-right">Cost: $20K/yr</span></div>
-      </div>
-
-      <!-- Card 3: Dating apps -->
-      <div class="swipe-card" data-idx="2">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-apps">
-          <div class="sc-photo-emoji">🔥</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Dating apps</div>
-          <div class="sc-title">Free to $60/mo · The "self-serve" option</div>
-        </div>
-        <div class="sc-bio">
-          Profile photos your friends took on a random Tuesday. A bio you wrote in three minutes. <strong>You match with women you're not attracted to. Silence from the ones you are.</strong>
-        </div>
-        <div class="sc-footer">Attempt 2 <span class="sc-footer-right">Match rate: 4.5%</span></div>
-      </div>
-
-      <!-- Card 4: Instagram -->
-      <div class="swipe-card" data-idx="3">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-ig">
-          <div class="sc-photo-emoji">◉</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Instagram</div>
-          <div class="sc-title">You have the account. Not the presence.</div>
-        </div>
-        <div class="sc-bio">
-          Women are doing more research than ever. Your feed is a career resume. <strong>They see a professional. Not a man they want to date.</strong>
-        </div>
-        <div class="sc-footer">Attempt 3 <span class="sc-footer-right">Last post: 4 months ago</span></div>
-      </div>
-
-      <!-- Card 5: Real life / Winging it -->
-      <div class="swipe-card" data-idx="4">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-irl">
-          <div class="sc-photo-emoji">👥</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Real life</div>
-          <div class="sc-title">Free · The "old way"</div>
-        </div>
-        <div class="sc-bio">
-          74% of women say they wish they were approached more. 55% of men haven't approached in the last year. <strong>You've been winging it. Nothing tells you why it isn't working.</strong>
-        </div>
-        <div class="sc-footer">Attempt 4 <span class="sc-footer-right">No feedback loop</span></div>
-      </div>
-
-    </div>
-
-    <div class="swipe-dots" id="swipe-dots-2">
-      <span class="swipe-dot active"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-    </div>
-  </div>
-  </div>
-</section>
+<!-- §10.5 PROBLEM swipe-card section removed on 2026-04-24.
+     Replaced by §5b Video Testimonials (selfie videos) placed below Deliverables. -->
 
 
 <!-- §11 FAQ -->
@@ -5550,6 +5683,19 @@ body.deliv-modal-open { overflow: hidden; }
       dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
     }, { passive: true });
   })();
+
+  // §5b · Video testimonials click-to-play.
+  // On first click, swap the placeholder frame for a real <video> element
+  // pointing at data-video. If file isn't there, the browser shows its
+  // native broken-media state — acceptable during placeholder phase.
+  document.querySelectorAll('.video-testi-card').forEach(card => {
+    const frame = card.querySelector('.vt-frame');
+    const src = card.dataset.video;
+    if (!frame || !src) return;
+    frame.addEventListener('click', () => {
+      frame.innerHTML = '<video controls autoplay playsinline preload="metadata" src="' + src + '"></video>';
+    }, { once: true });
+  });
 </script>
 
 
