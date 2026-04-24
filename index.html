@@ -3393,6 +3393,60 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .vt-dot.active { background: var(--blue); width: 18px; border-radius: 3px; }
 
+/* ══════════════════════════════════════════════════════════
+   v31 · Simple mobile deliverable cards (ported from v32).
+   Replaces the complex accordion on mobile. Small SVG icon +
+   header + body. Flat stacked layout.
+   ══════════════════════════════════════════════════════════ */
+.deliv-simple { display: none; }
+
+@media (max-width: 768px) {
+  /* Hide the old accordion + the desktop deliv-list entirely on mobile */
+  .deliv-m-cards { display: none !important; }
+  .deliv-list { display: none !important; }
+
+  .deliv-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 40px 0 24px;
+  }
+  .ds-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ds-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(167,181,232,0.10);
+    border: 1px solid rgba(167,181,232,0.25);
+    color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+  }
+  .ds-card h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    color: #fff;
+    margin: 0;
+  }
+  .ds-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.66);
+    margin: 0;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3439,116 +3493,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 <!-- Marquee removed per v30.2 feedback -->
 
-<!-- §3 PROBLEM. Tinder-style swipe cards. Todd intro + 4 problem cards. -->
-<section class="section s-dark">
-  <div class="swipe-heading-wrap">
-    <h2 class="reveal d1">Four things he tried.<br><em>None of them worked.</em></h2>
-    <div class="swipe-hint reveal d2">
-      <span class="sh-arrow">←</span>
-      <span>Swipe to see what went wrong</span>
-      <span class="sh-arrow">→</span>
-    </div>
-  </div>
-
-  <div class="swipe-stack reveal d3">
-    <div class="swipe-track" id="swipe-track">
-
-      <!-- Card 1: Todd intro. No swipe stamps on Our Client card. -->
-      <div class="swipe-card intro-hint" data-idx="0">
-        <div class="sc-photo sp-todd">
-          <div class="sc-photo-emoji">👤</div>
-          <div class="sc-badge gold">Our Client</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Todd, 54 <span class="sc-verified">✓</span></div>
-          <div class="sc-title">Retired Investor · $20M+ net worth</div>
-        </div>
-        <div class="sc-bio">
-          Has every box checked. Career. Fitness. Home. Portfolio. The only thing he hasn't figured out is this one. <strong>Not because he's broken. Because he never built a system for it.</strong>
-        </div>
-        <div class="sc-footer">Today's state <span class="sc-footer-right">Before Atlas</span></div>
-      </div>
-
-      <!-- Card 2: Matchmakers -->
-      <div class="swipe-card" data-idx="1">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-match">
-          <div class="sc-photo-emoji">💼</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Matchmakers</div>
-          <div class="sc-title">$10K to $30K/yr · The "premium" option</div>
-        </div>
-        <div class="sc-bio">
-          Outsource the whole thing. You hope their taste matches yours. It rarely does. <strong>No feedback. No compounding skill. Six months and zero quality dates.</strong>
-        </div>
-        <div class="sc-footer">Attempt 1 <span class="sc-footer-right">Cost: $20K/yr</span></div>
-      </div>
-
-      <!-- Card 3: Dating apps -->
-      <div class="swipe-card" data-idx="2">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-apps">
-          <div class="sc-photo-emoji">🔥</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Dating apps</div>
-          <div class="sc-title">Free to $60/mo · The "self-serve" option</div>
-        </div>
-        <div class="sc-bio">
-          Profile photos your friends took on a random Tuesday. A bio you wrote in three minutes. <strong>You match with women you're not attracted to. Silence from the ones you are.</strong>
-        </div>
-        <div class="sc-footer">Attempt 2 <span class="sc-footer-right">Match rate: 4.5%</span></div>
-      </div>
-
-      <!-- Card 4: Instagram -->
-      <div class="swipe-card" data-idx="3">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-ig">
-          <div class="sc-photo-emoji">◉</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Instagram</div>
-          <div class="sc-title">You have the account. Not the presence.</div>
-        </div>
-        <div class="sc-bio">
-          Women are doing more research than ever. Your feed is a career resume. <strong>They see a professional. Not a man they want to date.</strong>
-        </div>
-        <div class="sc-footer">Attempt 3 <span class="sc-footer-right">Last post: 4 months ago</span></div>
-      </div>
-
-      <!-- Card 5: Real life / Winging it -->
-      <div class="swipe-card" data-idx="4">
-        <div class="sc-stamp-nope">NOPE</div>
-        <div class="sc-photo sp-irl">
-          <div class="sc-photo-emoji">👥</div>
-          <div class="sc-badge red">Failed</div>
-        </div>
-        <div class="sc-info">
-          <div class="sc-name">Real life</div>
-          <div class="sc-title">Free · The "old way"</div>
-        </div>
-        <div class="sc-bio">
-          74% of women say they wish they were approached more. 55% of men haven't approached in the last year. <strong>You've been winging it. Nothing tells you why it isn't working.</strong>
-        </div>
-        <div class="sc-footer">Attempt 4 <span class="sc-footer-right">No feedback loop</span></div>
-      </div>
-
-    </div>
-
-    <div class="swipe-dots" id="swipe-dots">
-      <span class="swipe-dot active"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-      <span class="swipe-dot"></span>
-    </div>
-  </div>
-  </div>
-</section>
+<!-- §3 PROBLEM relocated after §9 90-day timeline (2026-04-23) -->
 
 
 <!-- §3.5 VIDEO TESTIMONIALS · Horizontal swipe carousel. 3 videos. Ported from v32. -->
@@ -3856,8 +3801,72 @@ body.deliv-modal-open { overflow: hidden; }
       What you keep after the 90-day engagement.
     </p>
 
-    
-    <!-- v30.1 Mobile compact cards. Visible only on mobile. Click to open modal. -->
+
+    <!-- v31 · Simple mobile deliverable cards (ported from v32). No accordion, no expansion. Visible only on mobile. -->
+    <div class="deliv-simple">
+      <div class="ds-card">
+        <div class="ds-icon">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="11" r="4.5"/>
+            <path d="M7 26c1.5-4.5 5-6.5 9-6.5s7.5 2 9 6.5"/>
+            <path d="M22.5 6.5l3 1.5M28.5 8l1.5 3"/>
+          </svg>
+        </div>
+        <h3>Done-For-You Profile Rebuild</h3>
+        <p>Female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different presentation. Different outcome.</p>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-icon">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M5 9h22M5 16h22M5 23h22"/>
+            <circle cx="10" cy="9" r="1.4" fill="currentColor"/>
+            <circle cx="18" cy="16" r="1.4" fill="currentColor"/>
+            <circle cx="23" cy="23" r="1.4" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>The 3 Part Pipeline</h3>
+        <p>Three channels running in parallel. Apps, Instagram, real life. When one cools, another is already warm. No single point of failure.</p>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-icon">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9a3 3 0 013-3h14a3 3 0 013 3v8a3 3 0 01-3 3h-8l-5 4v-4h-1a3 3 0 01-3-3V9z"/>
+            <path d="M12 11h8M12 15h6"/>
+          </svg>
+        </div>
+        <h3>The Conversion Blueprint</h3>
+        <p>Scripts, texting system, date frames. The exact messages that turn a match into a booked dinner, and how to spot when you are being read but not replied to.</p>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-icon">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M6 16v0M10 12v8M14 9v14M18 12v8M22 14v4M26 16v0"/>
+          </svg>
+        </div>
+        <h3>Date Debrief Feedback Loop</h3>
+        <p>After every date, a voice-note debrief with your advisor. Under 24-hour turnaround. You stop repeating the same mistake on date number three.</p>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-icon">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+            <circle cx="7" cy="7" r="2.2"/>
+            <circle cx="25" cy="7" r="2.2"/>
+            <circle cx="7" cy="25" r="2.2"/>
+            <circle cx="25" cy="25" r="2.2"/>
+            <path d="M9 9l5 5M23 9l-5 5M9 23l5-5M23 23l-5-5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>The Atlas Network</h3>
+        <p>Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. A team of experts in your pocket.</p>
+      </div>
+    </div>
+
+    <!-- v30.1 Mobile compact cards (legacy accordion, hidden on mobile by v31 CSS below). -->
     <div class="deliv-m-cards" id="delivMCards">
       <div class="deliv-m-card" data-deliv="profile" data-title="Done-For-You Profile Rebuild" data-sub="Our female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different outcome."><div class="deliv-m-preview">
         <div class="deliv-m-thumb thumb-profile"><span>REBUILD</span></div>
@@ -4613,6 +4622,118 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- §9.5 PROBLEM (relocated from §3 on 2026-04-23). Tinder-style swipe cards. Todd intro + 4 problem cards. -->
+<section class="section s-dark">
+  <div class="swipe-heading-wrap">
+    <h2 class="reveal d1">Four things he tried.<br><em>None of them worked.</em></h2>
+    <div class="swipe-hint reveal d2">
+      <span class="sh-arrow">←</span>
+      <span>Swipe to see what went wrong</span>
+      <span class="sh-arrow">→</span>
+    </div>
+  </div>
+
+  <div class="swipe-stack reveal d3">
+    <div class="swipe-track" id="swipe-track">
+
+      <!-- Card 1: Todd intro. No swipe stamps on Our Client card. -->
+      <div class="swipe-card intro-hint" data-idx="0">
+        <div class="sc-photo sp-todd">
+          <div class="sc-photo-emoji">👤</div>
+          <div class="sc-badge gold">Our Client</div>
+        </div>
+        <div class="sc-info">
+          <div class="sc-name">Todd, 54 <span class="sc-verified">✓</span></div>
+          <div class="sc-title">Retired Investor · $20M+ net worth</div>
+        </div>
+        <div class="sc-bio">
+          Has every box checked. Career. Fitness. Home. Portfolio. The only thing he hasn't figured out is this one. <strong>Not because he's broken. Because he never built a system for it.</strong>
+        </div>
+        <div class="sc-footer">Today's state <span class="sc-footer-right">Before Atlas</span></div>
+      </div>
+
+      <!-- Card 2: Matchmakers -->
+      <div class="swipe-card" data-idx="1">
+        <div class="sc-stamp-nope">NOPE</div>
+        <div class="sc-photo sp-match">
+          <div class="sc-photo-emoji">💼</div>
+          <div class="sc-badge red">Failed</div>
+        </div>
+        <div class="sc-info">
+          <div class="sc-name">Matchmakers</div>
+          <div class="sc-title">$10K to $30K/yr · The "premium" option</div>
+        </div>
+        <div class="sc-bio">
+          Outsource the whole thing. You hope their taste matches yours. It rarely does. <strong>No feedback. No compounding skill. Six months and zero quality dates.</strong>
+        </div>
+        <div class="sc-footer">Attempt 1 <span class="sc-footer-right">Cost: $20K/yr</span></div>
+      </div>
+
+      <!-- Card 3: Dating apps -->
+      <div class="swipe-card" data-idx="2">
+        <div class="sc-stamp-nope">NOPE</div>
+        <div class="sc-photo sp-apps">
+          <div class="sc-photo-emoji">🔥</div>
+          <div class="sc-badge red">Failed</div>
+        </div>
+        <div class="sc-info">
+          <div class="sc-name">Dating apps</div>
+          <div class="sc-title">Free to $60/mo · The "self-serve" option</div>
+        </div>
+        <div class="sc-bio">
+          Profile photos your friends took on a random Tuesday. A bio you wrote in three minutes. <strong>You match with women you're not attracted to. Silence from the ones you are.</strong>
+        </div>
+        <div class="sc-footer">Attempt 2 <span class="sc-footer-right">Match rate: 4.5%</span></div>
+      </div>
+
+      <!-- Card 4: Instagram -->
+      <div class="swipe-card" data-idx="3">
+        <div class="sc-stamp-nope">NOPE</div>
+        <div class="sc-photo sp-ig">
+          <div class="sc-photo-emoji">◉</div>
+          <div class="sc-badge red">Failed</div>
+        </div>
+        <div class="sc-info">
+          <div class="sc-name">Instagram</div>
+          <div class="sc-title">You have the account. Not the presence.</div>
+        </div>
+        <div class="sc-bio">
+          Women are doing more research than ever. Your feed is a career resume. <strong>They see a professional. Not a man they want to date.</strong>
+        </div>
+        <div class="sc-footer">Attempt 3 <span class="sc-footer-right">Last post: 4 months ago</span></div>
+      </div>
+
+      <!-- Card 5: Real life / Winging it -->
+      <div class="swipe-card" data-idx="4">
+        <div class="sc-stamp-nope">NOPE</div>
+        <div class="sc-photo sp-irl">
+          <div class="sc-photo-emoji">👥</div>
+          <div class="sc-badge red">Failed</div>
+        </div>
+        <div class="sc-info">
+          <div class="sc-name">Real life</div>
+          <div class="sc-title">Free · The "old way"</div>
+        </div>
+        <div class="sc-bio">
+          74% of women say they wish they were approached more. 55% of men haven't approached in the last year. <strong>You've been winging it. Nothing tells you why it isn't working.</strong>
+        </div>
+        <div class="sc-footer">Attempt 4 <span class="sc-footer-right">No feedback loop</span></div>
+      </div>
+
+    </div>
+
+    <div class="swipe-dots" id="swipe-dots">
+      <span class="swipe-dot active"></span>
+      <span class="swipe-dot"></span>
+      <span class="swipe-dot"></span>
+      <span class="swipe-dot"></span>
+      <span class="swipe-dot"></span>
+    </div>
+  </div>
   </div>
 </section>
 
