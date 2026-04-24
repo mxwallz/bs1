@@ -3402,8 +3402,9 @@ body.deliv-modal-open { overflow: hidden; }
   cursor: pointer; z-index: 3;
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.25s ease, background 0.25s;
-  padding: 0 0 0 4px;
+  padding: 0;
 }
+.vt-play svg { margin-left: 3px; }
 .vt-play:hover { background: rgba(167,181,232,0.36); transform: translate(-50%, -50%) scale(1.08); }
 .vt-dots {
   display: flex; justify-content: center; gap: 6px;
@@ -3411,7 +3412,7 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .vt-dot {
   width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(255,255,255,0.22);
+  background: rgba(167,181,232,0.28);
   transition: all 0.3s ease;
 }
 .vt-dot.active { background: var(--blue); width: 18px; border-radius: 3px; }
@@ -4040,7 +4041,7 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- §3.5 VIDEO TESTIMONIALS · Horizontal swipe carousel. 3 videos. Ported from v32. -->
 <section class="section s-black" id="video-testimonials">
   <div class="inner">
-    <p class="eyebrow text-center reveal d1">Hear From the Clients</p>
+    <p class="eyebrow text-center reveal d1">What Our Clients Say</p>
     <h2 class="reveal d1 text-center">Real Clients. Real Outcomes.</h2>
     <p class="body-lg reveal d2 text-center" style="max-width:720px; margin:20px auto 0; color:var(--w55);">
       Watch how high-performing men used Atlas to rebuild their dating lives from the ground up. Without relying on matchmakers, pickup tactics, or random luck.
@@ -4053,7 +4054,7 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g1">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">2:47</span>
-            <button class="vt-play" aria-label="Play Todd testimonial">▶</button>
+            <button class="vt-play" aria-label="Play Todd testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
             <span class="vt-thumb-label">Todd · Retired Investor</span>
           </div>
           <div class="vt-meta">
@@ -4066,7 +4067,7 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g2">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">3:12</span>
-            <button class="vt-play" aria-label="Play Yaro testimonial">▶</button>
+            <button class="vt-play" aria-label="Play Yaro testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
             <span class="vt-thumb-label">Yaro · Software Engineer</span>
           </div>
           <div class="vt-meta">
@@ -4079,7 +4080,7 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g3">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">2:21</span>
-            <button class="vt-play" aria-label="Play Spencer testimonial">▶</button>
+            <button class="vt-play" aria-label="Play Spencer testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
             <span class="vt-thumb-label">Spencer · Cybersecurity</span>
           </div>
           <div class="vt-meta">
