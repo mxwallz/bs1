@@ -3372,7 +3372,7 @@ body.deliv-modal-open { overflow: hidden; }
   scrollbar-width: none; -ms-overflow-style: none;
   padding: 8px 24px 32px;
   margin: 0 -24px;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
   -webkit-overflow-scrolling: touch;
 }
 .vt-swipe-track::-webkit-scrollbar { display: none; }
@@ -3602,14 +3602,16 @@ body.deliv-modal-open { overflow: hidden; }
   .match-transition { margin: 40px auto 14px; }
 
   /* Flex carousel: 2.5 cards per view, auto-scroll, seamless loop
-     via duplicated card set (.match-card-dup). */
+     via duplicated card set (.match-card-dup). Translates by the exact
+     width of one 6-card set (6 × 36vw + 6 × 8px gap) so the loop point
+     is visually identical to the start — no visible reset. */
   .match-grid-cards {
     display: flex;
     flex-wrap: nowrap;
     gap: 8px;
     width: max-content;
     padding: 0 14px;
-    animation: matchScroll 22s linear infinite;
+    animation: matchScroll 60s linear infinite;
   }
   .match-grid-cards:hover { animation-play-state: paused; }
   .match-card { flex: 0 0 36vw; }
@@ -3623,7 +3625,7 @@ body.deliv-modal-open { overflow: hidden; }
 }
 @keyframes matchScroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(calc(-216vw - 48px)); }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -3773,7 +3775,9 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 900px) {
-  /* Horizontal swipe carousel on mobile. Manual scroll + snap, no auto-move. */
+  /* Horizontal swipe carousel on mobile. Manual scroll + snap, no auto-move.
+     Card sized to fit within viewport height: 9/14 frame capped to ~54vh so
+     the card (frame + meta) fits on a standard phone screen. */
   .video-testi-grid {
     display: flex;
     grid-template-columns: none;
@@ -3786,15 +3790,22 @@ body.deliv-modal-open { overflow: hidden; }
     padding: 4px 18px 14px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
   }
   .video-testi-grid::-webkit-scrollbar { display: none; }
   .video-testi-card {
-    flex: 0 0 82%;
+    flex: 0 0 68%;
+    max-width: 360px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-  .vt-frame { aspect-ratio: 9/14; }
-  .vt-play-btn svg { width: 64px; height: 64px; }
+  .vt-frame { aspect-ratio: 9/14; max-height: 54vh; }
+  .vt-play-btn svg { width: 56px; height: 56px; }
+  .vt-meta { padding: 14px 16px 16px; }
+  .vt-name { font-size: 15px; }
+  .vt-age { font-size: 13px; }
+  .vt-occupation { font-size: 12px; margin-bottom: 10px; }
+  .vt-tldr { font-size: 13px; padding-top: 10px; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -3900,6 +3911,52 @@ body.deliv-modal-open { overflow: hidden; }
   .founder-body p,
   .founder-body .eyebrow { text-align: center; }
   .founder-body .stat-grid { justify-content: center; margin-left: auto; margin-right: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   v33 · Mobile deliverable section: show the rich visuals
+   (not the stripped .deliv-simple icons). Keep only header,
+   body, and visual. Strip testimonial pull-quote and specs.
+   Visuals reduced ~30% from prior mobile sizing.
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Show the rich deliverable list on mobile. */
+  .deliv-list { display: flex !important; }
+
+  /* Hide the icon-only fallback cards — we're showing the real mockups now. */
+  .deliv-simple { display: none !important; }
+
+  /* Each card: single column, tight padding, no alternating direction. */
+  .deliv {
+    grid-template-columns: 1fr !important;
+    direction: ltr !important;
+    padding: 22px 18px !important;
+    gap: 18px !important;
+    min-height: auto !important;
+  }
+  .deliv:nth-child(even) { direction: ltr !important; }
+  .deliv:nth-child(even) > * { direction: ltr !important; }
+
+  /* Hide everything except header, body, and visual. */
+  .deliv .deliv-testi,
+  .deliv .deliv-copy .spec { display: none !important; }
+
+  /* Order: visual on top, copy below. */
+  .deliv .deliv-mock-wrap { order: 1; }
+  .deliv .deliv-copy { order: 2; }
+
+  /* Shrink the mockups ~30% from prior mobile sizing. */
+  .deliv-mock-wrap { min-height: auto !important; }
+  .deliv.wwys-big .deliv-mock-wrap,
+  .deliv.profile-big .deliv-mock-wrap,
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 308px !important; padding: 8px !important; }
+  .deliv.network-big .deliv-mock-wrap { min-height: 280px !important; padding: 8px !important; }
+
+  .rp-phone { width: 154px !important; height: 333px !important; }
+  .wwys-phone, .reb-phone, .prof-swiper { max-height: 294px !important; }
+  .pipe2 { max-width: 294px !important; }
+  .mock-net2 svg { max-width: 280px !important; }
+  .debrief-thread { max-width: 280px !important; }
 }
 
 </style>
