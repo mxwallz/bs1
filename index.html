@@ -3415,35 +3415,47 @@ body.deliv-modal-open { overflow: hidden; }
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 22px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 18px 18px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: center;
   }
   .ds-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 28px; height: 28px;
+    border-radius: 7px;
     background: rgba(167,181,232,0.10);
     border: 1px solid rgba(167,181,232,0.25);
     color: var(--blue);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 6px;
+    margin-bottom: 0;
     flex-shrink: 0;
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .ds-icon svg {
+    width: 16px !important;
+    height: 16px !important;
   }
   .ds-card h3 {
     font-family: 'Spectral', Georgia, serif;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 500;
     letter-spacing: -0.01em;
     line-height: 1.25;
     color: #fff;
     margin: 0;
+    grid-row: 1;
+    grid-column: 2;
   }
   .ds-card p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.55;
     color: rgba(255,255,255,0.66);
     margin: 0;
+    grid-row: 2;
+    grid-column: 1 / -1;
   }
 
   /* Combine System + Deliverables on mobile by hiding the standalone
@@ -3712,7 +3724,10 @@ body.deliv-modal-open { overflow: hidden; }
 <section class="section s-black" id="system">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">The System</p>
-    <h2 class="reveal d1 text-center">Get in front of the right women.<br>Turn attention into dates.<br><em>Optimize each step of the dating process.</em></h2>
+    <h2 class="reveal d1 text-center">A framework.<br><em>Not tips.</em></h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:24px auto 0; color:var(--w55);">
+      Get in front of the right women. Turn attention into dates.
+    </p>
 
     <div class="modules">
 
@@ -3866,44 +3881,8 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
     </div>
 
-    <!-- v30.1 Mobile compact cards (legacy accordion, hidden on mobile by v31 CSS below). -->
-    <div class="deliv-m-cards" id="delivMCards">
-      <div class="deliv-m-card" data-deliv="profile" data-title="Done-For-You Profile Rebuild" data-sub="Our female advisors rebuild your dating apps and Instagram from photos to bio to prompts. Same man. Different outcome."><div class="deliv-m-preview">
-        <div class="deliv-m-thumb thumb-profile"><span>REBUILD</span></div>
-        <div class="deliv-m-text">
-          <h3>Profile Rebuild</h3>
-          <p>Dating apps + Instagram rebuilt by female advisors.</p>
-          <span class="deliv-m-tap">Tap to see →</span>
-        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
-      <div class="deliv-m-card" data-deliv="pipeline" data-title="The 3 Part Pipeline" data-sub="Three channels running in parallel. Apps, Instagram, real life. When one cools, another is already warm."><div class="deliv-m-preview">
-        <div class="deliv-m-thumb thumb-pipeline"><span>PIPELINE</span></div>
-        <div class="deliv-m-text">
-          <h3>The 3 Part Pipeline</h3>
-          <p>Three channels running in parallel. No single point of failure.</p>
-          <span class="deliv-m-tap">Tap to see →</span>
-        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
-      <div class="deliv-m-card" data-deliv="wwys" data-title="The Conversion Blueprint" data-sub="Scripts, texting system, date frames. Click either path to see how most guys fail vs what Atlas clients send."><div class="deliv-m-preview">
-        <div class="deliv-m-thumb thumb-wwys"><span>MESSAGES</span></div>
-        <div class="deliv-m-text">
-          <h3>What Would You Say</h3>
-          <p>Scripts + frames that turn matches into booked calendar time.</p>
-          <span class="deliv-m-tap">Tap to see →</span>
-        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
-      <div class="deliv-m-card" data-deliv="debrief" data-title="Date Debrief Feedback Loop" data-sub="After every date, a voice-note debrief with your advisor. Under 24-hour turnaround."><div class="deliv-m-preview">
-        <div class="deliv-m-thumb thumb-debrief"><span>DEBRIEF</span></div>
-        <div class="deliv-m-text">
-          <h3>Date Debrief Loop</h3>
-          <p>Voice-note feedback from your advisor after every date.</p>
-          <span class="deliv-m-tap">Tap to see →</span>
-        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
-      <div class="deliv-m-card" data-deliv="network" data-title="The Atlas Network" data-sub="Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men."><div class="deliv-m-preview">
-        <div class="deliv-m-thumb thumb-network"><span>TEAM</span></div>
-        <div class="deliv-m-text">
-          <h3>The Atlas Network</h3>
-          <p>A team of experts right in your pocket.</p>
-          <span class="deliv-m-tap">Tap to see →</span>
-        </div><div class="deliv-m-expand" aria-hidden="true"></div></div></div>
-    </div>
+    <!-- v30.1 .deliv-m-cards accordion block deleted on 2026-04-24. Replaced by v31 .deliv-simple cards above. -->
+
 
 <div class="deliv-list">
 
