@@ -127,6 +127,9 @@ p { color: var(--w75); }
 
 /* Hero */
 .hero { padding-top: clamp(120px, 14vw, 170px); }
+/* Deeper blue em on hero headline so "in the Next 30 Days" reads cleanly
+   against the dark background (overrides the softer global h1 em color). */
+.hero h1 em { color: #6A7FD2; opacity: 1; }
 .hero .pill {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.36);
@@ -3557,6 +3560,8 @@ body.deliv-modal-open { overflow: hidden; }
   overflow: hidden;
   background: #14161f;
 }
+/* Duplicate set used only for mobile carousel loop. */
+.match-card-dup { display: none; }
 .match-photo {
   position: absolute;
   inset: 0;
@@ -3590,14 +3595,35 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  .match-upsell { padding: 14px 14px 16px; margin-top: 24px; }
+  /* Zero horizontal padding so the auto-scroll track runs edge-to-edge.
+     Header still gets horizontal padding internally. */
+  .match-upsell { padding: 14px 0 16px; margin-top: 24px; overflow: hidden; }
+  .match-upsell-header { padding: 0 14px; }
   .match-transition { margin: 40px auto 14px; }
-  .match-grid-cards { gap: 4px; }
+
+  /* Flex carousel: 2.5 cards per view, auto-scroll, seamless loop
+     via duplicated card set (.match-card-dup). */
+  .match-grid-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: max-content;
+    padding: 0 14px;
+    animation: matchScroll 22s linear infinite;
+  }
+  .match-grid-cards:hover { animation-play-state: paused; }
+  .match-card { flex: 0 0 36vw; }
+  .match-card-dup { display: block; }
+
   .match-photo { filter: blur(2px); }
-  .match-info { font-size: 8px; padding: 2px 3px; border-radius: 3px; letter-spacing: 0; }
+  .match-info { font-size: 10px; padding: 3px 5px; border-radius: 4px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }
   .match-unlock { font-size: 9px; padding: 4px 8px; letter-spacing: 0.12em; }
+}
+@keyframes matchScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -4236,6 +4262,31 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="match-info">Nora, 27 · 1 mi</div>
         </div>
         <div class="match-card">
+          <div class="match-photo mp-6"></div>
+          <div class="match-info">Zoe, 24 · 5 mi</div>
+        </div>
+        <!-- Duplicate set for seamless mobile carousel loop. Hidden on desktop. -->
+        <div class="match-card match-card-dup" aria-hidden="true">
+          <div class="match-photo mp-1"></div>
+          <div class="match-info">Emma, 24 · 1 mi</div>
+        </div>
+        <div class="match-card match-card-dup" aria-hidden="true">
+          <div class="match-photo mp-2"></div>
+          <div class="match-info">Mia, 26 · 3 mi</div>
+        </div>
+        <div class="match-card match-card-dup" aria-hidden="true">
+          <div class="match-photo mp-3"></div>
+          <div class="match-info">Sophia, 25 · 2 mi</div>
+        </div>
+        <div class="match-card match-card-dup" aria-hidden="true">
+          <div class="match-photo mp-4"></div>
+          <div class="match-info">Ava, 23 · 4 mi</div>
+        </div>
+        <div class="match-card match-card-dup" aria-hidden="true">
+          <div class="match-photo mp-5"></div>
+          <div class="match-info">Nora, 27 · 1 mi</div>
+        </div>
+        <div class="match-card match-card-dup" aria-hidden="true">
           <div class="match-photo mp-6"></div>
           <div class="match-info">Zoe, 24 · 5 mi</div>
         </div>
