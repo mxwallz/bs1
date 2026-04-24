@@ -3465,6 +3465,211 @@ body.deliv-modal-open { overflow: hidden; }
   #system { display: none !important; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   §3.6 · Tinder/Hinge-style blurred match grid
+   Simulates the "47 people liked you" premium upsell.
+   Profile portraits are blurred 40% like the non-premium view.
+   Gradient placeholders stand in for AI-generated photos.
+   ══════════════════════════════════════════════════════════ */
+.match-upsell {
+  max-width: 560px;
+  margin: 48px auto 0;
+  padding: 18px 20px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.match-upsell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 0 2px;
+  gap: 12px;
+}
+.match-badge {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+.match-heart {
+  font-size: 16px;
+  line-height: 1;
+}
+.match-unlock {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--w55);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.match-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.match-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1d2e;
+}
+.match-photo {
+  position: absolute;
+  inset: 0;
+  filter: blur(14px);
+  transform: scale(1.25);
+  background-size: cover;
+  background-position: center 30%;
+}
+.mp-1 { background: radial-gradient(circle at 50% 30%, #f5d0c5 0%, #e8a79a 35%, #6e4e4e 90%); }
+.mp-2 { background: radial-gradient(circle at 50% 28%, #f0d1a8 0%, #cfa27c 35%, #5a4028 90%); }
+.mp-3 { background: radial-gradient(circle at 50% 32%, #f8c8b0 0%, #d8a07b 35%, #6b4838 90%); }
+.mp-4 { background: radial-gradient(circle at 50% 30%, #d4a574 0%, #a8845f 35%, #4a3020 90%); }
+.mp-5 { background: radial-gradient(circle at 50% 28%, #f8d7bf 0%, #e5a882 35%, #70504a 90%); }
+.mp-6 { background: radial-gradient(circle at 50% 30%, #e8c4a0 0%, #c39070 35%, #5e4030 90%); }
+.match-info {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .match-upsell { padding: 14px 14px 16px; margin-top: 32px; }
+  .match-grid-cards { gap: 6px; }
+  .match-photo { filter: blur(10px); }
+  .match-info { font-size: 9px; padding: 3px 5px; border-radius: 4px; }
+  .match-badge { font-size: 12px; }
+  .match-heart { font-size: 13px; }
+  .match-unlock { font-size: 9px; padding: 4px 8px; letter-spacing: 0.12em; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   §7 · Real Clients — 3 horizontal auto-scrolling rows
+   Each row scrolls at a slow constant speed. Rows 1 and 3
+   scroll left, row 2 scrolls right. Fade mask on edges.
+   ══════════════════════════════════════════════════════════ */
+.testi-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 56px -24px 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.testi-row {
+  overflow: hidden;
+}
+.testi-row-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+.testi-row-track.testi-left {
+  animation: testiScrollLeft 70s linear infinite;
+}
+.testi-row-track.testi-right {
+  animation: testiScrollRight 70s linear infinite;
+}
+.testi-row-track:hover {
+  animation-play-state: paused;
+}
+@keyframes testiScrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes testiScrollRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.testi-row .tc-card {
+  flex-shrink: 0;
+  width: 360px;
+  padding: 22px 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.testi-row .tc-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testi-row .tc-photo {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg3), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; font-size: 15px;
+  flex-shrink: 0;
+}
+.testi-row .tc-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 16px; font-weight: 500; color: #fff;
+  letter-spacing: -0.01em;
+}
+.testi-row .tc-title {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.testi-row .tc-quote {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+.testi-row .tc-quote strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .testi-row .tc-card { width: 280px; padding: 18px 18px; }
+  .testi-row .tc-quote { font-size: 12.5px; line-height: 1.5; }
+  .testi-row-track.testi-left,
+  .testi-row-track.testi-right { animation-duration: 55s; }
+}
+
+/* Center founder stats on mobile (portrait + body text both centered) */
+@media (max-width: 960px) {
+  .founder-stats { text-align: center; justify-items: center; }
+  .founder-body { text-align: center; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .founder-body h2,
+  .founder-body p,
+  .founder-body .eyebrow { text-align: center; }
+  .founder-body .stat-grid { justify-content: center; margin-left: auto; margin-right: auto; }
+}
+
 </style>
 </head>
 <body>
@@ -3714,6 +3919,40 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
       </div>
     </div></div>
+
+    <!-- Tinder-style "likes you" premium upsell grid. Blurred profile portraits. -->
+    <div class="match-upsell reveal d4">
+      <div class="match-upsell-header">
+        <span class="match-badge"><span class="match-heart">♥</span> 47 people liked you this week</span>
+        <span class="match-unlock">Tap to view</span>
+      </div>
+      <div class="match-grid-cards">
+        <div class="match-card">
+          <div class="match-photo mp-1"></div>
+          <div class="match-info">Emma, 24 · 1 mi</div>
+        </div>
+        <div class="match-card">
+          <div class="match-photo mp-2"></div>
+          <div class="match-info">Mia, 26 · 3 mi</div>
+        </div>
+        <div class="match-card">
+          <div class="match-photo mp-3"></div>
+          <div class="match-info">Sophia, 25 · 2 mi</div>
+        </div>
+        <div class="match-card">
+          <div class="match-photo mp-4"></div>
+          <div class="match-info">Ava, 23 · 4 mi</div>
+        </div>
+        <div class="match-card">
+          <div class="match-photo mp-5"></div>
+          <div class="match-info">Nora, 27 · 1 mi</div>
+        </div>
+        <div class="match-card">
+          <div class="match-photo mp-6"></div>
+          <div class="match-info">Zoe, 24 · 5 mi</div>
+        </div>
+      </div>
+    </div>
 
     <p class="sub-note text-center" style="margin-top:32px;">Illustrative. Individual results depend on execution and profile.</p>
   </div>
@@ -4435,113 +4674,103 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §7 TESTIMONIALS. 3-column vertical carousel, alternating directions. -->
+<!-- §7 TESTIMONIALS. 3-row horizontal carousels, alternating direction per row. -->
 <section class="section s-dark" id="testimonials">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">Real Clients</p>
     <h2 class="reveal d1 text-center">These are not outliers.</h2>
 
-    <div class="testi-columns reveal d2">
+    <div class="testi-rows reveal d2">
 
-      <!-- Column 1: scrolls up -->
-      <div class="testi-col">
-        <div class="testi-col-track up">
+      <!-- Row 1: scrolls left -->
+      <div class="testi-row">
+        <div class="testi-row-track testi-left">
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">T</div>
-              <div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div>
-            </div>
+            <div class="tc-head"><div class="tc-photo">T</div><div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div></div>
             <p class="tc-quote">"Was paying a matchmaker. Got nowhere. <strong>20 dates in 30 days</strong>, most with women in their 20s and 30s. Age was never the obstacle."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">Y</div>
-              <div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div>
-            </div>
-            <p class="tc-quote">"I had every box checked as a man except this one. <strong>30 days after the pipeline went live, I had 20+ dates on my calendar.</strong>"</p>
+            <div class="tc-head"><div class="tc-photo">Y</div><div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div></div>
+            <p class="tc-quote">"Every box checked as a man except this one. <strong>30 days after the pipeline went live, 20+ dates on my calendar.</strong>"</p>
           </div>
-          <!-- Duplicate for seamless loop -->
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">T</div>
-              <div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div>
-            </div>
+            <div class="tc-head"><div class="tc-photo">S</div><div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div></div>
+            <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">T</div><div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div></div>
             <p class="tc-quote">"Was paying a matchmaker. Got nowhere. <strong>20 dates in 30 days</strong>, most with women in their 20s and 30s. Age was never the obstacle."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">Y</div>
-              <div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div>
-            </div>
-            <p class="tc-quote">"I had every box checked as a man except this one. <strong>30 days after the pipeline went live, I had 20+ dates on my calendar.</strong>"</p>
+            <div class="tc-head"><div class="tc-photo">Y</div><div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div></div>
+            <p class="tc-quote">"Every box checked as a man except this one. <strong>30 days after the pipeline went live, 20+ dates on my calendar.</strong>"</p>
+          </div>
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">S</div><div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div></div>
+            <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
           </div>
         </div>
       </div>
 
-      <!-- Column 2: scrolls down -->
-      <div class="testi-col">
-        <div class="testi-col-track down">
+      <!-- Row 2: scrolls right -->
+      <div class="testi-row">
+        <div class="testi-row-track testi-right">
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">S</div>
-              <div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div>
-            </div>
-            <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
-          </div>
-          <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">A</div>
-              <div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div>
-            </div>
+            <div class="tc-head"><div class="tc-photo">A</div><div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div></div>
             <p class="tc-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">S</div>
-              <div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div>
-            </div>
-            <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
+            <div class="tc-head"><div class="tc-photo">B</div><div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div></div>
+            <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">A</div>
-              <div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div>
-            </div>
+            <div class="tc-head"><div class="tc-photo">H</div><div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div></div>
+            <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
+          </div>
+          <!-- Duplicate set -->
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">A</div><div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div></div>
             <p class="tc-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
+          </div>
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">B</div><div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div></div>
+            <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
+          </div>
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">H</div><div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div></div>
+            <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
           </div>
         </div>
       </div>
 
-      <!-- Column 3: scrolls up -->
-      <div class="testi-col">
-        <div class="testi-col-track up">
+      <!-- Row 3: scrolls left -->
+      <div class="testi-row">
+        <div class="testi-row-track testi-left">
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">B</div>
-              <div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div>
-            </div>
-            <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
+            <div class="tc-head"><div class="tc-photo">P</div><div><div class="tc-name">Parker</div><div class="tc-title">Business Analyst</div></div></div>
+            <p class="tc-quote">"Profile rebuilt by the female advisors. <strong>18 matches in a single night</strong> a week later. First time in years."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">H</div>
-              <div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div>
-            </div>
-            <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
+            <div class="tc-head"><div class="tc-photo">D</div><div><div class="tc-name">David</div><div class="tc-title">Combat Pilot</div></div></div>
+            <p class="tc-quote">"Instagram rebuild done in the first month. <strong>5 to 6 women sliding into my DMs</strong> who had previously ghosted me on apps."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">B</div>
-              <div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div>
-            </div>
-            <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
+            <div class="tc-head"><div class="tc-photo">M</div><div><div class="tc-name">Maneet</div><div class="tc-title">Software Engineer · NYC</div></div></div>
+            <p class="tc-quote">"Cold-approached a 10 on the street, not matched or messaged. <strong>I now believe in abundance even for attractive girls.</strong>"</p>
+          </div>
+          <!-- Duplicate set -->
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">P</div><div><div class="tc-name">Parker</div><div class="tc-title">Business Analyst</div></div></div>
+            <p class="tc-quote">"Profile rebuilt by the female advisors. <strong>18 matches in a single night</strong> a week later. First time in years."</p>
           </div>
           <div class="tc-card">
-            <div class="tc-head">
-              <div class="tc-photo">H</div>
-              <div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div>
-            </div>
-            <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage."</p>
+            <div class="tc-head"><div class="tc-photo">D</div><div><div class="tc-name">David</div><div class="tc-title">Combat Pilot</div></div></div>
+            <p class="tc-quote">"Instagram rebuild done in the first month. <strong>5 to 6 women sliding into my DMs</strong> who had previously ghosted me on apps."</p>
+          </div>
+          <div class="tc-card">
+            <div class="tc-head"><div class="tc-photo">M</div><div><div class="tc-name">Maneet</div><div class="tc-title">Software Engineer · NYC</div></div></div>
+            <p class="tc-quote">"Cold-approached a 10 on the street, not matched or messaged. <strong>I now believe in abundance even for attractive girls.</strong>"</p>
           </div>
         </div>
       </div>
