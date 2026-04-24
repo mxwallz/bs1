@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas · Vibe 1: The Monolith</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── VIBE 1: "THE MONOLITH"
+       Deep near-black + warm amber. Less navy blue, more warm charcoal.
+       Fewer widgets. Heavier typography. Closer to digitalblackbelt.com energy.
+       The compass/nav chrome is stripped — the headline does the work.
+    ─────────────────────────────────────────────────────────────────── */
+    :root {
+      --bg:    #0e0d0b;
+      --bg2:   #141210;
+      --bg3:   #1a1714;
+      --cream: #f0e8d8;
+      --c70:   rgba(240,232,216,0.82);
+      --c40:   rgba(240,232,216,0.42);
+      --c15:   rgba(240,232,216,0.15);
+      --amber: #d4922a;
+      --amber-l:#e8aa48;
+      --amber-10:rgba(212,146,42,0.10);
+      --amber-25:rgba(212,146,42,0.25);
+      --border:rgba(240,232,216,0.06);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Inter',sans-serif;
+      -webkit-font-smoothing:antialiased;
+      background:var(--bg);
+      color:var(--cream);
+      font-size:17px;
+      line-height:1.7;
+      min-height:100vh;
+    }
+    .serif{font-family:'Playfair Display',Georgia,serif;}
+    .mono{font-family:'Space Mono',monospace;}
+    .label{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:90;
+      padding:0 40px;height:60px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(14,13,11,0.92);backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .wordmark{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;letter-spacing:.22em;color:var(--cream);text-decoration:none;}
+    .nav-cta{
+      font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;
+      color:var(--amber);text-decoration:none;
+      border:1px solid var(--amber-25);padding:8px 20px;
+      transition:all .2s;
+    }
+    .nav-cta:hover{background:var(--amber-10);border-color:var(--amber);}
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    #hero{
+      min-height:100vh;
+      padding:120px 40px 100px;
+      display:flex;align-items:center;
+      position:relative;overflow:hidden;
+    }
+    /* Subtle warm grain texture via SVG noise */
+    #hero::before{
+      content:'';
+      position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(212,146,42,0.04) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      max-width:1120px;margin:0 auto;width:100%;
+      display:grid;grid-template-columns:1fr 480px;gap:72px;align-items:center;
+    }
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:48px;}}
+
+    /* Enrollment pill */
+    .enroll-pill{
+      display:inline-flex;align-items:center;gap:10px;
+      background:rgba(212,146,42,0.06);border:1px solid rgba(212,146,42,0.2);
+      padding:8px 18px;margin-bottom:36px;
+      font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+      letter-spacing:.1em;color:rgba(240,232,216,0.6);
+    }
+    .pulse{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.5);}50%{box-shadow:0 0 0 6px rgba(74,222,128,0);}}
+
+    /* Eyebrow */
+    .eyebrow{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--c40);text-transform:uppercase;margin-bottom:20px;}
+
+    /* Headline */
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(52px,7vw,86px);
+      font-weight:700;line-height:1.0;
+      color:var(--cream);
+      margin-bottom:28px;
+    }
+    h1 em{font-style:italic;color:var(--amber-l);}
+
+    /* Sub */
+    .sub{font-size:18px;color:var(--c70);max-width:440px;margin-bottom:12px;line-height:1.7;}
+    .sub2{font-size:14px;color:var(--c40);max-width:380px;margin-bottom:48px;line-height:1.75;}
+
+    /* CTAs */
+    .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:52px;}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--amber);color:#0e0d0b;
+      font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;
+      padding:14px 28px;text-decoration:none;border:none;cursor:pointer;
+      transition:all .2s;
+    }
+    .btn-primary:hover{background:var(--amber-l);}
+    .btn-ghost{
+      font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;
+      color:var(--c40);text-decoration:none;
+      border:1px solid var(--border);padding:14px 24px;
+      transition:all .2s;
+    }
+    .btn-ghost:hover{color:var(--cream);border-color:var(--c15);}
+
+    /* Fine print */
+    .fine{font-family:'Space Mono',monospace;font-size:9px;color:rgba(240,232,216,0.18);letter-spacing:.05em;}
+
+    /* ── STAT ROW ─────────────────────────────────────────────────── */
+    .stat-row{
+      display:flex;gap:40px;padding-top:40px;
+      border-top:1px solid var(--border);
+    }
+    .stat-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--cream);line-height:1;}
+    .stat-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--c40);letter-spacing:.1em;margin-top:5px;}
+
+    /* ── RIGHT: VSL CARD ──────────────────────────────────────────── */
+    .vsl-card{
+      position:relative;overflow:hidden;
+      background:var(--bg2);
+      border:1px solid var(--border);
+      border-top:2px solid var(--amber);
+    }
+    .vsl-thumb{
+      width:100%;aspect-ratio:16/9;
+      background:linear-gradient(145deg,#13110e 0%,#0d0c0a 60%,#181410 100%);
+      position:relative;display:flex;align-items:center;justify-content:center;
+      cursor:pointer;
+    }
+    .vsl-thumb::before{
+      content:'';position:absolute;inset:0;
+      background-image:linear-gradient(rgba(240,232,216,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(240,232,216,.015) 1px,transparent 1px);
+      background-size:28px 28px;pointer-events:none;
+    }
+    .play-btn{
+      width:56px;height:56px;border-radius:50%;
+      background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);
+      display:flex;align-items:center;justify-content:center;
+      backdrop-filter:blur(4px);
+      transition:background .2s;
+    }
+    .play-btn:hover{background:rgba(212,146,42,0.15);}
+    .vsl-meta{
+      position:absolute;bottom:0;left:0;right:0;
+      padding:12px 16px;
+      background:linear-gradient(to top,rgba(13,12,10,0.95) 0%,transparent 100%);
+    }
+    .vsl-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--c40);letter-spacing:.06em;}
+    .vsl-sub{font-size:11px;color:var(--c70);margin-top:2px;}
+    .vsl-foot{
+      padding:16px 20px;
+      display:flex;align-items:center;justify-content:space-between;
+      border-top:1px solid var(--border);
+    }
+    .vsl-client{font-size:13px;font-weight:600;color:var(--cream);}
+    .vsl-badge{
+      background:var(--amber-10);border:1px solid var(--amber-25);
+      padding:5px 12px;
+      font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--amber);
+    }
+
+    /* ── PROOF BAR ────────────────────────────────────────────────── */
+    #proof{
+      padding:60px 40px;
+      background:var(--bg2);
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .proof-inner{
+      max-width:1120px;margin:0 auto;
+      display:flex;flex-wrap:wrap;justify-content:center;gap:0;
+    }
+    .stat-block{
+      padding:20px 40px;text-align:center;
+      border-right:1px solid var(--border);
+    }
+    .stat-block:last-child{border-right:none;}
+    .stat-block .n{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--cream);}
+    .stat-block .l{font-family:'Space Mono',monospace;font-size:9px;color:var(--c40);letter-spacing:.12em;margin-top:6px;}
+
+    /* Results bar */
+    .results-bar{
+      max-width:1120px;margin:32px auto 0;
+      display:flex;flex-wrap:wrap;gap:0;
+      border:1px solid var(--border);
+    }
+    .rb-item{
+      flex:1;min-width:140px;padding:14px 20px;
+      border-right:1px solid var(--border);
+    }
+    .rb-item:last-child{border-right:none;}
+    .rb-name{font-size:12px;font-weight:600;color:var(--cream);}
+    .rb-result{font-family:'Space Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.06em;margin-top:3px;}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="wordmark">ATLAS</a>
+    <a href="#apply" class="nav-cta">Apply Now</a>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-inner">
+
+      <!-- LEFT -->
+      <div>
+        <div class="enroll-pill">
+          <div class="pulse"></div>
+          ENROLLMENT OPEN &nbsp;·&nbsp; 4 SPOTS REMAINING
+        </div>
+
+        <p class="eyebrow">For High-Performing Men</p>
+
+        <h1>
+          You've Built<br>
+          Everything.<br>
+          <em>Except This.</em>
+        </h1>
+
+        <p class="sub">We handle your profiles, scripts, and every conversation. <strong style="color:var(--cream);">You show up to the dates.</strong></p>
+        <p class="sub2">Built for men who solve every other problem systematically — and want this one handled the same way.</p>
+
+        <div class="cta-row">
+          <a href="#apply" class="btn-primary">
+            Apply for Your Consultation
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+        </div>
+
+        <p class="fine">Less than 5% of applicants accepted &nbsp;·&nbsp; NDA protected</p>
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-val">200M+</div>
+            <div class="stat-lbl">Views</div>
+          </div>
+          <div>
+            <div class="stat-val">10+</div>
+            <div class="stat-lbl">Years</div>
+          </div>
+          <div>
+            <div class="stat-val">1,000+</div>
+            <div class="stat-lbl">Private Clients</div>
+          </div>
+          <div>
+            <div class="stat-val">&lt;5%</div>
+            <div class="stat-lbl">Accepted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: VSL card -->
+      <div>
+        <p class="label" style="color:var(--c40);margin-bottom:12px;letter-spacing:.12em;">Watch First</p>
+        <div class="vsl-card">
+          <div class="vsl-thumb">
+            <div class="play-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(240,232,216,0.85)" style="margin-left:2px;"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="vsl-meta">
+              <div class="vsl-title">ATLAS OVERVIEW · HD · NO LOGIN</div>
+            </div>
+          </div>
+          <div class="vsl-foot">
+            <div>
+              <div class="vsl-client">Todd · Retired Investor, 54</div>
+              <div style="font-size:12px;color:var(--c40);margin-top:2px);">20 dates in 30 days</div>
+            </div>
+            <div class="vsl-badge">20 dates</div>
+          </div>
+        </div>
+        <p style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(240,232,216,0.12);margin-top:10px;letter-spacing:.05em;">Replace src attribute with your VSL URL to activate</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROOF ─────────────────────────────────────────────────── -->
+  <section id="proof">
+    <div class="proof-inner">
+      <div class="stat-block"><div class="n">200M+</div><div class="l">Views</div></div>
+      <div class="stat-block"><div class="n">10+</div><div class="l">Years</div></div>
+      <div class="stat-block"><div class="n">1,000+</div><div class="l">Private Clients</div></div>
+      <div class="stat-block"><div class="n">&lt;5%</div><div class="l">Accepted</div></div>
+    </div>
+    <div class="results-bar" style="max-width:1120px;margin:32px auto 0;">
+      <div class="rb-item"><div class="rb-name">Todd</div><div class="rb-result">20 DATES IN 30 DAYS</div></div>
+      <div class="rb-item"><div class="rb-name">Spencer</div><div class="rb-result">40+ MATCHES IN 24 HRS</div></div>
+      <div class="rb-item"><div class="rb-name">Aakash</div><div class="rb-result">WOMEN MESSAGED FIRST</div></div>
+      <div class="rb-item"><div class="rb-name">Hector</div><div class="rb-result">10 DATES IN 30 DAYS</div></div>
+      <div class="rb-item"><div class="rb-name">Ben</div><div class="rb-result">4 DATES IN 2 WEEKS</div></div>
+      <div class="rb-item"><div class="rb-name">Parker</div><div class="rb-result">MORE THAN HE CAN HANDLE</div></div>
+    </div>
+  </section>
+
+  <div style="padding:48px 40px;text-align:center;max-width:1120px;margin:0 auto;">
+    <p style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(240,232,216,0.2);letter-spacing:.1em;">VIBE 1 · THE MONOLITH · Warm charcoal, amber, stripped chrome · hero-v1-monolith.html</p>
+  </div>
+
+</body>
+</html>

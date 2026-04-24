@@ -3540,56 +3540,17 @@ body.deliv-modal-open { overflow: hidden; }
 .match-photo {
   position: absolute;
   inset: 0;
-  filter: blur(4px);
-  transform: scale(1.15);
+  filter: blur(2px);
+  transform: scale(1.08);
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 25%;
 }
-/* Model-tier portrait simulation: stacked radial layers
-   (hair halo + face + chest/torso) + subtle vignette. Reads
-   as a photographed woman at reduced blur. */
-.mp-1 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 38% at 50% 62%, #f3cdb3 0%, #dca486 55%, transparent 85%),
-    radial-gradient(ellipse 85% 55% at 50% 22%, #2a170e 0%, #4a2a18 45%, transparent 80%),
-    linear-gradient(180deg, #2c1a12 0%, #1a0f0a 100%);
-}
-.mp-2 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 52% 40% at 50% 60%, #fbe2c0 0%, #e5ba8c 55%, transparent 85%),
-    radial-gradient(ellipse 90% 58% at 50% 22%, #d9b277 0%, #a57f48 50%, transparent 82%),
-    linear-gradient(180deg, #2e241a 0%, #1a140e 100%);
-}
-.mp-3 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 38% at 50% 62%, #f4ccae 0%, #d9a180 55%, transparent 85%),
-    radial-gradient(ellipse 88% 56% at 50% 22%, #4a2a1a 0%, #2a1710 50%, transparent 82%),
-    linear-gradient(180deg, #22140e 0%, #140c08 100%);
-}
-.mp-4 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 38% at 50% 60%, #e7bd94 0%, #c49268 55%, transparent 85%),
-    radial-gradient(ellipse 86% 55% at 50% 22%, #1a120c 0%, #0f0a06 55%, transparent 82%),
-    linear-gradient(180deg, #1c140e 0%, #0f0a08 100%);
-}
-.mp-5 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 52% 40% at 50% 62%, #fadcc0 0%, #e9b187 55%, transparent 85%),
-    radial-gradient(ellipse 90% 58% at 50% 22%, #efd0a0 0%, #b8915a 50%, transparent 82%),
-    linear-gradient(180deg, #30241a 0%, #1a140e 100%);
-}
-.mp-6 {
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 38% at 50% 60%, #f0c4a2 0%, #cc9470 55%, transparent 85%),
-    radial-gradient(ellipse 88% 56% at 50% 22%, #5e3820 0%, #331b10 50%, transparent 82%),
-    linear-gradient(180deg, #241610 0%, #140b08 100%);
-}
+.mp-1 { background-image: url('img/matches/m1.jpg'); }
+.mp-2 { background-image: url('img/matches/m2.jpg'); }
+.mp-3 { background-image: url('img/matches/m3.jpg'); }
+.mp-4 { background-image: url('img/matches/m4.jpg'); }
+.mp-5 { background-image: url('img/matches/m5.jpg'); }
+.mp-6 { background-image: url('img/matches/m6.jpg'); }
 .match-info {
   position: absolute;
   bottom: 6px;
@@ -3612,7 +3573,7 @@ body.deliv-modal-open { overflow: hidden; }
   .match-upsell { padding: 14px 14px 16px; margin-top: 24px; }
   .match-transition { margin: 40px auto 14px; }
   .match-grid-cards { gap: 4px; }
-  .match-photo { filter: blur(3px); }
+  .match-photo { filter: blur(2px); }
   .match-info { font-size: 8px; padding: 2px 3px; border-radius: 3px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }

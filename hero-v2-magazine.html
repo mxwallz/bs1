@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas · Vibe 2: The Magazine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── VIBE 2: "THE MAGAZINE"
+       Light mode. Warm ivory/cream background. Gold as primary accent.
+       Editorial serif-forward. Think GQ x private equity. Confidence through
+       restraint — a lot of white space, almost no widgets.
+       Completely different energy from the current dark site.
+    ─────────────────────────────────────────────────────────────────── */
+    :root{
+      --bg:    #f5f0e8;
+      --bg2:   #ede7da;
+      --bg3:   #e6dfd0;
+      --ink:   #1a1814;
+      --ink-60:rgba(26,24,20,0.62);
+      --ink-30:rgba(26,24,20,0.32);
+      --ink-10:rgba(26,24,20,0.08);
+      --gold:  #9a6e1a;
+      --gold-l:#b88228;
+      --gold-10:rgba(154,110,26,0.10);
+      --gold-25:rgba(154,110,26,0.25);
+      --border:rgba(26,24,20,0.10);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Inter',sans-serif;
+      -webkit-font-smoothing:antialiased;
+      background:var(--bg);
+      color:var(--ink);
+      font-size:17px;
+      line-height:1.7;
+      min-height:100vh;
+    }
+    .serif{font-family:'Playfair Display',serif;}
+    .mono{font-family:'Space Mono',monospace;}
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:90;
+      padding:0 48px;height:64px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(245,240,232,0.95);backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .wordmark{
+      font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+      color:var(--ink);text-decoration:none;letter-spacing:.04em;
+    }
+    .nav-links{display:flex;align-items:center;gap:36px;}
+    .nav-link{font-size:13px;color:var(--ink-60);text-decoration:none;letter-spacing:.02em;transition:color .2s;}
+    .nav-link:hover{color:var(--ink);}
+    .nav-cta{
+      font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;
+      color:#fff;background:var(--ink);
+      padding:10px 22px;text-decoration:none;
+      transition:background .2s;
+    }
+    .nav-cta:hover{background:var(--gold);}
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    #hero{
+      min-height:100vh;
+      padding:128px 48px 80px;
+      display:flex;align-items:center;
+      background:var(--bg);
+      position:relative;
+    }
+    /* Horizontal rule accent */
+    #hero::after{
+      content:'';position:absolute;bottom:0;left:48px;right:48px;height:1px;
+      background:var(--border);
+    }
+    .hero-inner{
+      max-width:1120px;margin:0 auto;width:100%;
+      display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;
+    }
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:56px;}}
+
+    /* Overline */
+    .overline{
+      font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+      letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold);margin-bottom:24px;
+    }
+
+    /* Headline */
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(48px,6vw,78px);
+      font-weight:700;line-height:1.04;
+      color:var(--ink);
+      margin-bottom:28px;
+    }
+    h1 em{font-style:italic;color:var(--gold-l);font-weight:500;}
+
+    /* Body */
+    .lead{font-size:19px;color:var(--ink-60);max-width:440px;margin-bottom:10px;line-height:1.7;}
+    .lead2{font-size:14px;color:var(--ink-30);max-width:400px;margin-bottom:44px;line-height:1.75;}
+
+    /* CTAs */
+    .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:56px;}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--ink);color:#f5f0e8;
+      font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;
+      padding:14px 28px;text-decoration:none;cursor:pointer;
+      transition:all .2s;
+    }
+    .btn-primary:hover{background:var(--gold);}
+    .btn-ghost{
+      font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;
+      color:var(--ink-30);text-decoration:none;padding:14px 0;
+      transition:color .2s;
+    }
+    .btn-ghost:hover{color:var(--ink);}
+
+    /* Fine */
+    .fine{font-family:'Space Mono',monospace;font-size:9px;color:var(--ink-30);letter-spacing:.05em;}
+
+    /* Stat strip */
+    .stat-strip{
+      display:flex;gap:48px;
+      padding-top:40px;border-top:1px solid var(--border);
+    }
+    .s-val{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);}
+    .s-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--ink-30);letter-spacing:.1em;margin-top:4px;}
+
+    /* ── RIGHT COLUMN ─────────────────────────────────────────────── */
+    .right-col{padding-top:8px;}
+
+    /* Enrollment tag */
+    .enroll-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--border);
+      padding:7px 14px;margin-bottom:24px;
+      font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--ink-30);
+    }
+    .dot-green{width:5px;height:5px;border-radius:50%;background:#22c55e;animation:gp 2s ease-in-out infinite;}
+    @keyframes gp{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4);}50%{box-shadow:0 0 0 5px rgba(34,197,94,0);}}
+
+    /* Quote card */
+    .quote-card{
+      border-left:2px solid var(--gold);
+      padding:28px 28px 28px 32px;
+      background:var(--bg2);
+      margin-bottom:24px;
+    }
+    .quote-metric{
+      font-family:'Playfair Display',serif;font-size:34px;font-weight:700;
+      color:var(--gold-l);line-height:1;margin-bottom:6px;
+    }
+    .quote-period{font-family:'Space Mono',monospace;font-size:9px;color:var(--ink-30);letter-spacing:.1em;margin-bottom:20px;}
+    .quote-text{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--ink-60);line-height:1.65;margin-bottom:18px;}
+    .quote-who{font-size:12px;font-weight:600;color:var(--ink);}
+    .quote-desc{font-size:11px;color:var(--ink-30);margin-top:2px;font-family:'Space Mono',monospace;letter-spacing:.03em;}
+
+    /* Mini proof row */
+    .mini-proof{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);}
+    .mp-row{
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;
+      border-bottom:1px solid var(--border);
+    }
+    .mp-row:last-child{border-bottom:none;}
+    .mp-name{font-size:13px;font-weight:600;color:var(--ink);}
+    .mp-result{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:.06em;}
+
+    /* ── PROOF BAR ────────────────────────────────────────────────── */
+    #proof{
+      padding:64px 48px;
+      background:var(--ink);
+      color:var(--bg);
+    }
+    .proof-grid{
+      max-width:1120px;margin:0 auto;
+      display:flex;flex-wrap:wrap;justify-content:center;gap:0;
+    }
+    .proof-stat{padding:0 48px;text-align:center;border-right:1px solid rgba(245,240,232,0.08);}
+    .proof-stat:last-child{border-right:none;}
+    .pn{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--bg);}
+    .pl{font-family:'Space Mono',monospace;font-size:9px;color:rgba(245,240,232,0.4);letter-spacing:.12em;margin-top:6px;}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="wordmark">Atlas</a>
+    <div class="nav-links">
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#results" class="nav-link">Results</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#apply" class="nav-cta">Apply Now</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-inner">
+
+      <!-- LEFT -->
+      <div>
+        <p class="overline">Private Dating Concierge for High-Performing Men</p>
+
+        <h1>
+          You've Built<br>
+          Everything.<br>
+          <em>Except This.</em>
+        </h1>
+
+        <p class="lead">We handle your profiles, scripts, and every conversation. <strong>You show up to the dates.</strong></p>
+        <p class="lead2">Built for men who solve every other problem systematically — and want this one handled the same way.</p>
+
+        <div class="cta-row">
+          <a href="#apply" class="btn-primary">
+            Apply for Your Consultation
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#how" class="btn-ghost">See how it works →</a>
+        </div>
+
+        <p class="fine">Less than 5% of applicants accepted &nbsp;·&nbsp; NDA protected</p>
+
+        <div class="stat-strip">
+          <div><div class="s-val">200M+</div><div class="s-lbl">Views</div></div>
+          <div><div class="s-val">10+</div><div class="s-lbl">Years</div></div>
+          <div><div class="s-val">1,000+</div><div class="s-lbl">Clients</div></div>
+          <div><div class="s-val">&lt;5%</div><div class="s-lbl">Accepted</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col">
+        <div class="enroll-tag">
+          <div class="dot-green"></div>
+          ENROLLMENT OPEN · 4 SPOTS REMAINING
+        </div>
+
+        <!-- Featured quote -->
+        <div class="quote-card">
+          <div class="quote-metric">20 dates</div>
+          <div class="quote-period">IN 30 DAYS</div>
+          <p class="quote-text">"Age was never the obstacle. The system was missing."</p>
+          <div class="quote-who">Todd</div>
+          <div class="quote-desc">RETIRED INVESTOR · 54 · ATLAS CLIENT</div>
+        </div>
+
+        <!-- Mini proof rows -->
+        <div class="mini-proof">
+          <div class="mp-row">
+            <span class="mp-name">Spencer</span>
+            <span class="mp-result">40+ MATCHES IN 24 HRS</span>
+          </div>
+          <div class="mp-row">
+            <span class="mp-name">Aakash</span>
+            <span class="mp-result">WOMEN MESSAGED FIRST</span>
+          </div>
+          <div class="mp-row">
+            <span class="mp-name">Hector</span>
+            <span class="mp-result">10 DATES IN 30 DAYS</span>
+          </div>
+          <div class="mp-row">
+            <span class="mp-name">Yaro</span>
+            <span class="mp-result">20+ DATES IN 30 DAYS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROOF BAR ─────────────────────────────────────────────── -->
+  <section id="proof">
+    <div class="proof-grid">
+      <div class="proof-stat"><div class="pn">200M+</div><div class="pl">Views</div></div>
+      <div class="proof-stat"><div class="pn">10+</div><div class="pl">Years</div></div>
+      <div class="proof-stat"><div class="pn">1,000+</div><div class="pl">Private Clients</div></div>
+      <div class="proof-stat"><div class="pn">&lt;5%</div><div class="pl">Accepted</div></div>
+    </div>
+  </section>
+
+  <div style="padding:48px;text-align:center;background:#f5f0e8;">
+    <p style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(26,24,20,0.2);letter-spacing:.1em;">VIBE 2 · THE MAGAZINE · Warm ivory light mode, editorial, no widgets · hero-v2-magazine.html</p>
+  </div>
+
+</body>
+</html>
