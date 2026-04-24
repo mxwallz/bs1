@@ -3294,6 +3294,100 @@ body.deliv-modal-open { overflow: hidden; }
   }
 }
 
+/* ══════════════════════════════════════════════════════════
+   VIDEO TESTIMONIAL CAROUSEL (ported from v32)
+   Base card styles + horizontal swipe carousel.
+   ══════════════════════════════════════════════════════════ */
+.vt-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.35s;
+}
+.vt-card:hover { transform: translateY(-4px); border-color: var(--border-hi); box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
+.vt-thumb {
+  aspect-ratio: 16/10; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #1a1d2e 0%, #2a1f3a 100%);
+}
+.vt-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.55));
+}
+.vt-thumb-label {
+  position: absolute; left: 14px; bottom: 10px; z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; color: var(--w75);
+}
+.vt-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+  color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 99px;
+  border: 1px solid rgba(167,181,232,0.45);
+}
+.vt-duration {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  background: rgba(0,0,0,0.65);
+  color: #fff; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.vt-thumb.vt-g1 { background: linear-gradient(135deg, #1f2a45, #2a3f65); }
+.vt-thumb.vt-g2 { background: linear-gradient(135deg, #2a1f3a, #45305a); }
+.vt-thumb.vt-g3 { background: linear-gradient(135deg, #1f3a2f, #2f553f); }
+
+/* Swipe carousel */
+.vt-swipe { position: relative; margin-top: 48px; }
+.vt-swipe-track {
+  display: flex; gap: 20px;
+  overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; -ms-overflow-style: none;
+  padding: 8px 24px 32px;
+  margin: 0 -24px;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.vt-swipe-track::-webkit-scrollbar { display: none; }
+.vt-swipe-track > .vt-card {
+  flex: 0 0 calc(100% - 64px);
+  max-width: 440px;
+  scroll-snap-align: center;
+}
+@media (min-width: 900px) {
+  .vt-swipe-track > .vt-card { flex: 0 0 calc(33.333% - 14px); }
+}
+.vt-meta { padding: 18px 20px 22px; }
+.vt-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 18px; font-weight: 500; color: #fff;
+  margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.vt-quote {
+  font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.66);
+}
+.vt-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(167,181,232,0.22);
+  border: 1px solid rgba(167,181,232,0.55);
+  color: #fff; font-size: 22px;
+  cursor: pointer; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s ease, background 0.25s;
+  padding: 0 0 0 4px;
+}
+.vt-play:hover { background: rgba(167,181,232,0.36); transform: translate(-50%, -50%) scale(1.08); }
+.vt-dots {
+  display: flex; justify-content: center; gap: 6px;
+  margin-top: 8px;
+}
+.vt-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  transition: all 0.3s ease;
+}
+.vt-dot.active { background: var(--blue); width: 18px; border-radius: 3px; }
+
 </style>
 </head>
 <body>
@@ -3448,6 +3542,69 @@ body.deliv-modal-open { overflow: hidden; }
       <span class="swipe-dot"></span>
     </div>
   </div>
+  </div>
+</section>
+
+
+<!-- §3.5 VIDEO TESTIMONIALS · Horizontal swipe carousel. 3 videos. Ported from v32. -->
+<section class="section s-black" id="video-testimonials">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">In their own words</p>
+    <h2 class="reveal d1 text-center">Real Clients, Real Results.</h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:20px auto 0; color:var(--w55);">
+      These men stopped winging it and started to treat dating like every other aspect of their life.
+    </p>
+
+    <div class="vt-swipe reveal d3" id="vtSwipe">
+      <div class="vt-swipe-track">
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g1">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">2:47</span>
+            <button class="vt-play" aria-label="Play Todd testimonial">▶</button>
+            <span class="vt-thumb-label">Todd · Retired Investor</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Todd, 54</div>
+            <div class="vt-quote">"20 dates in 30 days. Most in their 20s and 30s. Age was never the obstacle."</div>
+          </div>
+        </div>
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g2">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">3:12</span>
+            <button class="vt-play" aria-label="Play Yaro testimonial">▶</button>
+            <span class="vt-thumb-label">Yaro · Software Engineer</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Yaro</div>
+            <div class="vt-quote">"Every box checked except this one. 30 days in, 20+ dates on the calendar."</div>
+          </div>
+        </div>
+
+        <div class="vt-card">
+          <div class="vt-thumb vt-g3">
+            <span class="vt-badge">Client</span>
+            <span class="vt-duration">2:21</span>
+            <button class="vt-play" aria-label="Play Spencer testimonial">▶</button>
+            <span class="vt-thumb-label">Spencer · Cybersecurity</span>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Spencer</div>
+            <div class="vt-quote">"40+ Bumble matches in the first 24 hours. More than I could realistically date."</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="vt-dots" id="vtDots">
+        <span class="vt-dot active"></span>
+        <span class="vt-dot"></span>
+        <span class="vt-dot"></span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -5015,6 +5172,27 @@ body.deliv-modal-open { overflow: hidden; }
       card.classList.add('expanded');
       currentId = id;
     });
+  })();
+
+  // Video testimonial swipe carousel dot updater (ported from v32).
+  (function initVtCarousel() {
+    const track = document.querySelector('.vt-swipe-track');
+    const dots = document.querySelectorAll('#vtDots .vt-dot');
+    if (!track || !dots.length) return;
+    const cards = track.querySelectorAll('.vt-card');
+    track.addEventListener('scroll', () => {
+      const trackRect = track.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closestIdx = 0;
+      let closestDist = Infinity;
+      cards.forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+    }, { passive: true });
   })();
 </script>
 
