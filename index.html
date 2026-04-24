@@ -158,6 +158,26 @@ p { color: var(--w75); }
 .hero .stat-num { font-size: clamp(22px, 2.6vw, 30px); font-weight: 750; color: var(--w100); letter-spacing: -0.02em; }
 .hero .stat-label { font-size: 11px; color: var(--w35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; }
 
+/* Desktop one-frame hero compression.
+   Sizes nav + notif + h1 + qualifier + VSL + CTA + paddings to fit in
+   a single viewport. VSL shrinks with viewport height via calc(). */
+@media (min-width: 901px) {
+  .hero { padding-top: clamp(76px, 8vh, 104px); padding-bottom: clamp(40px, 5vh, 64px); }
+  .hero h1 { font-size: clamp(34px, 3.2vw, 46px); line-height: 1.1; }
+  .hero .qualifier { font-size: clamp(13px, 1vw, 15px); margin-top: 14px; max-width: 540px; }
+  .hero-notif-slot { margin-bottom: 18px; height: 48px; }
+  .hero .vsl-wrap {
+    margin-top: 22px;
+    max-width: min(820px, calc((100vh - 480px) * 16 / 9));
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  }
+  .vsl-play { width: 60px; height: 60px; }
+  .vsl-play::after {
+    border-top-width: 11px; border-bottom-width: 11px; border-left-width: 17px;
+  }
+  .hero .cta-block { margin-top: 22px; gap: 10px; }
+}
+
 /* Marquee */
 .marquee-wrap { overflow: hidden; padding: 22px 0; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .marquee-track { display: flex; gap: 56px; white-space: nowrap; animation: marquee 44s linear infinite; width: max-content; }
