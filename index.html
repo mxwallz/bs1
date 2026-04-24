@@ -3601,31 +3601,31 @@ body.deliv-modal-open { overflow: hidden; }
   .match-upsell-header { padding: 0 14px; }
   .match-transition { margin: 40px auto 14px; }
 
-  /* Flex carousel: 2.5 cards per view, auto-scroll, seamless loop
+  /* Flex carousel: ~2 cards per view, auto-scroll, seamless loop
      via duplicated card set (.match-card-dup). Translates by the exact
-     width of one 6-card set (6 × 36vw + 6 × 8px gap) so the loop point
+     width of one 6-card set (6 × 48vw + 6 × 10px gap) so the loop point
      is visually identical to the start — no visible reset. */
   .match-grid-cards {
     display: flex;
     flex-wrap: nowrap;
-    gap: 8px;
+    gap: 10px;
     width: max-content;
     padding: 0 14px;
     animation: matchScroll 60s linear infinite;
   }
   .match-grid-cards:hover { animation-play-state: paused; }
-  .match-card { flex: 0 0 36vw; }
+  .match-card { flex: 0 0 48vw; }
   .match-card-dup { display: block; }
 
   .match-photo { filter: blur(2px); }
-  .match-info { font-size: 10px; padding: 3px 5px; border-radius: 4px; letter-spacing: 0; }
+  .match-info { font-size: 11px; padding: 4px 6px; border-radius: 4px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }
   .match-unlock { font-size: 9px; padding: 4px 8px; letter-spacing: 0.12em; }
 }
 @keyframes matchScroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(calc(-216vw - 48px)); }
+  to   { transform: translateX(calc(-288vw - 60px)); }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -3775,31 +3775,31 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 900px) {
-  /* Horizontal swipe carousel on mobile. Manual scroll + snap, no auto-move.
-     Card sized to fit within viewport height: 9/14 frame capped to ~54vh so
-     the card (frame + meta) fits on a standard phone screen. */
+  /* Auto-scrolling endless loop on mobile. One card per viewport.
+     Seamless: .vtc-dup duplicates hide on desktop, appear on mobile.
+     Translate is exactly 3 cards + 3 gaps so the wrap is invisible. */
   .video-testi-grid {
     display: flex;
     grid-template-columns: none;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    flex-wrap: nowrap;
     gap: 14px;
+    width: max-content;
     max-width: none;
     margin: 40px -18px 0;
     padding: 4px 18px 14px;
+    overflow: hidden;
     scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
+    animation: videoTestiScroll 36s linear infinite;
   }
+  .video-testi-grid:hover,
+  .video-testi-grid:focus-within { animation-play-state: paused; }
   .video-testi-grid::-webkit-scrollbar { display: none; }
   .video-testi-card {
-    flex: 0 0 68%;
-    max-width: 360px;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    flex: 0 0 calc(100vw - 36px);
+    max-width: 440px;
   }
-  .vt-frame { aspect-ratio: 9/14; max-height: 54vh; }
+  .video-testi-card.vtc-dup { display: flex; }
+  .vt-frame { aspect-ratio: 9/14; max-height: 58vh; }
   .vt-play-btn svg { width: 56px; height: 56px; }
   .vt-meta { padding: 14px 16px 16px; }
   .vt-name { font-size: 15px; }
@@ -3807,6 +3807,13 @@ body.deliv-modal-open { overflow: hidden; }
   .vt-occupation { font-size: 12px; margin-bottom: 10px; }
   .vt-tldr { font-size: 13px; padding-top: 10px; }
 }
+/* Loop: move exactly 3 cards + 3 gaps so the dup set lands at card 1's slot. */
+@keyframes videoTestiScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-3 * (100vw - 36px) - 3 * 14px)); }
+}
+/* Duplicate cards are hidden on desktop (where the 3-column grid shows). */
+.video-testi-card.vtc-dup { display: none; }
 
 /* ══════════════════════════════════════════════════════════
    §7 · Real Clients — 3 horizontal auto-scrolling rows
@@ -3914,6 +3921,27 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   v33 · WWYS: strip the phone frame on desktop + mobile. Just
+   the conversation itself — still interactive. The phone chrome
+   (border, notch, home indicator, status bar) goes away so the
+   visual reads as a square convo preview.
+   ══════════════════════════════════════════════════════════ */
+.wwys-phone {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  aspect-ratio: auto !important;
+  width: 100% !important;
+  max-width: 100%;
+}
+.wwys-phone::before,
+.wwys-phone::after { display: none !important; }
+.wwys-phone .wwys-status { display: none !important; }
+.wwys-phone .wwys { border-radius: 18px; }
+
+/* ══════════════════════════════════════════════════════════
    v33 · Mobile deliverable section: show the rich visuals
    (not the stripped .deliv-simple icons). Keep only header,
    body, and visual. Strip testimonial pull-quote and specs.
@@ -3954,9 +3982,10 @@ body.deliv-modal-open { overflow: hidden; }
 
   .rp-phone { width: 154px !important; height: 333px !important; }
   .wwys-phone, .reb-phone, .prof-swiper { max-height: 294px !important; }
-  .pipe2 { max-width: 294px !important; }
-  .mock-net2 svg { max-width: 280px !important; }
-  .debrief-thread { max-width: 280px !important; }
+  .pipe2 { max-width: 92vw !important; width: 100% !important; }
+  .deliv.pipeline-big .deliv-mock-wrap { min-height: 420px !important; }
+  .mock-net2 svg { max-width: 320px !important; }
+  .debrief-thread { max-width: 300px !important; }
 }
 
 </style>
@@ -5000,6 +5029,74 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
       </div>
 
+      <!-- Duplicate set for seamless mobile loop. Hidden on desktop. -->
+      <div class="video-testi-card vtc-dup" data-video="img/videos/v1.mp4" aria-hidden="true">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-1"></div>
+          <span class="vt-placeholder-tag">Video 1</span>
+          <button class="vt-play-btn" aria-label="Play Video 1" tabindex="-1">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">0:47</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 1 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+      <div class="video-testi-card vtc-dup" data-video="img/videos/v2.mp4" aria-hidden="true">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-2"></div>
+          <span class="vt-placeholder-tag">Video 2</span>
+          <button class="vt-play-btn" aria-label="Play Video 2" tabindex="-1">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">1:12</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 2 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+      <div class="video-testi-card vtc-dup" data-video="img/videos/v3.mp4" aria-hidden="true">
+        <div class="vt-frame">
+          <div class="vt-poster vtp-3"></div>
+          <span class="vt-placeholder-tag">Video 3</span>
+          <button class="vt-play-btn" aria-label="Play Video 3" tabindex="-1">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+              <path d="M19 15v18l15-9z" fill="#fff"/>
+            </svg>
+          </button>
+          <div class="vt-runtime">0:58</div>
+        </div>
+        <div class="vt-meta">
+          <div class="vt-name-line">
+            <span class="vt-name">[ Client 3 ]</span>
+            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-verified">✓</span>
+          </div>
+          <div class="vt-occupation">[ Occupation ]</div>
+          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -5294,29 +5391,7 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §12 FOUNDER CLOSE -->
-<section class="section s-darker">
-  <div class="inner narrow text-center">
-    <p class="eyebrow reveal d1">From Benjamin</p>
-    <h2 class="reveal d1">One last thing.</h2>
-    <div class="founder-letter reveal d2" style="text-align:left;">
-      <p>Atlas is built on one rule. No single point of failure. Three channels. A team of female advisors on the profile side. Coaches on the strategy side. Feedback after every date.</p>
-      <p>I don't need to convince you this works. The clients do. What I can tell you is this. The men who get in are the ones who already know the dating part of their life isn't going to fix itself. They want it handled. They want it now. They want to stop thinking about it.</p>
-      <p>If it's a fit, we'll know on the call. If it's not, I'll tell you.</p>
-      <div class="founder-sign">Benjamin Seda</div>
-      <div class="founder-sub">Founder, Atlas Advisory</div>
-    </div>
-    <div class="team-grid reveal d3">
-      <div class="team-avatar">[ Benjamin ]<!-- COPY_TODO: photo --></div>
-      <div class="team-avatar">[ Advisor 1 ]<!-- COPY_TODO: photo --></div>
-      <div class="team-avatar">[ Advisor 2 ]<!-- COPY_TODO: photo --></div>
-      <div class="team-avatar">[ Coach 1 ]<!-- COPY_TODO: photo --></div>
-      <div class="team-avatar">[ Coach 2 ]<!-- COPY_TODO: photo --></div>
-      <div class="team-avatar">[ Coach 3 ]<!-- COPY_TODO: photo --></div>
-    </div>
-    <p class="sub-note reveal d4">Female advisors · Atlas Network coaches · Private client community</p>
-  </div>
-</section>
+<!-- §12 FOUNDER CLOSE removed 2026-04-24 — redundant with earlier founder section -->
 
 
 <!-- §13 FINAL CTA -->
