@@ -3472,13 +3472,27 @@ body.deliv-modal-open { overflow: hidden; }
    Gradient placeholders stand in for AI-generated photos.
    ══════════════════════════════════════════════════════════ */
 .match-upsell {
-  max-width: 560px;
+  max-width: 760px;
   margin: 48px auto 0;
   padding: 18px 20px 20px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
 }
+.match-transition {
+  max-width: 760px;
+  margin: 64px auto 20px;
+  text-align: center;
+}
+.match-transition .eyebrow { margin-bottom: 10px; }
+.match-transition h3 {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--w90);
+  margin: 0;
+}
+.match-transition h3 em { color: var(--gold); font-style: italic; font-weight: 500; }
 .match-upsell-header {
   display: flex;
   align-items: center;
@@ -3513,30 +3527,69 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .match-grid-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
 }
 .match-card {
   position: relative;
   aspect-ratio: 3/4;
   border-radius: 10px;
   overflow: hidden;
-  background: #1a1d2e;
+  background: #14161f;
 }
 .match-photo {
   position: absolute;
   inset: 0;
-  filter: blur(8px);
+  filter: blur(4px);
   transform: scale(1.15);
   background-size: cover;
   background-position: center 30%;
 }
-.mp-1 { background: radial-gradient(circle at 50% 30%, #f5d0c5 0%, #e8a79a 35%, #6e4e4e 90%); }
-.mp-2 { background: radial-gradient(circle at 50% 28%, #f0d1a8 0%, #cfa27c 35%, #5a4028 90%); }
-.mp-3 { background: radial-gradient(circle at 50% 32%, #f8c8b0 0%, #d8a07b 35%, #6b4838 90%); }
-.mp-4 { background: radial-gradient(circle at 50% 30%, #d4a574 0%, #a8845f 35%, #4a3020 90%); }
-.mp-5 { background: radial-gradient(circle at 50% 28%, #f8d7bf 0%, #e5a882 35%, #70504a 90%); }
-.mp-6 { background: radial-gradient(circle at 50% 30%, #e8c4a0 0%, #c39070 35%, #5e4030 90%); }
+/* Model-tier portrait simulation: stacked radial layers
+   (hair halo + face + chest/torso) + subtle vignette. Reads
+   as a photographed woman at reduced blur. */
+.mp-1 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 38% at 50% 62%, #f3cdb3 0%, #dca486 55%, transparent 85%),
+    radial-gradient(ellipse 85% 55% at 50% 22%, #2a170e 0%, #4a2a18 45%, transparent 80%),
+    linear-gradient(180deg, #2c1a12 0%, #1a0f0a 100%);
+}
+.mp-2 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 52% 40% at 50% 60%, #fbe2c0 0%, #e5ba8c 55%, transparent 85%),
+    radial-gradient(ellipse 90% 58% at 50% 22%, #d9b277 0%, #a57f48 50%, transparent 82%),
+    linear-gradient(180deg, #2e241a 0%, #1a140e 100%);
+}
+.mp-3 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 38% at 50% 62%, #f4ccae 0%, #d9a180 55%, transparent 85%),
+    radial-gradient(ellipse 88% 56% at 50% 22%, #4a2a1a 0%, #2a1710 50%, transparent 82%),
+    linear-gradient(180deg, #22140e 0%, #140c08 100%);
+}
+.mp-4 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 38% at 50% 60%, #e7bd94 0%, #c49268 55%, transparent 85%),
+    radial-gradient(ellipse 86% 55% at 50% 22%, #1a120c 0%, #0f0a06 55%, transparent 82%),
+    linear-gradient(180deg, #1c140e 0%, #0f0a08 100%);
+}
+.mp-5 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 52% 40% at 50% 62%, #fadcc0 0%, #e9b187 55%, transparent 85%),
+    radial-gradient(ellipse 90% 58% at 50% 22%, #efd0a0 0%, #b8915a 50%, transparent 82%),
+    linear-gradient(180deg, #30241a 0%, #1a140e 100%);
+}
+.mp-6 {
+  background:
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 38% at 50% 60%, #f0c4a2 0%, #cc9470 55%, transparent 85%),
+    radial-gradient(ellipse 88% 56% at 50% 22%, #5e3820 0%, #331b10 50%, transparent 82%),
+    linear-gradient(180deg, #241610 0%, #140b08 100%);
+}
 .match-info {
   position: absolute;
   bottom: 6px;
@@ -3556,10 +3609,11 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  .match-upsell { padding: 14px 14px 16px; margin-top: 32px; }
-  .match-grid-cards { gap: 6px; }
-  .match-photo { filter: blur(6px); }
-  .match-info { font-size: 9px; padding: 3px 5px; border-radius: 4px; }
+  .match-upsell { padding: 14px 14px 16px; margin-top: 24px; }
+  .match-transition { margin: 40px auto 14px; }
+  .match-grid-cards { gap: 4px; }
+  .match-photo { filter: blur(3px); }
+  .match-info { font-size: 8px; padding: 2px 3px; border-radius: 3px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }
   .match-unlock { font-size: 9px; padding: 4px 8px; letter-spacing: 0.12em; }
@@ -3920,7 +3974,13 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
     </div></div>
 
-    <!-- Tinder-style "likes you" premium upsell grid. Blurred profile portraits. -->
+    <!-- Transition beat into the "likes you" upsell strip. -->
+    <div class="match-transition reveal d3">
+      <p class="eyebrow">And this…</p>
+      <h3>These are the women <em>lining up to meet you.</em></h3>
+    </div>
+
+    <!-- Tinder-style "likes you" premium upsell row. Blurred profile portraits. -->
     <div class="match-upsell reveal d4">
       <div class="match-upsell-header">
         <span class="match-badge"><span class="match-heart">♥</span> 47 people liked you this week</span>
