@@ -2082,12 +2082,6 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   z-index: 3; transition: transform 0.3s, background 0.3s;
 }
 .vt-card:hover .vt-play { transform: translate(-50%, -50%) scale(1.1); background: rgba(167,181,232,0.34); border-color: var(--gold); }
-.vt-play::after {
-  content: ""; width: 0; height: 0; margin-left: 4px;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 14px solid #fff;
-}
 .vt-body { padding: 20px 22px 22px; }
 .vt-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .vt-avatar {
@@ -4163,7 +4157,7 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
         <div>
           <div class="module-name">The 3 Part Pipeline</div>
-          <p class="module-body">Apps, Instagram, real life. Rebuilt in parallel. Two is one. One is none. When a channel goes cold, another is already running.</p>
+          <p class="module-body">Dating apps, Instagram, and in-person. With the right system, dating 9s and 10s isn't some miracle. It's just math.</p>
         </div>
       </div>
 
@@ -4917,95 +4911,83 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="deliv network-big reveal d1">
         <div class="deliv-mock-wrap" data-deliv-id="network">
           <div class="team-cloud">
-            <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" aria-labelledby="teamCloudTitle" role="img">
-              <title id="teamCloudTitle">A team of experts, right in your pocket</title>
+            <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Your Atlas Team">
               <defs>
-                <radialGradient id="tcGlow" cx="50%" cy="40%" r="55%">
-                  <stop offset="0%" stop-color="rgba(167,181,232,0.28)"/>
-                  <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
+                <linearGradient id="tr-e" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#d62976"/>
+                  <stop offset="1" stop-color="#fa7e1e"/>
+                </linearGradient>
+                <linearGradient id="tr-b" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#4f7eff"/>
+                  <stop offset="1" stop-color="#4f5bd5"/>
+                </linearGradient>
+                <radialGradient id="tr-glow" cx="50%" cy="0%" r="70%">
+                  <stop offset="0%" stop-color="rgba(79,126,255,0.1)"/>
+                  <stop offset="100%" stop-color="rgba(79,126,255,0)"/>
                 </radialGradient>
-                <linearGradient id="tcE" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d62976"/><stop offset="1" stop-color="#fa7e1e"/></linearGradient>
-                <linearGradient id="tcM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7eff"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient>
-                <linearGradient id="tcA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a2a55"/><stop offset="1" stop-color="#6a3a5a"/></linearGradient>
-                <linearGradient id="tcR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f3a2f"/><stop offset="1" stop-color="#2f8a5f"/></linearGradient>
               </defs>
 
-              <!-- Ambient glow behind the cloud -->
-              <ellipse cx="200" cy="130" rx="150" ry="110" fill="url(#tcGlow)"/>
+              <!-- Card depth shadow -->
+              <rect x="54" y="14" width="292" height="312" rx="20" fill="rgba(167,181,232,0.03)"/>
+              <!-- Card body -->
+              <rect x="50" y="10" width="292" height="312" rx="20" fill="#0c0e1a" stroke="rgba(167,181,232,0.12)" stroke-width="1"/>
+              <!-- Top glow -->
+              <rect x="50" y="10" width="292" height="160" rx="20" fill="url(#tr-glow)"/>
 
-              <!-- Cloud body: overlapping circles merge into one shape, no stroke
-                   so there are no inner seams. Subtle drift animation. -->
-              <g class="tc-cloud" fill="#0f111c">
-                <circle cx="120" cy="140" r="40"/>
-                <circle cx="160" cy="100" r="50"/>
-                <circle cx="210" cy="88"  r="54"/>
-                <circle cx="262" cy="100" r="48"/>
-                <circle cx="295" cy="140" r="42"/>
-                <circle cx="200" cy="155" r="62"/>
-                <circle cx="150" cy="160" r="42"/>
-                <circle cx="260" cy="160" r="42"/>
+              <!-- Header -->
+              <text x="196" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="2.5" fill="rgba(167,181,232,0.45)">YOUR ATLAS TEAM</text>
+              <line x1="70" y1="62" x2="322" y2="62" stroke="rgba(167,181,232,0.08)" stroke-width="1"/>
+
+              <!-- Row 1: Profile Advisors -->
+              <g transform="translate(70,80)">
+                <circle cx="24" cy="24" r="24" fill="url(#tr-e)" opacity="0.9"/>
+                <circle cx="24" cy="18" r="8" fill="rgba(255,255,255,0.92)"/>
+                <ellipse cx="24" cy="38" rx="12" ry="7" fill="rgba(255,255,255,0.92)"/>
+                <text x="62" y="18" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="rgba(255,255,255,0.92)">Profile Advisors</text>
+                <text x="62" y="34" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.55)">Female advisory team</text>
+                <circle cx="62" cy="47" r="3.5" fill="#4ade80"/>
+                <text x="71" y="51" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#4ade80">LIVE NOW</text>
               </g>
 
-              <!-- Header label inside the cloud -->
-              <text class="tc-head" x="200" y="98" text-anchor="middle">YOUR TEAM</text>
+              <line x1="70" y1="150" x2="322" y2="150" stroke="rgba(167,181,232,0.06)" stroke-width="1"/>
 
-              <!-- 4 team avatars arranged across the cloud -->
-              <g class="tc-avatars" font-family="system-ui, -apple-system, sans-serif">
-                <g class="tc-av" transform="translate(142,148)">
-                  <circle r="18" fill="url(#tcE)"/>
-                  <text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">E</text>
-                </g>
-                <g class="tc-av" transform="translate(184,148)">
-                  <circle r="18" fill="url(#tcM)"/>
-                  <text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#0a0a0a">M</text>
-                </g>
-                <g class="tc-av" transform="translate(226,148)">
-                  <circle r="18" fill="url(#tcA)"/>
-                  <text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">A</text>
-                </g>
-                <g class="tc-av" transform="translate(268,148)">
-                  <circle r="18" fill="url(#tcR)"/>
-                  <text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">R</text>
-                </g>
+              <!-- Row 2: Strategy Coaches -->
+              <g transform="translate(70,164)">
+                <circle cx="24" cy="24" r="24" fill="url(#tr-b)" opacity="0.9"/>
+                <rect x="15" y="12" width="18" height="24" rx="3" fill="rgba(255,255,255,0.92)"/>
+                <rect x="20" y="9" width="8" height="6" rx="2" fill="#4f7eff"/>
+                <line x1="18" y1="21" x2="30" y2="21" stroke="rgba(79,126,255,0.65)" stroke-width="1.5"/>
+                <line x1="18" y1="26" x2="30" y2="26" stroke="rgba(79,126,255,0.65)" stroke-width="1.5"/>
+                <line x1="18" y1="31" x2="25" y2="31" stroke="rgba(79,126,255,0.65)" stroke-width="1.5"/>
+                <text x="62" y="18" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="rgba(255,255,255,0.92)">Strategy Coaches</text>
+                <text x="62" y="34" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.55)">6 coaches on rotation</text>
+                <circle cx="62" cy="47" r="3.5" fill="#4ade80"/>
+                <text x="71" y="51" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#4ade80">LIVE NOW</text>
               </g>
 
-              <!-- Status row: online indicator -->
-              <g transform="translate(200,188)">
-                <circle cx="-38" cy="0" r="3.5" fill="#4ade80"/>
-                <text class="tc-status" x="-30" y="4">4 ONLINE · 11:52 PM</text>
+              <line x1="70" y1="234" x2="322" y2="234" stroke="rgba(167,181,232,0.06)" stroke-width="1"/>
+
+              <!-- Row 3: Atlas Network -->
+              <g transform="translate(70,248)">
+                <circle cx="24" cy="24" r="24" fill="#0f1326" stroke="rgba(167,181,232,0.18)" stroke-width="1"/>
+                <circle cx="24" cy="24" r="5" fill="rgba(167,181,232,0.9)"/>
+                <line x1="24" y1="24" x2="12" y2="14" stroke="rgba(167,181,232,0.35)" stroke-width="1.2"/>
+                <line x1="24" y1="24" x2="36" y2="14" stroke="rgba(167,181,232,0.35)" stroke-width="1.2"/>
+                <line x1="24" y1="24" x2="12" y2="34" stroke="rgba(167,181,232,0.35)" stroke-width="1.2"/>
+                <line x1="24" y1="24" x2="36" y2="34" stroke="rgba(167,181,232,0.35)" stroke-width="1.2"/>
+                <circle cx="12" cy="14" r="3" fill="rgba(167,181,232,0.6)"/>
+                <circle cx="36" cy="14" r="3" fill="rgba(167,181,232,0.6)"/>
+                <circle cx="12" cy="34" r="3" fill="rgba(167,181,232,0.6)"/>
+                <circle cx="36" cy="34" r="3" fill="rgba(167,181,232,0.6)"/>
+                <text x="62" y="18" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="rgba(255,255,255,0.92)">The Atlas Network</text>
+                <text x="62" y="34" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.55)">Private · NDA protected</text>
+                <circle cx="62" cy="47" r="3.5" fill="rgba(167,181,232,0.4)"/>
+                <text x="71" y="51" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="rgba(167,181,232,0.4)">MEMBERS ONLY</text>
               </g>
 
-              <!-- Cloud tail: three decreasing bumps leading down to the phone screen -->
-              <g class="tc-tail" fill="#0f111c">
-                <circle cx="178" cy="218" r="10"/>
-                <circle cx="172" cy="238" r="6"/>
-                <circle cx="168" cy="252" r="3"/>
-              </g>
-
-              <!-- Phone held up, angled slightly -->
-              <g class="tc-phone" transform="translate(148,258) rotate(-8 24 35)">
-                <rect x="0" y="0" width="48" height="72" rx="9" fill="#0b0d14" stroke="rgba(167,181,232,0.6)" stroke-width="1.5"/>
-                <rect x="4" y="9"  width="40" height="50" rx="3" fill="rgba(79,126,255,0.25)"/>
-                <rect x="18" y="3.5" width="12" height="2.5" rx="1.2" fill="rgba(255,255,255,0.22)"/>
-                <rect x="18" y="63" width="12" height="2.2" rx="1" fill="rgba(255,255,255,0.35)"/>
-                <!-- pulsing glow on screen -->
-                <circle class="tc-screen-pulse" cx="24" cy="32" r="7" fill="rgba(167,181,232,0.55)"/>
-              </g>
-
-              <!-- Guy silhouette (head + shoulders + arm up holding the phone) -->
-              <g class="tc-person" fill="rgba(167,181,232,0.42)">
-                <!-- Head -->
-                <circle cx="218" cy="302" r="18"/>
-                <!-- Shoulders / chest -->
-                <path d="M 172,358 Q 218,318 264,358 L 264,360 L 172,360 Z"/>
-                <!-- Arm raised toward phone -->
-                <path d="M 200,330 Q 180,308 168,285" stroke="rgba(167,181,232,0.42)" stroke-width="9" stroke-linecap="round" fill="none"/>
-              </g>
-
-              <!-- Tiny rising ping dots from the phone into the cloud -->
-              <circle class="tc-ping tc-ping-1" cx="172" cy="250" r="2.5" fill="#A7B5E8"/>
-              <circle class="tc-ping tc-ping-2" cx="176" cy="250" r="2.5" fill="#A7B5E8"/>
-              <circle class="tc-ping tc-ping-3" cx="180" cy="250" r="2.5" fill="#A7B5E8"/>
+              <!-- Footer -->
+              <line x1="70" y1="304" x2="322" y2="304" stroke="rgba(167,181,232,0.06)" stroke-width="1"/>
+              <text x="196" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="rgba(167,181,232,0.25)" letter-spacing="1.5">ALL REPLIES UNDER 24 HOURS</text>
             </svg>
           </div>
         </div>
