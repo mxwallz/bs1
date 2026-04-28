@@ -4005,9 +4005,9 @@ body.deliv-modal-open { overflow: hidden; }
    Visuals reduced ~30% from prior mobile sizing.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Keep rich list hidden on mobile — use deliv-simple cards instead. */
-  .deliv-list { display: none !important; }
-  .deliv-simple { display: flex !important; }
+  /* Show rich list on mobile — same pipeline/network visuals as desktop. */
+  .deliv-list { display: flex !important; }
+  .deliv-simple { display: none !important; }
 
   /* Each card: single column, tight padding, no alternating direction. */
   .deliv {
