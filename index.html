@@ -118,12 +118,10 @@ p { color: var(--w75); }
   font-size: 17px; font-weight: 600; letter-spacing: 0.26em;
   display: flex; align-items: center; gap: 10px;
 }
-.nav-compass {
-  width: 20px; height: 20px; flex-shrink: 0;
-  animation: compassSpin 32s linear infinite;
-  transform-origin: center;
+.nav-logo-img {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 50%; object-fit: cover; object-position: center top;
 }
-@keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 /* Hero */
 .hero { padding-top: clamp(120px, 14vw, 170px); }
@@ -4133,12 +4131,7 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- NAV. Apply button removed per feedback. -->
 <nav class="nav">
   <a href="#hero" class="nav-logo">
-    <svg class="nav-compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atlas">
-      <circle cx="12" cy="12" r="10" stroke="#A7B5E8" stroke-width="1.25"/>
-      <polygon points="12,5 14,12 12,19 10,12" fill="#A7B5E8"/>
-      <polygon points="12,5 10,12 12,12" fill="#C4CEF5" opacity="0.7"/>
-      <circle cx="12" cy="12" r="1.5" fill="#0a0a0a" stroke="#A7B5E8" stroke-width="1"/>
-    </svg>
+    <img class="nav-logo-img" src="img/logo" alt="Atlas">
     <span>ATLAS</span>
   </a>
 </nav>
@@ -4162,7 +4155,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
     <div class="cta-block reveal d4">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
     <!-- Hero stat row removed per v25 feedback. -->
 
@@ -4237,7 +4230,7 @@ body.deliv-modal-open { overflow: hidden; }
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
 
@@ -4590,7 +4583,7 @@ body.deliv-modal-open { overflow: hidden; }
 
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
   </div>
 </section>
@@ -4678,7 +4671,7 @@ body.deliv-modal-open { overflow: hidden; }
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
 
@@ -4914,7 +4907,7 @@ body.deliv-modal-open { overflow: hidden; }
 
     <div class="cta-block">
       <button class="btn reveal d1" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
   </div>
 </section>
@@ -5076,7 +5069,7 @@ body.deliv-modal-open { overflow: hidden; }
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
 
@@ -5173,7 +5166,7 @@ body.deliv-modal-open { overflow: hidden; }
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
 
@@ -5283,7 +5276,7 @@ body.deliv-modal-open { overflow: hidden; }
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
 
@@ -5611,10 +5604,10 @@ body.deliv-modal-open { overflow: hidden; }
   if (heroNotifSlot) {
     const pool = [
       { app: 'tinder', icon: '🔥', name: 'Tinder', text: '<strong>12</strong> new matches' },
-      { app: 'hinge', icon: 'H', name: 'Hinge', text: 'Sarah liked your prompt' },
+      { app: 'msg', icon: '💬', name: 'Messages', text: 'Mia: "no guy has ever approached me before 🥹"' },
       { app: 'bumble', icon: 'B', name: 'Bumble', text: 'Maya: "Pick the place"' },
       { app: 'ig', icon: '◉', name: 'Instagram', text: '<strong>2</strong> new DMs from women' },
-      { app: 'tinder', icon: '🔥', name: 'Tinder', text: 'Super Like received' },
+      { app: 'msg', icon: '💬', name: 'Messages', text: 'Ava: "Thx for coming up to me today 😊"' },
       { app: 'msg', icon: '💬', name: 'Messages', text: 'Lauren: "Free Friday?"' },
       { app: 'hinge', icon: 'H', name: 'Hinge', text: '<strong>8</strong> women liked you' },
       { app: 'ig', icon: '◉', name: 'Instagram', text: 'Anna viewed all your stories' },
