@@ -4020,32 +4020,128 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 /* ══════════════════════════════════════════════════════════
-   What You Get grid
+   What You Get — premium card grid
    ══════════════════════════════════════════════════════════ */
 .wy-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 20px; margin-top: 52px;
+  gap: 20px; margin-top: 56px;
 }
 .wy-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 28px 24px;
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  transition: border-color 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+  background: linear-gradient(145deg, rgba(13,17,40,0.96) 0%, rgba(8,10,24,0.99) 100%);
+  border: 1px solid rgba(167,181,232,0.10);
+  border-radius: 20px; padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
 }
-.wy-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+/* Gold shimmer top edge */
+.wy-card::before {
+  content: ''; position: absolute; top: 0; left: 18%; right: 18%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167,181,232,0.5), transparent);
+}
+/* Ambient corner glow */
+.wy-card::after {
+  content: ''; position: absolute; top: -70px; right: -70px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(167,181,232,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.wy-card:hover {
+  border-color: rgba(167,181,232,0.30);
+  transform: translateY(-5px);
+  box-shadow: 0 28px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,181,232,0.12);
+}
+/* Watermark index number */
+.wy-num {
+  position: absolute; top: 16px; right: 22px;
+  font-family: 'Spectral', Georgia, serif; font-style: italic;
+  font-size: 52px; font-weight: 300; line-height: 1;
+  color: rgba(167,181,232,0.07); pointer-events: none; user-select: none;
+}
 .wy-icon {
-  width: 44px; height: 44px;
-  background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.25);
-  border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px; color: var(--gold); flex-shrink: 0;
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, rgba(167,181,232,0.16), rgba(167,181,232,0.06));
+  border: 1px solid rgba(167,181,232,0.22); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; color: var(--gold); flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
 }
-.wy-title {
-  font-size: 15px; font-weight: 700; color: var(--w100);
-  margin-bottom: 8px; line-height: 1.35;
+.wy-card:hover .wy-icon {
+  background: linear-gradient(135deg, rgba(167,181,232,0.26), rgba(167,181,232,0.12));
+  border-color: rgba(167,181,232,0.42);
 }
-.wy-body { font-size: 13px; color: var(--w55); line-height: 1.6; margin: 0; }
-@media (max-width: 900px) { .wy-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) { .wy-grid { grid-template-columns: 1fr; gap: 14px; } }
+.wy-title { font-size: 15px; font-weight: 700; color: var(--w100); margin-bottom: 10px; line-height: 1.35; letter-spacing: -0.01em; }
+.wy-body  { font-size: 13px; color: var(--w55); line-height: 1.65; margin: 0; }
+
+/* Feature card — approach (spans 2 cols, text + animated scene) */
+.wy-feature { grid-column: span 2; padding: 0; }
+.wy-feature-inner { display: flex; height: 100%; min-height: 270px; }
+.wy-feature-text { flex: 1; padding: 32px 28px; display: flex; flex-direction: column; justify-content: center; }
+.wy-feature-text .wy-num { top: 20px; right: 24px; }
+.wy-feature-scene {
+  width: 260px; flex-shrink: 0; position: relative; overflow: hidden;
+  border-left: 1px solid rgba(167,181,232,0.07);
+  background: linear-gradient(135deg, rgba(5,6,8,0.7), rgba(10,13,31,0.5));
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Full-width network card */
+.wy-network { grid-column: span 3; }
+.wy-network-inner { display: flex; align-items: flex-start; gap: 24px; }
+.wy-network .wy-num { font-size: 68px; top: 14px; right: 28px; }
+.wy-network .wy-body { max-width: 880px; }
+
+/* ── Approach animation keyframes ── */
+@keyframes apprManWalk {
+  0%, 8%    { transform: translateX(0); }
+  30%, 62%  { transform: translateX(24px); }
+  88%, 100% { transform: translateX(0); }
+}
+@keyframes apprWomanWalk {
+  0%, 8%    { transform: translateX(0); }
+  30%, 62%  { transform: translateX(-24px); }
+  88%, 100% { transform: translateX(0); }
+}
+@keyframes apprGlow {
+  0%, 24%, 70%, 100% { opacity: 0; transform: scale(0.3); }
+  35%, 58%           { opacity: 1; transform: scale(1); }
+  46%                { transform: scale(1.18); }
+}
+@keyframes apprArmHS {
+  0%, 24%, 70%, 100% { opacity: 0; }
+  33%, 62%           { opacity: 1; }
+}
+@keyframes apprArmNorm {
+  0%, 24%, 70%, 100% { opacity: 1; }
+  33%, 62%           { opacity: 0; }
+}
+@keyframes apprBokeh {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50%      { opacity: 0.55; transform: translateY(-5px); }
+}
+.appr-man   { animation: apprManWalk   7.5s ease-in-out infinite; }
+.appr-woman { animation: apprWomanWalk 7.5s ease-in-out infinite; }
+.appr-hs-glow { animation: apprGlow 7.5s ease-in-out infinite; transform-origin: 130px 116px; }
+.appr-arm-hs   { animation: apprArmHS   7.5s ease-in-out infinite; }
+.appr-arm-norm { animation: apprArmNorm 7.5s ease-in-out infinite; }
+.appr-b1 { animation: apprBokeh 3.2s ease-in-out infinite; }
+.appr-b2 { animation: apprBokeh 4.1s ease-in-out infinite 0.9s; }
+.appr-b3 { animation: apprBokeh 3.8s ease-in-out infinite 1.8s; }
+
+.approach-svg { width: 100%; height: 100%; max-width: 260px; }
+
+@media (max-width: 900px) {
+  .wy-grid { grid-template-columns: repeat(2, 1fr); }
+  .wy-feature { grid-column: span 2; }
+  .wy-feature-scene { width: 200px; }
+  .wy-network { grid-column: span 2; }
+}
+@media (max-width: 640px) {
+  .wy-grid { grid-template-columns: 1fr; gap: 14px; }
+  .wy-feature, .wy-network { grid-column: span 1; }
+  .wy-feature-inner { flex-direction: column; }
+  .wy-feature-scene { width: 100%; height: 200px; border-left: none; border-top: 1px solid rgba(167,181,232,0.07); }
+  .wy-network-inner { flex-direction: column; gap: 0; }
+}
 
 </style>
 </head>
@@ -4895,36 +4991,6 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
       </div>
 
-      <!-- 03: What Would You Say (interactive, in phone frame) -->
-      <div class="deliv wwys-big reveal d1">
-        <div class="deliv-mock-wrap" data-deliv-id="wwys">
-          <div class="wwys-phone">
-            <div class="wwys-status"><span class="stat-time">9:41</span><span class="stat-icons">● ● ●</span></div>
-            <div class="wwys" id="wwys">
-              <div class="wwys-head">
-                <div class="wwys-avatar"></div>
-                <div><div class="wwys-name">Maya · 27</div><div class="wwys-status-pill">● matched 6m ago</div></div>
-              </div>
-              <div class="wwys-prompt">You just matched. What do you send?</div>
-              <div class="wwys-choice" id="wwys-choice">
-                <button class="wwys-choice-btn" onclick="playAvg()">What most guys send</button>
-                <button class="wwys-choice-btn atlas" onclick="playAtlas()">The Atlas approach</button>
-              </div>
-              <div class="wwys-thread" id="wwys-thread"></div>
-              <button class="wwys-reset" id="wwys-reset" onclick="resetWwys()">Try the other way</button>
-            </div>
-          </div>
-        </div>
-        <div class="deliv-copy">
-          <h3>What Would You Say</h3>
-          <p>Texting scripts. Escalation frameworks. First-date blueprints. No lines. No gimmicks. The specific mechanics that turn matches into booked calendar time. Your advisor reviews every conversation so you never guess again.</p>
-          <div class="spec">
-            <div class="spec-item"><div class="k">Includes</div><div class="v">Scripts · Frames · Dates</div></div>
-            <div class="spec-item"><div class="k">Support</div><div class="v">Live message review</div></div>
-            <div class="spec-item"><div class="k">Target</div><div class="v">Match to date in &lt;7 days</div></div>
-          </div>
-        </div>
-      </div>
 
       <!-- 05: Debrief = client message + advisor voice note (v25) -->
       <div class="deliv reveal d1">
@@ -5316,8 +5382,7 @@ body.deliv-modal-open { overflow: hidden; }
 <section class="section s-black" id="founder-bio">
   <div class="founder-stats">
     <div class="founder-portrait reveal d1">
-      [ Benjamin Seda. Studio portrait. ]
-      <!-- COPY_TODO: image. Founder studio portrait. -->
+      <img src="img/ben-founder.jpeg" alt="Benjamin Seda" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:20px;display:block;">
     </div>
     <div class="founder-body reveal d2">
       <p class="eyebrow">Meet the founder</p>
@@ -5464,76 +5529,166 @@ body.deliv-modal-open { overflow: hidden; }
 
     <div class="wy-grid">
 
+      <!-- 01 Wardrobe -->
       <div class="wy-card reveal d1">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
+        <div class="wy-num">01</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="wy-title">Image &amp; Wardrobe Overhaul</div>
         <p class="wy-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
       </div>
 
+      <!-- 02 App Profiles -->
       <div class="wy-card reveal d2">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg>
-        </div>
+        <div class="wy-num">02</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg></div>
         <div class="wy-title">Done-For-You Dating App Profiles</div>
         <p class="wy-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
       </div>
 
+      <!-- 03 Photographer -->
       <div class="wy-card reveal d3">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        </div>
+        <div class="wy-num">03</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
         <div class="wy-title">Photographer &amp; Photoshoot Playbook</div>
         <p class="wy-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
       </div>
 
+      <!-- 04 Instagram -->
       <div class="wy-card reveal d1">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-        </div>
+        <div class="wy-num">04</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
         <div class="wy-title">Instagram Overhaul</div>
         <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
       </div>
 
-      <div class="wy-card reveal d2">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <!-- 05 Approach — FEATURE CARD (spans 2 cols, animated scene) -->
+      <div class="wy-card wy-feature reveal d2">
+        <div class="wy-feature-inner">
+          <div class="wy-feature-text">
+            <div class="wy-num">05</div>
+            <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="wy-title">Real-Life Approach Gameplans</div>
+            <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
+          </div>
+          <div class="wy-feature-scene">
+            <svg class="approach-svg" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="scGlow" cx="50%" cy="58%" r="45%">
+                  <stop offset="0%" stop-color="#A7B5E8" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#A7B5E8" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="hsG" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#C4CEF5" stop-opacity="0.9"/>
+                  <stop offset="55%" stop-color="#A7B5E8" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#A7B5E8" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <!-- ambient bg glow -->
+              <rect width="260" height="200" fill="url(#scGlow)"/>
+              <!-- bokeh ambient dots -->
+              <circle cx="28" cy="32" r="2.5" fill="#A7B5E8" opacity="0.18" class="appr-b1"/>
+              <circle cx="232" cy="26" r="2" fill="#C4CEF5" opacity="0.14" class="appr-b2"/>
+              <circle cx="130" cy="16" r="1.5" fill="#A7B5E8" opacity="0.11" class="appr-b3"/>
+              <circle cx="48" cy="152" r="2" fill="#7AA0FF" opacity="0.10" class="appr-b2"/>
+              <circle cx="214" cy="148" r="2.5" fill="#A7B5E8" opacity="0.12" class="appr-b1"/>
+              <!-- floor line -->
+              <line x1="16" y1="172" x2="244" y2="172" stroke="rgba(167,181,232,0.18)" stroke-width="1"/>
+              <!-- handshake glow (center) -->
+              <g class="appr-hs-glow">
+                <circle cx="130" cy="116" r="22" fill="url(#hsG)"/>
+                <circle cx="130" cy="116" r="9" fill="rgba(167,181,232,0.5)"/>
+                <circle cx="130" cy="116" r="4" fill="rgba(196,206,245,0.8)"/>
+              </g>
+              <!-- MAN (base x≈82) -->
+              <g class="appr-man">
+                <!-- head -->
+                <circle cx="82" cy="56" r="12" fill="#A7B5E8"/>
+                <!-- neck -->
+                <rect x="79" y="68" width="6" height="7" rx="1" fill="#8896D5"/>
+                <!-- suit jacket -->
+                <path d="M68,75 Q66,92 67,112 L97,112 Q98,92 96,75 Q90,72 82,72 Q74,72 68,75Z" fill="#6B7EC4"/>
+                <!-- lapels -->
+                <path d="M76,75 L82,87" stroke="#8896D5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M88,75 L82,87" stroke="#8896D5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- tie -->
+                <rect x="80" y="76" width="4" height="20" rx="1" fill="#A7B5E8" opacity="0.28"/>
+                <!-- right arm — normal (down) -->
+                <line x1="97" y1="85" x2="108" y2="110" stroke="#A7B5E8" stroke-width="5" stroke-linecap="round" class="appr-arm-norm"/>
+                <!-- right arm — handshake (extends toward center) -->
+                <line x1="97" y1="85" x2="126" y2="116" stroke="#A7B5E8" stroke-width="5" stroke-linecap="round" class="appr-arm-hs"/>
+                <!-- left arm -->
+                <line x1="68" y1="85" x2="56" y2="108" stroke="#A7B5E8" stroke-width="5" stroke-linecap="round"/>
+                <!-- trousers -->
+                <rect x="70" y="112" width="11" height="57" rx="3" fill="#5A6AAD"/>
+                <rect x="83" y="112" width="11" height="57" rx="3" fill="#5A6AAD"/>
+                <!-- shoes -->
+                <ellipse cx="75" cy="170" rx="11" ry="4" fill="#3E4E8A"/>
+                <ellipse cx="89" cy="170" rx="11" ry="4" fill="#3E4E8A"/>
+              </g>
+              <!-- WOMAN (base x≈178) -->
+              <g class="appr-woman">
+                <!-- head -->
+                <circle cx="178" cy="56" r="11" fill="#C4CEF5"/>
+                <!-- elegant hair -->
+                <ellipse cx="178" cy="48" rx="13" ry="9" fill="#C4CEF5" opacity="0.42"/>
+                <ellipse cx="178" cy="45" rx="8" ry="5" fill="#C4CEF5" opacity="0.28"/>
+                <!-- neck -->
+                <rect x="175" y="67" width="6" height="8" rx="1" fill="#B0BCEE"/>
+                <!-- dress body -->
+                <path d="M165,75 Q163,88 162,112 Q170,115 178,115 Q186,115 196,112 Q195,88 191,75 Q185,72 178,72 Q171,72 165,75Z" fill="#7AA0FF" opacity="0.82"/>
+                <!-- dress skirt flare -->
+                <path d="M162,112 Q158,135 156,170 L178,170 L200,170 Q198,135 196,112Z" fill="#6690EE" opacity="0.72"/>
+                <!-- waist belt -->
+                <rect x="164" y="109" width="28" height="4" rx="2" fill="#C4CEF5" opacity="0.28"/>
+                <!-- left arm — normal (down) -->
+                <line x1="165" y1="85" x2="154" y2="108" stroke="#C4CEF5" stroke-width="4" stroke-linecap="round" class="appr-arm-norm"/>
+                <!-- left arm — handshake (extends toward man) -->
+                <line x1="165" y1="85" x2="136" y2="116" stroke="#C4CEF5" stroke-width="4" stroke-linecap="round" class="appr-arm-hs"/>
+                <!-- right arm -->
+                <line x1="191" y1="85" x2="204" y2="108" stroke="#C4CEF5" stroke-width="4" stroke-linecap="round"/>
+                <!-- heels -->
+                <ellipse cx="165" cy="170" rx="8" ry="3.5" fill="#9099CC"/>
+                <ellipse cx="191" cy="170" rx="8" ry="3.5" fill="#9099CC"/>
+              </g>
+            </svg>
+          </div>
         </div>
-        <div class="wy-title">Real-Life Approach Gameplans</div>
-        <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, how to ask for the number. Plus audio reviews of your approaches so you stop freezing and start getting dates from women you actually see in real life.</p>
       </div>
 
-      <div class="wy-card reveal d3">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
+      <!-- 06 Messaging -->
+      <div class="wy-card reveal d1">
+        <div class="wy-num">06</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <div class="wy-title">Messaging Blueprint &amp; Texting Scripts</div>
         <p class="wy-body">Copy-and-paste openers and message flows that turn matches and numbers into confirmed dates in 24-48 hours, without endless small talk.</p>
       </div>
 
-      <div class="wy-card reveal d1">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
+      <!-- 07 Date Frameworks -->
+      <div class="wy-card reveal d2">
+        <div class="wy-num">07</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="wy-title">First-Date &amp; Relationship Frameworks</div>
         <p class="wy-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
       </div>
 
-      <div class="wy-card reveal d2">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-        </div>
+      <!-- 08 1:1 Support -->
+      <div class="wy-card reveal d3">
+        <div class="wy-num">08</div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
         <div class="wy-title">1:1 Message Support &amp; Live Feedback</div>
         <p class="wy-body">Direct access to me and my team of Atlas Advisors, plus live strategy calls, to review your profiles, DMs, approaches, and dates so you know exactly what to tweak each week.</p>
       </div>
 
-      <div class="wy-card reveal d3">
-        <div class="wy-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <!-- 09 Network — full width -->
+      <div class="wy-card wy-network reveal d2">
+        <div class="wy-num">09</div>
+        <div class="wy-network-inner">
+          <div class="wy-icon" style="flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="wy-title">Private Atlas Network (NDA-Protected)</div>
+            <p class="wy-body">A curated room of other high-performing men (not a public Discord). Sharing lessons, wins, and breakdowns of best practices so you learn from others' experience, not just your own. Members regularly meet up in their cities.</p>
+          </div>
         </div>
-        <div class="wy-title">Private Atlas Network (NDA-Protected)</div>
-        <p class="wy-body">A curated room of other high-performing men. Not a public Discord. Sharing lessons, wins, and breakdowns of best practices so you learn from others' experience, not just your own. Members regularly meet up in their cities.</p>
       </div>
 
     </div>
