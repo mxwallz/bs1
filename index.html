@@ -3951,6 +3951,32 @@ body.deliv-modal-open { overflow: hidden; }
   .founder-body .stat-grid { justify-content: center; margin-left: auto; margin-right: auto; }
 }
 
+/* Founder section — small mobile */
+@media (max-width: 640px) {
+  /* Portrait: cap height so it doesn't eat the viewport */
+  .founder-portrait {
+    aspect-ratio: unset;
+    height: 300px;
+    max-width: 100%;
+    width: 100%;
+  }
+  .founder-portrait img { object-position: center 18%; }
+
+  /* Body copy slightly tighter */
+  .founder-body p { font-size: 15px; margin-bottom: 14px; }
+
+  /* Checklist: align left so it reads cleanly */
+  .founder-body ul { text-align: left; }
+
+  /* Stats: 2-col grid instead of 4 */
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .stat-big { font-size: 22px; }
+  .stat-lab { font-size: 10px; }
+}
+
 /* ══════════════════════════════════════════════════════════
    v33 · WWYS: strip the phone frame on desktop + mobile. Just
    the conversation itself — still interactive. The phone chrome
