@@ -3115,8 +3115,8 @@ body.deliv-modal-open { overflow: hidden; }
   grid-template-columns: none !important;
   animation: notifScrollV 32s linear infinite;
 }
-.notif-wall .notif-track:hover {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .notif-wall .notif-track:hover { animation-play-state: paused; }
 }
 @keyframes notifScrollV {
   from { transform: translateY(0); }
@@ -3125,7 +3125,7 @@ body.deliv-modal-open { overflow: hidden; }
 /* Mobile: slightly faster feed + narrower */
 @media (max-width: 640px) {
   .notif-wall { max-height: 480px; max-width: 420px; margin: 48px auto 0; }
-  .notif-wall .notif-track { animation-duration: 28s; }
+  .notif-wall .notif-track { animation-duration: 48s; }
 }
 
 
