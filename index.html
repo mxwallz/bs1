@@ -4019,6 +4019,34 @@ body.deliv-modal-open { overflow: hidden; }
   .debrief-thread { max-width: 300px !important; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   What You Get grid
+   ══════════════════════════════════════════════════════════ */
+.wy-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 52px;
+}
+.wy-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 24px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.wy-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+.wy-icon {
+  width: 44px; height: 44px;
+  background: var(--gold-soft); border: 1px solid rgba(167,181,232,0.25);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; color: var(--gold); flex-shrink: 0;
+}
+.wy-title {
+  font-size: 15px; font-weight: 700; color: var(--w100);
+  margin-bottom: 8px; line-height: 1.35;
+}
+.wy-body { font-size: 13px; color: var(--w55); line-height: 1.6; margin: 0; }
+@media (max-width: 900px) { .wy-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .wy-grid { grid-template-columns: 1fr; gap: 14px; } }
+
 </style>
 </head>
 <body>
@@ -5425,51 +5453,89 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- §8 CASE STUDIES removed per v15 feedback. -->
 
 
-<!-- §9 90-DAY SCROLL-ANIMATED TIMELINE (replaces 4-card roadmap) -->
-<section class="section s-dark timeline-section" id="timeline">
-  <div class="inner narrow">
-    <h2 class="reveal d1 text-center">How It Works.</h2>
+<!-- §9 WHAT YOU GET -->
+<section class="section s-dark" id="what-you-get">
+  <div class="inner">
+    <div class="text-center">
+      <p class="eyebrow reveal d1">The Full Package</p>
+      <h2 class="reveal d1">What You Get Inside<br><em>Atlas Advisory.</em></h2>
+      <p class="body-lg reveal d2" style="max-width:560px; margin:16px auto 0; color:var(--w55);">Everything you need to build a dating life that matches your success.</p>
+    </div>
 
-    <div class="timeline-container">
-      <div class="timeline-rail">
-        <div class="timeline-fill"></div>
-      </div>
+    <div class="wy-grid">
 
-      <div class="phase-entry" data-phase="1">
-        <div class="phase-dot"></div>
-        <div class="phase-card">
-          <div class="phase-week">Weeks 1–2</div>
-          <div class="phase-title">Pipeline live</div>
-          <p class="phase-body">Profiles rebuilt. Instagram dialed. All three channels running in parallel.</p>
+      <div class="wy-card reveal d1">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
+        <div class="wy-title">Image &amp; Wardrobe Overhaul</div>
+        <p class="wy-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
       </div>
 
-      <div class="phase-entry" data-phase="2">
-        <div class="phase-dot"></div>
-        <div class="phase-card">
-          <div class="phase-week">Weeks 3–4</div>
-          <div class="phase-title">First dates</div>
-          <p class="phase-body">Scripts deployed. Message support active. Most clients book their first date in this window.</p>
+      <div class="wy-card reveal d2">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg>
         </div>
+        <div class="wy-title">Done-For-You Dating App Profiles</div>
+        <p class="wy-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
       </div>
 
-      <div class="phase-entry" data-phase="3">
-        <div class="phase-dot"></div>
-        <div class="phase-card">
-          <div class="phase-week">Weekly · ongoing</div>
-          <div class="phase-title">Feedback layer</div>
-          <p class="phase-body">Strategy review. Date debriefs. Approach audits. 1:1 message support throughout the week.</p>
+      <div class="wy-card reveal d3">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
+        <div class="wy-title">Photographer &amp; Photoshoot Playbook</div>
+        <p class="wy-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
       </div>
 
-      <div class="phase-entry" data-phase="4">
-        <div class="phase-dot"></div>
-        <div class="phase-card">
-          <div class="phase-week">Day 90</div>
-          <div class="phase-title">Operating at capacity</div>
-          <p class="phase-body">1 to 3 dates per week. The skill is yours. You don't need us anymore.</p>
+      <div class="wy-card reveal d1">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         </div>
+        <div class="wy-title">Instagram Overhaul</div>
+        <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
       </div>
+
+      <div class="wy-card reveal d2">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="wy-title">Real-Life Approach Gameplans</div>
+        <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, how to ask for the number. Plus audio reviews of your approaches so you stop freezing and start getting dates from women you actually see in real life.</p>
+      </div>
+
+      <div class="wy-card reveal d3">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="wy-title">Messaging Blueprint &amp; Texting Scripts</div>
+        <p class="wy-body">Copy-and-paste openers and message flows that turn matches and numbers into confirmed dates in 24-48 hours, without endless small talk.</p>
+      </div>
+
+      <div class="wy-card reveal d1">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="wy-title">First-Date &amp; Relationship Frameworks</div>
+        <p class="wy-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
+      </div>
+
+      <div class="wy-card reveal d2">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <div class="wy-title">1:1 Message Support &amp; Live Feedback</div>
+        <p class="wy-body">Direct access to me and my team of Atlas Advisors, plus live strategy calls, to review your profiles, DMs, approaches, and dates so you know exactly what to tweak each week.</p>
+      </div>
+
+      <div class="wy-card reveal d3">
+        <div class="wy-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="wy-title">Private Atlas Network (NDA-Protected)</div>
+        <p class="wy-body">A curated room of other high-performing men. Not a public Discord. Sharing lessons, wins, and breakdowns of best practices so you learn from others' experience, not just your own. Members regularly meet up in their cities.</p>
+      </div>
+
     </div>
   </div>
 </section>
