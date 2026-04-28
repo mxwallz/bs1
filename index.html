@@ -4008,6 +4008,10 @@ body.deliv-modal-open { overflow: hidden; }
   /* Show rich list on mobile — same pipeline/network visuals as desktop. */
   .deliv-list { display: flex !important; }
   .deliv-simple { display: none !important; }
+  /* Earlier blocks hid child elements directly — override them. */
+  .deliv-list > .deliv { display: grid !important; }
+  .deliv-list > .deliv > .deliv-copy { display: block !important; }
+  .deliv-list > .deliv > .deliv-mock-wrap { display: flex !important; }
 
   /* Each card: single column, tight padding, no alternating direction. */
   .deliv {
@@ -4574,6 +4578,89 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
 
     <p class="sub-note text-center" style="margin-top:32px;">Illustrative. Individual results depend on execution and profile.</p>
+  </div>
+</section>
+
+
+<!-- §9 WHAT YOU GET -->
+<section class="section s-dark" id="what-you-get">
+  <div class="inner">
+    <div class="text-center">
+      <p class="eyebrow reveal d1">The Full Package</p>
+      <h2 class="reveal d1">What You Get Inside<br><em>Atlas Advisory.</em></h2>
+      <p class="body-lg reveal d2" style="max-width:560px; margin:16px auto 0; color:var(--w55);">Everything you need to build a dating life that matches your success.</p>
+    </div>
+
+    <div class="wy-grid">
+
+      <!-- 01 Wardrobe -->
+      <div class="wy-card reveal d1">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="wy-title">Image &amp; Wardrobe Overhaul</div>
+        <p class="wy-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
+      </div>
+
+      <!-- 02 App Profiles -->
+      <div class="wy-card reveal d2">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg></div>
+        <div class="wy-title">Done-For-You Dating App Profiles</div>
+        <p class="wy-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
+      </div>
+
+      <!-- 03 Photographer -->
+      <div class="wy-card reveal d3">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="wy-title">Photographer &amp; Photoshoot Playbook</div>
+        <p class="wy-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
+      </div>
+
+      <!-- 04 Instagram -->
+      <div class="wy-card reveal d1">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <div class="wy-title">Instagram Overhaul</div>
+        <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
+      </div>
+
+      <!-- 05 Approach -->
+      <div class="wy-card wy-feature reveal d2">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 1-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="wy-title">Real-Life Approach Gameplans</div>
+        <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
+      </div>
+
+      <!-- 06 Messaging -->
+      <div class="wy-card reveal d1">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="wy-title">Messaging Blueprint &amp; Texting Scripts</div>
+        <p class="wy-body">Copy-and-paste openers and message flows that turn matches and numbers into confirmed dates in 24-48 hours, without endless small talk.</p>
+      </div>
+
+      <!-- 07 Date Frameworks -->
+      <div class="wy-card reveal d2">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="wy-title">First-Date &amp; Relationship Frameworks</div>
+        <p class="wy-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
+      </div>
+
+      <!-- 08 1:1 Support -->
+      <div class="wy-card reveal d3">
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="wy-title">1:1 Message Support &amp; Live Feedback</div>
+        <p class="wy-body">Direct access to me and my team of Atlas Advisors, plus live strategy calls, to review your profiles, DMs, approaches, and dates so you know exactly what to tweak each week.</p>
+      </div>
+
+      <!-- 09 Network — full width -->
+      <div class="wy-card wy-network reveal d2">
+        <div class="wy-network-inner">
+          <div class="wy-icon" style="flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="wy-title">Private Atlas Network (NDA-Protected)</div>
+            <p class="wy-body">A curated room of other high-performing men (not a public Discord). Sharing lessons, wins, and breakdowns of best practices so you learn from others' experience, not just your own. Members regularly meet up in their cities.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -5192,89 +5279,6 @@ body.deliv-modal-open { overflow: hidden; }
 
 
 <!-- §8 CASE STUDIES removed per v15 feedback. -->
-
-
-<!-- §9 WHAT YOU GET -->
-<section class="section s-dark" id="what-you-get">
-  <div class="inner">
-    <div class="text-center">
-      <p class="eyebrow reveal d1">The Full Package</p>
-      <h2 class="reveal d1">What You Get Inside<br><em>Atlas Advisory.</em></h2>
-      <p class="body-lg reveal d2" style="max-width:560px; margin:16px auto 0; color:var(--w55);">Everything you need to build a dating life that matches your success.</p>
-    </div>
-
-    <div class="wy-grid">
-
-      <!-- 01 Wardrobe -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div class="wy-title">Image &amp; Wardrobe Overhaul</div>
-        <p class="wy-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
-      </div>
-
-      <!-- 02 App Profiles -->
-      <div class="wy-card reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg></div>
-        <div class="wy-title">Done-For-You Dating App Profiles</div>
-        <p class="wy-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
-      </div>
-
-      <!-- 03 Photographer -->
-      <div class="wy-card reveal d3">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <div class="wy-title">Photographer &amp; Photoshoot Playbook</div>
-        <p class="wy-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
-      </div>
-
-      <!-- 04 Instagram -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
-        <div class="wy-title">Instagram Overhaul</div>
-        <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
-      </div>
-
-      <!-- 05 Approach -->
-      <div class="wy-card wy-feature reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
-        <div class="wy-title">Real-Life Approach Gameplans</div>
-        <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
-      </div>
-
-      <!-- 06 Messaging -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="wy-title">Messaging Blueprint &amp; Texting Scripts</div>
-        <p class="wy-body">Copy-and-paste openers and message flows that turn matches and numbers into confirmed dates in 24-48 hours, without endless small talk.</p>
-      </div>
-
-      <!-- 07 Date Frameworks -->
-      <div class="wy-card reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="wy-title">First-Date &amp; Relationship Frameworks</div>
-        <p class="wy-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
-      </div>
-
-      <!-- 08 1:1 Support -->
-      <div class="wy-card reveal d3">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
-        <div class="wy-title">1:1 Message Support &amp; Live Feedback</div>
-        <p class="wy-body">Direct access to me and my team of Atlas Advisors, plus live strategy calls, to review your profiles, DMs, approaches, and dates so you know exactly what to tweak each week.</p>
-      </div>
-
-      <!-- 09 Network — full width -->
-      <div class="wy-card wy-network reveal d2">
-        <div class="wy-network-inner">
-          <div class="wy-icon" style="flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div>
-            <div class="wy-title">Private Atlas Network (NDA-Protected)</div>
-            <p class="wy-body">A curated room of other high-performing men (not a public Discord). Sharing lessons, wins, and breakdowns of best practices so you learn from others' experience, not just your own. Members regularly meet up in their cities.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 
 <!-- §9.5 PROBLEM moved to §10.5 (right before FAQ) on 2026-04-23 -->
