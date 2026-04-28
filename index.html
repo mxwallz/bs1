@@ -3648,7 +3648,7 @@ body.deliv-modal-open { overflow: hidden; }
     padding: 0 14px;
     animation: matchScroll 60s linear infinite;
   }
-  .match-grid-cards:hover { animation-play-state: paused; }
+  @media (hover: hover) { .match-grid-cards:hover { animation-play-state: paused; } }
   .match-card { flex: 0 0 48vw; }
   .match-card-dup { display: block; }
 
@@ -3875,8 +3875,8 @@ body.deliv-modal-open { overflow: hidden; }
 .testi-row-track.testi-right {
   animation: testiScrollRight 70s linear infinite;
 }
-.testi-row-track:hover {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .testi-row-track:hover { animation-play-state: paused; }
 }
 @keyframes testiScrollLeft {
   from { transform: translateX(0); }
@@ -4005,11 +4005,9 @@ body.deliv-modal-open { overflow: hidden; }
    Visuals reduced ~30% from prior mobile sizing.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Show the rich deliverable list on mobile. */
-  .deliv-list { display: flex !important; }
-
-  /* Hide the icon-only fallback cards — we're showing the real mockups now. */
-  .deliv-simple { display: none !important; }
+  /* Keep rich list hidden on mobile — use deliv-simple cards instead. */
+  .deliv-list { display: none !important; }
+  .deliv-simple { display: flex !important; }
 
   /* Each card: single column, tight padding, no alternating direction. */
   .deliv {
