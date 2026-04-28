@@ -4064,6 +4064,7 @@ body.deliv-modal-open { overflow: hidden; }
   border: 1px solid rgba(167,181,232,0.10);
   border-radius: 20px; padding: 32px 28px;
   transition: border-color 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+  text-align: center;
 }
 /* Gold shimmer top edge */
 .wy-card::before {
@@ -4094,7 +4095,7 @@ body.deliv-modal-open { overflow: hidden; }
   background: linear-gradient(135deg, rgba(167,181,232,0.16), rgba(167,181,232,0.06));
   border: 1px solid rgba(167,181,232,0.22); border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px; color: var(--gold); flex-shrink: 0;
+  margin: 0 auto 20px; color: var(--gold); flex-shrink: 0;
   transition: background 0.3s, border-color 0.3s;
 }
 .wy-card:hover .wy-icon {
@@ -4109,7 +4110,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 /* Full-width network card */
 .wy-network { grid-column: span 3; }
-.wy-network-inner { display: flex; align-items: flex-start; gap: 24px; }
+.wy-network-inner { display: flex; align-items: flex-start; gap: 24px; justify-content: center; }
 .wy-network .wy-num { font-size: 68px; top: 14px; right: 28px; }
 .wy-network .wy-body { max-width: 880px; }
 
@@ -5331,10 +5332,6 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
     </div>
   </div>
-    <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 2 minutes · NDA protected</div>
-    </div>
 </section>
 
 
