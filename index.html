@@ -3633,27 +3633,35 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  /* Restore horizontal carousel on mobile, 5% smaller cards */
+  /* Vertical 2-column grid scroll on mobile */
   .match-upsell {
     max-width: none;
-    height: auto;
-    padding: 14px 0 16px;
+    height: 380px;
+    padding: 0;
     margin-top: 24px;
     border-radius: 0;
     border-left: none;
     border-right: none;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 88%, transparent 100%);
   }
-  .match-upsell { padding: 14px 0 16px; margin-top: 24px; overflow: hidden; }
-  .match-upsell-header { padding: 0 14px; }
+  .match-upsell-header { padding: 0 14px; margin-bottom: 12px; }
   .match-transition { margin: 40px auto 14px; }
 
   .match-grid-cards {
-    /* 5% smaller: 51.5vw → 48.9vw; 6 × (48.9vw + 10px gap) */
-    --match-translate: calc(-293.4vw - 60px);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    gap: 8px;
     padding: 0 14px;
+    animation: matchScrollV 14s linear infinite;
   }
-  .match-card { flex: 0 0 48.9vw; }
+  .match-card {
+    flex: 0 0 calc(50% - 4px);
+    width: calc(50% - 4px);
+  }
 
   .match-photo { filter: blur(2px); }
   .match-info { font-size: 11px; padding: 4px 6px; border-radius: 4px; letter-spacing: 0; }
