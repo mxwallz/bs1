@@ -3528,13 +3528,24 @@ body.deliv-modal-open { overflow: hidden; }
    Gradient placeholders stand in for AI-generated photos.
    ══════════════════════════════════════════════════════════ */
 .match-upsell {
-  max-width: 760px;
+  max-width: 300px;
   margin: 48px auto 0;
-  padding: 18px 0 20px;
+  padding: 18px 0 0;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
+  height: 660px;
+  position: relative;
+}
+.match-upsell::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bg1));
+  pointer-events: none;
+  z-index: 2;
 }
 .match-transition {
   max-width: 760px;
@@ -3584,12 +3595,11 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .match-grid-cards {
   display: flex;
+  flex-direction: column;
   flex-wrap: nowrap;
   gap: 8px;
-  width: max-content;
-  /* translate = 6 × (16.2vw card + 8px gap) */
-  --match-translate: calc(-97.2vw - 48px);
-  animation: matchScroll 48s linear infinite;
+  padding: 0 12px 0;
+  animation: matchScrollV 24s linear infinite;
 }
 .match-card {
   position: relative;
@@ -3597,9 +3607,9 @@ body.deliv-modal-open { overflow: hidden; }
   border-radius: 10px;
   overflow: hidden;
   background: #14161f;
-  flex: 0 0 16.2vw;
+  flex: 0 0 auto;
+  width: 100%;
 }
-/* Duplicate set for seamless loop — visible on all screen sizes. */
 .match-card-dup { display: block; }
 .match-photo {
   position: absolute;
@@ -3634,20 +3644,30 @@ body.deliv-modal-open { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  /* Zero horizontal padding so the auto-scroll track runs edge-to-edge.
-     Header still gets horizontal padding internally. */
-  .match-upsell { padding: 14px 0 16px; margin-top: 24px; overflow: hidden; }
+  /* Restore horizontal carousel on mobile, 5% smaller cards */
+  .match-upsell {
+    max-width: none;
+    height: auto;
+    padding: 14px 0 16px;
+    margin-top: 24px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .match-upsell::after { display: none; }
   .match-upsell-header { padding: 0 14px; }
   .match-transition { margin: 40px auto 14px; }
 
-  /* Mobile: ~1.7 cards per view, 20% faster than original. */
   .match-grid-cards {
-    /* translate = 6 × (51.5vw card + 10px gap) */
-    --match-translate: calc(-309vw - 60px);
+    flex-direction: row;
+    width: max-content;
+    /* 5% smaller: 51.5vw → 48.9vw; 6 × (48.9vw + 10px gap) */
+    --match-translate: calc(-293.4vw - 60px);
     gap: 10px;
     padding: 0 14px;
+    animation: matchScroll 48s linear infinite;
   }
-  .match-card { flex: 0 0 51.5vw; }
+  .match-card { flex: 0 0 48.9vw; width: auto; }
 
   .match-photo { filter: blur(2px); }
   .match-info { font-size: 11px; padding: 4px 6px; border-radius: 4px; letter-spacing: 0; }
@@ -3660,6 +3680,10 @@ body.deliv-modal-open { overflow: hidden; }
 @keyframes matchScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(var(--match-translate)); }
+}
+@keyframes matchScrollV {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 
 /* ══════════════════════════════════════════════════════════
