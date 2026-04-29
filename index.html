@@ -4174,10 +4174,13 @@ body.deliv-modal-open { overflow: hidden; }
 
 /* tw-outer removed */
 
-/* Mobile deliverables: show simple icon cards, hide rich visuals (overrides v33) */
+/* Mobile deliverables: show rich visual cards (matches desktop), hide simple icon cards */
 @media (max-width: 768px) {
-  .deliv-simple { display: flex !important; }
-  .deliv-list { display: none !important; }
+  .deliv-simple { display: none !important; }
+  .deliv-list { display: flex !important; }
+  /* feedback-big SVG card sizing on mobile */
+  .deliv.feedback-big .deliv-mock-wrap { min-height: 260px !important; padding: 8px !important; }
+  .team-cloud svg { max-width: 92vw !important; width: 100% !important; height: auto !important; }
 }
 
 </style>
@@ -4736,7 +4739,7 @@ body.deliv-modal-open { overflow: hidden; }
 <section class="section s-dark">
   <div class="inner wide">
     <p class="eyebrow text-center reveal d1">Everything You Get</p>
-    <h2 class="reveal d1 text-center">Three components.<br><em>All built for you.</em></h2>
+    <h2 class="reveal d1 text-center">A framework,<br><em>not tips.</em></h2>
     <p class="body-lg reveal d2 text-center" style="max-width:620px; margin:24px auto 0; color:var(--w55);">
       What you keep after the 90-day engagement.
     </p>
