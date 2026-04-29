@@ -4176,6 +4176,12 @@ body.deliv-modal-open { overflow: hidden; }
   .system-pipeline-visual { margin-top: 36px !important; }
 }
 
+/* Screenshot testimonial image cards */
+.tc-img-card { padding: 0 !important; overflow: hidden; width: 280px; }
+.tc-img-card img { border-radius: 14px; }
+.notif-img { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+.notif-img img { border-radius: 14px; border: 1px solid var(--border-2); }
+
 /* Mobile deliverables: show rich visual cards (matches desktop), hide simple icon cards */
 @media (max-width: 768px) {
   .deliv-simple { display: none !important; }
@@ -5072,12 +5078,6 @@ body.deliv-modal-open { overflow: hidden; }
     <p class="eyebrow text-center reveal d1">Real Clients</p>
     <h2 class="reveal d1 text-center">These are not outliers.</h2>
 
-    <!-- Screenshot wall — real testimonial images -->
-    <div class="tg-screenshot-wall reveal d2" style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:780px; margin:48px auto 0;">
-      <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result" style="width:100%; border-radius:14px; border:1px solid var(--border-2); display:block;">
-      <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result" style="width:100%; border-radius:14px; border:1px solid var(--border-2); display:block;">
-    </div>
-
     <!-- Mobile: single vertical scroll feed (notif-style, rAF auto-scroll) -->
     <div class="testi-scroll-feed" id="testiMobileFeed">
       <div class="testi-feed-track">
@@ -5163,6 +5163,13 @@ body.deliv-modal-open { overflow: hidden; }
           </div>
         </div>
 
+        <div class="notif notif-img">
+          <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:12px;">
+        </div>
+        <div class="notif notif-img">
+          <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:12px;">
+        </div>
+
         <!-- Duplicates for seamless loop -->
         <div class="notif">
           <div class="notif-icon messages">T</div>
@@ -5244,6 +5251,12 @@ body.deliv-modal-open { overflow: hidden; }
             <div class="notif-text">Cold-approached a 10 on the street. I now believe the most attractive women are completely attainable.</div>
           </div>
         </div>
+        <div class="notif notif-img">
+          <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:12px;">
+        </div>
+        <div class="notif notif-img">
+          <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:12px;">
+        </div>
 
       </div>
     </div>
@@ -5265,6 +5278,12 @@ body.deliv-modal-open { overflow: hidden; }
             <div class="tc-head"><div class="tc-photo">S</div><div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div></div>
             <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
           </div>
+          <div class="tc-card tc-img-card">
+            <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:8px;">
+          </div>
+          <div class="tc-card tc-img-card">
+            <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:8px;">
+          </div>
           <!-- Duplicate set for seamless loop -->
           <div class="tc-card">
             <div class="tc-head"><div class="tc-photo">T</div><div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div></div>
@@ -5277,6 +5296,12 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="tc-card">
             <div class="tc-head"><div class="tc-photo">S</div><div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div></div>
             <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
+          </div>
+          <div class="tc-card tc-img-card">
+            <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:8px;">
+          </div>
+          <div class="tc-card tc-img-card">
+            <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result" style="width:100%;height:auto;display:block;border-radius:8px;">
           </div>
         </div>
       </div>
