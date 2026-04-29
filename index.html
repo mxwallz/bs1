@@ -4160,20 +4160,16 @@ body.deliv-modal-open { overflow: hidden; }
 .wy-title { font-size: 15px; font-weight: 700; color: var(--w100); margin-bottom: 10px; line-height: 1.35; letter-spacing: -0.01em; }
 .wy-body  { font-size: 13px; color: var(--w55); line-height: 1.65; margin: 0; }
 
-/* Feature card — approach (spans 2 cols) */
-.wy-feature { grid-column: span 2; }
-
-/* Full-width network card */
-.wy-network { grid-column: span 3; }
-.wy-network-inner { display: flex; align-items: flex-start; gap: 24px; justify-content: center; }
-.wy-network .wy-num { font-size: 68px; top: 14px; right: 28px; }
-.wy-network .wy-body { max-width: 880px; }
-
+/* All cards equal — no spanning */
+.wy-feature { grid-column: span 1; }
+.wy-network { grid-column: span 1; }
+.wy-network-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.wy-network .wy-num { font-size: 52px; }
+.wy-network .wy-body { max-width: 100%; }
 
 @media (max-width: 900px) {
   .wy-grid { grid-template-columns: repeat(2, 1fr); }
-  .wy-feature { grid-column: span 2; }
-  .wy-network { grid-column: span 2; }
+  .wy-feature, .wy-network { grid-column: span 1; }
 }
 @media (max-width: 640px) {
   .wy-grid { grid-template-columns: 1fr; gap: 14px; }
@@ -4739,11 +4735,8 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- §5 DELIVERABLES (no "Deliverable N" tags, testimonial pull-quotes inside select cards, new subhead) -->
 <section class="section s-dark">
   <div class="inner wide">
-    <p class="eyebrow text-center reveal d1">Everything You Get</p>
-    <h2 class="reveal d1 text-center">Three components.<br><em>All built for you.</em></h2>
-    <p class="body-lg reveal d2 text-center" style="max-width:620px; margin:24px auto 0; color:var(--w55);">
-      What you keep after the 90-day engagement.
-    </p>
+    <p class="eyebrow text-center reveal d1">The System</p>
+    <h2 class="reveal d1 text-center">A framework,<br><em>not tips.</em></h2>
 
 
     <!-- v31 · Simple mobile deliverable cards (ported from v32). No accordion, no expansion. Visible only on mobile. -->
