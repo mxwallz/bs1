@@ -4765,17 +4765,14 @@ body.deliv-modal-open { overflow: hidden; }
 
       <div class="ds-card">
         <div class="ds-icon">
-          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
-            <circle cx="16" cy="16" r="3" fill="currentColor"/>
-            <circle cx="7" cy="7" r="2.2"/>
-            <circle cx="25" cy="7" r="2.2"/>
-            <circle cx="7" cy="25" r="2.2"/>
-            <circle cx="25" cy="25" r="2.2"/>
-            <path d="M9 9l5 5M23 9l-5 5M9 23l5-5M23 23l-5-5" stroke-linecap="round"/>
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M4 8h16M4 13h10"/>
+            <circle cx="23" cy="9" r="4"/>
+            <path d="M19 13l-3 4h3l-2 6 7-8h-4l2-2z" fill="currentColor" stroke="none"/>
           </svg>
         </div>
-        <h3>The Atlas Network</h3>
-        <p>Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. A team of experts in your pocket.</p>
+        <h3>The Feedback Layer</h3>
+        <p>We review your texts, profiles, approaches, and dates each week. You find out exactly where you're losing women and get immediate fixes. No more lost opportunities.</p>
       </div>
     </div>
 
@@ -4884,12 +4881,12 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
 
       <!-- 06: Atlas Network · v34 · illustrated "team cloud coming out of the phone". -->
-      <div class="deliv network-big reveal d1">
-        <div class="deliv-mock-wrap" data-deliv-id="network">
+      <div class="deliv feedback-big reveal d1">
+        <div class="deliv-mock-wrap" data-deliv-id="feedback">
           <div class="team-cloud">
-            <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Your Atlas Team">
+            <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Feedback Layer">
               <defs>
-                <radialGradient id="net-glow" cx="50%" cy="0%" r="80%">
+                <radialGradient id="fl-glow" cx="50%" cy="0%" r="80%">
                   <stop offset="0%" stop-color="rgba(167,181,232,0.09)"/>
                   <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
                 </radialGradient>
@@ -4897,60 +4894,56 @@ body.deliv-modal-open { overflow: hidden; }
 
               <!-- Card -->
               <rect x="40" y="10" width="320" height="320" rx="20" fill="#080a12" stroke="rgba(167,181,232,0.13)" stroke-width="1"/>
-              <rect x="40" y="10" width="320" height="130" rx="20" fill="url(#net-glow)"/>
+              <rect x="40" y="10" width="320" height="80" rx="20" fill="url(#fl-glow)"/>
 
               <!-- Eyebrow -->
-              <text x="200" y="47" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.5" font-weight="700" letter-spacing="2.5" fill="rgba(167,181,232,0.45)">YOUR ATLAS TEAM</text>
+              <text x="200" y="47" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.5" font-weight="700" letter-spacing="2.5" fill="rgba(167,181,232,0.45)">WEEKLY FEEDBACK REVIEW</text>
               <line x1="64" y1="61" x2="336" y2="61" stroke="rgba(167,181,232,0.08)" stroke-width="1"/>
 
-              <!-- Row 1: Profile Advisors -->
-              <circle cx="92" cy="100" r="22" fill="rgba(167,181,232,0.06)" stroke="rgba(167,181,232,0.26)" stroke-width="1"/>
-              <circle cx="92" cy="93" r="6.5" fill="none" stroke="rgba(167,181,232,0.72)" stroke-width="1.4"/>
-              <path d="M79 113 Q79 104 92 104 Q105 104 105 113" fill="none" stroke="rgba(167,181,232,0.72)" stroke-width="1.4" stroke-linecap="round"/>
-              <text x="126" y="93" font-family="system-ui,-apple-system,sans-serif" font-size="12.5" font-weight="600" fill="rgba(255,255,255,0.92)">Profile Advisors</text>
-              <text x="126" y="109" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.5)">Female advisory team</text>
-              <circle cx="128" cy="122" r="3.5" fill="#4ade80"/>
-              <text x="137" y="126" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#4ade80">LIVE NOW</text>
+              <!-- Outgoing message (user) -->
+              <rect x="196" y="72" width="152" height="38" rx="10" fill="#1e3a5f"/>
+              <text x="208" y="88" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" fill="rgba(255,255,255,0.88)">"Hey, free Saturday?"</text>
+              <text x="208" y="103" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="rgba(255,255,255,0.38)">Delivered</text>
 
-              <line x1="64" y1="146" x2="336" y2="146" stroke="rgba(167,181,232,0.07)" stroke-width="1"/>
+              <!-- Negative annotation -->
+              <line x1="196" y1="88" x2="178" y2="88" stroke="rgba(248,113,113,0.55)" stroke-width="1" stroke-dasharray="3,2"/>
+              <circle cx="172" cy="88" r="6" fill="rgba(248,113,113,0.12)" stroke="rgba(248,113,113,0.65)" stroke-width="1.2"/>
+              <text x="172" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="rgba(248,113,113,0.9)">&#10005;</text>
+              <text x="64" y="79" font-family="system-ui,-apple-system,sans-serif" font-size="9.5" fill="rgba(248,113,113,0.75)">No specificity.</text>
+              <text x="64" y="92" font-family="system-ui,-apple-system,sans-serif" font-size="9.5" fill="rgba(248,113,113,0.75)">Screams low effort.</text>
 
-              <!-- Row 2: Strategy Coaches -->
-              <circle cx="92" cy="185" r="22" fill="rgba(167,181,232,0.06)" stroke="rgba(167,181,232,0.26)" stroke-width="1"/>
-              <line x1="82" y1="180" x2="102" y2="180" stroke="rgba(167,181,232,0.75)" stroke-width="1.5" stroke-linecap="round"/>
-              <line x1="82" y1="186" x2="102" y2="186" stroke="rgba(167,181,232,0.75)" stroke-width="1.5" stroke-linecap="round"/>
-              <line x1="82" y1="192" x2="95" y2="192" stroke="rgba(167,181,232,0.75)" stroke-width="1.5" stroke-linecap="round"/>
-              <text x="126" y="178" font-family="system-ui,-apple-system,sans-serif" font-size="12.5" font-weight="600" fill="rgba(255,255,255,0.92)">Strategy Coaches</text>
-              <text x="126" y="194" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.5)">6 coaches on rotation</text>
-              <circle cx="128" cy="207" r="3.5" fill="#4ade80"/>
-              <text x="137" y="211" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#4ade80">LIVE NOW</text>
+              <!-- Her "reply" — left on read -->
+              <rect x="64" y="123" width="120" height="26" rx="8" fill="rgba(167,181,232,0.06)" stroke="rgba(167,181,232,0.10)" stroke-width="0.8"/>
+              <text x="76" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(255,255,255,0.45)">Left on read</text>
 
-              <line x1="64" y1="228" x2="336" y2="228" stroke="rgba(167,181,232,0.07)" stroke-width="1"/>
+              <!-- Divider + The Fix label -->
+              <line x1="64" y1="163" x2="336" y2="163" stroke="rgba(167,181,232,0.07)" stroke-width="1"/>
+              <text x="200" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="2" fill="rgba(167,181,232,0.38)">AFTER COACHING</text>
 
-              <!-- Row 3: Atlas Network -->
-              <circle cx="92" cy="268" r="22" fill="rgba(167,181,232,0.06)" stroke="rgba(167,181,232,0.26)" stroke-width="1"/>
-              <circle cx="92" cy="268" r="4" fill="rgba(167,181,232,0.85)"/>
-              <line x1="92" y1="268" x2="80" y2="258" stroke="rgba(167,181,232,0.38)" stroke-width="1.2"/>
-              <line x1="92" y1="268" x2="104" y2="258" stroke="rgba(167,181,232,0.38)" stroke-width="1.2"/>
-              <line x1="92" y1="268" x2="80" y2="278" stroke="rgba(167,181,232,0.38)" stroke-width="1.2"/>
-              <line x1="92" y1="268" x2="104" y2="278" stroke="rgba(167,181,232,0.38)" stroke-width="1.2"/>
-              <circle cx="80" cy="258" r="2.5" fill="rgba(167,181,232,0.55)"/>
-              <circle cx="104" cy="258" r="2.5" fill="rgba(167,181,232,0.55)"/>
-              <circle cx="80" cy="278" r="2.5" fill="rgba(167,181,232,0.55)"/>
-              <circle cx="104" cy="278" r="2.5" fill="rgba(167,181,232,0.55)"/>
-              <text x="126" y="261" font-family="system-ui,-apple-system,sans-serif" font-size="12.5" font-weight="600" fill="rgba(255,255,255,0.92)">The Atlas Network</text>
-              <text x="126" y="277" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="rgba(167,181,232,0.5)">Private · NDA protected</text>
-              <circle cx="128" cy="290" r="3.5" fill="rgba(167,181,232,0.35)"/>
-              <text x="137" y="294" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="rgba(167,181,232,0.38)">MEMBERS ONLY</text>
+              <!-- Revised outgoing message -->
+              <rect x="162" y="188" width="186" height="48" rx="10" fill="#1e3a5f"/>
+              <text x="174" y="204" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" fill="rgba(255,255,255,0.88)">"I'm going to this rooftop</text>
+              <text x="174" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" fill="rgba(255,255,255,0.88)">bar Friday. You should come."</text>
+              <text x="174" y="231" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="rgba(255,255,255,0.38)">Delivered</text>
+
+              <!-- Positive annotation -->
+              <line x1="162" y1="207" x2="144" y2="207" stroke="rgba(74,222,128,0.55)" stroke-width="1" stroke-dasharray="3,2"/>
+              <circle cx="138" cy="207" r="6" fill="rgba(74,222,128,0.12)" stroke="rgba(74,222,128,0.65)" stroke-width="1.2"/>
+              <text x="138" y="211" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="rgba(74,222,128,0.9)">&#10003;</text>
+
+              <!-- Her reply after fix -->
+              <rect x="64" y="250" width="150" height="26" rx="8" fill="rgba(74,222,128,0.06)" stroke="rgba(74,222,128,0.18)" stroke-width="0.8"/>
+              <text x="76" y="267" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" fill="rgba(255,255,255,0.82)">"I'm in! What time?" &#128525;</text>
 
               <!-- Footer -->
-              <line x1="64" y1="309" x2="336" y2="309" stroke="rgba(167,181,232,0.07)" stroke-width="1"/>
-              <text x="200" y="327" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="rgba(167,181,232,0.22)" letter-spacing="1.5">ALL REPLIES UNDER 24 HOURS</text>
+              <line x1="64" y1="292" x2="336" y2="292" stroke="rgba(167,181,232,0.07)" stroke-width="1"/>
+              <text x="200" y="307" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="rgba(167,181,232,0.22)" letter-spacing="1.5">REVIEWED BY ATLAS · 24H TURNAROUND</text>
             </svg>
           </div>
         </div>
         <div class="deliv-copy">
-          <h3>A team of experts<br>right in your pocket.</h3>
-          <p>Female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds. When you hit a wall at 11pm, someone is already answering.</p>
+          <h3>The Feedback Layer</h3>
+          <p>Dating is one of the only skills where you don't get actionable feedback. When a girl rejects you, she doesn't tell you exactly what you did wrong... she just disappears. We review your texts, profiles, approaches, and dates each week, point out exactly where you're losing women, and give you immediate fixes. No more lost opportunities.</p>
         </div>
       </div>
 
