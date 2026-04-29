@@ -4266,31 +4266,13 @@ body.deliv-modal-open { overflow: hidden; }
   .proof-wall { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .proof-filters { display: none; }
-  .proof-wall { display: none; }
+  .proof-wall { grid-template-columns: 1fr; gap: 12px; }
+  .proof-filters { gap: 6px; margin: 24px auto 20px; }
+  .proof-tag { font-size: 10px; padding: 6px 12px; }
 }
 
 /* Mobile testimonial image cards — replaces notification feed */
-.tg-mobile-pics { display: none; }
-@media (max-width: 768px) {
-  .tg-mobile-pics {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 28px;
-  }
-  .tg-pic-card {
-    background: var(--card);
-    border: 1px solid var(--border-2);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .tg-pic-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-}
+
 
 /* Screenshot testimonial image cards */
 .tc-img-card { padding: 0 !important; overflow: hidden; width: 280px; }
@@ -5207,12 +5189,6 @@ body.deliv-modal-open { overflow: hidden; }
     <!-- Mobile subtitle -->
     <p class="testi-mobile-sub reveal d2">Some of the wins from inside the community. Scroll yourself to see what the average day inside Atlas looks like.</p>
 
-    <!-- Desktop: puzzle-fit screenshot mosaic (hidden on mobile) -->
-    <div class="tg-proof-mosaic reveal d2">
-      <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result — 18 matches in one day">
-      <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result — mindset shift">
-    </div>
-
     <!-- Desktop: tag filters + proof wall -->
     <div class="proof-filters reveal d2">
       <button class="proof-tag active" data-filter="all">All</button>
@@ -5274,21 +5250,8 @@ body.deliv-modal-open { overflow: hidden; }
         <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="18 matches in one day">
       </div>
 
-      <div class="tc-card tc-img-card" data-tag="relationship">
-        <img src="img/tg-testimonials/IMG_2503.jpg" alt="Mindset shift after 3 months">
-      </div>
-
     </div>
 
-    <!-- Mobile: plain stacked images, no scroll container -->
-    <div class="tg-mobile-pics">
-      <div class="tg-pic-card">
-        <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result">
-      </div>
-      <div class="tg-pic-card">
-        <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result">
-      </div>
-    </div>
 
         <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
