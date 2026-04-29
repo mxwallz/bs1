@@ -4214,6 +4214,39 @@ body.deliv-modal-open { overflow: hidden; }
   }
 }
 
+/* Mobile testimonial image cards — replaces notification feed */
+.tg-mobile-pics { display: none; }
+@media (max-width: 768px) {
+  .testi-scroll-feed { display: none !important; }
+  .tg-mobile-pics {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 28px;
+    max-height: 500px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding: 4px 2px 40px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 88%, transparent 100%);
+  }
+  .tg-mobile-pics::-webkit-scrollbar { display: none; }
+  .tg-pic-card {
+    background: var(--card);
+    border: 1px solid var(--border-2);
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .tg-pic-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
 /* Screenshot testimonial image cards */
 .tc-img-card { padding: 0 !important; overflow: hidden; width: 280px; }
 .tc-img-card img { border-radius: 14px; }
@@ -5097,7 +5130,7 @@ body.deliv-modal-open { overflow: hidden; }
       <p class="eyebrow">Meet the founder</p>
       <h2>I'm Benjamin Seda,<br><em>founder of Atlas Advisory.</em></h2>
       <p>I've been advising men on dating and relationships for over a decade.</p>
-      <p>(You may remember me from my early days as "Based Zeus")</p>
+      <p><em>(You may remember me from my early days as "Based Zeus")</em></p>
       <p style="color:var(--w55); font-size:14px; font-weight:600; margin-bottom:8px;">Over the last 10 years, I've personally:</p>
       <ul style="list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px;">
         <li style="display:flex; gap:10px; align-items:flex-start; font-size:15px; color:var(--w75);"><span style="color:var(--gold); flex-shrink:0; margin-top:2px;">&#10003;</span>Built thousands of dating profiles and Instagrams</li>
@@ -5135,8 +5168,18 @@ body.deliv-modal-open { overflow: hidden; }
       <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result — mindset shift">
     </div>
 
-    <!-- Mobile: single vertical scroll feed (notif-style, rAF auto-scroll) -->
-    <div class="testi-scroll-feed" id="testiMobileFeed">
+    <!-- Mobile: scrollable image cards -->
+    <div class="tg-mobile-pics">
+      <div class="tg-pic-card">
+        <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result">
+      </div>
+      <div class="tg-pic-card">
+        <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result">
+      </div>
+    </div>
+
+    <!-- Mobile: notification feed (desktop hidden, kept for JS scroll loop) -->
+    <div class="testi-scroll-feed" id="testiMobileFeed" style="display:none!important;">
       <div class="testi-feed-track">
 
         <div class="notif">
