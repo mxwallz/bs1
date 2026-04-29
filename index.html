@@ -3514,11 +3514,6 @@ body.deliv-modal-open { overflow: hidden; }
     grid-column: 1 / -1;
   }
 
-  /* Combine System + Deliverables on mobile by hiding the standalone
-     System section. The .deliv-simple cards in §5 already cover the
-     four pillars (pipeline + blueprint + feedback layer + network)
-     plus profile rebuild, so the System section is redundant on mobile. */
-  #system { display: none !important; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -4174,6 +4169,13 @@ body.deliv-modal-open { overflow: hidden; }
 
 /* tw-outer removed */
 
+/* §4 system pipeline featured visual */
+.system-pipeline-visual .pipe2 { max-width: 100%; padding: 0; }
+.system-pipeline-visual .pipe2 svg { width: 100%; height: auto; display: block; }
+@media (max-width: 768px) {
+  .system-pipeline-visual { margin-top: 36px !important; }
+}
+
 /* Mobile deliverables: show rich visual cards (matches desktop), hide simple icon cards */
 @media (max-width: 768px) {
   .deliv-simple { display: none !important; }
@@ -4294,101 +4296,7 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §3.6 PHONES moved below §4 Framework on 2026-04-24. See #phone-outcome. -->
-
-
-<!-- §4 ATLAS SYSTEM (big numbers replaced with small icons) -->
-<section class="section s-black" id="system">
-  <div class="inner">
-    <p class="eyebrow text-center reveal d1">The System</p>
-    <h2 class="reveal d1 text-center">A framework.<br><em>Not tips.</em></h2>
-    <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:24px auto 0; color:var(--w55);">
-      Get in front of the right women. Turn attention into dates. Expert feedback to optimize each step of the dating process.
-    </p>
-
-    <div class="modules">
-
-      <div class="module reveal d1">
-        <div class="module-icon" aria-label="3 Part Pipeline icon">
-          <!-- Trident: 3 streams converging -->
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M 8,8 C 8,20 12,24 20,26"/>
-            <path d="M 20,8 L 20,26"/>
-            <path d="M 32,8 C 32,20 28,24 20,26"/>
-            <line x1="20" y1="26" x2="20" y2="34"/>
-            <circle cx="20" cy="26" r="2" fill="currentColor"/>
-          </svg>
-        </div>
-        <div>
-          <div class="module-name">The 3 Part Pipeline</div>
-          <p class="module-body">Dating apps, Instagram, and in-person. With the right system, dating 9s and 10s isn't some miracle. It's just math.</p>
-        </div>
-      </div>
-
-      <div class="module reveal d1">
-        <div class="module-icon" aria-label="Conversion Blueprint icon">
-          <!-- Two chat bubbles: conversion -->
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 6,10 L 22,10 Q 26,10 26,14 L 26,20 Q 26,24 22,24 L 14,24 L 10,28 L 10,24 L 6,24 Q 6,24 6,20 L 6,10 Z"/>
-            <path d="M 18,18 L 32,18 Q 34,18 34,20 L 34,28 Q 34,32 30,32 L 24,32 L 28,36 L 28,32" opacity="0.55"/>
-          </svg>
-        </div>
-        <div>
-          <div class="module-name">The Conversion Blueprint</div>
-          <p class="module-body">From match to date. Scripts, texting system, date frames. The specific mechanics that turn attention into booked calendar time.</p>
-        </div>
-      </div>
-
-      <div class="module reveal d1">
-        <div class="module-icon" aria-label="Feedback Layer icon">
-          <!-- Circular arrow loop -->
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 30,12 A 12 12 0 1 0 33,23"/>
-            <polyline points="24,8 30,12 26,18"/>
-            <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
-          </svg>
-        </div>
-        <div>
-          <div class="module-name">The Feedback Layer</div>
-          <p class="module-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
-        </div>
-      </div>
-
-      <div class="module reveal d1">
-        <div class="module-icon" aria-label="Atlas Network icon">
-          <!-- Hub and spoke -->
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <line x1="20" y1="20" x2="8" y2="10"/>
-            <line x1="20" y1="20" x2="32" y2="10"/>
-            <line x1="20" y1="20" x2="8" y2="30"/>
-            <line x1="20" y1="20" x2="32" y2="30"/>
-            <line x1="20" y1="20" x2="34" y2="20"/>
-            <line x1="20" y1="20" x2="6" y2="20"/>
-            <circle cx="20" cy="20" r="5" fill="currentColor"/>
-            <circle cx="8" cy="10" r="2.5" fill="currentColor" stroke="none"/>
-            <circle cx="32" cy="10" r="2.5" fill="currentColor" stroke="none"/>
-            <circle cx="8" cy="30" r="2.5" fill="currentColor" stroke="none"/>
-            <circle cx="32" cy="30" r="2.5" fill="currentColor" stroke="none"/>
-            <circle cx="34" cy="20" r="2.5" fill="currentColor" stroke="none"/>
-            <circle cx="6" cy="20" r="2.5" fill="currentColor" stroke="none"/>
-          </svg>
-        </div>
-        <div>
-          <div class="module-name">The Atlas Network</div>
-          <p class="module-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="cta-block reveal d4" style="margin-top: 56px;">
-      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 30 seconds · NDA protected</div>
-    </div>
-  </div>
-</section>
-
-
+<!-- §3.6 PHONES -->
 <!-- §3.6 PHONES · Relocated to run after §4 Framework on 2026-04-24. -->
 <section class="section s-dark" id="phone-outcome">
   <div class="inner">
@@ -4648,6 +4556,199 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
+<!-- §4 ATLAS SYSTEM (big numbers replaced with small icons) -->
+<section class="section s-black" id="system">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">The System</p>
+    <h2 class="reveal d1 text-center">A framework.<br><em>Not tips.</em></h2>
+    <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:24px auto 0; color:var(--w55);">
+      Get in front of the right women. Turn attention into dates. Expert feedback to optimize each step of the dating process.
+    </p>
+
+    <!-- Pipeline animation — featured visual -->
+    <div class="system-pipeline-visual reveal d3" style="max-width:680px; margin:52px auto 0;">
+      
+    </div>
+
+    <!-- Pipeline animation — featured visual -->
+    <div class="system-pipeline-visual reveal d3" style="max-width:680px;margin:52px auto 0;">
+      <div class="pipe2">
+            <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
+              <defs>
+                <linearGradient id="v12GlassGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0.015)"/>
+                </linearGradient>
+                <linearGradient id="v12IgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#feda75"/>
+                  <stop offset="25%" stop-color="#fa7e1e"/>
+                  <stop offset="50%" stop-color="#d62976"/>
+                  <stop offset="75%" stop-color="#962fbf"/>
+                  <stop offset="100%" stop-color="#4f5bd5"/>
+                </linearGradient>
+                <radialGradient id="v12NodeGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(79,126,255,0.16)"/>
+                  <stop offset="100%" stop-color="rgba(79,126,255,0)"/>
+                </radialGradient>
+                <radialGradient id="v12CenterGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(167,181,232,0.36)"/>
+                  <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
+                </radialGradient>
+                <filter id="v12SoftGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3.5"/>
+                  <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="v12PathApps" d="M 200,260 C 200,380 280,430 400,465"/>
+                <path id="v12PathIg" d="M 400,260 L 400,465"/>
+                <path id="v12PathIrl" d="M 600,260 C 600,380 520,430 400,465"/>
+                <path id="v12PathTrunk" d="M 400,465 L 400,650"/>
+              </defs>
+
+              <circle cx="200" cy="180" r="100" fill="url(#v12NodeGlow)"/>
+              <circle cx="400" cy="180" r="100" fill="url(#v12NodeGlow)"/>
+              <circle cx="600" cy="180" r="100" fill="url(#v12NodeGlow)"/>
+
+              <rect x="130" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
+              <g transform="translate(200,180)">
+                <rect x="-44" y="-22" width="36" height="36" rx="10" fill="#fd5068"/>
+                <path d="M -22 -8 Q -26 -2 -22 3 Q -18 -1 -18 -5 Q -14 -1 -14 3 Q -14 8 -20 8 Q -26 8 -26 1" fill="#fff" opacity="0.95" transform="translate(-4, -1)"/>
+                <rect x="-4" y="-18" width="36" height="36" rx="10" fill="#F4C430"/>
+                <polygon points="10,0 18,4 18,12 10,16 2,12 2,4" fill="#0a0a0a" opacity="0.80" transform="translate(4,-6)"/>
+                <rect x="-20" y="14" width="36" height="36" rx="10" fill="#ffffff"/>
+                <text x="-2" y="38" font-family="Georgia, serif" font-size="18" font-weight="900" fill="#0a0a0a" text-anchor="middle">H</text>
+              </g>
+              <text class="pipe2-label" x="200" y="290">APPS</text>
+
+              <rect x="330" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
+              <rect x="362" y="142" width="76" height="76" rx="18" fill="url(#v12IgGrad)"/>
+              <rect x="362" y="142" width="76" height="76" rx="18" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+              <circle cx="400" cy="180" r="18" fill="none" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="424" cy="156" r="2.5" fill="#fff"/>
+              <text class="pipe2-label" x="400" y="290">INSTAGRAM</text>
+
+              <rect x="530" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
+              <g transform="translate(600,180)">
+                <circle cx="-14" cy="-16" r="8" fill="rgba(255,255,255,0.92)"/>
+                <path d="M -24 -4 Q -24 -8 -20 -8 L -8 -8 Q -4 -8 -4 -4 L -4 18 Q -4 22 -8 22 L -20 22 Q -24 22 -24 18 Z" fill="rgba(255,255,255,0.92)"/>
+                <circle cx="14" cy="-16" r="8" fill="rgba(255,255,255,0.92)"/>
+                <path d="M 4 -4 Q 4 -8 8 -8 L 20 -8 Q 24 -8 24 -4 L 24 18 Q 24 22 20 22 L 8 22 Q 4 22 4 18 Z" fill="rgba(255,255,255,0.92)"/>
+                <circle cx="20" cy="-28" r="4" fill="rgba(255,255,255,0.8)"/>
+                <circle cx="28" cy="-22" r="2.5" fill="rgba(255,255,255,0.55)"/>
+              </g>
+              <text class="pipe2-label" x="600" y="290">REAL LIFE</text>
+
+              <path class="pipe2-flow" d="M 200,260 C 200,380 280,430 400,465"/>
+              <path class="pipe2-flow" d="M 400,260 L 400,465"/>
+              <path class="pipe2-flow" d="M 600,260 C 600,380 520,430 400,465"/>
+
+              <circle cx="400" cy="465" r="56" fill="url(#v12CenterGlow)"/>
+              <circle cx="400" cy="465" r="7" fill="#A7B5E8" opacity="0.85" filter="url(#v12SoftGlow)"/>
+
+              <path class="pipe2-trunk" d="M 400,465 L 400,640"/>
+              <path d="M 400,672 L 388,652 L 412,652 Z" fill="#A7B5E8"/>
+
+              <text class="pipe2-leads" x="400" y="732">DATES</text>
+              <text class="pipe2-subtitle" x="400" y="758">THE 3 PART PIPELINE</text>
+
+              <!-- Heart-shaped traveling dots (Unicode ♥ for unambiguous shape) -->
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
+              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
+              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
+              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
+            </svg>
+          </div>
+    </div>
+
+    <div class="modules">
+
+      <div class="module reveal d1">
+        <div class="module-icon" aria-label="3 Part Pipeline icon">
+          <!-- Trident: 3 streams converging -->
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M 8,8 C 8,20 12,24 20,26"/>
+            <path d="M 20,8 L 20,26"/>
+            <path d="M 32,8 C 32,20 28,24 20,26"/>
+            <line x1="20" y1="26" x2="20" y2="34"/>
+            <circle cx="20" cy="26" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <div class="module-name">The 3 Part Pipeline</div>
+          <p class="module-body">Dating apps, Instagram, and in-person. With the right system, dating 9s and 10s isn't some miracle. It's just math.</p>
+        </div>
+      </div>
+
+      <div class="module reveal d1">
+        <div class="module-icon" aria-label="Conversion Blueprint icon">
+          <!-- Two chat bubbles: conversion -->
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 6,10 L 22,10 Q 26,10 26,14 L 26,20 Q 26,24 22,24 L 14,24 L 10,28 L 10,24 L 6,24 Q 6,24 6,20 L 6,10 Z"/>
+            <path d="M 18,18 L 32,18 Q 34,18 34,20 L 34,28 Q 34,32 30,32 L 24,32 L 28,36 L 28,32" opacity="0.55"/>
+          </svg>
+        </div>
+        <div>
+          <div class="module-name">The Conversion Blueprint</div>
+          <p class="module-body">From match to date. Scripts, texting system, date frames. The specific mechanics that turn attention into booked calendar time.</p>
+        </div>
+      </div>
+
+      <div class="module reveal d1">
+        <div class="module-icon" aria-label="Feedback Layer icon">
+          <!-- Circular arrow loop -->
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 30,12 A 12 12 0 1 0 33,23"/>
+            <polyline points="24,8 30,12 26,18"/>
+            <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <div class="module-name">The Feedback Layer</div>
+          <p class="module-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
+        </div>
+      </div>
+
+      <div class="module reveal d1">
+        <div class="module-icon" aria-label="Atlas Network icon">
+          <!-- Hub and spoke -->
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="20" y1="20" x2="8" y2="10"/>
+            <line x1="20" y1="20" x2="32" y2="10"/>
+            <line x1="20" y1="20" x2="8" y2="30"/>
+            <line x1="20" y1="20" x2="32" y2="30"/>
+            <line x1="20" y1="20" x2="34" y2="20"/>
+            <line x1="20" y1="20" x2="6" y2="20"/>
+            <circle cx="20" cy="20" r="5" fill="currentColor"/>
+            <circle cx="8" cy="10" r="2.5" fill="currentColor" stroke="none"/>
+            <circle cx="32" cy="10" r="2.5" fill="currentColor" stroke="none"/>
+            <circle cx="8" cy="30" r="2.5" fill="currentColor" stroke="none"/>
+            <circle cx="32" cy="30" r="2.5" fill="currentColor" stroke="none"/>
+            <circle cx="34" cy="20" r="2.5" fill="currentColor" stroke="none"/>
+            <circle cx="6" cy="20" r="2.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div>
+          <div class="module-name">The Atlas Network</div>
+          <p class="module-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-block reveal d4" style="margin-top: 56px;">
+      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
 <!-- §9 WHAT YOU GET -->
 <section class="section s-dark" id="what-you-get">
   <div class="inner">
@@ -4682,14 +4783,14 @@ body.deliv-modal-open { overflow: hidden; }
 
       <!-- 04 Instagram -->
       <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><linearGradient id="ig-wy" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="1" y="1" width="18" height="18" rx="5" fill="url(#ig-wy)"/><circle cx="10" cy="10" r="4.2" fill="none" stroke="white" stroke-width="1.5"/><circle cx="14.8" cy="5.2" r="1.1" fill="white"/></svg></div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="wy-title">Instagram Overhaul</div>
         <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
       </div>
 
       <!-- 05 Approach -->
       <div class="wy-card wy-feature reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><path d="M3 20v-2a4 4 0 014-4h2"/><circle cx="18" cy="5" r="2.5"/><path d="M21 20v-2a4 4 0 00-4-4h-2"/><path d="M10 12h4"/><path d="M12 10l2 2-2 2"/></svg></div>
+        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="4.5" r="2.5"/><path d="M3 20v-2a4 4 0 014-4h1.5"/><circle cx="18" cy="5" r="2"/><path d="M21 20v-1.5a3.5 3.5 0 00-3.5-3.5H16"/><path d="M14.5 19l1.5-4.5h3l1.5 4.5"/><path d="M9.5 12h5"/><path d="M12 10l2.5 2-2.5 2"/></svg></div>
         <div class="wy-title">Real-Life Approach Gameplans</div>
         <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
       </div>
@@ -4787,109 +4888,7 @@ body.deliv-modal-open { overflow: hidden; }
     <!-- v30.1 .deliv-m-cards accordion block deleted on 2026-04-24. Replaced by v31 .deliv-simple cards above. -->
 
 
-<div class="deliv-list">
 
-      <!-- 02: Pipeline (Apple-grade animated, bigger per v16) -->
-      <div class="deliv pipeline-big reveal d1">
-        <div class="deliv-mock-wrap" data-deliv-id="pipeline">
-          <div class="pipe2">
-            <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
-              <defs>
-                <linearGradient id="v12GlassGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
-                  <stop offset="100%" stop-color="rgba(255,255,255,0.015)"/>
-                </linearGradient>
-                <linearGradient id="v12IgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#feda75"/>
-                  <stop offset="25%" stop-color="#fa7e1e"/>
-                  <stop offset="50%" stop-color="#d62976"/>
-                  <stop offset="75%" stop-color="#962fbf"/>
-                  <stop offset="100%" stop-color="#4f5bd5"/>
-                </linearGradient>
-                <radialGradient id="v12NodeGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(79,126,255,0.16)"/>
-                  <stop offset="100%" stop-color="rgba(79,126,255,0)"/>
-                </radialGradient>
-                <radialGradient id="v12CenterGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(167,181,232,0.36)"/>
-                  <stop offset="100%" stop-color="rgba(167,181,232,0)"/>
-                </radialGradient>
-                <filter id="v12SoftGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3.5"/>
-                  <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <path id="v12PathApps" d="M 200,260 C 200,380 280,430 400,465"/>
-                <path id="v12PathIg" d="M 400,260 L 400,465"/>
-                <path id="v12PathIrl" d="M 600,260 C 600,380 520,430 400,465"/>
-                <path id="v12PathTrunk" d="M 400,465 L 400,650"/>
-              </defs>
-
-              <circle cx="200" cy="180" r="100" fill="url(#v12NodeGlow)"/>
-              <circle cx="400" cy="180" r="100" fill="url(#v12NodeGlow)"/>
-              <circle cx="600" cy="180" r="100" fill="url(#v12NodeGlow)"/>
-
-              <rect x="130" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
-              <g transform="translate(200,180)">
-                <rect x="-44" y="-22" width="36" height="36" rx="10" fill="#fd5068"/>
-                <path d="M -22 -8 Q -26 -2 -22 3 Q -18 -1 -18 -5 Q -14 -1 -14 3 Q -14 8 -20 8 Q -26 8 -26 1" fill="#fff" opacity="0.95" transform="translate(-4, -1)"/>
-                <rect x="-4" y="-18" width="36" height="36" rx="10" fill="#F4C430"/>
-                <polygon points="10,0 18,4 18,12 10,16 2,12 2,4" fill="#0a0a0a" opacity="0.80" transform="translate(4,-6)"/>
-                <rect x="-20" y="14" width="36" height="36" rx="10" fill="#ffffff"/>
-                <text x="-2" y="38" font-family="Georgia, serif" font-size="18" font-weight="900" fill="#0a0a0a" text-anchor="middle">H</text>
-              </g>
-              <text class="pipe2-label" x="200" y="290">APPS</text>
-
-              <rect x="330" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
-              <rect x="362" y="142" width="76" height="76" rx="18" fill="url(#v12IgGrad)"/>
-              <rect x="362" y="142" width="76" height="76" rx="18" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
-              <circle cx="400" cy="180" r="18" fill="none" stroke="#fff" stroke-width="2.5"/>
-              <circle cx="424" cy="156" r="2.5" fill="#fff"/>
-              <text class="pipe2-label" x="400" y="290">INSTAGRAM</text>
-
-              <rect x="530" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
-              <g transform="translate(600,180)">
-                <circle cx="-14" cy="-16" r="8" fill="rgba(255,255,255,0.92)"/>
-                <path d="M -24 -4 Q -24 -8 -20 -8 L -8 -8 Q -4 -8 -4 -4 L -4 18 Q -4 22 -8 22 L -20 22 Q -24 22 -24 18 Z" fill="rgba(255,255,255,0.92)"/>
-                <circle cx="14" cy="-16" r="8" fill="rgba(255,255,255,0.92)"/>
-                <path d="M 4 -4 Q 4 -8 8 -8 L 20 -8 Q 24 -8 24 -4 L 24 18 Q 24 22 20 22 L 8 22 Q 4 22 4 18 Z" fill="rgba(255,255,255,0.92)"/>
-                <circle cx="20" cy="-28" r="4" fill="rgba(255,255,255,0.8)"/>
-                <circle cx="28" cy="-22" r="2.5" fill="rgba(255,255,255,0.55)"/>
-              </g>
-              <text class="pipe2-label" x="600" y="290">REAL LIFE</text>
-
-              <path class="pipe2-flow" d="M 200,260 C 200,380 280,430 400,465"/>
-              <path class="pipe2-flow" d="M 400,260 L 400,465"/>
-              <path class="pipe2-flow" d="M 600,260 C 600,380 520,430 400,465"/>
-
-              <circle cx="400" cy="465" r="56" fill="url(#v12CenterGlow)"/>
-              <circle cx="400" cy="465" r="7" fill="#A7B5E8" opacity="0.85" filter="url(#v12SoftGlow)"/>
-
-              <path class="pipe2-trunk" d="M 400,465 L 400,640"/>
-              <path d="M 400,672 L 388,652 L 412,652 Z" fill="#A7B5E8"/>
-
-              <text class="pipe2-leads" x="400" y="732">DATES</text>
-              <text class="pipe2-subtitle" x="400" y="758">THE 3 PART PIPELINE</text>
-
-              <!-- Heart-shaped traveling dots (Unicode ♥ for unambiguous shape) -->
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathApps"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIg"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="1.0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="26" text-anchor="middle" dominant-baseline="central" fill="#A7B5E8" filter="url(#v12SoftGlow)">♥<animateMotion dur="3s" repeatCount="indefinite" begin="2.5s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathIrl"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
-              <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
-            </svg>
-          </div>
-        </div>
-        <div class="deliv-copy">
-          <h3>The 3 Part Pipeline</h3>
-          <p>Dating apps, Instagram, and in-person. With the right system, dating 9s and 10s isn't some miracle. It's just math.</p>
-        </div>
-      </div>
-
-
-    </div>
 
     <div class="cta-block">
       <button class="btn reveal d1" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
