@@ -4176,6 +4176,44 @@ body.deliv-modal-open { overflow: hidden; }
   .system-pipeline-visual { margin-top: 36px !important; }
 }
 
+/* Testimonial proof mosaic — desktop only puzzle layout */
+.tg-proof-mosaic {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+  gap: 12px;
+  max-width: 860px;
+  margin: 40px auto 0;
+  align-items: stretch;
+}
+.tg-proof-mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border-2);
+  display: block;
+}
+/* Hide on mobile — images appear in scroll feed instead */
+@media (max-width: 768px) {
+  .tg-proof-mosaic { display: none; }
+}
+
+/* Mobile subtitle under "These are not outliers" */
+.testi-mobile-sub {
+  display: none;
+}
+@media (max-width: 768px) {
+  .testi-mobile-sub {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: var(--w55);
+    line-height: 1.5;
+    max-width: 320px;
+    margin: 14px auto 0;
+  }
+}
+
 /* Screenshot testimonial image cards */
 .tc-img-card { padding: 0 !important; overflow: hidden; width: 280px; }
 .tc-img-card img { border-radius: 14px; }
@@ -5087,6 +5125,15 @@ body.deliv-modal-open { overflow: hidden; }
   <div class="inner">
     <p class="eyebrow text-center reveal d1">Real Clients</p>
     <h2 class="reveal d1 text-center">These are not outliers.</h2>
+
+    <!-- Mobile subtitle -->
+    <p class="testi-mobile-sub reveal d2">Some of the wins from inside the community. Scroll yourself to see what the average day inside Atlas looks like.</p>
+
+    <!-- Desktop: puzzle-fit screenshot mosaic (hidden on mobile) -->
+    <div class="tg-proof-mosaic reveal d2">
+      <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="Client result — 18 matches in one day">
+      <img src="img/tg-testimonials/IMG_2503.jpg" alt="Client result — mindset shift">
+    </div>
 
     <!-- Mobile: single vertical scroll feed (notif-style, rAF auto-scroll) -->
     <div class="testi-scroll-feed" id="testiMobileFeed">
