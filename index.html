@@ -120,9 +120,6 @@ p { color: var(--w75); }
 }
 .nav-logo-img {
   width: 44px; height: 44px; flex-shrink: 0;
-  object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
 }
 
 /* Hero */
@@ -4298,7 +4295,26 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- NAV. Apply button removed per feedback. -->
 <nav class="nav">
   <a href="#hero" class="nav-logo">
-    <img class="nav-logo-img" src="logo_v2_transparent.png" alt="Atlas">
+    <svg class="nav-logo-img" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atlas">
+      <!-- Outer ring -->
+      <circle cx="24" cy="24" r="21.5" stroke="rgba(255,255,255,0.18)" stroke-width="0.75"/>
+      <!-- Intercardinal tick marks -->
+      <line x1="39.2" y1="8.8" x2="36.6" y2="11.4" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="8.8"  y1="8.8" x2="11.4" y2="11.4" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="39.2" y1="39.2" x2="36.6" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="8.8"  y1="39.2" x2="11.4" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <!-- N pointer — brand accent -->
+      <polygon points="24,3.5 26.8,22 24,24 21.2,22" fill="#A7B5E8"/>
+      <!-- S pointer -->
+      <polygon points="24,44.5 26.8,26 24,24 21.2,26" fill="rgba(255,255,255,0.28)"/>
+      <!-- E pointer -->
+      <polygon points="44.5,24 26,21.2 24,24 26,26.8" fill="rgba(255,255,255,0.28)"/>
+      <!-- W pointer -->
+      <polygon points="3.5,24 22,26.8 24,24 22,21.2" fill="rgba(255,255,255,0.28)"/>
+      <!-- Center jewel -->
+      <circle cx="24" cy="24" r="3" fill="rgb(5,6,8)" stroke="rgba(255,255,255,0.45)" stroke-width="0.75"/>
+      <circle cx="24" cy="24" r="1.2" fill="rgba(255,255,255,0.9)"/>
+    </svg>
     <span>ATLAS</span>
   </a>
 </nav>
