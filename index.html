@@ -121,6 +121,28 @@ p { color: var(--w75); }
 .nav-logo-img {
   width: 44px; height: 44px; flex-shrink: 0;
 }
+/* Live compass — the needle rose seeks like a real compass, settling toward
+   north with a slight overshoot, then carries through a full turn. */
+.nav-logo-img .compass-rose {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: compass-seek 11s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.nav-logo:hover .compass-rose { animation-duration: 3.6s; }
+@keyframes compass-seek {
+  0%   { transform: rotate(0deg); }
+  16%  { transform: rotate(116deg); }   /* swing past */
+  24%  { transform: rotate(96deg); }    /* settle back */
+  30%  { transform: rotate(100deg); }   /* lock */
+  46%  { transform: rotate(100deg); }   /* hold heading */
+  62%  { transform: rotate(224deg); }
+  70%  { transform: rotate(208deg); }
+  76%  { transform: rotate(212deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo-img .compass-rose { animation: none; }
+}
 
 /* Hero */
 .hero { padding-top: clamp(120px, 14vw, 170px); }
@@ -4103,7 +4125,12 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .wy-card {
   position: relative; overflow: hidden;
-  background: linear-gradient(145deg, rgba(13,17,40,0.96) 0%, rgba(8,10,24,0.99) 100%);
+  /* Layer 1 = diagonal sheen (parked off-card), layer 2 = base gradient */
+  background:
+    linear-gradient(115deg, transparent 38%, rgba(167,181,232,0.10) 48%, rgba(196,206,245,0.16) 50%, rgba(167,181,232,0.10) 52%, transparent 62%) no-repeat,
+    linear-gradient(145deg, rgba(13,17,40,0.96) 0%, rgba(8,10,24,0.99) 100%);
+  background-size: 260% 100%, 100% 100%;
+  background-position: -130% 0, 0 0;
   border: 1px solid rgba(167,181,232,0.10);
   border-radius: 20px; padding: 32px 28px;
   transition: border-color 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
@@ -4125,6 +4152,30 @@ body.deliv-modal-open { overflow: hidden; }
   border-color: rgba(167,181,232,0.30);
   transform: translateY(-5px);
   box-shadow: 0 28px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,181,232,0.12);
+  animation: wy-sheen 0.95s ease-out;
+}
+/* Light sweeps diagonally across the card on hover (Atlas-tinted) */
+@keyframes wy-sheen {
+  0%   { background-position: -130% 0, 0 0; }
+  100% { background-position: 230% 0, 0 0; }
+}
+/* Ambient particles that drift upward inside the card (injected via JS) */
+.wy-particle {
+  position: absolute; bottom: 0; width: 2px; height: 2px; border-radius: 50%;
+  background: rgba(196,206,245,0.9);
+  box-shadow: 0 0 6px rgba(167,181,232,0.7);
+  opacity: 0; pointer-events: none;
+  animation: wy-particle-float 6s ease-in infinite;
+}
+@keyframes wy-particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(0); }
+  15%  { opacity: 0.7; }
+  85%  { opacity: 0.25; }
+  100% { opacity: 0; transform: translateY(-150px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wy-card:hover { animation: none; }
+  .wy-particle { animation: none; opacity: 0; }
 }
 /* Watermark index number */
 .wy-num {
@@ -4303,14 +4354,17 @@ body.deliv-modal-open { overflow: hidden; }
       <line x1="8.8"  y1="8.8" x2="11.4" y2="11.4" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
       <line x1="39.2" y1="39.2" x2="36.6" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
       <line x1="8.8"  y1="39.2" x2="11.4" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
-      <!-- N pointer — brand accent -->
-      <polygon points="24,3.5 26.8,22 24,24 21.2,22" fill="#A7B5E8"/>
-      <!-- S pointer -->
-      <polygon points="24,44.5 26.8,26 24,24 21.2,26" fill="rgba(255,255,255,0.28)"/>
-      <!-- E pointer -->
-      <polygon points="44.5,24 26,21.2 24,24 26,26.8" fill="rgba(255,255,255,0.28)"/>
-      <!-- W pointer -->
-      <polygon points="3.5,24 22,26.8 24,24 22,21.2" fill="rgba(255,255,255,0.28)"/>
+      <!-- Rotating needle rose (N accent + S/E/W) -->
+      <g class="compass-rose">
+        <!-- N pointer — brand accent -->
+        <polygon points="24,3.5 26.8,22 24,24 21.2,22" fill="#A7B5E8"/>
+        <!-- S pointer -->
+        <polygon points="24,44.5 26.8,26 24,24 21.2,26" fill="rgba(255,255,255,0.28)"/>
+        <!-- E pointer -->
+        <polygon points="44.5,24 26,21.2 24,24 26,26.8" fill="rgba(255,255,255,0.28)"/>
+        <!-- W pointer -->
+        <polygon points="3.5,24 22,26.8 24,24 22,21.2" fill="rgba(255,255,255,0.28)"/>
+      </g>
       <!-- Center jewel -->
       <circle cx="24" cy="24" r="3" fill="rgb(5,6,8)" stroke="rgba(255,255,255,0.45)" stroke-width="0.75"/>
       <circle cx="24" cy="24" r="1.2" fill="rgba(255,255,255,0.9)"/>
@@ -5855,6 +5909,25 @@ body.deliv-modal-open { overflow: hidden; }
     requestAnimationFrame(step);
     outer.addEventListener('touchstart', function() { paused = true; clearTimeout(resumeTimer); }, { passive: true });
     outer.addEventListener('touchend', function() { clearTimeout(resumeTimer); resumeTimer = setTimeout(function() { paused = false; lastTs = null; }, 1800); }, { passive: true });
+  })();
+
+  // Feature-card ambient particles — a few specks drift upward inside each
+  // .wy-card, staggered so they don't move in lockstep. Skips reduced-motion.
+  (function() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var PER_CARD = 4;
+    document.querySelectorAll('.wy-card').forEach(function(card) {
+      for (var i = 0; i < PER_CARD; i++) {
+        var p = document.createElement('span');
+        p.className = 'wy-particle';
+        // Even-ish horizontal spread with a little jitter, varied speed/delay.
+        var x = (100 / PER_CARD) * (i + 0.5) + (i % 2 ? 6 : -6);
+        p.style.left = Math.max(6, Math.min(94, x)) + '%';
+        p.style.animationDuration = (5 + i * 0.8) + 's';
+        p.style.animationDelay = (i * 1.4) + 's';
+        card.appendChild(p);
+      }
+    });
   })();
 
 </script>
