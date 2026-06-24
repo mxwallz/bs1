@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google Analytics 4 (gtag.js). COPY_TODO: replace G-XXXXXXXXXX with the real Atlas site GA4 Measurement ID. Guard skips loading until a real ID is set. -->
+<script>
+  window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  (function () {
+    var id = window.GA_MEASUREMENT_ID;
+    if (!id || /X{4,}/.test(id)) return; // not configured yet — no-op
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+  })();
+</script>
+
 <title>Atlas Advisory. Private Dating Consulting for High-Performing Men.</title>
 <meta name="description" content="Application-only dating consulting for professionally successful men. A system for consistent dates with women you actually want. Run by a team of female advisors.">
 
@@ -6079,5 +6097,8 @@ body.deliv-modal-open { overflow: hidden; }
 
 
 
+<!-- Atlas first-party funnel tracker. Posts to the live portal /api/track. -->
+<script>window.ATLAS_TRACK_ENDPOINT = 'https://clientportal-two-rho.vercel.app/api/track';</script>
+<script defer src="js/atlas-track.js"></script>
 </body>
 </html>
