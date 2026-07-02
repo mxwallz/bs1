@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google Analytics 4 (gtag.js). COPY_TODO: replace G-XXXXXXXXXX with the real Atlas site GA4 Measurement ID. Guard skips loading until a real ID is set. -->
+<script>
+  window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  (function () {
+    var id = window.GA_MEASUREMENT_ID;
+    if (!id || /X{4,}/.test(id)) return; // not configured yet — no-op
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+  })();
+</script>
+
 <title>Atlas Advisory. Private Dating Consulting for High-Performing Men.</title>
 <meta name="description" content="Application-only dating consulting for professionally successful men. A system for consistent dates with women you actually want. Run by a team of female advisors.">
 
@@ -388,6 +406,7 @@ p { color: var(--w75); }
 .pipe2-label { fill: var(--w75); font-size: 20px; font-weight: 600; letter-spacing: 0.18em; text-anchor: middle; font-family: "Inter", system-ui, sans-serif; }
 .pipe2-leads { fill: var(--gold-hi); font-size: 48px; font-weight: 600; letter-spacing: 0.14em; text-anchor: middle; font-family: "Inter", system-ui, sans-serif; }
 .pipe2-subtitle { fill: var(--w55); font-size: 14px; font-weight: 600; letter-spacing: 0.24em; text-anchor: middle; text-transform: uppercase; }
+.pipe2-rate { fill: var(--gold-hi); font-size: 15px; font-weight: 600; letter-spacing: 0.14em; text-anchor: middle; text-transform: uppercase; font-family: "Inter", system-ui, sans-serif; }
 .pipe2-dot { fill: var(--gold); }
 .pipe2-dot-bright { fill: var(--gold-hi); }
 
@@ -4339,6 +4358,228 @@ body.deliv-modal-open { overflow: hidden; }
   .team-cloud svg { max-width: 92vw !important; width: 100% !important; height: auto !important; }
 }
 
+/* === bs1-v2: ZGA-ported deliverables + roadmap (Atlas-tinted) === */
+
+/* --- TASK 1: "What's Inside" alternating module layout --- */
+.wi-modules { display: flex; flex-direction: column; gap: clamp(56px, 7vw, 92px); margin-top: clamp(56px, 7vw, 88px); }
+.wi-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+.wi-row.rev .wi-text { order: 2; }
+.wi-row.rev .wi-visual { order: 1; }
+.wi-num {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px; font-family: 'Inter', sans-serif;
+}
+.wi-num::before { content: ""; width: 26px; height: 1px; background: var(--gold); opacity: 0.6; }
+.wi-title { font-family: 'Spectral', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 500; color: var(--w100); line-height: 1.18; letter-spacing: -0.01em; margin-bottom: 14px; }
+.wi-body { font-size: 15px; color: var(--w55); line-height: 1.7; margin: 0 0 18px; }
+.wi-feats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.wi-feats li { position: relative; padding-left: 26px; font-size: 13.5px; color: var(--w75); line-height: 1.5; }
+.wi-feats li svg { position: absolute; left: 0; top: 2px; width: 15px; height: 15px; color: var(--gold); }
+
+/* visual shell */
+.wi-visual {
+  position: relative; border: 1px solid var(--border-2); border-radius: 18px;
+  background: linear-gradient(160deg, var(--card-solid), var(--bg2));
+  min-height: 280px; padding: 26px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+.wi-visual::after { /* subtle top sheen */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 50% -10%, rgba(167,181,232,0.10), transparent 60%);
+}
+.wi-glass { width: 100%; max-width: 300px; position: relative; z-index: 1; }
+.wi-chip { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); background: var(--gold-soft); border: 1px solid var(--border-2); border-radius: 999px; padding: 4px 10px; }
+
+/* 01 wardrobe before/after */
+.wi-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 300px; }
+.wi-ba-tile { border: 1px solid var(--border-2); border-radius: 14px; aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 12px; position: relative; overflow: hidden; }
+.wi-ba-tile.before { background: linear-gradient(180deg, #14161f, #0c0d14); }
+.wi-ba-tile.after { background: linear-gradient(180deg, rgba(167,181,232,0.14), #0c0d14); border-color: var(--gold-soft); }
+.wi-ba-tile svg { width: 54px; height: 54px; opacity: 0.5; margin-bottom: auto; margin-top: 14px; }
+.wi-ba-tile.after svg { opacity: 0.9; color: var(--gold-hi); }
+.wi-ba-lab { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--w55); }
+.wi-ba-tile.after .wi-ba-lab { color: var(--gold); }
+
+/* 02 dating profile card */
+.wi-profile { width: 100%; max-width: 240px; border: 1px solid var(--border-2); border-radius: 18px; overflow: hidden; background: var(--bg1); }
+.wi-profile-photo { aspect-ratio: 4/5; background: linear-gradient(150deg, #1a1d2b, #0d0f1a); position: relative; display: flex; align-items: flex-end; padding: 12px; }
+.wi-profile-photo .wi-pp-name { font-family: 'Spectral', serif; font-size: 17px; color: #fff; font-weight: 600; }
+.wi-profile-photo .wi-pp-like { position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(167,181,232,0.4); }
+.wi-profile-photo .wi-pp-like svg { width: 17px; height: 17px; color: #fff; }
+.wi-profile-prompt { padding: 13px 14px; }
+.wi-profile-prompt .q { font-size: 10px; color: var(--w35); letter-spacing: 0.04em; margin-bottom: 5px; }
+.wi-profile-prompt .a { font-size: 13px; color: var(--w100); line-height: 1.4; }
+
+/* 03 photographer viewfinder */
+.wi-view { width: 100%; max-width: 280px; aspect-ratio: 4/3; border-radius: 14px; position: relative; background: linear-gradient(150deg, #161826, #0b0c13); display: grid; place-items: center; }
+.wi-view .corner { position: absolute; width: 26px; height: 26px; border: 2px solid var(--gold); }
+.wi-view .corner.tl { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.wi-view .corner.tr { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+.wi-view .corner.bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
+.wi-view .corner.br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+.wi-view .wi-shutter { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--gold-hi); position: relative; }
+.wi-view .wi-shutter::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--gold-soft); }
+.wi-view .wi-rec { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: 0.16em; color: var(--gold); }
+
+/* 04 instagram grid */
+.wi-ig { width: 100%; max-width: 260px; }
+.wi-ig-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.wi-ig-av { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-hover)); flex: none; }
+.wi-ig-meta .h { font-size: 12px; color: var(--w100); font-weight: 600; }
+.wi-ig-meta .s { font-size: 10px; color: var(--w35); }
+.wi-ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.wi-ig-cell { aspect-ratio: 1; border-radius: 5px; background: linear-gradient(150deg, #191c2a, #0e1019); }
+.wi-ig-cell:nth-child(2n) { background: linear-gradient(150deg, rgba(167,181,232,0.16), #0e1019); }
+
+/* 05 approach map */
+.wi-map { width: 100%; max-width: 280px; aspect-ratio: 4/3; border-radius: 14px; background: linear-gradient(150deg, #12141f, #0b0c12); position: relative; overflow: hidden; }
+.wi-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wi-map .wi-pin { position: absolute; top: 38%; left: 56%; width: 16px; height: 16px; border-radius: 50% 50% 50% 0; background: var(--gold); transform: rotate(-45deg); box-shadow: 0 0 0 6px rgba(167,181,232,0.18); }
+
+/* 06 conversion chat */
+.wi-chat { width: 100%; max-width: 280px; display: flex; flex-direction: column; gap: 10px; }
+.wi-bub { max-width: 78%; padding: 10px 13px; border-radius: 16px; font-size: 12.5px; line-height: 1.4; }
+.wi-bub.them { align-self: flex-start; background: #16192580; border: 1px solid var(--border-2); color: var(--w75); border-bottom-left-radius: 5px; }
+.wi-bub.me { align-self: flex-end; background: var(--gold); color: #fff; border-bottom-right-radius: 5px; }
+
+/* 07 date calendar */
+.wi-cal { width: 100%; max-width: 250px; border: 1px solid var(--border-2); border-radius: 16px; overflow: hidden; background: var(--bg1); }
+.wi-cal-top { background: var(--gold-soft); padding: 11px 14px; font-family: 'Spectral', serif; font-size: 14px; color: var(--gold-hi); display: flex; justify-content: space-between; align-items: center; }
+.wi-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 12px; }
+.wi-cal-d { aspect-ratio: 1; border-radius: 6px; background: #11131d; display: grid; place-items: center; font-size: 10px; color: var(--w35); }
+.wi-cal-d.on { background: var(--gold); color: #fff; font-weight: 700; box-shadow: 0 4px 14px rgba(167,181,232,0.4); }
+
+/* 08 feedback waveform */
+.wi-wave { width: 100%; max-width: 280px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.wi-wave-bars { display: flex; align-items: center; gap: 4px; height: 70px; }
+.wi-wave-bars span { width: 5px; border-radius: 3px; background: var(--gold); opacity: 0.85; }
+.wi-wave-play { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--w55); letter-spacing: 0.05em; }
+.wi-wave-play .pb { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; }
+.wi-wave-play .pb svg { width: 13px; height: 13px; color: #fff; }
+
+/* 09 network hub-and-spoke */
+.wi-net { width: 100%; max-width: 300px; aspect-ratio: 1; position: relative; }
+.wi-net svg { width: 100%; height: 100%; }
+
+/* --- TASK 2: 90-Day Roadmap timeline --- */
+.rm-wrap { max-width: 860px; margin: clamp(48px, 6vw, 76px) auto 0; position: relative; padding-left: 76px; }
+.rm-line { position: absolute; left: 27px; top: 8px; bottom: 8px; width: 2px; background: var(--border-2); border-radius: 2px; }
+.rm-progress { position: absolute; left: 27px; top: 8px; width: 2px; height: 0; border-radius: 2px;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold)); box-shadow: 0 0 14px rgba(167,181,232,0.5);
+  transition: height 0.18s linear; }
+.rm-step { position: relative; padding-bottom: clamp(40px, 5vw, 60px); }
+.rm-step:last-of-type { padding-bottom: 0; }
+.rm-dot {
+  position: absolute; left: -64px; top: 0; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--bg1); border: 2px solid var(--border-hi);
+  font-family: 'Spectral', serif; font-size: 20px; color: var(--w35); z-index: 2;
+  transition: all 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.rm-step.active .rm-dot { border-color: var(--gold); color: var(--gold-hi); background: var(--bg1); box-shadow: 0 0 0 6px var(--gold-soft); }
+.rm-step.active .rm-dot::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--gold); animation: rm-pulse 2.4s ease-out infinite; }
+@keyframes rm-pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0; } }
+.rm-content { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center;
+  border: 1px solid var(--border); border-radius: 16px; padding: 24px 26px; background: var(--card);
+  transition: border-color 0.45s ease, transform 0.45s ease; }
+.rm-step.active .rm-content { border-color: var(--border-hi); }
+.rm-week { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.rm-title { font-family: 'Spectral', serif; font-size: clamp(19px, 2.4vw, 25px); font-weight: 500; color: var(--w100); line-height: 1.2; margin-bottom: 10px; }
+.rm-body { font-size: 14px; color: var(--w55); line-height: 1.65; margin: 0; }
+.rm-graphic { display: flex; align-items: center; justify-content: center; min-height: 120px; }
+
+/* roadmap mini-graphics */
+.rmg-check { width: 100%; max-width: 180px; display: flex; flex-direction: column; gap: 9px; }
+.rmg-check .r { display: flex; align-items: center; gap: 9px; }
+.rmg-check .bx { width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid var(--border-hi); flex: none; display: grid; place-items: center; }
+.rmg-check .r.done .bx { background: var(--gold); border-color: var(--gold); }
+.rmg-check .r.done .bx svg { width: 10px; height: 10px; color: #fff; }
+.rmg-check .ln { height: 7px; border-radius: 4px; background: var(--border-2); flex: 1; }
+.rmg-check .r.done .ln { background: var(--gold-soft); }
+.rmg-check .ln.s { max-width: 60%; } .rmg-check .ln.xs { max-width: 40%; }
+.rmg-pipe { display: flex; align-items: center; gap: 8px; }
+.rmg-pipe .nd { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border-2); background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-hi); font-size: 9px; font-weight: 700; }
+.rmg-pipe .ar { color: var(--gold); opacity: 0.7; }
+.rmg-bars { display: flex; align-items: flex-end; gap: 5px; height: 64px; }
+.rmg-bars span { width: 6px; border-radius: 3px; background: var(--gold); opacity: 0.85; }
+.rmg-stack { position: relative; width: 120px; height: 96px; }
+.rmg-stack .c { position: absolute; inset: 0; border: 1px solid var(--border-2); border-radius: 12px; background: var(--card-solid); }
+.rmg-stack .c.b2 { transform: translate(10px, 10px); opacity: 0.5; }
+.rmg-stack .c.b3 { transform: translate(20px, 20px); opacity: 0.3; }
+.rmg-stack .c.top { display: flex; flex-direction: column; gap: 7px; padding: 14px; }
+.rmg-stack .tag { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; color: var(--gold); }
+.rmg-stack .l { height: 6px; border-radius: 3px; background: var(--border-2); }
+.rmg-stack .l.g { background: var(--gold-soft); max-width: 70%; }
+.rmg-stack .l.s { max-width: 50%; }
+
+/* roadmap finish */
+.rm-finish { position: relative; margin-top: 8px; }
+.rm-finish-dot { position: absolute; left: -68px; top: -4px; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #fff; z-index: 2; box-shadow: 0 0 0 8px var(--gold-soft); opacity: 0.45; transition: opacity 0.5s ease; }
+.rm-finish.active .rm-finish-dot { opacity: 1; }
+.rm-finish-dot svg { width: 26px; height: 26px; }
+.rm-finish-content { border: 1px solid var(--gold-soft); border-radius: 16px; padding: 28px 30px; background: linear-gradient(160deg, var(--gold-soft), transparent); }
+.rm-finish-content .rm-week { color: var(--gold-hi); }
+.rm-finish-content h3 { font-family: 'Spectral', serif; font-size: clamp(21px, 2.8vw, 29px); font-weight: 500; color: var(--w100); line-height: 1.2; margin-bottom: 12px; }
+.rm-finish-content h3 em { font-style: italic; color: var(--gold-hi); }
+.rm-finish-content p { font-size: 14.5px; color: var(--w55); line-height: 1.7; margin: 0; }
+
+/* responsive */
+@media (max-width: 768px) {
+  .wi-row, .wi-row.rev { grid-template-columns: 1fr; gap: 22px; }
+  .wi-row.rev .wi-text { order: 1; }
+  .wi-row.rev .wi-visual { order: 2; }
+  .wi-visual { min-height: 220px; padding: 22px; }
+  .rm-wrap { padding-left: 52px; }
+  .rm-line, .rm-progress { left: 19px; }
+  .rm-dot { left: -52px; width: 42px; height: 42px; font-size: 16px; }
+  .rm-finish-dot { left: -54px; width: 44px; height: 44px; }
+  .rm-content { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .rm-graphic { min-height: 0; order: 2; }
+}
+
+/* reduced motion: freeze animation, keep everything visible */
+@media (prefers-reduced-motion: reduce) {
+  .rm-progress { transition: none; }
+  .rm-step.active .rm-dot::after { animation: none; }
+}
+/* === end bs1-v2 ZGA port === */
+
+/* === bs1-v2: sunk-cost section === */
+#sunk-cost .sc-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 940px; margin: clamp(48px,6vw,72px) auto 0; }
+#sunk-cost .sc-stat { text-align: center; padding: 30px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--card); }
+#sunk-cost .sc-stat-num { font-family: 'Spectral', Georgia, serif; font-size: clamp(44px,7vw,72px); font-weight: 500; line-height: 1; color: var(--gold-hi); letter-spacing: -0.02em; margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+#sunk-cost .sc-stat-line { font-size: 14px; color: var(--w55); line-height: 1.55; margin: 0; }
+#sunk-cost .sc-bridge { max-width: 640px; margin: 44px auto 0; text-align: center; font-size: clamp(15px,1.4vw,17px); color: var(--w75); line-height: 1.6; }
+#sunk-cost .sc-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; max-width: 940px; margin: 36px auto 0; }
+#sunk-cost .sc-card { border: 1px solid var(--border-2); border-radius: 16px; background: linear-gradient(160deg,var(--card-solid),var(--bg2)); padding: 26px 24px; text-align: left; box-shadow: 0 18px 44px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 8px; }
+#sunk-cost .sc-card-ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid var(--border-2); margin-bottom: 6px; }
+#sunk-cost .sc-card-ic svg { width: 21px; height: 21px; color: var(--gold-hi); }
+#sunk-cost .sc-card-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+#sunk-cost .sc-card-num { font-family: 'Spectral', Georgia, serif; font-size: clamp(34px,5vw,52px); font-weight: 500; line-height: 1; color: var(--w100); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+#sunk-cost .sc-card-assume { font-size: 13px; color: var(--w35); line-height: 1.5; margin: 0; }
+#sunk-cost .sc-card--worst { grid-column: 1 / -1; border-color: rgba(248,113,113,0.42); background: linear-gradient(160deg, rgba(248,113,113,0.10), var(--bg2)); box-shadow: 0 18px 50px rgba(248,113,113,0.12); }
+#sunk-cost .sc-card--worst .sc-card-ic { background: rgba(248,113,113,0.14); border-color: rgba(248,113,113,0.32); }
+#sunk-cost .sc-card--worst .sc-card-ic svg { color: var(--no); }
+#sunk-cost .sc-card--worst .sc-card-label { color: var(--no); }
+#sunk-cost .sc-card--worst .sc-card-num { color: var(--no); font-size: clamp(40px,6vw,64px); }
+#sunk-cost .sc-subtotal { max-width: 660px; margin: 42px auto 0; text-align: center; font-size: clamp(15px,1.5vw,18px); color: var(--w75); line-height: 1.6; }
+#sunk-cost .sc-subtotal strong { color: var(--no); font-weight: 600; }
+#sunk-cost .sc-reframe { max-width: 600px; margin: 18px auto 0; text-align: center; font-size: clamp(15px,1.4vw,17px); color: var(--w55); line-height: 1.65; }
+#sunk-cost .sc-reframe strong { color: var(--gold-hi); font-weight: 500; }
+@media (max-width: 768px) {
+  #sunk-cost .sc-stats { grid-template-columns: 1fr; gap: 14px; }
+  #sunk-cost .sc-cards { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #sunk-cost .sc-card, #sunk-cost .sc-stat { transition: none; }
+}
+/* === end sunk-cost === */
+
+
 </style>
 </head>
 <body>
@@ -4659,6 +4900,8 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
     </div></div>
 
+    <p class="sub-note text-center reveal d3" style="margin-top:28px;">Every channel firing at once: apps, Instagram, real life.</p>
+
     <!-- Transition beat into the "likes you" upsell strip. -->
     <div class="match-transition reveal d3">
       <h3>And these are the women<br><em>lining up to meet you.</em></h3>
@@ -4732,78 +4975,77 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §8.7 OPPORTUNITY COST · "What is your time worth?" interactive calculator.
-     Income slider → hourly rate (÷2080 work hrs/yr) × hours/day on apps × 30 = monthly cost.
-     Problem-agitation beat placed before the solution reveal. Added 2026-06-16. -->
-<style id="tw-styles">
-  #time-worth .tw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 56px auto 0; max-width: 940px;
-    background: var(--card); border: 1px solid var(--border-2); border-radius: 18px; overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
-  #time-worth .tw-inputs { padding: clamp(28px, 4vw, 48px); border-right: 1px solid var(--border-2); display: flex; flex-direction: column; gap: 40px; justify-content: center; text-align: left; }
-  #time-worth .tw-field-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0; display: block; }
-  #time-worth .tw-slider-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap; }
-  #time-worth .tw-val { font-family: 'Spectral', Georgia, serif; font-size: clamp(24px, 3vw, 34px); color: var(--w100); white-space: nowrap; }
-  #time-worth .tw-val small { font-size: 14px; color: var(--w55); font-family: 'Inter', sans-serif; margin-left: 4px; }
-  #time-worth .tw-hourly { font-size: 13px; color: var(--w35); margin-top: 12px; }
-  #time-worth .tw-hourly strong { color: var(--gold); font-weight: 600; }
-  #time-worth input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 99px;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--tw-fill,40%), rgba(255,255,255,0.12) var(--tw-fill,40%), rgba(255,255,255,0.12) 100%); margin-top: 18px; cursor: pointer; }
-  #time-worth input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
-    border-radius: 50%; background: var(--gold-hi); border: 3px solid var(--bg0); box-shadow: 0 2px 10px rgba(167,181,232,0.5); cursor: pointer; }
-  #time-worth input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--gold-hi); border: 3px solid var(--bg0); cursor: pointer; }
-  #time-worth .tw-result { padding: clamp(28px, 4vw, 48px); background: linear-gradient(160deg, rgba(122,160,255,0.07), rgba(167,181,232,0.03)); display: flex; flex-direction: column; justify-content: center; gap: 6px; text-align: left; }
-  #time-worth .tw-result-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--w55); }
-  #time-worth .tw-big { font-family: 'Spectral', Georgia, serif; font-size: clamp(48px, 8vw, 76px); font-weight: 500; line-height: 1; color: var(--gold-hi); letter-spacing: -0.02em; margin: 6px 0; }
-  #time-worth .tw-result-sub { font-size: 15px; color: var(--w75); line-height: 1.5; max-width: 320px; }
-  #time-worth .tw-result-sub strong { color: var(--w100); font-weight: 600; }
-  #time-worth .tw-rule { height: 1px; background: var(--border-2); margin: 22px 0; }
-  #time-worth .tw-yearly { font-size: 13px; color: var(--w35); }
-  #time-worth .tw-yearly strong { color: var(--no); font-weight: 600; }
-  #time-worth .tw-reframe { max-width: 620px; margin: 36px auto 0; font-size: clamp(15px, 1.4vw, 17px); color: var(--w55); line-height: 1.65; text-align: center; }
-  #time-worth .tw-reframe strong { color: var(--gold-hi); font-weight: 500; }
-  @media (max-width: 768px) {
-    #time-worth .tw-grid { grid-template-columns: 1fr; }
-    #time-worth .tw-inputs { border-right: none; border-bottom: 1px solid var(--border-2); gap: 32px; }
-  }
-</style>
-<section class="section s-black text-center" id="time-worth">
+<!-- §8.7 SUNK COST · "you're getting older" stats + cost-of-inaction cards (replaces the time-worth calculator) -->
+<section class="section s-black" id="sunk-cost">
   <div class="inner">
-    <div class="eyebrow reveal d1">The real cost of waiting</div>
-    <h2 class="reveal d1">What is your time<br><em>actually worth?</em></h2>
-    <p class="body-lg reveal d2" style="color:var(--w55); max-width:560px; margin:20px auto 0;">The men we work with don't have a money problem. They have a time problem &#8212; and the apps are bleeding it dry. Run the math on yours.</p>
+    <div class="text-center">
+      <p class="eyebrow reveal d1">The clock you can't pause</p>
+      <h2 class="reveal d1">Every year you wing it<br><em>is a year you don't get back.</em></h2>
+      <p class="body-lg reveal d2" style="max-width:600px; margin:18px auto 0; color:var(--w55);">The pool doesn't wait. The numbers are not on the side of the man who keeps telling himself he'll figure it out later.</p>
+    </div>
 
-    <div class="tw-grid reveal d3">
-      <div class="tw-inputs">
-        <div class="tw-control">
-          <div class="tw-slider-row">
-            <label class="tw-field-label" for="twIncome">Your annual income</label>
-            <div class="tw-val">$<span id="twIncomeVal">250,000</span></div>
-          </div>
-          <input id="twIncome" type="range" min="100000" max="2000000" step="25000" value="250000" aria-label="Annual income">
-          <div class="tw-hourly">That's about <strong id="twHourly">$120</strong>/hour of your time.</div>
-        </div>
-        <div class="tw-control">
-          <div class="tw-slider-row">
-            <label class="tw-field-label" for="twHours">Hours/day on apps &amp; texting</label>
-            <div class="tw-val"><span id="twHoursVal">2</span><small>hrs</small></div>
-          </div>
-          <input id="twHours" type="range" min="0.5" max="5" step="0.5" value="2" aria-label="Hours per day on dating apps">
-        </div>
+    <div class="sc-stats reveal d3">
+      <div class="sc-stat">
+        <div class="sc-stat-num"><span data-count="50" data-suffix="%">0%</span></div><!-- COPY_TODO: user-supplied ~50%, verify exact stat + source before publishing -->
+        <p class="sc-stat-line">of men aged 18 to 35 reported no intimacy in the past year.</p>
       </div>
-      <div class="tw-result">
-        <div class="tw-result-eyebrow">You're spending</div>
-        <div class="tw-big" id="twBig">$7,212</div>
-        <div class="tw-result-sub">worth of your time <strong>every month</strong> &#8212; that's <strong id="twMonthlyHrs">60 hours</strong> swiping and texting instead of living.</div>
-        <div class="tw-rule"></div>
-        <div class="tw-yearly">Over a year: <strong id="twYearly">$86,538</strong> of your time, gone.</div>
+      <div class="sc-stat">
+        <div class="sc-stat-num"><span data-count="74" data-suffix="%">0%</span></div><!-- COPY_TODO: from Atlas funnel/VSL, confirm source -->
+        <p class="sc-stat-line">of women wish men would approach them more often.</p>
+      </div>
+      <div class="sc-stat">
+        <div class="sc-stat-num"><span data-count="55" data-suffix="%">0%</span></div><!-- COPY_TODO: from Atlas funnel/VSL, confirm exact stat + source -->
+        <p class="sc-stat-line">of men did not approach a single woman they wanted to last year.</p>
       </div>
     </div>
 
-    <p class="tw-reframe reveal d3">Atlas hands that time back. <strong>You spend ~5 focused hours a week &#8212; we handle the rest.</strong> Same caliber of woman, a fraction of the hours, none of the swiping.</p>
+    <p class="sc-bridge reveal d2">And while the stats hold, the bill keeps running. Here is what figuring it out alone actually costs you over five years.</p>
+
+    <div class="sc-cards">
+
+      <div class="sc-card reveal d1">
+        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+        <div class="sc-card-label">Premium on 3 apps</div>
+        <div class="sc-card-num"><span data-count="5400" data-prefix="$">$0</span></div>
+        <p class="sc-card-assume">Three apps, premium tier, five years of swiping.</p>
+      </div>
+
+      <div class="sc-card reveal d2">
+        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3v8M8 3v8M6.5 11v10M16 3c-1.7 0-3 1.8-3 5s1.3 4 3 4v9"/></svg></div>
+        <div class="sc-card-label">First-date dinners</div>
+        <div class="sc-card-num"><span data-count="26000" data-prefix="$">$0</span></div>
+        <p class="sc-card-assume">A nice dinner out once a week, six months a year, five years.</p><!-- COPY_TODO: ~$200/dinner assumption -->
+      </div>
+
+      <div class="sc-card reveal d1">
+        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h14l-6 7v7M13 18h-2M9 21h6"/></svg></div>
+        <div class="sc-card-label">Bar tabs in the city</div>
+        <div class="sc-card-num"><span data-count="13000" data-prefix="$">$0</span></div>
+        <p class="sc-card-assume">Drinks at a decent bar in a city like NYC, once a week, six months a year, five years.</p><!-- COPY_TODO: ~$100/night assumption -->
+      </div>
+
+      <div class="sc-card reveal d2">
+        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M12 10v3l2 1M9 3h6l-1 3.5M9 23h6l-1-3.5"/></svg></div>
+        <div class="sc-card-label">The watch. The car.</div>
+        <div class="sc-card-num"><span data-count="10000" data-prefix="$">$0</span>+</div>
+        <p class="sc-card-assume">The upgrades you tell yourself are for you, not to get noticed.</p><!-- COPY_TODO: illustrative figure -->
+      </div>
+
+      <div class="sc-card sc-card--worst reveal d1">
+        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/><path d="M12 7l-1.6 3.4 2.2 1.8L11 16" stroke-width="1.3"/></svg></div>
+        <div class="sc-card-label">Marrying the wrong woman</div>
+        <div class="sc-card-num"><span data-count="100000" data-prefix="$">$0</span> to $500,000+</div>
+        <p class="sc-card-assume">Legal fees alone on a high-net-worth divorce, before a single asset is split.</p><!-- COPY_TODO: source = Atlas offer research (HNW divorce, >$5M assets, $100K-$500K+ legal fees); confirm before publishing -->
+      </div>
+
+    </div>
+
+    <p class="sc-subtotal reveal d2">Over <strong>$54,000</strong> gone before you have even met the wrong person. And that last one can erase a decade of work in a single signature.</p>
+    <p class="sc-reframe reveal d2">Atlas costs a fraction of any one of these. <strong>The most expensive choice on this page is doing nothing.</strong></p>
 
     <div class="cta-block reveal d4">
-      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100" style="padding: 20px 56px; font-size: 16px;">Get Your Time Back</button>
-      <div class="cta-friction">takes 30 seconds · NDA protected</div>
+      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100" style="padding: 20px 56px; font-size: 16px;">Solve This Now</button>
+      <div class="cta-friction">takes 30 seconds &middot; NDA protected</div>
     </div>
   </div>
 </section>
@@ -4818,71 +5060,188 @@ body.deliv-modal-open { overflow: hidden; }
       <p class="body-lg reveal d2" style="max-width:560px; margin:16px auto 0; color:var(--w55);">Everything you need to build a dating life that matches your success.</p>
     </div>
 
-    <div class="wy-grid">
+    <div class="wi-modules">
 
       <!-- 01 Wardrobe -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div class="wy-title">Image &amp; Wardrobe Overhaul</div>
-        <p class="wy-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
+      <div class="wi-row reveal">
+        <div class="wi-text">
+          <div class="wi-num">01</div>
+          <h3 class="wi-title">Image &amp; Wardrobe Overhaul</h3>
+          <p class="wi-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Haircut and grooming dialed in</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Outfits for photos, dates, and daily life</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>An appearance that matches your resume</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-ba">
+            <div class="wi-ba-tile before"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="wi-ba-lab">Before</span></div>
+            <div class="wi-ba-tile after"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="wi-ba-lab">After</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- 02 App Profiles -->
-      <div class="wy-card reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6M9 11h4"/></svg></div>
-        <div class="wy-title">Done-For-You Dating App Profiles</div>
-        <p class="wy-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
+      <div class="wi-row rev reveal">
+        <div class="wi-text">
+          <div class="wi-num">02</div>
+          <h3 class="wi-title">Done-For-You Dating App Profiles</h3>
+          <p class="wi-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Hinge, Raya, Bumble, and more</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Photos, prompts, and bios built for you</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Iterated to attract high-caliber women</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-profile">
+            <div class="wi-profile-photo">
+              <span class="wi-pp-name">Top 1%</span>
+              <span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
+            </div>
+            <div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div>
+          </div>
+        </div>
       </div>
 
       <!-- 03 Photographer -->
-      <div class="wy-card reveal d3">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <div class="wy-title">Photographer &amp; Photoshoot Playbook</div>
-        <p class="wy-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
+      <div class="wi-row reveal">
+        <div class="wi-text">
+          <div class="wi-num">03</div>
+          <h3 class="wi-title">Photographer &amp; Photoshoot Playbook</h3>
+          <p class="wi-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>We source and vet a local photographer</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Our photoshoot playbook handed to them</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Exact posing direction, no stiff headshots</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-view">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <span class="wi-rec">FOCUS</span>
+            <div class="wi-shutter"></div>
+          </div>
+        </div>
       </div>
 
       <!-- 04 Instagram -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
-        <div class="wy-title">Instagram Overhaul</div>
-        <p class="wy-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
+      <div class="wi-row rev reveal">
+        <div class="wi-text">
+          <div class="wi-num">04</div>
+          <h3 class="wi-title">Instagram Overhaul</h3>
+          <p class="wi-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Quietly showcases your real life</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>No fake flexing or influencer cosplay</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>High-status, authentic presentation</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-ig">
+            <div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div>
+            <div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div>
+          </div>
+        </div>
       </div>
 
       <!-- 05 Approach -->
-      <div class="wy-card wy-feature reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><path d="M3 21v-2a4 4 0 014-4h2"/><circle cx="18" cy="5" r="2.5"/><path d="M15 21l3-9 3 9"/></svg></div>
-        <div class="wy-title">Real-Life Approach Gameplans</div>
-        <p class="wy-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
+      <div class="wi-row reveal">
+        <div class="wi-text">
+          <div class="wi-num">05</div>
+          <h3 class="wi-title">Real-Life Approach Gameplans</h3>
+          <p class="wi-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Where to go and what to say</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>How to open and ask for the number</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Audio reviews of your real approaches</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-map">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="none"><g stroke="rgba(167,181,232,0.18)" stroke-width="1.5" fill="none"><path d="M0 40 H200"/><path d="M0 95 H200"/><path d="M55 0 V150"/><path d="M130 0 V150"/></g><path d="M55 95 L55 40 L130 40" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-dasharray="5 5"/></svg>
+            <span class="wi-pin"></span>
+          </div>
+        </div>
       </div>
 
-      <!-- 06 Messaging -->
-      <div class="wy-card reveal d1">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="wy-title">The Conversion Blueprint</div>
-        <p class="wy-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real‑life date quickly and reliably. Proven openers, texting sequences, and first date frameworks.</p>
+      <!-- 06 Conversion -->
+      <div class="wi-row rev reveal">
+        <div class="wi-text">
+          <div class="wi-num">06</div>
+          <h3 class="wi-title">The Conversion Blueprint</h3>
+          <p class="wi-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real‑life date quickly and reliably. Proven openers, texting sequences, and first date frameworks.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Proven openers that get replies</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Texting sequences that move to a date</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>First-date frameworks that convert</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-chat">
+            <div class="wi-bub them">Honestly did not expect you to be this smooth</div>
+            <div class="wi-bub me">Then let me take you for a drink Thursday</div>
+            <div class="wi-bub them">It's a date</div>
+          </div>
+        </div>
       </div>
 
       <!-- 07 Date Frameworks -->
-      <div class="wy-card reveal d2">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="wy-title">First-Date &amp; Relationship Frameworks</div>
-        <p class="wy-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
+      <div class="wi-row reveal">
+        <div class="wi-text">
+          <div class="wi-num">07</div>
+          <h3 class="wi-title">First-Date &amp; Relationship Frameworks</h3>
+          <p class="wi-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Run great first dates with structure</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Screen for red flags early</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Escalate and commit on your terms</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-cal">
+            <div class="wi-cal-top">This Week <span class="wi-chip">Date set</span></div>
+            <div class="wi-cal-grid"><div class="wi-cal-d">M</div><div class="wi-cal-d">T</div><div class="wi-cal-d">W</div><div class="wi-cal-d on">T</div><div class="wi-cal-d">F</div><div class="wi-cal-d">S</div><div class="wi-cal-d">S</div><div class="wi-cal-d">8</div><div class="wi-cal-d">9</div><div class="wi-cal-d">10</div><div class="wi-cal-d on">11</div><div class="wi-cal-d">12</div><div class="wi-cal-d">13</div><div class="wi-cal-d">14</div></div>
+          </div>
+        </div>
       </div>
 
-      <!-- 08 1:1 Support -->
-      <div class="wy-card reveal d3">
-        <div class="wy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
-        <div class="wy-title">The Feedback Layer</div>
-        <p class="wy-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
+      <!-- 08 Feedback Layer -->
+      <div class="wi-row rev reveal">
+        <div class="wi-text">
+          <div class="wi-num">08</div>
+          <h3 class="wi-title">The Feedback Layer</h3>
+          <p class="wi-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Debriefs after every date</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Approach audits</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Message support between sessions</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-wave">
+            <div class="wi-wave-bars"><span style="height:20px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:62px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:24px"></span><span style="height:40px"></span></div>
+            <div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Debrief &middot; 2:47</div>
+          </div>
+        </div>
       </div>
 
-      <!-- 09 Network — full width -->
-      <div class="wy-card wy-network reveal d2">
-        <div class="wy-network-inner">
-          <div class="wy-icon" style="flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div>
-            <div class="wy-title">The Atlas Network</div>
-            <p class="wy-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
+      <!-- 09 Atlas Network -->
+      <div class="wi-row reveal">
+        <div class="wi-text">
+          <div class="wi-num">09</div>
+          <h3 class="wi-title">The Atlas Network</h3>
+          <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
+          <ul class="wi-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Female advisors on the profile side</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Six coaches on the strategy side</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>A closed room of high-performers</li>
+          </ul>
+        </div>
+        <div class="wi-visual">
+          <div class="wi-net">
+            <svg viewBox="0 0 200 200"><g stroke="rgba(167,181,232,0.4)" stroke-width="1.5"><line x1="100" y1="100" x2="170" y2="100"/><line x1="100" y1="100" x2="135" y2="161"/><line x1="100" y1="100" x2="65" y2="161"/><line x1="100" y1="100" x2="30" y2="100"/><line x1="100" y1="100" x2="65" y2="39"/><line x1="100" y1="100" x2="135" y2="39"/></g><g fill="var(--card-solid)" stroke="var(--gold)" stroke-width="1.5"><circle cx="170" cy="100" r="13"/><circle cx="135" cy="161" r="13"/><circle cx="65" cy="161" r="13"/><circle cx="30" cy="100" r="13"/><circle cx="65" cy="39" r="13"/><circle cx="135" cy="39" r="13"/></g><circle cx="100" cy="100" r="22" fill="var(--gold)"/><text x="100" y="104" text-anchor="middle" font-family="Spectral, serif" font-size="13" fill="#fff">You</text></svg>
           </div>
         </div>
       </div>
@@ -4958,6 +5317,7 @@ body.deliv-modal-open { overflow: hidden; }
                 <text x="-2" y="38" font-family="Georgia, serif" font-size="18" font-weight="900" fill="#0a0a0a" text-anchor="middle">H</text>
               </g>
               <text class="pipe2-label" x="200" y="290">APPS</text>
+              <text class="pipe2-rate" x="200" y="316">5-10+ / week</text>
 
               <rect x="330" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
               <rect x="362" y="142" width="76" height="76" rx="18" fill="url(#v12IgGrad)"/>
@@ -4965,10 +5325,12 @@ body.deliv-modal-open { overflow: hidden; }
               <circle cx="400" cy="180" r="18" fill="none" stroke="#fff" stroke-width="2.5"/>
               <circle cx="424" cy="156" r="2.5" fill="#fff"/>
               <text class="pipe2-label" x="400" y="290">INSTAGRAM</text>
+              <text class="pipe2-rate" x="400" y="316">5-10+ / week</text>
 
               <rect x="530" y="110" width="140" height="140" rx="28" fill="url(#v12GlassGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"/>
               <image href="in-person-v2.png" x="545" y="120" width="110" height="110" preserveAspectRatio="xMidYMid meet"/>
               <text class="pipe2-label" x="600" y="290">REAL LIFE</text>
+              <text class="pipe2-rate" x="600" y="316">5-10+ / week</text>
 
               <path class="pipe2-flow" d="M 200,260 C 200,380 280,430 400,465"/>
               <path class="pipe2-flow" d="M 400,260 L 400,465"/>
@@ -4980,7 +5342,7 @@ body.deliv-modal-open { overflow: hidden; }
               <path class="pipe2-trunk" d="M 400,465 L 400,640"/>
               <path d="M 400,672 L 388,652 L 412,652 Z" fill="#A7B5E8"/>
 
-              <text class="pipe2-leads" x="400" y="732">DATES</text>
+              <text class="pipe2-leads" x="400" y="732" style="font-size:40px;">1-3+ DATES / WEEK</text>
               <text class="pipe2-subtitle" x="400" y="758">THE 3 PART PIPELINE</text>
 
               <!-- Heart-shaped traveling dots (Unicode ♥ for unambiguous shape) -->
@@ -4994,6 +5356,7 @@ body.deliv-modal-open { overflow: hidden; }
               <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
             </svg>
           </div>
+      <p class="body-lg text-center reveal d3" style="max-width:560px; margin:28px auto 0; color:var(--w55);">Three independent streams. If one slows down, the other two keep feeding you. No single point of failure.</p>
     </div>
 
     <div class="modules">
@@ -5011,7 +5374,7 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
         <div>
           <div class="module-name">The 3 Part Pipeline</div>
-          <p class="module-body">Dating apps, Instagram, and in-person. With the right system, dating 9s and 10s isn't some miracle. It's just math.</p>
+          <p class="module-body">Now imagine all three channels running at once: 5-10+ new leads a week from apps, another 5-10+ from Instagram, and 5-10+ more from real life. At that volume, dating 9s and 10s isn't some miracle. It's just math.</p>
         </div>
       </div>
 
@@ -5056,6 +5419,114 @@ body.deliv-modal-open { overflow: hidden; }
 
 
 
+
+
+<!-- §4.5 · 90-DAY ROADMAP (ZGA-ported timeline, Atlas-tinted) -->
+<section class="section s-dark" id="roadmap">
+  <div class="inner">
+    <div class="text-center">
+      <p class="eyebrow reveal d1">How It Works</p>
+      <h2 class="reveal d1">Your 90-Day <em>Roadmap.</em></h2>
+      <p class="body-lg reveal d2" style="max-width:600px; margin:16px auto 0; color:var(--w55);">From the first call to a dating life that runs on its own. Here is exactly how it gets built.</p>
+    </div>
+
+    <div class="rm-wrap" id="rmSteps">
+      <div class="rm-line"></div>
+      <div class="rm-progress" id="rmProgress"></div>
+
+      <!-- Step 1 -->
+      <div class="rm-step">
+        <div class="rm-dot">1</div>
+        <div class="rm-content">
+          <div class="rm-textcol">
+            <div class="rm-week">Days 1-3 <!-- COPY_TODO: Ben confirm onboarding timeframe --></div>
+            <h3 class="rm-title">Onboarding &amp; Kickoff</h3>
+            <p class="rm-body">Your intake and first strategy call map your situation, your type, and the plan. You get full system access and your private channel from day one.</p>
+          </div>
+          <div class="rm-graphic">
+            <div class="rmg-check">
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln s"></span></div>
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
+              <div class="r"><span class="bx"></span><span class="ln xs"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="rm-step">
+        <div class="rm-dot">2</div>
+        <div class="rm-content">
+          <div class="rm-textcol">
+            <div class="rm-week">Days 1-14 <!-- COPY_TODO: site says "installed in 14 days", Ben confirm --></div>
+            <h3 class="rm-title">Pipeline Install</h3>
+            <p class="rm-body">Wardrobe, grooming, done-for-you dating app profiles, your photoshoot, and the Instagram overhaul all go live. The 3-Part Pipeline starts feeding you matches.</p>
+          </div>
+          <div class="rm-graphic">
+            <div class="rmg-pipe">
+              <div class="nd">APPS</div>
+              <span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <div class="nd">IG</div>
+              <span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <div class="nd" style="background:var(--gold);color:#fff;border-color:var(--gold);">IRL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="rm-step">
+        <div class="rm-dot">3</div>
+        <div class="rm-content">
+          <div class="rm-textcol">
+            <div class="rm-week">Weeks 3-6 <!-- COPY_TODO: Ben confirm conversion-phase timeframe --></div>
+            <h3 class="rm-title">Conversion</h3>
+            <p class="rm-body">Proven openers, texting sequences, and first-date frameworks turn those matches into real dates on your calendar, reliably and on repeat.</p>
+          </div>
+          <div class="rm-graphic">
+            <div class="rmg-bars"><span style="height:22px"></span><span style="height:34px"></span><span style="height:44px"></span><span style="height:56px"></span><span style="height:64px"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="rm-step">
+        <div class="rm-dot">4</div>
+        <div class="rm-content">
+          <div class="rm-textcol">
+            <div class="rm-week">Ongoing <!-- COPY_TODO: Ben confirm cadence --></div>
+            <h3 class="rm-title">The Feedback Layer</h3>
+            <p class="rm-body">Debriefs after every date, approach audits, and message support between sessions. We close the loop so every week is sharper than the last.</p>
+          </div>
+          <div class="rm-graphic">
+            <div class="rmg-stack">
+              <div class="c b3"></div>
+              <div class="c b2"></div>
+              <div class="c top"><span class="tag">DEBRIEF</span><span class="l g"></span><span class="l"></span><span class="l s"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finish -->
+      <div class="rm-finish">
+        <div class="rm-finish-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+        <div class="rm-finish-content">
+          <div class="rm-week">Day 90 &middot; The Outcome</div>
+          <h3>Consistent dates with women you <em>actually want.</em></h3>
+          <p>By day 90 the guesswork is gone. The pipeline is built, the system runs, and you have a dating life that finally matches your success. It is all yours to keep and run on autopilot.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-block reveal d4" style="margin-top: 56px;">
+      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <div class="cta-friction">takes 30 seconds · NDA protected</div>
+    </div>
+  </div>
+</section>
 
 
 <!-- §5b · VIDEO TESTIMONIALS (selfie-style, click-to-play).
@@ -5534,6 +6005,60 @@ body.deliv-modal-open { overflow: hidden; }
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* === bs1-v2: sunk-cost count-up === */
+  (function () {
+    const root = document.getElementById('sunk-cost');
+    if (!root) return;
+    const nums = root.querySelectorAll('[data-count]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = (n) => n.toLocaleString('en-US');
+    const render = (el, val) => { el.textContent = (el.dataset.prefix || '') + fmt(val) + (el.dataset.suffix || ''); };
+    if (reduce) { nums.forEach(el => render(el, parseInt(el.dataset.count, 10) || 0)); return; }
+    const animate = (el) => {
+      const target = parseInt(el.dataset.count, 10) || 0;
+      const dur = 1100; const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        render(el, Math.round(target * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    nums.forEach(el => io.observe(el));
+  })();
+
+  /* === bs1-v2: 90-Day Roadmap scroll-fill + active steps === */
+  (function () {
+    const wrap = document.getElementById('rmSteps');
+    const progress = document.getElementById('rmProgress');
+    if (!wrap || !progress) return;
+    const steps = wrap.querySelectorAll('.rm-step, .rm-finish');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce) { progress.style.height = '100%'; steps.forEach(s => s.classList.add('active')); return; }
+
+    function update() {
+      const rect = wrap.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const trigger = viewH * 0.65;
+      const progressPct = Math.max(0, Math.min((trigger - rect.top) / rect.height, 1));
+      progress.style.height = (progressPct * 100) + '%';
+      steps.forEach(step => {
+        const r = step.getBoundingClientRect();
+        if (r.top + r.height * 0.3 < trigger) step.classList.add('active');
+        else step.classList.remove('active');
+      });
+    }
+    let raf = null;
+    const onScroll = () => { if (raf === null) raf = requestAnimationFrame(() => { raf = null; update(); }); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
 
   // FAQ toggle
   document.querySelectorAll('.faq-item').forEach(item => {
@@ -6033,51 +6558,14 @@ body.deliv-modal-open { overflow: hidden; }
     });
   })();
 
-  // §8.7 — "What is your time worth?" opportunity-cost calculator.
-  // hourly = income / 2080 (40h × 52wk) · monthly = hourly × hrs/day × 30 · yearly = monthly × 12
-  (function initTimeWorth() {
-    var income = document.getElementById('twIncome');
-    var hours  = document.getElementById('twHours');
-    if (!income || !hours) return;
-    var elIncomeVal = document.getElementById('twIncomeVal');
-    var elHourly = document.getElementById('twHourly');
-    var elHoursVal = document.getElementById('twHoursVal');
-    var elBig = document.getElementById('twBig');
-    var elMonthlyHrs = document.getElementById('twMonthlyHrs');
-    var elYearly = document.getElementById('twYearly');
 
-    var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
-    function fill(el) {
-      var pct = ((el.value - el.min) / (el.max - el.min)) * 100;
-      el.style.setProperty('--tw-fill', pct + '%');
-    }
-
-    function recompute() {
-      var inc = parseInt(income.value, 10) || 0;
-      var hrs = parseFloat(hours.value);
-      var hourly = inc / 2080;
-      var monthlyHrs = hrs * 30;
-      var monthly = hourly * monthlyHrs;
-
-      elIncomeVal.textContent = inc.toLocaleString('en-US');
-      elHourly.textContent = fmt(hourly);
-      elHoursVal.textContent = (hrs % 1 === 0) ? hrs : hrs.toFixed(1);
-      elBig.textContent = fmt(monthly);
-      elMonthlyHrs.textContent = Math.round(monthlyHrs) + ' hours';
-      elYearly.textContent = fmt(monthly * 12);
-
-      fill(income);
-      fill(hours);
-    }
-
-    income.addEventListener('input', recompute);
-    hours.addEventListener('input', recompute);
-    recompute();
-  })();
 
 </script>
 
 
 
+<!-- Atlas first-party funnel tracker. Posts to the live portal /api/track. -->
+<script>window.ATLAS_TRACK_ENDPOINT = 'https://clientportal-two-rho.vercel.app/api/track';</script>
+<script defer src="js/atlas-track.js"></script>
 </body>
 </html>
