@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Atlas · Site Control Center</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#08090b; --bg2:#0d0f12; --card:#111318; --card-hi:#161a20;
+    --border:#20242c; --border-hi:#2e3440; --w100:#f2f3f5; --w70:#a7adb8; --w45:#6b7280;
+    --gold:#e5b769; --green:#34d399; --blue:#60a5fa; --grey:#8b93a1;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  html,body { background:var(--bg); color:var(--w100); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased; line-height:1.5; }
+  body { background:
+      radial-gradient(1100px 500px at 80% -10%, rgba(229,183,105,0.06), transparent 60%),
+      var(--bg); }
+  .wrap { max-width:1040px; margin:0 auto; padding:56px 24px 96px; }
+
+  header { border-bottom:1px solid var(--border); padding-bottom:26px; margin-bottom:34px; }
+  .kicker { font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold); display:flex; align-items:center; gap:9px; }
+  .kicker::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 0 0 rgba(52,211,153,.6); animation:pulse 2.4s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)} 70%{box-shadow:0 0 0 8px rgba(52,211,153,0)} 100%{box-shadow:0 0 0 0 rgba(52,211,153,0)} }
+  h1 { font-size:30px; font-weight:700; letter-spacing:-0.02em; margin:12px 0 6px; }
+  .sub { color:var(--w70); font-size:15px; }
+  .hmeta { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:16px; font-family:var(--mono); font-size:12.5px; color:var(--w45); }
+  .hmeta a { color:var(--w70); text-decoration:none; border-bottom:1px dotted var(--border-hi); }
+  .hmeta a:hover { color:var(--gold); }
+
+  h2.sec { font-size:13px; font-family:var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--w45); margin:38px 0 14px; }
+
+  .ver-card { display:flex; align-items:center; gap:18px; text-decoration:none; color:inherit;
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:18px 20px; margin-bottom:12px; transition:border-color .18s, background .18s, transform .18s; }
+  .ver-card:hover { border-color:var(--border-hi); background:var(--card-hi); transform:translateY(-2px); }
+  .ver-card.active { border-color:rgba(52,211,153,.35); }
+  .ver-card.active:hover { border-color:rgba(52,211,153,.6); }
+
+  .badge { flex:0 0 auto; font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.09em;
+    padding:5px 9px; border-radius:6px; border:1px solid; white-space:nowrap; }
+  .badge.active { color:var(--green); border-color:rgba(52,211,153,.4); background:rgba(52,211,153,.09); }
+  .badge.stable { color:var(--gold); border-color:rgba(229,183,105,.4); background:rgba(229,183,105,.09); }
+  .badge.root { color:var(--blue); border-color:rgba(96,165,250,.4); background:rgba(96,165,250,.09); }
+
+  .ver-main { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px; }
+  .ver-name { font-family:var(--mono); font-size:15.5px; font-weight:600; color:var(--w100); }
+  .ver-note { font-size:13.5px; color:var(--w70); }
+  .ver-meta { flex:0 0 auto; display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
+  .ver-date { font-family:var(--mono); font-size:12px; color:var(--w45); }
+  .ver-open { font-size:12.5px; color:var(--gold); font-weight:600; }
+
+  details { margin-top:8px; border:1px solid var(--border); border-radius:14px; background:var(--bg2); overflow:hidden; }
+  summary { cursor:pointer; list-style:none; padding:16px 20px; font-family:var(--mono); font-size:13px;
+    color:var(--w70); display:flex; justify-content:space-between; align-items:center; }
+  summary::-webkit-details-marker { display:none; }
+  summary:hover { color:var(--gold); }
+  summary .count { color:var(--w45); }
+  .arc-list { padding:6px 12px 14px; }
+  .arc-row { display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;
+    padding:10px 12px; border-radius:9px; transition:background .15s; }
+  .arc-row:hover { background:var(--card); }
+  .arc-name { flex:1 1 auto; font-family:var(--mono); font-size:13px; color:var(--w70); }
+  .arc-date { font-family:var(--mono); font-size:11.5px; color:var(--w45); }
+  .arc-open { font-size:11.5px; color:var(--w45); }
+  .arc-row:hover .arc-name { color:var(--w100); }
+  .arc-row:hover .arc-open { color:var(--gold); }
+
+  footer { margin-top:40px; padding-top:22px; border-top:1px solid var(--border);
+    font-family:var(--mono); font-size:12px; color:var(--w45); }
+  @media (max-width:640px){
+    .ver-card { flex-wrap:wrap; gap:12px; }
+    .ver-meta { flex-direction:row; align-items:center; gap:12px; width:100%; justify-content:space-between; }
+    h1 { font-size:24px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker">Live · Version Control</div>
+      <h1>Atlas — Site Control Center</h1>
+      <p class="sub">Every version of the Atlas landing page, its status, and a one-click live link.</p>
+      <div class="hmeta">
+        <span>base&nbsp;·&nbsp;<a href="https://mxwallz.github.io/bs1/" target="_blank" rel="noopener">mxwallz.github.io/bs1</a></span>
+        <span>repo&nbsp;·&nbsp;<a href="https://github.com/mxwallz/bs1" target="_blank" rel="noopener">mxwallz/bs1</a></span>
+        <span>updated&nbsp;·&nbsp;2026-07-10</span>
+      </div>
+    </header>
+
+    <h2 class="sec">Active line</h2>
+      <a class="ver-card active" href="https://mxwallz.github.io/bs1/bs1-v3.html" target="_blank" rel="noopener">
+        <span class="badge active">ACTIVE</span>
+        <span class="ver-main">
+          <span class="ver-name">bs1-v3.html</span>
+          <span class="ver-note">Forked from v2 to start the next iteration. Open for edits — this is the working head.</span>
+        </span>
+        <span class="ver-meta">
+          <span class="ver-date">2026-07-10</span>
+          <span class="ver-open">Open&nbsp;&rarr;</span>
+        </span>
+      </a>
+      <a class="ver-card stable" href="https://mxwallz.github.io/bs1/bs1-v2.html" target="_blank" rel="noopener">
+        <span class="badge stable">STABLE</span>
+        <span class="ver-main">
+          <span class="ver-name">bs1-v2.html</span>
+          <span class="ver-note">Auto-scrolling 50-screenshot proof wall (5 rows, seamless). Text testimonials removed. Last green-lit build.</span>
+        </span>
+        <span class="ver-meta">
+          <span class="ver-date">2026-07-10</span>
+          <span class="ver-open">Open&nbsp;&rarr;</span>
+        </span>
+      </a>
+      <a class="ver-card root" href="https://mxwallz.github.io/bs1/index.html" target="_blank" rel="noopener">
+        <span class="badge root">ROOT</span>
+        <span class="ver-main">
+          <span class="ver-name">index.html</span>
+          <span class="ver-note">Currently served at the public root URL. Legacy monolith that predates the bs1-v line.</span>
+        </span>
+        <span class="ver-meta">
+          <span class="ver-date">2026-06-24</span>
+          <span class="ver-open">Open&nbsp;&rarr;</span>
+        </span>
+      </a>
+
+    <h2 class="sec">Archive · legacy versions</h2>
+    <details>
+      <summary><span>Show all prior version files</span><span class="count">30 files</span></summary>
+      <div class="arc-list">
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v32.html" target="_blank" rel="noopener"><span class="arc-name">v32.html</span><span class="arc-date">2026-04-24</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v21.html" target="_blank" rel="noopener"><span class="arc-name">index-v21.html</span><span class="arc-date">2026-04-24</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v33.html" target="_blank" rel="noopener"><span class="arc-name">v33.html</span><span class="arc-date">2026-04-24</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v31.html" target="_blank" rel="noopener"><span class="arc-name">v31.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v30.html" target="_blank" rel="noopener"><span class="arc-name">index-v30.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v29.html" target="_blank" rel="noopener"><span class="arc-name">v29.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v28.html" target="_blank" rel="noopener"><span class="arc-name">v28.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/v27.html" target="_blank" rel="noopener"><span class="arc-name">v27.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v26.html" target="_blank" rel="noopener"><span class="arc-name">index-v26.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v25.html" target="_blank" rel="noopener"><span class="arc-name">index-v25.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v24.html" target="_blank" rel="noopener"><span class="arc-name">index-v24.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v23.html" target="_blank" rel="noopener"><span class="arc-name">index-v23.html</span><span class="arc-date">2026-04-22</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v22.html" target="_blank" rel="noopener"><span class="arc-name">index-v22.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v20.html" target="_blank" rel="noopener"><span class="arc-name">index-v20.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v19.html" target="_blank" rel="noopener"><span class="arc-name">index-v19.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v18.html" target="_blank" rel="noopener"><span class="arc-name">index-v18.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v17.html" target="_blank" rel="noopener"><span class="arc-name">index-v17.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v16.html" target="_blank" rel="noopener"><span class="arc-name">index-v16.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v15.html" target="_blank" rel="noopener"><span class="arc-name">index-v15.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v14.html" target="_blank" rel="noopener"><span class="arc-name">index-v14.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v13.html" target="_blank" rel="noopener"><span class="arc-name">index-v13.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v12.html" target="_blank" rel="noopener"><span class="arc-name">index-v12.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v11.html" target="_blank" rel="noopener"><span class="arc-name">index-v11.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v10.html" target="_blank" rel="noopener"><span class="arc-name">index-v10.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v9.html" target="_blank" rel="noopener"><span class="arc-name">index-v9.html</span><span class="arc-date">2026-04-21</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v7-minimal.html" target="_blank" rel="noopener"><span class="arc-name">index-v7-minimal.html</span><span class="arc-date">2026-04-16</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v5-minimal.html" target="_blank" rel="noopener"><span class="arc-name">index-v5-minimal.html</span><span class="arc-date">2026-04-16</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v6.html" target="_blank" rel="noopener"><span class="arc-name">index-v6.html</span><span class="arc-date">2026-04-10</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v6-microscroll.html" target="_blank" rel="noopener"><span class="arc-name">index-v6-microscroll.html</span><span class="arc-date">2026-04-10</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+          <a class="arc-row" href="https://mxwallz.github.io/bs1/index-v4-framer.html" target="_blank" rel="noopener"><span class="arc-name">index-v4-framer.html</span><span class="arc-date">2026-04-09</span><span class="arc-open">Open&nbsp;&rarr;</span></a>
+      </div>
+    </details>
+
+    <footer>Atlas · Benjamin Seda &nbsp;—&nbsp; maintained alongside each new version cut.</footer>
+  </div>
+</body>
+</html>
