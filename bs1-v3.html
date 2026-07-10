@@ -2413,10 +2413,10 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   .hero .stat-row { grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: none; }
   .hero .stat-num { font-size: 22px; }
 
-  /* VSL compact */
-  .hero .vsl-wrap { margin-top: 40px; border-radius: 12px; aspect-ratio: 16/9.5; }
-  .vsl-play { width: 56px; height: 56px; }
-  .vsl-play::after { border-top-width: 10px; border-bottom-width: 10px; border-left-width: 16px; }
+  /* VSL bigger + near full-bleed on mobile */
+  .hero .vsl-wrap { margin-top: 24px; border-radius: 14px; aspect-ratio: 16/11; width: calc(100% + 20px); margin-left: -10px; margin-right: -10px; }
+  .vsl-play { width: 70px; height: 70px; }
+  .vsl-play::after { border-top-width: 12px; border-bottom-width: 12px; border-left-width: 19px; }
 
   /* CTA full-width for easy tap */
   .btn { width: 100%; max-width: 320px; padding: 16px 28px; font-size: 14px; }
@@ -4349,6 +4349,30 @@ body.deliv-modal-open { overflow: hidden; }
 .notif-img { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 .notif-img img { border-radius: 14px; border: 1px solid var(--border-2); }
 
+/* Mid-page receipts strip — one horizontal row of group-chat screenshots, links to the full wall */
+#testimonials { scroll-margin-top: 84px; }
+#receipts .rcpt-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+#receipts .rcpt-head h2 { margin-top: 8px; }
+#receipts .rcpt-see { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: gap 0.2s ease, color 0.2s ease; }
+#receipts .rcpt-see:hover { color: var(--gold-hi); gap: 11px; }
+#receipts .rcpt-see svg { width: 15px; height: 15px; }
+#receipts .rcpt-viewport { overflow: hidden; margin: 30px -24px 0; padding: 8px 0 14px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%); }
+#receipts .rcpt-row { display: flex; width: max-content; animation: rcptScroll 48s linear infinite; }
+#receipts .rcpt-viewport:hover .rcpt-row { animation-play-state: paused; }
+#receipts .rcpt-card { flex: 0 0 auto; margin-right: 14px; width: clamp(212px, 60vw, 248px); height: clamp(304px, 42vw, 360px); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
+#receipts .rcpt-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+@keyframes rcptScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (max-width: 768px) {
+  #receipts .rcpt-card { width: clamp(198px, 62vw, 236px); height: clamp(286px, 88vw, 340px); }
+  #receipts .rcpt-viewport { margin: 24px -20px 0; }
+  #receipts .rcpt-row { animation-duration: 36s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #receipts .rcpt-row { animation: none; }
+  #receipts .rcpt-viewport { overflow-x: auto; scrollbar-width: none; }
+  #receipts .rcpt-viewport::-webkit-scrollbar { display: none; }
+}
+
 /* Mobile deliverables: show rich visual cards (matches desktop), hide simple icon cards */
 @media (max-width: 768px) {
   .deliv-simple { display: none !important; }
@@ -4516,6 +4540,19 @@ body.deliv-modal-open { overflow: hidden; }
 .rmg-stack .l.g { background: var(--gold-soft); max-width: 70%; }
 .rmg-stack .l.s { max-width: 50%; }
 
+/* Milestone marker between roadmap phases — glowing horizontal line + label */
+.rm-milestone { position: relative; display: flex; align-items: center; margin: clamp(2px,1vw,10px) 0 clamp(30px,3.6vw,42px); }
+.rm-milestone::before { content: ""; position: absolute; left: -49px; right: 0; top: 50%; height: 2px; transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(167,181,232,0.16), var(--gold-hi) 50%, rgba(167,181,232,0.16));
+  box-shadow: 0 0 16px rgba(167,181,232,0.5); animation: rm-ms-glow 3s ease-in-out infinite; }
+.rm-ms-node { position: absolute; left: -49px; top: 50%; transform: translate(-50%,-50%); width: 13px; height: 13px; border-radius: 50%;
+  background: var(--gold-hi); box-shadow: 0 0 0 5px var(--gold-soft), 0 0 16px rgba(167,181,232,0.85); z-index: 2; }
+.rm-ms-label { position: relative; margin: 0 auto; background: var(--bg1); border: 1px solid var(--gold-soft); border-radius: 99px;
+  padding: 10px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.01em; color: var(--gold-hi); line-height: 1.3; text-align: center;
+  box-shadow: 0 0 26px rgba(167,181,232,0.28); display: inline-flex; align-items: center; gap: 9px; z-index: 1; }
+.rm-ms-label svg { width: 15px; height: 15px; flex: none; color: var(--gold); }
+@keyframes rm-ms-glow { 0%,100% { opacity: 0.82; } 50% { opacity: 1; } }
+
 /* roadmap finish */
 .rm-finish { position: relative; margin-top: 8px; }
 .rm-finish-dot { position: absolute; left: -68px; top: -4px; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #fff; z-index: 2; box-shadow: 0 0 0 8px var(--gold-soft); opacity: 0.45; transition: opacity 0.5s ease; }
@@ -4539,12 +4576,15 @@ body.deliv-modal-open { overflow: hidden; }
   .rm-finish-dot { left: -54px; width: 44px; height: 44px; }
   .rm-content { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
   .rm-graphic { min-height: 0; order: 2; }
+  .rm-milestone::before, .rm-ms-node { left: -33px; }
+  .rm-ms-label { font-size: 11px; padding: 9px 15px; }
 }
 
 /* reduced motion: freeze animation, keep everything visible */
 @media (prefers-reduced-motion: reduce) {
   .rm-progress { transition: none; }
   .rm-step.active .rm-dot::after { animation: none; }
+  .rm-milestone::before { animation: none; }
 }
 /* === end bs1-v2 ZGA port === */
 
@@ -4580,9 +4620,182 @@ body.deliv-modal-open { overflow: hidden; }
 /* === end sunk-cost === */
 
 
+/* ══════════════════════════════════════════════════════════
+   MOBILE SWIPE DECK — scroll-pinned Tinder-style deliverables.
+   Desktop keeps the stacked .wi-modules layout; phones (≤767px)
+   swap in a pinned card stack that swipes as you scroll.
+   ══════════════════════════════════════════════════════════ */
+.swipe-deck { display: none; }
+@media (max-width: 767px) {
+  #what-you-get .wi-modules { display: none; }
+  #what-you-get .swipe-deck { display: block; }
+  #what-you-get .inner { max-width: none; }
+}
+.sd-track { position: relative; }
+.sd-sticky {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: calc(100svh - 54px);
+  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  padding: 10px 2px 12px;
+}
+.sd-sticky.is-fixed { position: fixed; top: 54px; right: auto; }
+.sd-sticky.is-bottom { position: absolute; top: auto; bottom: 0; left: 0; right: 0; }
+.sd-head { flex-shrink: 0; padding: 4px 12px 0; }
+.sd-head-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 11px; }
+.sd-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); }
+.sd-counter { font-family: 'Spectral', Georgia, serif; color: var(--w35); font-size: 13px; letter-spacing: 0.04em; }
+.sd-counter b { color: var(--w100); font-size: 23px; font-weight: 500; letter-spacing: -0.01em; }
+.sd-counter i { font-style: normal; margin-left: 3px; }
+.sd-bar { height: 4px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.sd-bar-fill { height: 100%; width: 0%; border-radius: 99px; background: linear-gradient(90deg, var(--gold), var(--gold-hi)); box-shadow: 0 0 10px rgba(167,181,232,0.55); transition: width 0.14s cubic-bezier(0.22,1,0.36,1); }
+.sd-stack { position: relative; flex: 0 0 auto; width: 100%; max-width: 424px; min-height: 400px; margin: 0 auto; }
+.sd-card {
+  position: absolute; inset: 0;
+  background: linear-gradient(168deg, #131730, #0a1120 62%);
+  border: 1px solid var(--border-2); border-radius: 26px;
+  padding: 26px 24px 24px;
+  display: flex; flex-direction: column; justify-content: center;
+  box-shadow: 0 26px 64px rgba(0,0,0,0.58);
+  transform-origin: center 78%;
+  backface-visibility: hidden;
+  will-change: transform, opacity; overflow: hidden;
+}
+.sd-card::before {
+  content: ""; position: absolute; top: -46%; left: 50%; transform: translateX(-50%);
+  width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,181,232,0.18), transparent 70%);
+  pointer-events: none;
+}
+.sd-card-top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+.sd-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); background: var(--gold-soft); border: 1px solid var(--border-2); padding: 5px 12px; border-radius: 99px; }
+.sd-idx { font-family: 'Spectral', Georgia, serif; font-size: 36px; font-weight: 500; color: rgba(255,255,255,0.13); line-height: 1; letter-spacing: -0.02em; }
+.sd-card-visual {
+  flex: 0 0 auto; margin: 12px 0 22px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.sd-card-visual > * { max-width: 100%; flex-shrink: 0; }
+.sd-card-visual .wi-map, .sd-card-visual .wi-view { max-width: 224px; }
+.sd-card-visual .wi-profile { max-width: 184px; }
+.sd-card-visual .wi-ba { max-width: 232px; }
+.sd-card-visual .wi-ig { max-width: 196px; }
+.sd-card-visual .wi-net { max-width: 150px; }
+.sd-card-visual .wi-chat { max-width: 260px; }
+.sd-card-title { font-family: 'Spectral', Georgia, serif; font-weight: 500; font-size: clamp(21px, 5.6vw, 26px); line-height: 1.12; letter-spacing: -0.015em; color: var(--w100); margin-bottom: 13px; position: relative; z-index: 1; }
+.sd-card-body { font-size: 13.5px; line-height: 1.45; color: var(--w75); position: relative; z-index: 1; }
+.sd-card-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; color: var(--w35); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 14px; position: relative; z-index: 1; }
+.sd-card-foot svg { width: 15px; height: 15px; }
+.sd-hint { flex-shrink: 0; text-align: center; color: var(--w35); font-size: 10.5px; letter-spacing: 0.20em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.3s ease; }
+.sd-hint::after { content: "↓"; font-size: 13px; animation: sdBob 1.6s ease-in-out infinite; }
+@keyframes sdBob { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(4px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sd-hint::after { animation: none; } }
+
+/* Framework (#system) module cards → centered, icon-above-text on mobile */
+@media (max-width: 767px) {
+  #system .module {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+    text-align: center;
+    gap: 16px !important;
+    padding: 32px 24px !important;
+  }
+  #system .module-icon { margin: 0 auto; }
+  #system .module > div { text-align: center; }
+  #system .module-name,
+  #system .module-body { text-align: center; }
+}
+
+/* Video testimonial thumbnail → animated before/after reveal that wipes L→R,
+   then hands off to the video thumbnail (play button). Placeholder halves —
+   drop real photos into --vt-before / --vt-after per card later. */
+#video-testimonials .vt-thumb { position: relative; overflow: hidden; padding: 0; }
+#video-testimonials .vt-thumb::after { display: none; }
+#video-testimonials .vt-badge, #video-testimonials .vt-duration { z-index: 6; }
+
+#video-testimonials .vt-ba-reveal { position: absolute; inset: 0; z-index: 1; }
+#video-testimonials .vt-ba-half { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; }
+#video-testimonials .vt-ba-before { background-color: #171a24; background-image: var(--vt-before, linear-gradient(160deg,#232733,#0d0f15)); filter: saturate(0.7); }
+#video-testimonials .vt-ba-after { background-color: #10131f; background-image: var(--vt-after, radial-gradient(130% 100% at 62% 28%, rgba(167,181,232,0.42), rgba(122,160,255,0.16) 46%, #0a0e1a 86%)); clip-path: inset(0 100% 0 0); animation: vtWipe 7s cubic-bezier(0.65,0,0.35,1) infinite; }
+#video-testimonials .vt-ba-half > svg { width: 62px; height: 62px; }
+#video-testimonials .vt-ba-before > svg { color: var(--w35); opacity: .45; }
+#video-testimonials .vt-ba-after > svg { color: var(--gold-hi); opacity: 1; filter: drop-shadow(0 0 14px rgba(167,181,232,0.7)); }
+#video-testimonials .vt-ba-pill {
+  position: absolute; top: 12px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 99px; background: rgba(10,12,18,.55);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid var(--border-2);
+}
+#video-testimonials .vt-ba-before .vt-ba-pill { left: 12px; color: var(--w75); }
+#video-testimonials .vt-ba-after .vt-ba-pill { right: 12px; color: var(--gold); }
+#video-testimonials .vt-ba-divider {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 2px; z-index: 2;
+  background: linear-gradient(var(--gold-hi), var(--gold)); box-shadow: 0 0 14px rgba(167,181,232,.7);
+  animation: vtDivider 7s cubic-bezier(0.65,0,0.35,1) infinite;
+}
+#video-testimonials .vt-ba-divider::after {
+  content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 24px; height: 24px; border-radius: 50%; background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(167,181,232,.22), 0 4px 12px rgba(0,0,0,.4);
+}
+#video-testimonials .vt-video-state {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px;
+  background: linear-gradient(to bottom, rgba(8,10,16,.15), rgba(8,10,16,.7));
+  opacity: 0; animation: vtHandoff 7s ease infinite;
+}
+#video-testimonials .vt-thumb .vt-play { position: static; transform: none; margin: 0; width: 56px; height: 56px; }
+#video-testimonials .vt-thumb .vt-play:hover { transform: scale(1.08); }
+#video-testimonials .vt-watch { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--w55); display: inline-flex; align-items: center; gap: 7px; }
+#video-testimonials .vt-watch::before { content: ""; width: 12px; height: 1px; background: var(--gold-soft); }
+
+@keyframes vtWipe {
+  0%, 8% { clip-path: inset(0 100% 0 0); }
+  44%, 100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes vtDivider {
+  0% { left: 0; opacity: 0; }
+  8% { left: 0; opacity: 1; }
+  44% { left: 100%; opacity: 1; }
+  52%, 100% { left: 100%; opacity: 0; }
+}
+@keyframes vtHandoff {
+  0% { opacity: 1; }
+  8%, 60% { opacity: 0; }
+  72%, 100% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #video-testimonials .vt-ba-after { clip-path: inset(0 0 0 0); animation: none; }
+  #video-testimonials .vt-ba-divider { display: none; }
+  #video-testimonials .vt-video-state { opacity: 1; animation: none; }
+}
+/* Mobile: bigger, more prominent testimonial cards + taller portrait thumbnail */
+@media (max-width: 767px) {
+  #video-testimonials .vt-swipe { margin-top: 40px; }
+  #video-testimonials .vt-swipe-track > .vt-card { flex: 0 0 calc(100% - 40px); max-width: 520px; }
+  #video-testimonials .vt-thumb { aspect-ratio: 4 / 5; }
+  #video-testimonials .vt-thumb .vt-play { width: 68px; height: 68px; }
+  #video-testimonials .vt-ba-half > svg { width: 82px; height: 82px; }
+  #video-testimonials .vt-ba-pill { font-size: 11px; padding: 6px 14px; top: 14px; }
+  #video-testimonials .vt-ba-before .vt-ba-pill { left: 14px; }
+  #video-testimonials .vt-ba-after .vt-ba-pill { right: 14px; }
+  #video-testimonials .vt-watch { font-size: 11px; }
+  #video-testimonials .vt-meta { padding: 20px 22px 24px; }
+}
 </style>
 </head>
 <body>
+
+<template id="__bundler_thumbnail" data-bg-color="#050608">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#050608"/>
+    <circle cx="600" cy="380" r="150" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="3"/>
+    <polygon points="600,250 632,372 600,404 568,372" fill="#A7B5E8"/>
+    <polygon points="600,510 568,388 600,356 632,388" fill="rgba(196,206,245,0.55)"/>
+    <polygon points="470,380 592,348 624,380 592,412" fill="rgba(255,255,255,0.28)"/>
+    <polygon points="730,380 608,412 576,380 608,348" fill="rgba(255,255,255,0.28)"/>
+    <text x="600" y="620" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" letter-spacing="14" fill="#ffffff">ATLAS</text>
+    <text x="600" y="672" text-anchor="middle" font-family="Georgia, serif" font-size="22" letter-spacing="4" fill="rgba(167,181,232,0.8)" font-style="italic">Advisory</text>
+  </svg>
+</template>
 
 <!-- NAV. Apply button removed per feedback. -->
 <nav class="nav">
@@ -4662,8 +4875,15 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g1">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">2:47</span>
-            <button class="vt-play" aria-label="Play Todd testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-            <span class="vt-thumb-label">Todd · Retired Investor</span>
+            <div class="vt-ba-reveal" aria-hidden="true">
+              <div class="vt-ba-half vt-ba-before"><span class="vt-ba-pill">Before</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-half vt-ba-after"><span class="vt-ba-pill">After</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-divider"></div>
+            </div>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play Todd testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the interview</span>
+            </div>
           </div>
           <div class="vt-meta">
             <div class="vt-name">Todd, 54</div>
@@ -4675,8 +4895,15 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g2">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">3:12</span>
-            <button class="vt-play" aria-label="Play Yaro testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-            <span class="vt-thumb-label">Yaro · Software Engineer</span>
+            <div class="vt-ba-reveal" aria-hidden="true">
+              <div class="vt-ba-half vt-ba-before"><span class="vt-ba-pill">Before</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-half vt-ba-after"><span class="vt-ba-pill">After</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-divider"></div>
+            </div>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play Yaro testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the interview</span>
+            </div>
           </div>
           <div class="vt-meta">
             <div class="vt-name">Yaro</div>
@@ -4688,8 +4915,15 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="vt-thumb vt-g3">
             <span class="vt-badge">Client</span>
             <span class="vt-duration">2:21</span>
-            <button class="vt-play" aria-label="Play Spencer testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-            <span class="vt-thumb-label">Spencer · Cybersecurity</span>
+            <div class="vt-ba-reveal" aria-hidden="true">
+              <div class="vt-ba-half vt-ba-before"><span class="vt-ba-pill">Before</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-half vt-ba-after"><span class="vt-ba-pill">After</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="vt-ba-divider"></div>
+            </div>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play Spencer testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the interview</span>
+            </div>
           </div>
           <div class="vt-meta">
             <div class="vt-name">Spencer</div>
@@ -4975,81 +5209,6 @@ body.deliv-modal-open { overflow: hidden; }
 </section>
 
 
-<!-- §8.7 SUNK COST · "you're getting older" stats + cost-of-inaction cards (replaces the time-worth calculator) -->
-<section class="section s-black" id="sunk-cost">
-  <div class="inner">
-    <div class="text-center">
-      <p class="eyebrow reveal d1">The clock you can't pause</p>
-      <h2 class="reveal d1">Every year you wing it<br><em>is a year you don't get back.</em></h2>
-      <p class="body-lg reveal d2" style="max-width:600px; margin:18px auto 0; color:var(--w55);">The pool doesn't wait. The numbers are not on the side of the man who keeps telling himself he'll figure it out later.</p>
-    </div>
-
-    <div class="sc-stats reveal d3">
-      <div class="sc-stat">
-        <div class="sc-stat-num"><span data-count="50" data-suffix="%">0%</span></div><!-- COPY_TODO: user-supplied ~50%, verify exact stat + source before publishing -->
-        <p class="sc-stat-line">of men aged 18 to 35 reported no intimacy in the past year.</p>
-      </div>
-      <div class="sc-stat">
-        <div class="sc-stat-num"><span data-count="74" data-suffix="%">0%</span></div><!-- COPY_TODO: from Atlas funnel/VSL, confirm source -->
-        <p class="sc-stat-line">of women wish men would approach them more often.</p>
-      </div>
-      <div class="sc-stat">
-        <div class="sc-stat-num"><span data-count="55" data-suffix="%">0%</span></div><!-- COPY_TODO: from Atlas funnel/VSL, confirm exact stat + source -->
-        <p class="sc-stat-line">of men did not approach a single woman they wanted to last year.</p>
-      </div>
-    </div>
-
-    <p class="sc-bridge reveal d2">And while the stats hold, the bill keeps running. Here is what figuring it out alone actually costs you over five years.</p>
-
-    <div class="sc-cards">
-
-      <div class="sc-card reveal d1">
-        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
-        <div class="sc-card-label">Premium on 3 apps</div>
-        <div class="sc-card-num"><span data-count="5400" data-prefix="$">$0</span></div>
-        <p class="sc-card-assume">Three apps, premium tier, five years of swiping.</p>
-      </div>
-
-      <div class="sc-card reveal d2">
-        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3v8M8 3v8M6.5 11v10M16 3c-1.7 0-3 1.8-3 5s1.3 4 3 4v9"/></svg></div>
-        <div class="sc-card-label">First-date dinners</div>
-        <div class="sc-card-num"><span data-count="26000" data-prefix="$">$0</span></div>
-        <p class="sc-card-assume">A nice dinner out once a week, six months a year, five years.</p><!-- COPY_TODO: ~$200/dinner assumption -->
-      </div>
-
-      <div class="sc-card reveal d1">
-        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h14l-6 7v7M13 18h-2M9 21h6"/></svg></div>
-        <div class="sc-card-label">Bar tabs in the city</div>
-        <div class="sc-card-num"><span data-count="13000" data-prefix="$">$0</span></div>
-        <p class="sc-card-assume">Drinks at a decent bar in a city like NYC, once a week, six months a year, five years.</p><!-- COPY_TODO: ~$100/night assumption -->
-      </div>
-
-      <div class="sc-card reveal d2">
-        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M12 10v3l2 1M9 3h6l-1 3.5M9 23h6l-1-3.5"/></svg></div>
-        <div class="sc-card-label">The watch. The car.</div>
-        <div class="sc-card-num"><span data-count="10000" data-prefix="$">$0</span>+</div>
-        <p class="sc-card-assume">The upgrades you tell yourself are for you, not to get noticed.</p><!-- COPY_TODO: illustrative figure -->
-      </div>
-
-      <div class="sc-card sc-card--worst reveal d1">
-        <div class="sc-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/><path d="M12 7l-1.6 3.4 2.2 1.8L11 16" stroke-width="1.3"/></svg></div>
-        <div class="sc-card-label">Marrying the wrong woman</div>
-        <div class="sc-card-num"><span data-count="100000" data-prefix="$">$0</span> to $500,000+</div>
-        <p class="sc-card-assume">Legal fees alone on a high-net-worth divorce, before a single asset is split.</p><!-- COPY_TODO: source = Atlas offer research (HNW divorce, >$5M assets, $100K-$500K+ legal fees); confirm before publishing -->
-      </div>
-
-    </div>
-
-    <p class="sc-subtotal reveal d2">Over <strong>$54,000</strong> gone before you have even met the wrong person. And that last one can erase a decade of work in a single signature.</p>
-    <p class="sc-reframe reveal d2">Atlas costs a fraction of any one of these. <strong>The most expensive choice on this page is doing nothing.</strong></p>
-
-    <div class="cta-block reveal d4">
-      <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100" style="padding: 20px 56px; font-size: 16px;">Solve This Now</button>
-      <div class="cta-friction">takes 30 seconds &middot; NDA protected</div>
-    </div>
-  </div>
-</section>
-
 
 <!-- §9 WHAT YOU GET -->
 <section class="section s-dark" id="what-you-get">
@@ -5068,11 +5227,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">01</div>
           <h3 class="wi-title">Image &amp; Wardrobe Overhaul</h3>
           <p class="wi-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Haircut and grooming dialed in</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Outfits for photos, dates, and daily life</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>An appearance that matches your resume</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-ba">
@@ -5088,11 +5242,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">02</div>
           <h3 class="wi-title">Done-For-You Dating App Profiles</h3>
           <p class="wi-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Hinge, Raya, Bumble, and more</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Photos, prompts, and bios built for you</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Iterated to attract high-caliber women</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-profile">
@@ -5111,11 +5260,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">03</div>
           <h3 class="wi-title">Photographer &amp; Photoshoot Playbook</h3>
           <p class="wi-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>We source and vet a local photographer</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Our photoshoot playbook handed to them</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Exact posing direction, no stiff headshots</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-view">
@@ -5132,11 +5276,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">04</div>
           <h3 class="wi-title">Instagram Overhaul</h3>
           <p class="wi-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Quietly showcases your real life</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>No fake flexing or influencer cosplay</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>High-status, authentic presentation</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-ig">
@@ -5152,11 +5291,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">05</div>
           <h3 class="wi-title">Real-Life Approach Gameplans</h3>
           <p class="wi-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Where to go and what to say</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>How to open and ask for the number</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Audio reviews of your real approaches</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-map">
@@ -5172,11 +5306,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">06</div>
           <h3 class="wi-title">The Conversion Blueprint</h3>
           <p class="wi-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real‑life date quickly and reliably. Proven openers, texting sequences, and first date frameworks.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Proven openers that get replies</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Texting sequences that move to a date</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>First-date frameworks that convert</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-chat">
@@ -5193,11 +5322,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">07</div>
           <h3 class="wi-title">First-Date &amp; Relationship Frameworks</h3>
           <p class="wi-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Run great first dates with structure</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Screen for red flags early</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Escalate and commit on your terms</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-cal">
@@ -5213,11 +5337,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">08</div>
           <h3 class="wi-title">The Feedback Layer</h3>
           <p class="wi-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Debriefs after every date</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Approach audits</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Message support between sessions</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-wave">
@@ -5233,11 +5352,6 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-num">09</div>
           <h3 class="wi-title">The Atlas Network</h3>
           <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
-          <ul class="wi-feats">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Female advisors on the profile side</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>Six coaches on the strategy side</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>A closed room of high-performers</li>
-          </ul>
         </div>
         <div class="wi-visual">
           <div class="wi-net">
@@ -5247,11 +5361,175 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
 
     </div>
+
+    <!-- MOBILE-ONLY: scroll-pinned Tinder-style swipe deck of the same deliverables -->
+    <div class="swipe-deck">
+      <div class="sd-track" id="sdTrack">
+        <div class="sd-sticky">
+          <div class="sd-head">
+            <div class="sd-head-row">
+              <span class="sd-eyebrow">The Full Package</span>
+              <span class="sd-counter"><b id="sdCur">01</b><i>/ 09</i></span>
+            </div>
+            <div class="sd-bar"><div class="sd-bar-fill" id="sdBarFill"></div></div>
+          </div>
+          <div class="sd-stack" id="sdStack">
+
+            <article class="sd-card" data-i="0">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">01</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-ba">
+            <div class="wi-ba-tile before"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="wi-ba-lab">Before</span></div>
+            <div class="wi-ba-tile after"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="wi-ba-lab">After</span></div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">Image &amp; Wardrobe Overhaul</h3>
+              <p class="sd-card-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
+            </article>
+
+            <article class="sd-card" data-i="1">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">02</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-profile">
+            <div class="wi-profile-photo">
+              <span class="wi-pp-name">Top 1%</span>
+              <span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"></path></svg></span>
+            </div>
+            <div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">Done-For-You Dating App Profiles</h3>
+              <p class="sd-card-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
+            </article>
+
+            <article class="sd-card" data-i="2">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">03</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-view">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <span class="wi-rec">FOCUS</span>
+            <div class="wi-shutter"></div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">Photographer &amp; Photoshoot Playbook</h3>
+              <p class="sd-card-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
+            </article>
+
+            <article class="sd-card" data-i="3">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">04</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-ig">
+            <div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div>
+            <div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">Instagram Overhaul</h3>
+              <p class="sd-card-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
+            </article>
+
+            <article class="sd-card" data-i="4">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">05</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-map">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="none"><g stroke="rgba(167,181,232,0.18)" stroke-width="1.5" fill="none"><path d="M0 40 H200"></path><path d="M0 95 H200"></path><path d="M55 0 V150"></path><path d="M130 0 V150"></path></g><path d="M55 95 L55 40 L130 40" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-dasharray="5 5"></path></svg>
+            <span class="wi-pin"></span>
+          </div>
+              </div>
+              <h3 class="sd-card-title">Real-Life Approach Gameplans</h3>
+              <p class="sd-card-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
+            </article>
+
+            <article class="sd-card" data-i="5">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">06</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-chat">
+            <div class="wi-bub them">Honestly did not expect you to be this smooth</div>
+            <div class="wi-bub me">Then let me take you for a drink Thursday</div>
+            <div class="wi-bub them">It's a date</div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">The Conversion Blueprint</h3>
+              <p class="sd-card-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real-life date quickly and reliably. Proven openers and texting sequences.</p>
+            </article>
+
+            <article class="sd-card" data-i="6">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">07</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-cal">
+            <div class="wi-cal-top">This Week <span class="wi-chip">Date set</span></div>
+            <div class="wi-cal-grid"><div class="wi-cal-d">M</div><div class="wi-cal-d">T</div><div class="wi-cal-d">W</div><div class="wi-cal-d on">T</div><div class="wi-cal-d">F</div><div class="wi-cal-d">S</div><div class="wi-cal-d">S</div><div class="wi-cal-d">8</div><div class="wi-cal-d">9</div><div class="wi-cal-d">10</div><div class="wi-cal-d on">11</div><div class="wi-cal-d">12</div><div class="wi-cal-d">13</div><div class="wi-cal-d">14</div></div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">First-Date &amp; Relationship Frameworks</h3>
+              <p class="sd-card-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
+            </article>
+
+            <article class="sd-card" data-i="7">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">08</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-wave">
+            <div class="wi-wave-bars"><span style="height:20px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:62px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:24px"></span><span style="height:40px"></span></div>
+            <div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>Debrief · 2:47</div>
+          </div>
+              </div>
+              <h3 class="sd-card-title">The Feedback Layer</h3>
+              <p class="sd-card-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
+            </article>
+
+            <article class="sd-card" data-i="8">
+              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">09</span></div>
+              <div class="sd-card-visual">
+                <div class="wi-net">
+            <svg viewBox="0 0 200 200"><g stroke="rgba(167,181,232,0.4)" stroke-width="1.5"><line x1="100" y1="100" x2="170" y2="100"></line><line x1="100" y1="100" x2="135" y2="161"></line><line x1="100" y1="100" x2="65" y2="161"></line><line x1="100" y1="100" x2="30" y2="100"></line><line x1="100" y1="100" x2="65" y2="39"></line><line x1="100" y1="100" x2="135" y2="39"></line></g><g fill="var(--card-solid)" stroke="var(--gold)" stroke-width="1.5"><circle cx="170" cy="100" r="13"></circle><circle cx="135" cy="161" r="13"></circle><circle cx="65" cy="161" r="13"></circle><circle cx="30" cy="100" r="13"></circle><circle cx="65" cy="39" r="13"></circle><circle cx="135" cy="39" r="13"></circle></g><circle cx="100" cy="100" r="22" fill="var(--gold)"></circle><text x="100" y="104" text-anchor="middle" font-family="Spectral, serif" font-size="13" fill="#fff">You</text></svg>
+          </div>
+              </div>
+              <h3 class="sd-card-title">The Atlas Network</h3>
+              <p class="sd-card-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
+            </article>
+
+          </div>
+          <div class="sd-hint" id="sdHint">Keep scrolling</div>
+        </div>
+      </div>
+    </div>
+
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="YOUR_FORM_ID" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
+</section>
+
+
+<!-- §9.3 RECEIPTS STRIP — mid-page proof teaser linking to the full wall -->
+<section class="section s-darker" id="receipts" style="padding-top:clamp(60px,7.5vw,96px);padding-bottom:clamp(60px,7.5vw,96px);">
+  <div class="inner wide">
+    <div class="rcpt-head">
+      <div>
+        <p class="eyebrow reveal d1">The Receipts</p>
+        <h2 class="reveal d1" style="max-width:520px;">Straight from the <em>client group chat.</em></h2>
+      </div>
+      <a href="#testimonials" class="rcpt-see reveal d2">See the full wall <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="rcpt-viewport reveal d3">
+      <div class="rcpt-row">
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-07-hinge-matches.jpg" loading="lazy" alt="Hinge match list stacked with new matches"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-02-its-a-date.jpg" loading="lazy" alt="It's a date — two dates set up in one week"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-09-five-dates-one-week.jpg" loading="lazy" alt="Five dates booked in the first week on the program"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-05-one-per-day.jpg" loading="lazy" alt="Match suggests meeting tomorrow — about once a day now"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_2685-2.jpg" loading="lazy" alt="18 matches in one day"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-03-three-dates-lined-up.jpg" loading="lazy" alt="Three dates lined up over three days"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/tg-06-girls-asking-plans.jpg" loading="lazy" alt="Three girls texted asking for plans in one night"></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-07-hinge-matches.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-02-its-a-date.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-09-five-dates-one-week.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-05-one-per-day.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_2685-2.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-03-three-dates-lined-up.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-06-girls-asking-plans.jpg" loading="lazy" alt=""></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -5263,11 +5541,6 @@ body.deliv-modal-open { overflow: hidden; }
     <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:24px auto 0; color:var(--w55);">
       Get in front of the right women. Turn attention into dates. Expert feedback to optimize each step of the dating process.
     </p>
-
-    <!-- Pipeline animation — featured visual -->
-    <div class="system-pipeline-visual reveal d3" style="max-width:680px; margin:52px auto 0;">
-      
-    </div>
 
     <!-- Pipeline animation — featured visual -->
     <div class="system-pipeline-visual reveal d3" style="max-width:680px;margin:52px auto 0;">
@@ -5473,6 +5746,12 @@ body.deliv-modal-open { overflow: hidden; }
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Milestone: momentum marker between Pipeline Install and Conversion -->
+      <div class="rm-milestone">
+        <span class="rm-ms-node"></span>
+        <span class="rm-ms-label"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.6 6.3L21 9l-4.8 4.3L17.6 20 12 16.4 6.4 20l1.4-6.7L3 9l6.4-.7z"/></svg>Most men start reaching 1&ndash;3 high-quality dates here</span>
       </div>
 
       <!-- Step 3 -->
@@ -5792,141 +6071,96 @@ body.deliv-modal-open { overflow: hidden; }
     <!-- Mobile subtitle -->
     <p class="testi-mobile-sub reveal d2">Some of the wins from inside the community. Scroll yourself to see what the average day inside Atlas looks like.</p>
 
-    <style>
-    /* Auto-scrolling proof wall — seamless (margin-based, no flex gap → -50% is pixel-exact) */
-    .proof-rows { display:flex; flex-direction:column; gap:12px; margin-top:36px; }
-    .proof-row { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
-    .proof-track { display:flex; width:max-content; will-change:transform; transform:translateZ(0); backface-visibility:hidden; animation:proofScroll 64s linear infinite; }
-    .proof-shot { flex:0 0 auto; height:210px; margin-right:12px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:var(--card); box-shadow:0 4px 16px rgba(0,0,0,0.22); }
-    .proof-shot img { height:100%; width:auto; display:block; }
-    .proof-row:nth-child(2) .proof-track { animation-duration:78s; animation-direction:reverse; }
-    .proof-row:nth-child(3) .proof-track { animation-duration:70s; }
-    .proof-row:nth-child(4) .proof-track { animation-duration:84s; animation-direction:reverse; }
-    .proof-row:nth-child(5) .proof-track { animation-duration:72s; }
-    .proof-row:hover .proof-track { animation-play-state:paused; }
-    @media (max-width:768px){
-      .proof-shot{ height:150px; margin-right:10px; border-radius:10px; }
-      .proof-track{ animation-duration:44s; }
-      .proof-row:nth-child(2) .proof-track{ animation-duration:54s; }
-      .proof-row:nth-child(3) .proof-track{ animation-duration:48s; }
-      .proof-row:nth-child(4) .proof-track{ animation-duration:58s; }
-      .proof-row:nth-child(5) .proof-track{ animation-duration:50s; }
-    }
-    @media (prefers-reduced-motion: reduce){ .proof-track{ animation:none; } .proof-row{ overflow-x:auto; -webkit-overflow-scrolling:touch; } }
-    @keyframes proofScroll { from{ transform:translate3d(0,0,0);} to{ transform:translate3d(-50%,0,0);} }
-    </style>
+    <!-- Desktop: tag filters + proof wall -->
+    <div class="proof-filters reveal d2">
+      <button class="proof-tag active" data-filter="all">All</button>
+      <button class="proof-tag" data-filter="dating-apps">Dating Apps</button>
+      <button class="proof-tag" data-filter="social-profiles">Social Profiles</button>
+      <button class="proof-tag" data-filter="online-dates">Online Dates</button>
+      <button class="proof-tag" data-filter="on-dates">On Dates</button>
+      <button class="proof-tag" data-filter="relationship">Relationship</button>
+    </div>
 
-    <div class="proof-rows" id="proofWall">
-      <div class="proof-row"><div class="proof-track">
-        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"></div>
-        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"></div>
-        <div class="proof-shot" data-tag="relationship"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"></div>
-        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"></div>
-        <div class="proof-shot" data-tag="on-dates social-profiles"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"></div>
-        <div class="proof-shot" data-tag="social-profiles" aria-hidden="true"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"></div>
-        <div class="proof-shot" data-tag="online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"></div>
-        <div class="proof-shot" data-tag="relationship" aria-hidden="true"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"></div>
-        <div class="proof-shot" data-tag="online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"></div>
-        <div class="proof-shot" data-tag="on-dates social-profiles" aria-hidden="true"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"></div>
-      </div></div>
-      <div class="proof-row"><div class="proof-track">
-        <div class="proof-shot" data-tag="dating-apps online-dates"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"></div>
-        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"></div>
-        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"></div>
-        <div class="proof-shot" data-tag="dating-apps relationship"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"></div>
-        <div class="proof-shot" data-tag="dating-apps online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"></div>
-        <div class="proof-shot" data-tag="online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"></div>
-        <div class="proof-shot" data-tag="dating-apps" aria-hidden="true"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"></div>
-        <div class="proof-shot" data-tag="dating-apps relationship" aria-hidden="true"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"></div>
-      </div></div>
-      <div class="proof-row"><div class="proof-track">
-        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"></div>
-        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"></div>
-        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"></div>
-        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"></div>
-        <div class="proof-shot" data-tag="social-profiles" aria-hidden="true"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"></div>
-        <div class="proof-shot" data-tag="dating-apps social-profiles" aria-hidden="true"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"></div>
-        <div class="proof-shot" data-tag="dating-apps" aria-hidden="true"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"></div>
-        <div class="proof-shot" data-tag="dating-apps" aria-hidden="true"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"></div>
-      </div></div>
-      <div class="proof-row"><div class="proof-track">
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"></div>
-        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"></div>
-        <div class="proof-shot" data-tag="online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"></div>
-      </div></div>
-      <div class="proof-row"><div class="proof-track">
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"></div>
-        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"></div>
-        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
-        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"></div>
-        <div class="proof-shot" data-tag="dating-apps social-profiles" aria-hidden="true"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div>
-        <div class="proof-shot" data-tag="dating-apps on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"></div>
-        <div class="proof-shot" data-tag="social-profiles online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"></div>
-        <div class="proof-shot" data-tag="online-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
-        <div class="proof-shot" data-tag="on-dates" aria-hidden="true"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"></div>
-      </div></div>
+    <div class="proof-wall" id="proofWall">
+
+      <div class="tc-card" data-tag="dating-apps on-dates">
+        <div class="tc-head"><div class="tc-photo">T</div><div><div class="tc-name">Todd, 54</div><div class="tc-title">Retired Investor</div></div></div>
+        <p class="tc-quote">"Was paying a matchmaker. Got nowhere. <strong>20 dates in 30 days</strong>, most with women in their 20s and 30s. Age was never the obstacle."</p>
+      </div>
+
+      <div class="tc-card" data-tag="dating-apps online-dates on-dates">
+        <div class="tc-head"><div class="tc-photo">Y</div><div><div class="tc-name">Yaro</div><div class="tc-title">Software Engineer · SF</div></div></div>
+        <p class="tc-quote">"Every box checked as a man except this one. <strong>30 days after the pipeline went live, 20+ dates on my calendar.</strong>"</p>
+      </div>
+
+      <div class="tc-card" data-tag="dating-apps online-dates">
+        <div class="tc-head"><div class="tc-photo">S</div><div><div class="tc-name">Spencer</div><div class="tc-title">Cybersecurity Consultant</div></div></div>
+        <p class="tc-quote">"<strong>40+ Bumble matches in 24 hours</strong> of going live. More than I could realistically go on dates with."</p>
+      </div>
+
+      <div class="tc-card" data-tag="social-profiles">
+        <div class="tc-head"><div class="tc-photo">A</div><div><div class="tc-name">Aakash</div><div class="tc-title">Quant Trader · CA</div></div></div>
+        <p class="tc-quote">"Instagram rebuilt once. Never posted again. <strong>Women started cold-DMing me</strong> within weeks of going live."</p>
+      </div>
+
+      <div class="tc-card" data-tag="relationship">
+        <div class="tc-head"><div class="tc-photo">B</div><div><div class="tc-name">Ben</div><div class="tc-title">Private Equity</div></div></div>
+        <p class="tc-quote">"I am a man now instead of a people pleaser. <strong>Now in a relationship with my first pick.</strong> It feels completely natural."</p>
+      </div>
+
+      <div class="tc-card" data-tag="on-dates">
+        <div class="tc-head"><div class="tc-photo">H</div><div><div class="tc-name">Hector</div><div class="tc-title">Post-Divorce Executive</div></div></div>
+        <p class="tc-quote">"Never used a dating app before Atlas. <strong>More dates in 2 months than in my entire life.</strong> More than 5 years of marriage combined."</p>
+      </div>
+
+      <div class="tc-card" data-tag="dating-apps online-dates">
+        <div class="tc-head"><div class="tc-photo">P</div><div><div class="tc-name">Parker</div><div class="tc-title">Business Analyst</div></div></div>
+        <p class="tc-quote">"Profile rebuilt by the female advisors. <strong>18 matches in a single night</strong> a week later. First time in years."</p>
+      </div>
+
+      <div class="tc-card" data-tag="social-profiles">
+        <div class="tc-head"><div class="tc-photo">D</div><div><div class="tc-name">David</div><div class="tc-title">Tech Executive</div></div></div>
+        <p class="tc-quote">"Instagram rebuild done in the first month. <strong>5 to 6 women sliding into my DMs</strong> who had previously ghosted me on apps."</p>
+      </div>
+
+      <div class="tc-card" data-tag="on-dates">
+        <div class="tc-head"><div class="tc-photo">M</div><div><div class="tc-name">Maneet</div><div class="tc-title">Finance · NYC</div></div></div>
+        <p class="tc-quote">"Cold-approached a 10 on the street, not matched or messaged. <strong>I now believe in abundance even for attractive girls.</strong>"</p>
+      </div>
+
+      <div class="tc-card tc-img-card" data-tag="dating-apps online-dates">
+        <img src="img/tg-testimonials/IMG_2685-2.jpg" alt="18 matches in one day">
+      </div>
+
+      <!-- Telegram screenshot proof — batch 1 (auto-categorized) -->
+      <div class="tc-card tc-img-card" data-tag="dating-apps online-dates">
+        <img src="img/tg-testimonials/tg-01-first-date-weekend.jpg" loading="lazy" alt="Match asks when the first date is and gives her number — the profile does the work">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="online-dates">
+        <img src="img/tg-testimonials/tg-02-its-a-date.jpg" loading="lazy" alt="It's a date — two dates set up in one week">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="online-dates">
+        <img src="img/tg-testimonials/tg-03-three-dates-lined-up.jpg" loading="lazy" alt="Client: three dates lined up over the next three days, two firsts and a second">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="dating-apps online-dates">
+        <img src="img/tg-testimonials/tg-04-show-up-look-pretty.jpg" loading="lazy" alt="Match offers to show up and look pretty for the first date">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="dating-apps online-dates">
+        <img src="img/tg-testimonials/tg-05-one-per-day.jpg" loading="lazy" alt="Match suggests meeting tomorrow — client gets these about once a day now">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="online-dates">
+        <img src="img/tg-testimonials/tg-06-girls-asking-plans.jpg" loading="lazy" alt="Client: three girls texted asking for plans in one night">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="dating-apps">
+        <img src="img/tg-testimonials/tg-07-hinge-matches.jpg" loading="lazy" alt="Hinge match list stacked with new matches and 40 likes waiting">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="online-dates">
+        <img src="img/tg-testimonials/tg-08-check-it-out-together.jpg" loading="lazy" alt="Client lands a date to check out a new spot together">
+      </div>
+      <div class="tc-card tc-img-card" data-tag="online-dates on-dates">
+        <img src="img/tg-testimonials/tg-09-five-dates-one-week.jpg" loading="lazy" alt="Five dates booked in the first week on the program — a new record">
+      </div>
+
     </div>
 
 
@@ -6608,6 +6842,134 @@ body.deliv-modal-open { overflow: hidden; }
 </script>
 
 
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   MOBILE SWIPE DECK — scroll-driven pinned card stack.
+   Uses JS-driven fixed positioning (not position:sticky, which
+   the root's overflow-x:hidden breaks). The viewport pins while
+   scrolling through the tall track; cards glide off with a slight tilt,
+   the next peeks behind, the bar fills faster-than-linear, using the
+   site's smooth easing (no springy bounce). Active only ≤767px.
+   ══════════════════════════════════════════════════════════ */
+(function () {
+  var track = document.getElementById('sdTrack');
+  var stack = document.getElementById('sdStack');
+  if (!track || !stack) return;
+  var viewport = track.querySelector('.sd-sticky');
+  var cards = Array.prototype.slice.call(stack.querySelectorAll('.sd-card'));
+  var N = cards.length;
+  var barFill = document.getElementById('sdBarFill');
+  var curEl = document.getElementById('sdCur');
+  var hint = document.getElementById('sdHint');
+  var STICKY_TOP = 54;
+  var mq = window.matchMedia('(max-width: 767px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var lastIndex = -1, ticking = false, state = '';
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(t) { return t * t * (3 - 2 * t); }   // smoothstep — matches the site's eased motion
+
+  function sizeTrack() {
+    if (!mq.matches) { track.style.height = ''; return; }
+    var seg = window.innerHeight * 0.60;               // scroll distance per transition
+    track.style.height = Math.round(window.innerHeight + (N - 1) * seg) + 'px';
+  }
+
+  // Size the stack to the tallest card's natural content height so every
+  // overlaid card shares one tight box (no empty flex space).
+  function measure() {
+    if (!mq.matches) { stack.style.height = ''; return; }
+    var max = 0;
+    cards.forEach(function (c) {
+      var pBottom = c.style.bottom, pHeight = c.style.height, pTransform = c.style.transform, pOpacity = c.style.opacity, pDisplay = c.style.display;
+      c.style.transform = 'none'; c.style.opacity = '1'; c.style.display = 'flex';
+      c.style.bottom = 'auto'; c.style.height = 'auto';
+      var h = c.offsetHeight;
+      if (h > max) max = h;
+      c.style.bottom = pBottom; c.style.height = pHeight; c.style.transform = pTransform; c.style.opacity = pOpacity; c.style.display = pDisplay;
+    });
+    var cap = window.innerHeight - 128;               // leave room for header + hint
+    stack.style.height = Math.min(max, cap) + 'px';
+  }
+
+  function setState(s) {
+    if (s === state) return;
+    state = s;
+    viewport.classList.toggle('is-fixed', s === 'pin');
+    viewport.classList.toggle('is-bottom', s === 'post');
+    if (s !== 'pin') { viewport.style.left = ''; viewport.style.width = ''; }
+  }
+
+  function render() {
+    if (!mq.matches) { setState('pre'); return; }
+    var trackRect = track.getBoundingClientRect();
+    var scrollY = window.scrollY || window.pageYOffset;
+    var trackTopAbs = trackRect.top + scrollY;
+    var pinH = viewport.offsetHeight;
+    var pinStart = trackTopAbs - STICKY_TOP;
+    var pinRange = Math.max(1, track.offsetHeight - pinH);
+    var pinEnd = pinStart + pinRange;
+
+    if (scrollY < pinStart) { setState('pre'); }
+    else if (scrollY > pinEnd) { setState('post'); }
+    else {
+      setState('pin');
+      viewport.style.left = Math.round(trackRect.left) + 'px';
+      viewport.style.width = Math.round(track.clientWidth) + 'px';
+    }
+
+    var p = clamp((scrollY - pinStart) / pinRange, 0, 1);
+    var cf = p * (N - 1);
+    var idx = Math.floor(cf + 1e-6); if (idx > N - 1) idx = N - 1;
+    var local = clamp(cf - idx, 0, 1);
+
+    if (idx !== lastIndex) {
+      if (lastIndex !== -1 && !reduce && navigator.vibrate) navigator.vibrate(5);
+      lastIndex = idx;
+      curEl.textContent = String(idx + 1).padStart(2, '0');
+    }
+
+    barFill.style.width = (Math.pow(p, 0.6) * 100).toFixed(1) + '%';
+    hint.style.opacity = p > 0.03 ? '0' : '';
+
+    for (var i = 0; i < N; i++) {
+      var c = cards[i], transform, opacity, z;
+      if (i < idx) {
+        transform = 'translateX(124%) translateY(-3%) rotate(9deg)'; opacity = 0; z = 0;
+      } else if (i === idx) {
+        var g = ease(local);
+        transform = 'translateX(' + (g * 124).toFixed(2) + '%) translateY(' + (-g * 3).toFixed(2) +
+                    '%) rotate(' + (g * 9).toFixed(2) + 'deg)';
+        opacity = 1; z = N + 1;
+      } else {
+        var depth = i - idx;
+        var rise = depth === 1 ? ease(local) : 0;
+        var scale = (1 - depth * 0.05) + rise * 0.05;
+        var y = (depth * 3.0) - rise * 3.0;
+        transform = 'translateY(' + y.toFixed(2) + '%) scale(' + scale.toFixed(3) + ')';
+        opacity = depth <= 2 ? 1 : 0; z = N - depth;
+      }
+      c.style.transform = transform; c.style.opacity = opacity; c.style.zIndex = z;
+    }
+  }
+
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }
+
+  function reset() {
+    cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; });
+    lastIndex = -1; setState('pre');
+  }
+
+  function init() { sizeTrack(); measure(); if (mq.matches) { render(); } else { reset(); } }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { sizeTrack(); init(); }, { passive: true });
+  (mq.addEventListener ? mq.addEventListener('change', init) : mq.addListener(init));
+  init();
+})();
+</script>
 
 <!-- Atlas first-party funnel tracker. Posts to the live portal /api/track. -->
 <script>window.ATLAS_TRACK_ENDPOINT = 'https://clientportal-two-rho.vercel.app/api/track';</script>
