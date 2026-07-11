@@ -4356,16 +4356,21 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-see { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: gap 0.2s ease, color 0.2s ease; }
 #receipts .rcpt-see:hover { color: var(--gold-hi); gap: 11px; }
 #receipts .rcpt-see svg { width: 15px; height: 15px; }
-#receipts .rcpt-viewport { overflow: hidden; margin: 30px -24px 0; padding: 8px 0 14px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%); }
-#receipts .rcpt-row { display: flex; width: max-content; animation: rcptScroll 48s linear infinite; }
-#receipts .rcpt-viewport:hover .rcpt-row { animation-play-state: paused; }
+#receipts .rcpt-viewport { position: relative; overflow: hidden; margin: 30px -24px 0; padding: 8px 0 14px; }
+/* edge fade via overlay gradients (not mask-image — mask forces a per-frame repaint of the moving layer) */
+#receipts .rcpt-viewport::before, #receipts .rcpt-viewport::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; z-index: 2; pointer-events: none; }
+#receipts .rcpt-viewport::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+#receipts .rcpt-viewport::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+#receipts .rcpt-row { display: flex; width: max-content; position: relative; z-index: 1; transform: translateZ(0); backface-visibility: hidden; animation: rcptScroll 60s linear infinite; animation-play-state: paused; }
+#receipts .rcpt-viewport.in-view .rcpt-row { animation-play-state: running; will-change: transform; }
+#receipts .rcpt-viewport.in-view:hover .rcpt-row { animation-play-state: paused; }
 #receipts .rcpt-card { flex: 0 0 auto; margin-right: 14px; width: clamp(212px, 60vw, 248px); height: clamp(304px, 42vw, 360px); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
 #receipts .rcpt-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 @keyframes rcptScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (max-width: 768px) {
   #receipts .rcpt-card { width: clamp(198px, 62vw, 236px); height: clamp(286px, 88vw, 340px); }
   #receipts .rcpt-viewport { margin: 24px -20px 0; }
-  #receipts .rcpt-row { animation-duration: 36s; }
+  #receipts .rcpt-row { animation-duration: 46s; }
 }
 @media (prefers-reduced-motion: reduce) {
   #receipts .rcpt-row { animation: none; }
@@ -6074,15 +6079,21 @@ body.deliv-modal-open { overflow: hidden; }
     <style>
     /* Auto-scrolling proof wall — seamless (margin-based, no flex gap → -50% is pixel-exact) */
     .proof-rows { display:flex; flex-direction:column; gap:12px; margin-top:36px; }
-    .proof-row { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
-    .proof-track { display:flex; width:max-content; will-change:transform; transform:translateZ(0); backface-visibility:hidden; animation:proofScroll 64s linear infinite; }
+    .proof-row { position:relative; overflow:hidden; }
+    /* edge fade via overlay gradients (not mask-image — mask repaints the moving layer every frame) */
+    .proof-row::before, .proof-row::after { content:""; position:absolute; top:0; bottom:0; width:6%; z-index:2; pointer-events:none; }
+    .proof-row::before { left:0; background:linear-gradient(90deg, var(--bg1), transparent); }
+    .proof-row::after { right:0; background:linear-gradient(270deg, var(--bg1), transparent); }
+    .proof-track { display:flex; width:max-content; position:relative; z-index:1; transform:translateZ(0); backface-visibility:hidden; animation:proofScroll 64s linear infinite; animation-play-state:paused; }
+    /* only animate (and hold a GPU layer) while the wall is on-screen — kills scroll jank elsewhere */
+    .proof-rows.in-view .proof-track { animation-play-state:running; will-change:transform; }
     .proof-shot { flex:0 0 auto; height:210px; margin-right:12px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:var(--card); box-shadow:0 4px 16px rgba(0,0,0,0.22); }
     .proof-shot img { height:100%; width:auto; display:block; }
     .proof-row:nth-child(2) .proof-track { animation-duration:78s; animation-direction:reverse; }
     .proof-row:nth-child(3) .proof-track { animation-duration:70s; }
     .proof-row:nth-child(4) .proof-track { animation-duration:84s; animation-direction:reverse; }
     .proof-row:nth-child(5) .proof-track { animation-duration:72s; }
-    .proof-row:hover .proof-track { animation-play-state:paused; }
+    .proof-rows.in-view .proof-row:hover .proof-track { animation-play-state:paused; }
     @media (max-width:768px){
       .proof-shot{ height:150px; margin-right:10px; border-radius:10px; }
       .proof-track{ animation-duration:44s; }
@@ -7013,6 +7024,23 @@ body.deliv-modal-open { overflow: hidden; }
   window.addEventListener('resize', function () { sizeTrack(); init(); }, { passive: true });
   (mq.addEventListener ? mq.addEventListener('change', init) : mq.addListener(init));
   init();
+})();
+</script>
+
+<!-- Marquee perf: only run the auto-scroll carousels while they're on-screen.
+     Off-screen they're paused and drop their GPU layer, so scrolling the rest
+     of the page stays smooth (no compositing of idle moving layers). -->
+<script>
+(function () {
+  var marquees = document.querySelectorAll('.rcpt-viewport, .proof-rows');
+  if (!marquees.length || !('IntersectionObserver' in window)) {
+    marquees.forEach(function (el) { el.classList.add('in-view'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { e.target.classList.toggle('in-view', e.isIntersecting); });
+  }, { rootMargin: '150px 0px' });
+  marquees.forEach(function (el) { io.observe(el); });
 })();
 </script>
 
