@@ -4349,6 +4349,12 @@ body.deliv-modal-open { overflow: hidden; }
 .notif-img { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 .notif-img img { border-radius: 14px; border: 1px solid var(--border-2); }
 
+/* Inline Calendly booking embed — framed to match, fixed height so it never
+   collapses; taller on desktop, comfortable scroll height on mobile. */
+#book .cal-embed { border: 1px solid var(--border-2); border-radius: 18px; overflow: hidden; background: var(--bg1); box-shadow: 0 18px 44px rgba(0,0,0,0.4); height: 680px; }
+#book .calendly-inline-widget { width: 100%; height: 100%; }
+@media (max-width: 768px) { #book .cal-embed { height: 1000px; border-radius: 14px; } }
+
 /* Mid-page receipts strip — one horizontal row of group-chat screenshots, links to the full wall */
 #testimonials { scroll-margin-top: 84px; }
 #receipts .rcpt-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -6284,6 +6290,22 @@ body.deliv-modal-open { overflow: hidden; }
 
 <!-- §12 FOUNDER CLOSE removed 2026-04-24 — redundant with earlier founder section -->
 
+<!-- §12.5 INLINE BOOKING — Calendly embedded in-page (NOT the popup widget, so it
+     never opens full-screen). Renders inside .cal-embed on the page + on mobile.
+     COPY_TODO: replace CALENDLY_URL below (data-url) with the real Calendly event
+     link, e.g. https://calendly.com/atlas-advisory/consultation . Everything else
+     is wired — widget.js is loaded at the bottom of the page. -->
+<section class="section s-dark text-center" id="book">
+  <div class="inner narrow">
+    <p class="eyebrow reveal d1">Book Your Call</p>
+    <h2 class="reveal d2">Grab a time that <em>works for you.</em></h2>
+    <p class="section-sub reveal d3" style="margin-bottom:34px;">Pick a slot below. You'll get a private confirmation with everything you need before we speak.</p>
+    <div class="cal-embed reveal d3">
+      <!-- data-url: paste the real Calendly event link here -->
+      <div class="calendly-inline-widget" data-url="CALENDLY_URL?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0d1f&text_color=ffffff&primary_color=A7B5E8" style="min-width:280px;height:100%;"></div>
+    </div>
+  </div>
+</section>
 
 <!-- §13 FINAL CTA -->
 <section class="section s-black text-center" id="apply">
@@ -7055,6 +7077,9 @@ body.deliv-modal-open { overflow: hidden; }
   marquees.forEach(function (el) { io.observe(el); });
 })();
 </script>
+
+<!-- Calendly inline embed widget (renders the #book scheduler in-page, no popup). -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <!-- Atlas first-party funnel tracker. Posts to the live portal /api/track. -->
 <script>window.ATLAS_TRACK_ENDPOINT = 'https://clientportal-two-rho.vercel.app/api/track';</script>
