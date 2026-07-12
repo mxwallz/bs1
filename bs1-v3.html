@@ -4367,16 +4367,18 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-viewport::before, #receipts .rcpt-viewport::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; z-index: 2; pointer-events: none; }
 #receipts .rcpt-viewport::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
 #receipts .rcpt-viewport::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
-#receipts .rcpt-row { display: flex; width: max-content; position: relative; z-index: 1; transform: translateZ(0); backface-visibility: hidden; animation: rcptScroll 60s linear infinite; animation-play-state: paused; }
+/* Very slow, seamless auto-scroll so each screenshot is easy to read. */
+#receipts .rcpt-row { display: flex; width: max-content; position: relative; z-index: 1; transform: translateZ(0); backface-visibility: hidden; animation: rcptScroll 150s linear infinite; animation-play-state: paused; }
 #receipts .rcpt-viewport.in-view .rcpt-row { animation-play-state: running; will-change: transform; }
 #receipts .rcpt-viewport.in-view:hover .rcpt-row { animation-play-state: paused; }
-#receipts .rcpt-card { flex: 0 0 auto; margin-right: 14px; width: clamp(212px, 60vw, 248px); height: clamp(304px, 42vw, 360px); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
-#receipts .rcpt-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+/* Height-fixed, width-auto: the WHOLE screenshot shows at its natural aspect (no crop). */
+#receipts .rcpt-card { flex: 0 0 auto; margin-right: 14px; height: clamp(300px, 46vw, 340px); border-radius: 14px; overflow: hidden; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
+#receipts .rcpt-card img { height: 100%; width: auto; display: block; }
 @keyframes rcptScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (max-width: 768px) {
-  #receipts .rcpt-card { width: clamp(198px, 62vw, 236px); height: clamp(286px, 88vw, 340px); }
+  #receipts .rcpt-card { height: clamp(260px, 62vw, 300px); }
   #receipts .rcpt-viewport { margin: 24px -20px 0; }
-  #receipts .rcpt-row { animation-duration: 46s; }
+  #receipts .rcpt-row { animation-duration: 120s; }
 }
 @media (prefers-reduced-motion: reduce) {
   #receipts .rcpt-row { animation: none; }
@@ -5531,21 +5533,25 @@ body.deliv-modal-open { overflow: hidden; }
       <a href="#testimonials" class="rcpt-see reveal d2">See the full wall <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="rcpt-viewport reveal d3">
+      <!-- Full, uncropped screenshots pulled from the proof wall (readable — the strip
+           height-fits each image at its natural width). Duplicated 1:1 for a seamless loop. -->
       <div class="rcpt-row">
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-07-hinge-matches.jpg" loading="lazy" alt="Hinge match list stacked with new matches"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-02-its-a-date.jpg" loading="lazy" alt="It's a date — two dates set up in one week"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-09-five-dates-one-week.jpg" loading="lazy" alt="Five dates booked in the first week on the program"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-05-one-per-day.jpg" loading="lazy" alt="Match suggests meeting tomorrow — about once a day now"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_2685-2.jpg" loading="lazy" alt="18 matches in one day"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-03-three-dates-lined-up.jpg" loading="lazy" alt="Three dates lined up over three days"></div>
-        <div class="rcpt-card"><img src="img/tg-testimonials/tg-06-girls-asking-plans.jpg" loading="lazy" alt="Three girls texted asking for plans in one night"></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-07-hinge-matches.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-02-its-a-date.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-09-five-dates-one-week.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-05-one-per-day.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_2685-2.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-03-three-dates-lined-up.jpg" loading="lazy" alt=""></div>
-        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/tg-06-girls-asking-plans.jpg" loading="lazy" alt=""></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" alt="Matched with 18 girls in one day — more than ever before"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" alt="A win he's been chasing for months — the hottest girl he's talked to"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" alt="Great date with a 27-year-old model who complimented his new necklace"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" alt="35-40 approaches, 10 Instagrams, 4 dates in a week"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" alt="100+ likes and 27 roses in 48 hours with high-end matches"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" alt="Cold-approached an IG model in SoHo and took her to lunch"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" alt="Three dates scheduled for the coming week"></div>
+        <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" alt="Now seeing his third Wilhelmina model"></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" alt=""></div>
+        <div class="rcpt-card" aria-hidden="true"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" alt=""></div>
       </div>
     </div>
   </div>
@@ -6110,11 +6116,12 @@ body.deliv-modal-open { overflow: hidden; }
     .proof-rows.in-view .proof-row:hover .proof-track { animation-play-state:paused; }
     @media (max-width:768px){
       .proof-shot{ height:150px; margin-right:10px; border-radius:10px; }
-      .proof-track{ animation-duration:44s; }
-      .proof-row:nth-child(2) .proof-track{ animation-duration:54s; }
-      .proof-row:nth-child(3) .proof-track{ animation-duration:48s; }
-      .proof-row:nth-child(4) .proof-track{ animation-duration:58s; }
-      .proof-row:nth-child(5) .proof-track{ animation-duration:50s; }
+      /* Only 3 animating rows on phones (was 5) — cuts compositing load ~40% so
+         scrolling past the wall stays smooth. Still 30 screenshots of proof. */
+      .proof-row:nth-child(n+4){ display:none; }
+      .proof-track{ animation-duration:58s; }
+      .proof-row:nth-child(2) .proof-track{ animation-duration:70s; }
+      .proof-row:nth-child(3) .proof-track{ animation-duration:64s; }
     }
     @media (prefers-reduced-motion: reduce){ .proof-track{ animation:none; } .proof-row{ overflow-x:auto; -webkit-overflow-scrolling:touch; } }
     @keyframes proofScroll { from{ transform:translate3d(0,0,0);} to{ transform:translate3d(-50%,0,0);} }
@@ -7071,9 +7078,12 @@ body.deliv-modal-open { overflow: hidden; }
     marquees.forEach(function (el) { el.classList.add('in-view'); });
     return;
   }
+  // rootMargin 0px: a marquee animates only while it's actually on-screen and
+  // pauses (and drops its GPU layer) the instant it scrolls out — so the
+  // following sections aren't fighting an off-screen animation for the compositor.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { e.target.classList.toggle('in-view', e.isIntersecting); });
-  }, { rootMargin: '150px 0px' });
+  }, { rootMargin: '0px' });
   marquees.forEach(function (el) { io.observe(el); });
 })();
 </script>
