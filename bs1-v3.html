@@ -4637,14 +4637,12 @@ body.deliv-modal-open { overflow: hidden; }
   #what-you-get .inner { max-width: none; }
 }
 .sd-track { position: relative; }
+/* In-place deck (no scroll-pin): the stack sits still and advances on idle. */
 .sd-sticky {
-  position: absolute; top: 0; left: 0; right: 0;
-  height: calc(100svh - 54px);
+  position: relative;
   display: flex; flex-direction: column; justify-content: center; gap: 14px;
   padding: 10px 2px 12px;
 }
-.sd-sticky.is-fixed { position: fixed; top: 54px; right: auto; }
-.sd-sticky.is-bottom { position: absolute; top: auto; bottom: 0; left: 0; right: 0; }
 .sd-head { flex-shrink: 0; padding: 4px 12px 0; }
 .sd-head-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 11px; }
 .sd-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); }
@@ -4661,9 +4659,10 @@ body.deliv-modal-open { overflow: hidden; }
   padding: 26px 24px 24px;
   display: flex; flex-direction: column; justify-content: center;
   box-shadow: 0 26px 64px rgba(0,0,0,0.58);
-  transform-origin: center 78%;
+  transform-origin: center 82%;
   backface-visibility: hidden;
   will-change: transform, opacity; overflow: hidden;
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
 }
 .sd-card::before {
   content: ""; position: absolute; top: -46%; left: 50%; transform: translateX(-50%);
@@ -4691,9 +4690,13 @@ body.deliv-modal-open { overflow: hidden; }
 .sd-card-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; color: var(--w35); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 14px; position: relative; z-index: 1; }
 .sd-card-foot svg { width: 15px; height: 15px; }
 .sd-hint { flex-shrink: 0; text-align: center; color: var(--w35); font-size: 10.5px; letter-spacing: 0.20em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.3s ease; }
-.sd-hint::after { content: "↓"; font-size: 13px; animation: sdBob 1.6s ease-in-out infinite; }
-@keyframes sdBob { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(4px); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .sd-hint::after { animation: none; } }
+.sd-hint::after { content: "‹  ›"; font-size: 13px; letter-spacing: 2px; opacity: 0.65; }
+/* Reduced motion: no auto-advance — lay every card out as a static readable stack. */
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  #what-you-get .sd-stack { height: auto !important; }
+  #what-you-get .sd-card { position: relative; inset: auto; transform: none !important; opacity: 1 !important; transition: none; margin-bottom: 14px; }
+  #what-you-get .sd-bar, #what-you-get .sd-counter, #what-you-get .sd-hint { display: none; }
+}
 
 /* Framework (#system) module cards → centered, icon-above-text on mobile */
 @media (max-width: 767px) {
@@ -5493,7 +5496,7 @@ body.deliv-modal-open { overflow: hidden; }
             </article>
 
           </div>
-          <div class="sd-hint" id="sdHint">Keep scrolling</div>
+          <div class="sd-hint" id="sdHint">Swipe, or just watch</div>
         </div>
       </div>
     </div>
@@ -6901,129 +6904,110 @@ body.deliv-modal-open { overflow: hidden; }
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   MOBILE SWIPE DECK — scroll-driven pinned card stack.
-   Uses JS-driven fixed positioning (not position:sticky, which
-   the root's overflow-x:hidden breaks). The viewport pins while
-   scrolling through the tall track; cards glide off with a slight tilt,
-   the next peeks behind, the bar fills faster-than-linear, using the
-   site's smooth easing (no springy bounce). Active only ≤767px.
+   MOBILE SWIPE DECK — dwell-advance card stack (≤767px).
+   The stack sits in place. It NEVER advances from scrolling —
+   every scroll/touch restarts an idle timer; only after the user
+   holds still for DWELL ms does it glide to the next card (slight
+   lean). Swipe left/right to browse manually. Stops on the last
+   card; pauses off-screen; static readable stack under reduced-motion.
    ══════════════════════════════════════════════════════════ */
 (function () {
-  var track = document.getElementById('sdTrack');
   var stack = document.getElementById('sdStack');
-  if (!track || !stack) return;
-  var viewport = track.querySelector('.sd-sticky');
+  var track = document.getElementById('sdTrack');
+  if (!stack || !track) return;
   var cards = Array.prototype.slice.call(stack.querySelectorAll('.sd-card'));
   var N = cards.length;
+  if (!N) return;
   var barFill = document.getElementById('sdBarFill');
   var curEl = document.getElementById('sdCur');
   var hint = document.getElementById('sdHint');
-  var STICKY_TOP = 54;
   var mq = window.matchMedia('(max-width: 767px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var lastIndex = -1, ticking = false, state = '';
+  var DWELL = 4500;                 // ms of stillness before it advances one card
+  var idx = 0, idleTimer = null, inView = false, active = false;
 
-  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
-  function ease(t) { return t * t * (3 - 2 * t); }   // smoothstep — matches the site's eased motion
-
-  function sizeTrack() {
-    if (!mq.matches) { track.style.height = ''; return; }
-    var seg = window.innerHeight * 0.60;               // scroll distance per transition
-    track.style.height = Math.round(window.innerHeight + (N - 1) * seg) + 'px';
+  function clearInline() {
+    cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; });
+    stack.style.height = '';
   }
 
-  // Size the stack to the tallest card's natural content height so every
-  // overlaid card shares one tight box (no empty flex space).
+  // Size the stack to the tallest card so the overlaid cards share one tight box.
   function measure() {
-    if (!mq.matches) { stack.style.height = ''; return; }
     var max = 0;
     cards.forEach(function (c) {
-      var pBottom = c.style.bottom, pHeight = c.style.height, pTransform = c.style.transform, pOpacity = c.style.opacity, pDisplay = c.style.display;
+      var s = { t: c.style.transform, o: c.style.opacity, d: c.style.display, h: c.style.height, b: c.style.bottom };
       c.style.transform = 'none'; c.style.opacity = '1'; c.style.display = 'flex';
       c.style.bottom = 'auto'; c.style.height = 'auto';
-      var h = c.offsetHeight;
-      if (h > max) max = h;
-      c.style.bottom = pBottom; c.style.height = pHeight; c.style.transform = pTransform; c.style.opacity = pOpacity; c.style.display = pDisplay;
+      var h = c.offsetHeight; if (h > max) max = h;
+      c.style.transform = s.t; c.style.opacity = s.o; c.style.display = s.d; c.style.height = s.h; c.style.bottom = s.b;
     });
-    var cap = window.innerHeight - 128;               // leave room for header + hint
-    stack.style.height = Math.min(max, cap) + 'px';
+    stack.style.height = Math.min(max, window.innerHeight - 150) + 'px';
   }
 
-  function setState(s) {
-    if (s === state) return;
-    state = s;
-    viewport.classList.toggle('is-fixed', s === 'pin');
-    viewport.classList.toggle('is-bottom', s === 'post');
-    if (s !== 'pin') { viewport.style.left = ''; viewport.style.width = ''; }
-  }
-
-  function render() {
-    if (!mq.matches) { setState('pre'); return; }
-    var trackRect = track.getBoundingClientRect();
-    var scrollY = window.scrollY || window.pageYOffset;
-    var trackTopAbs = trackRect.top + scrollY;
-    var pinH = viewport.offsetHeight;
-    var pinStart = trackTopAbs - STICKY_TOP;
-    var pinRange = Math.max(1, track.offsetHeight - pinH);
-    var pinEnd = pinStart + pinRange;
-
-    if (scrollY < pinStart) { setState('pre'); }
-    else if (scrollY > pinEnd) { setState('post'); }
-    else {
-      setState('pin');
-      viewport.style.left = Math.round(trackRect.left) + 'px';
-      viewport.style.width = Math.round(track.clientWidth) + 'px';
-    }
-
-    var p = clamp((scrollY - pinStart) / pinRange, 0, 1);
-    var cf = p * (N - 1);
-    var idx = Math.floor(cf + 1e-6); if (idx > N - 1) idx = N - 1;
-    var local = clamp(cf - idx, 0, 1);
-
-    if (idx !== lastIndex) {
-      if (lastIndex !== -1 && !reduce && navigator.vibrate) navigator.vibrate(5);
-      lastIndex = idx;
-      curEl.textContent = String(idx + 1).padStart(2, '0');
-    }
-
-    barFill.style.width = (Math.pow(p, 0.6) * 100).toFixed(1) + '%';
-    hint.style.opacity = p > 0.03 ? '0' : '';
-
+  function paint() {
     for (var i = 0; i < N; i++) {
-      var c = cards[i], transform, opacity, z;
-      if (i < idx) {
-        transform = 'translateX(124%) translateY(-3%) rotate(9deg)'; opacity = 0; z = 0;
-      } else if (i === idx) {
-        var g = ease(local);
-        transform = 'translateX(' + (g * 124).toFixed(2) + '%) translateY(' + (-g * 3).toFixed(2) +
-                    '%) rotate(' + (g * 9).toFixed(2) + 'deg)';
-        opacity = 1; z = N + 1;
-      } else {
-        var depth = i - idx;
-        var rise = depth === 1 ? ease(local) : 0;
-        var scale = (1 - depth * 0.05) + rise * 0.05;
-        var y = (depth * 3.0) - rise * 3.0;
-        transform = 'translateY(' + y.toFixed(2) + '%) scale(' + scale.toFixed(3) + ')';
-        opacity = depth <= 2 ? 1 : 0; z = N - depth;
+      var c = cards[i], t, o, z;
+      if (i < idx) {                 // already seen — off to the side with a light lean
+        t = 'translateX(112%) translateY(-2%) rotate(3deg)'; o = 0; z = 0;
+      } else if (i === idx) {        // front
+        t = 'translateX(0) translateY(0) scale(1) rotate(0deg)'; o = 1; z = N + 1;
+      } else {                       // queued behind, peeking
+        var d = i - idx;
+        t = 'translateY(' + (d * 8) + 'px) scale(' + (1 - d * 0.045).toFixed(3) + ') rotate(0deg)';
+        o = d === 1 ? 1 : (d === 2 ? 0.5 : 0); z = N - d;
       }
-      c.style.transform = transform; c.style.opacity = opacity; c.style.zIndex = z;
+      c.style.transform = t; c.style.opacity = o; c.style.zIndex = z;
     }
+    if (curEl) curEl.textContent = String(idx + 1).padStart(2, '0');
+    if (barFill) barFill.style.width = (idx / (N - 1) * 100).toFixed(1) + '%';
+    if (hint) hint.style.opacity = idx > 0 ? '0' : '';
   }
 
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }
-
-  function reset() {
-    cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; });
-    lastIndex = -1; setState('pre');
+  function schedule() {
+    if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; }
+    if (!active || !inView || idx >= N - 1) return;
+    idleTimer = setTimeout(function () { idx++; paint(); schedule(); }, DWELL);
   }
 
-  function init() { sizeTrack(); measure(); if (mq.matches) { render(); } else { reset(); } }
+  function go(n) {
+    var v = n < 0 ? 0 : n > N - 1 ? N - 1 : n;
+    if (v !== idx) { idx = v; paint(); }
+    schedule();
+  }
+
+  // Any page scroll HOLDS the current card and restarts the idle countdown.
+  function onScroll() { if (active) schedule(); }
+
+  // Manual horizontal swipe to browse.
+  var sx = 0, sy = 0, swiping = false;
+  function onStart(e) { var t = e.touches ? e.touches[0] : e; sx = t.clientX; sy = t.clientY; swiping = true; }
+  function onEnd(e) {
+    if (!swiping) return; swiping = false;
+    var t = e.changedTouches ? e.changedTouches[0] : e;
+    var dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) go(idx + (dx < 0 ? 1 : -1));
+    else schedule();
+  }
+
+  function enable() { if (active) return; active = true; measure(); idx = 0; paint(); schedule(); }
+  function disable() { active = false; if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; } clearInline(); }
+  function apply() { if (mq.matches && !reduce) enable(); else disable(); }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      if (active) { if (inView) schedule(); else if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; } }
+    }, { threshold: 0.35 }).observe(track);
+  } else { inView = true; }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { sizeTrack(); init(); }, { passive: true });
-  (mq.addEventListener ? mq.addEventListener('change', init) : mq.addListener(init));
-  init();
+  stack.addEventListener('touchstart', onStart, { passive: true });
+  stack.addEventListener('touchend', onEnd, { passive: true });
+  window.addEventListener('resize', function () { if (active) measure(); }, { passive: true });
+  (mq.addEventListener ? mq.addEventListener('change', apply) : mq.addListener(apply));
+
+  apply();
 })();
 </script>
 
