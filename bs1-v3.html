@@ -4355,6 +4355,34 @@ body.deliv-modal-open { overflow: hidden; }
 #book .calendly-inline-widget { width: 100%; height: 100%; }
 @media (max-width: 768px) { #book .cal-embed { height: 1000px; border-radius: 14px; } }
 
+/* Before / After — dating-profile-style transformation cards */
+#transformation .tf-cases { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 72px); margin-top: 44px; }
+#transformation .tf-name { text-align: center; font-family: 'Spectral', Georgia, serif; font-size: clamp(19px, 2.6vw, 24px); color: var(--w100); margin-bottom: 18px; letter-spacing: -0.01em; }
+#transformation .tf-pair { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: clamp(12px, 3vw, 34px); max-width: 760px; margin: 0 auto; }
+#transformation .tf-card { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); aspect-ratio: 4/5; background: var(--card-solid); }
+#transformation .tf-card > img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+#transformation .tf-card::after { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(to top, rgba(0,0,0,0.72), transparent); pointer-events: none; }
+#transformation .tf-badge { position: absolute; top: 12px; left: 12px; z-index: 2; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+#transformation .tf-badge.before { background: rgba(120,124,140,0.4); color: #e8eaf0; border: 1px solid rgba(255,255,255,0.2); }
+#transformation .tf-badge.after { background: var(--gold-soft); color: var(--gold-hi); border: 1px solid var(--gold); }
+#transformation .tf-meta { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-weight: 600; font-size: 15px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+#transformation .tf-heart { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.14); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.28); }
+#transformation .tf-heart svg { width: 17px; height: 17px; color: #ff5a7a; }
+#transformation .tf-thumbs { display: flex; gap: 6px; margin-top: 8px; }
+#transformation .tf-thumb { flex: 1 1 0; aspect-ratio: 3/4; border-radius: 9px; overflow: hidden; border: 1px solid var(--border-2); }
+#transformation .tf-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+#transformation .tf-arrow { align-self: center; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--gold-soft); border: 1px solid var(--gold); color: var(--gold-hi); flex: none; }
+#transformation .tf-arrow svg { width: 22px; height: 22px; }
+#transformation .tf-caption { text-align: center; color: rgba(255,255,255,0.5); font-size: 13.5px; margin: 18px auto 0; max-width: 600px; line-height: 1.5; }
+@media (max-width: 620px){
+  #transformation .tf-pair { grid-template-columns: 1fr 1fr; gap: 10px; }
+  #transformation .tf-arrow { display: none; }
+  #transformation .tf-thumbs { gap: 4px; }
+  #transformation .tf-meta { font-size: 13px; bottom: 10px; left: 11px; }
+  #transformation .tf-heart { width: 28px; height: 28px; }
+  #transformation .tf-heart svg { width: 14px; height: 14px; }
+}
+
 /* Mid-page receipts strip — one horizontal row of group-chat screenshots, links to the full wall */
 #testimonials { scroll-margin-top: 84px; }
 #receipts .rcpt-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -5520,6 +5548,83 @@ body.deliv-modal-open { overflow: hidden; }
       <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
+</section>
+
+
+<!-- §9.2 BEFORE / AFTER — profile rebuild transformation (dating-profile-style cards) -->
+<section class="section s-black" id="transformation">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">The Profile Rebuild</p>
+    <h2 class="reveal d1 text-center">Same man. <em>New profile.</em></h2>
+    <p class="section-sub text-center reveal d2">Same guy — restyled, reshot, and packaged the way the top 1% of profiles are. Here's what the rebuild actually looks like.</p>
+    <div class="tf-cases">
+
+      <!-- Adam -->
+      <div class="tf-case reveal d2">
+        <div class="tf-name">Adam</div>
+        <div class="tf-pair">
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/adam/before-2.jpg" loading="lazy" decoding="async" alt="Adam's dating profile before Atlas — casual amateur phone photo">
+              <span class="tf-badge before">Before</span>
+              <span class="tf-meta">Adam</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/adam/before-3.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/before-1.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
+              <span class="tf-badge after">After</span>
+              <span class="tf-meta">Adam</span>
+              <span class="tf-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/after-5.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/after-2.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Todd -->
+      <div class="tf-case reveal d2">
+        <div class="tf-name">Todd</div>
+        <div class="tf-pair">
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
+              <span class="tf-badge before">Before</span>
+              <span class="tf-meta">Todd</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/before-8.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/before-7.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
+              <span class="tf-badge after">After</span>
+              <span class="tf-meta">Todd</span>
+              <span class="tf-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="tf-caption reveal d3">Real clients. Same men, same faces — a profile built to match the life behind it.</p>
+  </div>
 </section>
 
 
