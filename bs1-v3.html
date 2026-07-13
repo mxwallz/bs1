@@ -4402,9 +4402,10 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-slide { flex: 0 0 100%; display: flex; align-items: center; justify-content: center; height: clamp(320px, 58vh, 540px); padding: 0 12px; }
 #receipts .rcpt-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 14px; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
 /* Prev/next arrows */
-#receipts .rcpt-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--w100); background: rgba(13,16,32,0.82); border: 1px solid var(--border-2); backdrop-filter: blur(6px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: background 0.2s ease, opacity 0.2s ease; }
-#receipts .rcpt-arrow:hover { background: var(--gold-soft); border-color: var(--gold); }
-#receipts .rcpt-arrow svg { width: 22px; height: 22px; }
+#receipts .rcpt-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff; background: rgba(13,16,32,0.42); border: 1px solid rgba(255,255,255,0.14); transition: background 0.2s ease, opacity 0.2s ease; }
+#receipts .rcpt-arrow:hover { background: rgba(13,16,32,0.72); border-color: var(--gold); }
+/* keep the chevron legible over the image now that the button is see-through */
+#receipts .rcpt-arrow svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7)); }
 #receipts .rcpt-arrow.prev { left: 6px; }
 #receipts .rcpt-arrow.next { right: 6px; }
 #receipts .rcpt-arrow[disabled] { opacity: 0; pointer-events: none; }
@@ -4829,6 +4830,20 @@ body.deliv-modal-open { overflow: hidden; }
   #video-testimonials .vt-ba-after .vt-ba-pill { right: 14px; }
   #video-testimonials .vt-watch { font-size: 11px; }
   #video-testimonials .vt-meta { padding: 20px 22px 24px; }
+}
+
+/* ── MOBILE SCROLL PERF ──────────────────────────────────────
+   backdrop-filter: blur() forces the browser to re-blur everything
+   scrolling behind it every frame. On the fixed nav + fixed bottom bar
+   (always on-screen) that tanks scroll performance across the WHOLE page
+   on mobile. Kill all backdrop blur ≤768px — the backgrounds underneath
+   are already near-opaque, so the look barely changes but scroll goes smooth.
+   Desktop keeps the frosted-glass effect. */
+@media (max-width: 768px) {
+  * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  /* the two fixed bars: a touch more opaque now that the blur is gone */
+  .nav { background: rgba(5,6,8,0.97) !important; }
+  .sticky-apply { background: rgba(10,10,10,0.97) !important; }
 }
 </style>
 </head>
@@ -5559,6 +5574,37 @@ body.deliv-modal-open { overflow: hidden; }
     <p class="section-sub text-center reveal d2">Same guy — restyled, reshot, and packaged the way the top 1% of profiles are. Here's what the rebuild actually looks like.</p>
     <div class="tf-cases">
 
+      <!-- Todd -->
+      <div class="tf-case reveal d2">
+        <div class="tf-name">Todd</div>
+        <div class="tf-pair">
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
+              <span class="tf-badge before">Before</span>
+              <span class="tf-meta">Todd</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/before-8.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/before-7.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="tf-side">
+            <div class="tf-card">
+              <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
+              <span class="tf-badge after">After</span>
+              <span class="tf-meta">Todd</span>
+              <span class="tf-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Adam -->
       <div class="tf-case reveal d2">
         <div class="tf-name">Adam</div>
@@ -5586,37 +5632,6 @@ body.deliv-modal-open { overflow: hidden; }
               <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
               <div class="tf-thumb"><img src="img/before-after/adam/after-5.jpg" loading="lazy" decoding="async" alt=""></div>
               <div class="tf-thumb"><img src="img/before-after/adam/after-2.jpg" loading="lazy" decoding="async" alt=""></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Todd -->
-      <div class="tf-case reveal d2">
-        <div class="tf-name">Todd</div>
-        <div class="tf-pair">
-          <div class="tf-side">
-            <div class="tf-card">
-              <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
-              <span class="tf-badge before">Before</span>
-              <span class="tf-meta">Todd</span>
-            </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/todd/before-8.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/todd/before-7.jpg" loading="lazy" decoding="async" alt=""></div>
-            </div>
-          </div>
-          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="tf-side">
-            <div class="tf-card">
-              <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
-              <span class="tf-badge after">After</span>
-              <span class="tf-meta">Todd</span>
-              <span class="tf-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
-            </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/todd/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
             </div>
           </div>
         </div>
