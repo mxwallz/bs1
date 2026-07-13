@@ -4367,13 +4367,12 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-frame::before, #receipts .rcpt-frame::after { content: ""; position: absolute; top: 0; bottom: 0; width: 6%; z-index: 2; pointer-events: none; }
 #receipts .rcpt-frame::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
 #receipts .rcpt-frame::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
-/* Native horizontal scroll-snap: smooth finger-swipe, no CSS animation (zero lag). */
-#receipts .rcpt-viewport { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-padding: 0 24px; padding: 8px 24px 14px; }
-#receipts .rcpt-viewport::-webkit-scrollbar { display: none; }
-#receipts .rcpt-row { display: flex; width: max-content; }
-/* Height-fixed, width-auto: the WHOLE screenshot shows at its natural aspect (no crop). */
-#receipts .rcpt-card { flex: 0 0 auto; margin-right: 14px; height: clamp(300px, 46vw, 340px); scroll-snap-align: center; border-radius: 14px; overflow: hidden; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
-#receipts .rcpt-card img { height: 100%; width: auto; display: block; }
+/* Transform slider: no scroll container, so it can't fight vertical page scroll. */
+#receipts .rcpt-viewport { overflow: hidden; }
+#receipts .rcpt-track { display: flex; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+/* One slide per view; the WHOLE screenshot is scaled to fit inside the viewport. */
+#receipts .rcpt-slide { flex: 0 0 100%; display: flex; align-items: center; justify-content: center; height: clamp(320px, 58vh, 540px); padding: 0 12px; }
+#receipts .rcpt-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 14px; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
 /* Prev/next arrows */
 #receipts .rcpt-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--w100); background: rgba(13,16,32,0.82); border: 1px solid var(--border-2); backdrop-filter: blur(6px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: background 0.2s ease, opacity 0.2s ease; }
 #receipts .rcpt-arrow:hover { background: var(--gold-soft); border-color: var(--gold); }
@@ -4382,7 +4381,7 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-arrow.next { right: 6px; }
 #receipts .rcpt-arrow[disabled] { opacity: 0; pointer-events: none; }
 @media (max-width: 768px) {
-  #receipts .rcpt-card { height: clamp(260px, 62vw, 300px); }
+  #receipts .rcpt-slide { height: clamp(300px, 62vh, 480px); padding: 0 8px; }
   #receipts .rcpt-frame { margin-top: 24px; }
   #receipts .rcpt-arrow { width: 40px; height: 40px; }
   #receipts .rcpt-arrow svg { width: 19px; height: 19px; }
@@ -5534,23 +5533,24 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
       <a href="#testimonials" class="rcpt-see reveal d2">See the full wall <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-    <!-- Swipeable / arrow-driven carousel. Auto-advances until the user swipes or
-         clicks an arrow, then hands over manual control. Native scroll-snap = smooth
-         swipe + zero animation lag. -->
+    <!-- Transform-based slider (NOT native scroll): one screenshot per slide, fully
+         contained in the viewport. No scroll container = no gesture fight with the
+         page = no scroll lag. Arrows + horizontal swipe advance; gentle auto-advance
+         pauses while the page is scrolling and stops for good on first interaction. -->
     <div class="rcpt-frame reveal d3">
       <button class="rcpt-arrow prev" id="rcptPrev" aria-label="Previous screenshot" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <div class="rcpt-viewport" id="rcptViewport">
-        <div class="rcpt-row">
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" alt="Matched with 18 girls in one day — more than ever before"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" alt="A win he's been chasing for months — the hottest girl he's talked to"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" alt="Great date with a 27-year-old model who complimented his new necklace"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" alt="35-40 approaches, 10 Instagrams, 4 dates in a week"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" alt="100+ likes and 27 roses in 48 hours with high-end matches"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" alt="Cold-approached an IG model in SoHo and took her to lunch"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" alt="Three dates scheduled for the coming week"></div>
-          <div class="rcpt-card"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" alt="Now seeing his third Wilhelmina model"></div>
+      <div class="rcpt-viewport">
+        <div class="rcpt-track" id="rcptTrack">
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" alt="Matched with 18 girls in one day — more than ever before"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" alt="A win he's been chasing for months — the hottest girl he's talked to"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" alt="Great date with a 27-year-old model who complimented his new necklace"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" alt="35-40 approaches, 10 Instagrams, 4 dates in a week"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" alt="100+ likes and 27 roses in 48 hours with high-end matches"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" alt="Cold-approached an IG model in SoHo and took her to lunch"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" alt="Three dates scheduled for the coming week"></div>
+          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" alt="Now seeing his third Wilhelmina model"></div>
         </div>
       </div>
       <button class="rcpt-arrow next" id="rcptNext" aria-label="Next screenshot" type="button">
@@ -6103,7 +6103,7 @@ body.deliv-modal-open { overflow: hidden; }
     /* Static 2-column masonry wall — no animation (zero scroll lag), full images,
        scrolls with the page. "Two at a time", readable, natural aspect ratios. */
     .proof-masonry { columns: 2; column-gap: 12px; margin-top: 36px; }
-    .proof-shot { break-inside: avoid; margin: 0 0 12px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+    .proof-shot { break-inside: avoid; margin: 0 0 12px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); content-visibility: auto; contain-intrinsic-size: auto 320px; }
     .proof-shot img { width: 100%; height: auto; display: block; }
     @media (max-width: 600px){ .proof-masonry { column-gap: 10px; } .proof-shot { margin-bottom: 10px; border-radius: 10px; } }
     </style>
@@ -6921,6 +6921,12 @@ body.deliv-modal-open { overflow: hidden; }
   function render() {
     if (!on()) { setState('pre'); return; }
     var trackRect = track.getBoundingClientRect();
+    // Deck fully off-screen → set resting state and bail before the per-card
+    // transform loop. Keeps page scrolling smooth above/below the deck.
+    if (trackRect.bottom < -40 || trackRect.top > window.innerHeight + 40) {
+      setState(trackRect.top > 0 ? 'pre' : 'post');
+      return;
+    }
     var scrollY = window.scrollY || window.pageYOffset;
     var trackTopAbs = trackRect.top + scrollY;
     var pinH = viewport.offsetHeight;
@@ -6987,71 +6993,55 @@ body.deliv-modal-open { overflow: hidden; }
 })();
 </script>
 
-<!-- Receipts carousel: auto-advances one card every few seconds while on-screen,
-     until the user swipes or clicks an arrow — then it hands over manual control.
-     Native scroll-snap does the smooth swipe; no CSS animation means no scroll lag. -->
+<!-- Receipts slider (transform-based). One screenshot per slide. Advances on
+     arrow-click or horizontal swipe. Gentle auto-advance runs only while the
+     section is on-screen AND the page isn't being scrolled, and stops for good
+     once the user swipes or taps an arrow. No scroll container = no page-scroll lag. -->
 <script>
 (function () {
-  var vp = document.getElementById('rcptViewport');
-  if (!vp) return;
-  var row = vp.querySelector('.rcpt-row');
-  var cards = Array.prototype.slice.call(row.children);
+  var track = document.getElementById('rcptTrack');
+  if (!track) return;
+  var slides = Array.prototype.slice.call(track.children);
+  var N = slides.length;
   var prev = document.getElementById('rcptPrev');
   var next = document.getElementById('rcptNext');
   var section = document.getElementById('receipts');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var DWELL = 3500;               // ms each card holds before auto-advancing
-  var auto = !reduce, timer = null, inView = false;
+  var DWELL = 4000;
+  var idx = 0, manual = reduce, timer = null, inView = false, scrolling = false, scrollT = null;
 
-  function cardOffset(i) {         // scrollLeft that centers card i in the viewport
-    var c = cards[i];
-    return Math.max(0, c.offsetLeft - (vp.clientWidth - c.clientWidth) / 2);
-  }
-  function current() {            // index of the card nearest the viewport centre
-    var mid = vp.scrollLeft + vp.clientWidth / 2, best = 0, bd = Infinity;
-    cards.forEach(function (c, i) {
-      var d = Math.abs((c.offsetLeft + c.clientWidth / 2) - mid);
-      if (d < bd) { bd = d; best = i; }
-    });
-    return best;
-  }
-  function goTo(i, smooth) {
-    i = i < 0 ? 0 : i > cards.length - 1 ? cards.length - 1 : i;
-    vp.scrollTo({ left: cardOffset(i), behavior: smooth === false ? 'auto' : 'smooth' });
-    updateArrows(i);
-  }
-  function updateArrows(i) {
-    if (i == null) i = current();
-    prev.disabled = i <= 0;
-    next.disabled = i >= cards.length - 1;
-  }
-  function stopAuto() {           // first user interaction → manual mode for good
-    auto = false;
-    if (timer) { clearInterval(timer); timer = null; }
-  }
+  function render() { track.style.transform = 'translateX(' + (-idx * 100) + '%)'; }
+  function go(i) { idx = (i % N + N) % N; render(); }        // wraps around
+  function stopAuto() { manual = true; if (timer) { clearInterval(timer); timer = null; } }
   function startAuto() {
-    if (!auto || timer) return;
-    timer = setInterval(function () {
-      if (!inView) return;
-      var i = current();
-      goTo(i >= cards.length - 1 ? 0 : i + 1);   // loop back at the end
-    }, DWELL);
+    if (manual || timer) return;
+    timer = setInterval(function () { if (inView && !scrolling) go(idx + 1); }, DWELL);
   }
 
-  prev.addEventListener('click', function () { stopAuto(); goTo(current() - 1); });
-  next.addEventListener('click', function () { stopAuto(); goTo(current() + 1); });
-  vp.addEventListener('touchstart', stopAuto, { passive: true });
-  vp.addEventListener('wheel', stopAuto, { passive: true });
-  vp.addEventListener('scroll', function () { updateArrows(); }, { passive: true });
+  prev.addEventListener('click', function () { stopAuto(); go(idx - 1); });
+  next.addEventListener('click', function () { stopAuto(); go(idx + 1); });
+
+  // Horizontal swipe. We never preventDefault, so vertical drags still scroll the page.
+  var sx = 0, sy = 0, tracking = false;
+  track.addEventListener('touchstart', function (e) { var t = e.touches[0]; sx = t.clientX; sy = t.clientY; tracking = true; }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    if (!tracking) return; tracking = false;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) { stopAuto(); go(idx + (dx < 0 ? 1 : -1)); }
+  }, { passive: true });
+
+  // Pause auto-advance while the page is actively scrolling (so it never moves under you).
+  window.addEventListener('scroll', function () {
+    scrolling = true;
+    if (scrollT) clearTimeout(scrollT);
+    scrollT = setTimeout(function () { scrolling = false; }, 250);
+  }, { passive: true });
 
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) {
-      inView = e[0].isIntersecting;
-      if (inView) startAuto();
-    }, { threshold: 0.3 }).observe(section);
+    new IntersectionObserver(function (e) { inView = e[0].isIntersecting; if (inView) startAuto(); }, { threshold: 0.35 }).observe(section);
   } else { inView = true; startAuto(); }
 
-  updateArrows(0);
+  render();
 })();
 </script>
 
