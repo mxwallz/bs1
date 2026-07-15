@@ -4368,8 +4368,16 @@ body.deliv-modal-open { overflow: hidden; }
 #transformation .tf-badge.before { background: rgba(58,62,74,0.82); color: #e8eaf0; border: 1px solid rgba(255,255,255,0.2); }
 #transformation .tf-badge.after { background: rgba(52,60,104,0.85); color: var(--gold-hi); border: 1px solid var(--gold); }
 #transformation .tf-meta { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-weight: 600; font-size: 15px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
-#transformation .tf-heart { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.14); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.28); }
-#transformation .tf-heart svg { width: 17px; height: 17px; color: #ff5a7a; }
+/* Hinge-style "new like" notification — placeholder proof of the *type* of woman
+   liking the rebuilt profile. Sits middle-right over the "after" photo (the
+   "before" card has none — the contrast IS the message). Solid bg, no blur, so
+   it stays scroll-cheap. Swap name/age per client. */
+#transformation .tf-like-notif { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); z-index: 3; display: flex; align-items: center; gap: 9px; padding: 7px 12px 7px 7px; border-radius: 13px; background: rgba(14,16,26,0.92); border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
+#transformation .tf-like-heart { width: 29px; height: 29px; border-radius: 50%; flex: none; display: grid; place-items: center; background: linear-gradient(135deg, #ff6a86, #ff2d6f); box-shadow: 0 4px 12px rgba(255,45,111,0.42); }
+#transformation .tf-like-heart svg { width: 15px; height: 15px; color: #fff; }
+#transformation .tf-like-text { display: flex; flex-direction: column; line-height: 1.25; }
+#transformation .tf-like-name { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+#transformation .tf-like-sub { font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.55); letter-spacing: 0.02em; }
 #transformation .tf-thumbs { display: flex; gap: 6px; margin-top: 8px; }
 #transformation .tf-thumb { flex: 1 1 0; aspect-ratio: 3/4; border-radius: 9px; overflow: hidden; border: 1px solid var(--border-2); }
 #transformation .tf-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
@@ -4381,8 +4389,12 @@ body.deliv-modal-open { overflow: hidden; }
   #transformation .tf-arrow { display: none; }
   #transformation .tf-thumbs { gap: 4px; }
   #transformation .tf-meta { font-size: 13px; bottom: 10px; left: 11px; }
-  #transformation .tf-heart { width: 28px; height: 28px; }
-  #transformation .tf-heart svg { width: 14px; height: 14px; }
+  /* shrink the like-notif on narrow cards so it doesn't cover the face */
+  #transformation .tf-like-notif { right: 7px; gap: 6px; padding: 5px 8px 5px 5px; border-radius: 11px; }
+  #transformation .tf-like-heart { width: 23px; height: 23px; }
+  #transformation .tf-like-heart svg { width: 12px; height: 12px; }
+  #transformation .tf-like-name { font-size: 10.5px; }
+  #transformation .tf-like-sub { font-size: 8.5px; }
 }
 
 /* Mid-page receipts strip — one horizontal row of group-chat screenshots, links to the full wall */
@@ -4834,14 +4846,18 @@ body.deliv-modal-open { overflow: hidden; }
   #video-testimonials .vt-meta { padding: 20px 22px 24px; }
 }
 
-/* Perf: freeze the decorative looping animations inside any section that isn't
-   on-screen. ~42 infinite animations run across the page (phone-mockup demos,
-   pulses, marquees); compositing all of them at once while scrolling is a major
-   mobile drain. A section gets .anim-idle when off-screen (JS observer below). */
-.section.anim-idle,
-.section.anim-idle *,
-.section.anim-idle *::before,
-.section.anim-idle *::after { animation-play-state: paused !important; }
+/* Perf: freeze EVERY looping animation while the page is actively scrolling.
+   ~45 infinite animations run across the page (phone-mockup demos, pulses,
+   marquees). Compositing all of them every frame is the main scroll drain, and
+   it hurts most exactly while the user scrolls — up or down. One body.is-scrolling
+   class (toggled by a single debounced scroll listener) pauses them for the
+   duration of the gesture and releases them ~180ms after scrolling stops, so at
+   rest everything animates normally. Cheaper and smoother than per-section
+   wake/sleep toggling, which itself spiked on scroll-up. Skipped under
+   prefers-reduced-motion (decorative loops are already suppressed there). */
+body.is-scrolling *,
+body.is-scrolling *::before,
+body.is-scrolling *::after { animation-play-state: paused !important; }
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -5591,6 +5607,11 @@ body.deliv-modal-open { overflow: hidden; }
               <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
               <span class="tf-badge after">After</span>
               <span class="tf-meta">Todd</span>
+              <!-- COPY_TODO: swap name/age for a real (or representative) like -->
+              <div class="tf-like-notif">
+                <span class="tf-like-heart"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+                <span class="tf-like-text"><span class="tf-like-name">Maya, 27</span><span class="tf-like-sub">liked your photo</span></span>
+              </div>
             </div>
             <div class="tf-thumbs">
               <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
@@ -5621,6 +5642,11 @@ body.deliv-modal-open { overflow: hidden; }
               <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
               <span class="tf-badge after">After</span>
               <span class="tf-meta">Adam</span>
+              <!-- COPY_TODO: swap name/age for a real (or representative) like -->
+              <div class="tf-like-notif">
+                <span class="tf-like-heart"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+                <span class="tf-like-text"><span class="tf-like-name">Sofia, 26</span><span class="tf-like-sub">liked your photo</span></span>
+              </div>
             </div>
             <div class="tf-thumbs">
               <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
@@ -6420,22 +6446,19 @@ body.deliv-modal-open { overflow: hidden; }
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* === Perf: pause off-screen looping animations ===
-     ~45 infinite CSS animations run across the page (phone-mockup demos, pulses,
-     marquees). Compositing all of them every frame while scrolling is the main
-     mobile scroll drain. This toggles .anim-idle on each section when it leaves
-     the viewport; the CSS rule then pauses every animation inside it. Sections
-     on-screen (plus a generous rootMargin buffer) keep animating so nothing
-     visibly freezes mid-view. Skipped entirely under prefers-reduced-motion,
-     where the decorative loops are already suppressed. */
+  /* === Perf: pause looping animations while actively scrolling ===
+     See the body.is-scrolling CSS rule. Adds the class on the first scroll event
+     and removes it 180ms after the last one, so the ~45 infinite animations stop
+     compositing during the scroll gesture (the janky moment) and resume at rest.
+     Passive listener, single class toggle. Off under prefers-reduced-motion. */
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const sections = document.querySelectorAll('.section');
-    if (!sections.length || !('IntersectionObserver' in window)) return;
-    const animIO = new IntersectionObserver((entries) => {
-      entries.forEach(e => e.target.classList.toggle('anim-idle', !e.isIntersecting));
-    }, { rootMargin: '200px 0px' });
-    sections.forEach(s => animIO.observe(s));
+    let scrollT = null;
+    window.addEventListener('scroll', () => {
+      document.body.classList.add('is-scrolling');
+      if (scrollT) clearTimeout(scrollT);
+      scrollT = setTimeout(() => { document.body.classList.remove('is-scrolling'); scrollT = null; }, 180);
+    }, { passive: true });
   })();
 
   /* === bs1-v2: sunk-cost count-up === */
