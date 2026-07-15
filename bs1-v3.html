@@ -3869,7 +3869,7 @@ body.deliv-modal-open { overflow: hidden; }
     display: flex;
     grid-template-columns: none;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: clip;
     scroll-snap-type: x mandatory;
     gap: 14px;
     max-width: none;
@@ -3878,7 +3878,6 @@ body.deliv-modal-open { overflow: hidden; }
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x pan-y;
-    scroll-behavior: smooth;
   }
   .video-testi-grid::-webkit-scrollbar { display: none; }
   .video-testi-card {
@@ -4362,9 +4361,12 @@ body.deliv-modal-open { overflow: hidden; }
 #transformation .tf-card { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); aspect-ratio: 4/5; background: var(--card-solid); }
 #transformation .tf-card > img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
 #transformation .tf-card::after { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(to top, rgba(0,0,0,0.72), transparent); pointer-events: none; }
-#transformation .tf-badge { position: absolute; top: 12px; left: 12px; z-index: 2; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-#transformation .tf-badge.before { background: rgba(120,124,140,0.4); color: #e8eaf0; border: 1px solid rgba(255,255,255,0.2); }
-#transformation .tf-badge.after { background: var(--gold-soft); color: var(--gold-hi); border: 1px solid var(--gold); }
+/* Perf: no backdrop-filter here — 8 blurred badges re-compute every scroll frame
+   and were a source of mobile jank in this section. Solid-ish backgrounds read the
+   same over the photos without the per-frame re-blur. */
+#transformation .tf-badge { position: absolute; top: 12px; left: 12px; z-index: 2; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; }
+#transformation .tf-badge.before { background: rgba(58,62,74,0.82); color: #e8eaf0; border: 1px solid rgba(255,255,255,0.2); }
+#transformation .tf-badge.after { background: rgba(52,60,104,0.85); color: var(--gold-hi); border: 1px solid var(--gold); }
 #transformation .tf-meta { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-weight: 600; font-size: 15px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
 #transformation .tf-heart { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.14); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.28); }
 #transformation .tf-heart svg { width: 17px; height: 17px; color: #ff5a7a; }
@@ -4831,6 +4833,15 @@ body.deliv-modal-open { overflow: hidden; }
   #video-testimonials .vt-watch { font-size: 11px; }
   #video-testimonials .vt-meta { padding: 20px 22px 24px; }
 }
+
+/* Perf: freeze the decorative looping animations inside any section that isn't
+   on-screen. ~42 infinite animations run across the page (phone-mockup demos,
+   pulses, marquees); compositing all of them at once while scrolling is a major
+   mobile drain. A section gets .anim-idle when off-screen (JS observer below). */
+.section.anim-idle,
+.section.anim-idle *,
+.section.anim-idle *::before,
+.section.anim-idle *::after { animation-play-state: paused !important; }
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -5941,7 +5952,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 <!-- §5b · VIDEO TESTIMONIALS (selfie-style, click-to-play).
      Placeholders until 3 video files land in img/videos/v1.mp4, v2.mp4, v3.mp4. -->
-<section class="section s-dark" id="video-testimonials">
+<section class="section s-dark" id="video-testimonials-2">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">Client Videos</p>
     <h2 class="reveal d1 text-center">Real clients.<br><em>On camera.</em></h2>
@@ -6409,6 +6420,24 @@ body.deliv-modal-open { overflow: hidden; }
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  /* === Perf: pause off-screen looping animations ===
+     ~45 infinite CSS animations run across the page (phone-mockup demos, pulses,
+     marquees). Compositing all of them every frame while scrolling is the main
+     mobile scroll drain. This toggles .anim-idle on each section when it leaves
+     the viewport; the CSS rule then pauses every animation inside it. Sections
+     on-screen (plus a generous rootMargin buffer) keep animating so nothing
+     visibly freezes mid-view. Skipped entirely under prefers-reduced-motion,
+     where the decorative loops are already suppressed. */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const sections = document.querySelectorAll('.section');
+    if (!sections.length || !('IntersectionObserver' in window)) return;
+    const animIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.target.classList.toggle('anim-idle', !e.isIntersecting));
+    }, { rootMargin: '200px 0px' });
+    sections.forEach(s => animIO.observe(s));
+  })();
+
   /* === bs1-v2: sunk-cost count-up === */
   (function () {
     const root = document.getElementById('sunk-cost');
@@ -6500,8 +6529,12 @@ body.deliv-modal-open { overflow: hidden; }
       entries.forEach((entry, i) => entry.classList.toggle('active', i === activeIdx));
     };
 
-    window.addEventListener('scroll', updateTimeline, { passive: true });
-    window.addEventListener('resize', updateTimeline, { passive: true });
+    // rAF-throttle: updateTimeline reads layout (getBoundingClientRect) in a loop,
+    // so running it once per frame instead of once per scroll event stops the jank.
+    let tlRaf = null;
+    const onTimelineScroll = () => { if (tlRaf === null) tlRaf = requestAnimationFrame(() => { tlRaf = null; updateTimeline(); }); };
+    window.addEventListener('scroll', onTimelineScroll, { passive: true });
+    window.addEventListener('resize', onTimelineScroll, { passive: true });
     updateTimeline();
   }
 
