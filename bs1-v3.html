@@ -4876,6 +4876,17 @@ body.deliv-modal-open { overflow: hidden; }
 .section.anim-idle *::before,
 .section.anim-idle *::after { animation-play-state: paused !important; }
 
+/* ── VIDEO PLAYBACK FIT ──────────────────────────────────────
+   All 11 testimonial videos are 16:9 landscape, but their placeholder cards
+   are portrait/16:10. Once playing, the surface snaps to the video's real
+   aspect so the player fills the card edge-to-edge instead of rendering as a
+   small strip. !important so it beats the mobile 4/5 thumb override. */
+#video-testimonials .vt-thumb.vt-playing,
+#video-testimonials-2 .vt-frame.vt-playing {
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+}
+
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
    scrolling behind it every frame. On the fixed nav + fixed bottom bar
@@ -6965,7 +6976,13 @@ body.deliv-modal-open { overflow: hidden; }
           if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
           i.getElementsByTagName("head")[0].appendChild(s);
         };}
-        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){
+          // The account's embed settings ship with the fullscreen button OFF —
+          // re-enable it before the player boots so viewers can go fullscreen
+          // like a regular video. (Belt-and-braces: also flip it on in the
+          // Vidalytics dashboard per video.)
+          try { var fs = v[y].embeds[a].options.ui.controlBar.fullscreen; fs.show = true; if (fs.customFullscreen && fs.customFullscreen.default) fs.customFullscreen.default.enabled = true; } catch (err) {}
+          var vec=v[d][ve];t=new vec();t.run(a);});});
       })(window, document, 'Vidalytics', 'vidalytics_embed_'+embedId, 'https://quick.vidalytics.com/embeds/vsqPFSDP/'+embedId+'/');
     }
     function mountPlayer(surface, embedId){
