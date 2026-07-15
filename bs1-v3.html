@@ -6979,9 +6979,23 @@ body.deliv-modal-open { overflow: hidden; }
         vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){
           // The account's embed settings ship with the fullscreen button OFF —
           // re-enable it before the player boots so viewers can go fullscreen
-          // like a regular video. (Belt-and-braces: also flip it on in the
-          // Vidalytics dashboard per video.)
-          try { var fs = v[y].embeds[a].options.ui.controlBar.fullscreen; fs.show = true; if (fs.customFullscreen && fs.customFullscreen.default) fs.customFullscreen.default.enabled = true; } catch (err) {}
+          // like a regular video. On touch devices, additionally use
+          // Vidalytics' own "custom fullscreen" with expandOnPlay so the video
+          // auto-opens fullscreen when it starts (a 16:9 video inline on a
+          // narrow phone card is tiny otherwise). (Belt-and-braces: flip the
+          // same switches in the Vidalytics dashboard per video.)
+          try {
+            var fs = v[y].embeds[a].options.ui.controlBar.fullscreen;
+            fs.show = true;
+            var cf = fs.customFullscreen;
+            if (cf) {
+              if (cf.default) cf.default.enabled = true;
+              if (window.matchMedia('(pointer: coarse)').matches) {
+                if (cf.mobile) cf.mobile.enabled = true;
+                cf.expandOnPlay = true;
+              }
+            }
+          } catch (err) {}
           var vec=v[d][ve];t=new vec();t.run(a);});});
       })(window, document, 'Vidalytics', 'vidalytics_embed_'+embedId, 'https://quick.vidalytics.com/embeds/vsqPFSDP/'+embedId+'/');
     }
