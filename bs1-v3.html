@@ -4362,12 +4362,6 @@ body.deliv-modal-open { overflow: hidden; }
 .notif-img { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 .notif-img img { border-radius: 14px; border: 1px solid var(--border-2); }
 
-/* Inline Calendly booking embed — framed to match, fixed height so it never
-   collapses; taller on desktop, comfortable scroll height on mobile. */
-#book .cal-embed { border: 1px solid var(--border-2); border-radius: 18px; overflow: hidden; background: var(--bg1); box-shadow: 0 18px 44px rgba(0,0,0,0.4); height: 680px; }
-#book .calendly-inline-widget { width: 100%; height: 100%; }
-@media (max-width: 768px) { #book .cal-embed { height: 1000px; border-radius: 14px; } }
-
 /* Before / After — dating-profile-style transformation cards */
 #transformation .tf-cases { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 72px); margin-top: 44px; }
 #transformation .tf-name { text-align: center; font-family: 'Spectral', Georgia, serif; font-size: clamp(19px, 2.6vw, 24px); color: var(--w100); margin-bottom: 18px; letter-spacing: -0.01em; }
@@ -4430,8 +4424,13 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-viewport { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; }
 #receipts .rcpt-viewport::-webkit-scrollbar { display: none; }
 #receipts .rcpt-track { display: flex; }
-/* One slide per view; the WHOLE screenshot is scaled to fit inside the viewport. */
+/* Mobile: one slide per view; the WHOLE screenshot is scaled to fit inside the viewport. */
 #receipts .rcpt-slide { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; height: clamp(320px, 58vh, 540px); padding: 0 12px; }
+/* Desktop: 4 screenshots visible at a time in the single row; arrows page a
+   full viewport (4 slides) at a time. */
+@media (min-width: 769px) {
+  #receipts .rcpt-slide { flex: 0 0 25%; scroll-snap-align: start; scroll-snap-stop: normal; padding: 0 7px; height: clamp(300px, 42vh, 470px); }
+}
 #receipts .rcpt-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 14px; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
 /* Prev/next arrows */
 #receipts .rcpt-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff; background: rgba(13,16,32,0.42); border: 1px solid rgba(255,255,255,0.14); transition: background 0.2s ease, opacity 0.2s ease; }
@@ -6268,6 +6267,29 @@ body.deliv-modal-open { overflow: hidden; }
     .proof-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
     .proof-shot img { width: 100%; height: auto; display: block; }
     @media (max-width: 600px){ .proof-masonry { gap: 10px; } .proof-col { gap: 10px; } .proof-shot { border-radius: 10px; } }
+
+    /* Desktop: the wall becomes 4 horizontal auto-scrolling marquee rows;
+       the 2-col masonry is mobile-only. Rows alternate direction with varied
+       speeds so it doesn't move in lockstep; hover pauses a row for reading.
+       margin-right (not flex gap) keeps the duplicated halves exactly equal
+       so the -50% loop is seamless. */
+    .proof-marquee { display: none; }
+    @media (min-width: 769px) {
+      .proof-masonry { display: none; }
+      .proof-marquee { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+      .pm-row { overflow: hidden; }
+      .pm-track { display: flex; width: max-content; animation: pmLeft var(--pm-dur, 95s) linear infinite; }
+      .pm-track img { height: 200px; width: auto; margin-right: 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); display: block; }
+      .pm-row:nth-child(2) .pm-track { --pm-dur: 112s; animation-name: pmRight; }
+      .pm-row:nth-child(3) .pm-track { --pm-dur: 99s; }
+      .pm-row:nth-child(4) .pm-track { --pm-dur: 120s; animation-name: pmRight; }
+      .pm-row:hover .pm-track { animation-play-state: paused; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pm-track { animation: none !important; }
+    }
+    @keyframes pmLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes pmRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
     </style>
 
     <div class="proof-masonry" id="proofWall">
@@ -6327,6 +6349,17 @@ body.deliv-modal-open { overflow: hidden; }
       </div>
     </div>
 
+    <!-- Desktop-only auto-scrolling proof wall: 4 marquee rows, alternating
+         direction. Each track holds its images twice so translateX(-50%) loops
+         seamlessly. Mobile keeps the 2-col masonry above (this is display:none
+         there); .anim-idle pauses the rows whenever the section is off-screen. -->
+    <div class="proof-marquee reveal d3">
+      <div class="pm-row"><div class="pm-track"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" style="aspect-ratio:683/440" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" style="aspect-ratio:1688/440" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" style="aspect-ratio:606/440" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" style="aspect-ratio:527/440" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" style="aspect-ratio:1729/440" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" style="aspect-ratio:1127/440" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" style="aspect-ratio:618/440" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" style="aspect-ratio:312/440" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" style="aspect-ratio:438/440" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" style="aspect-ratio:1061/440" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" style="aspect-ratio:683/440" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" style="aspect-ratio:1688/440" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" style="aspect-ratio:606/440" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" style="aspect-ratio:527/440" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" style="aspect-ratio:1729/440" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" style="aspect-ratio:1127/440" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" style="aspect-ratio:618/440" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" style="aspect-ratio:312/440" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" style="aspect-ratio:438/440" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" style="aspect-ratio:1061/440" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div></div>
+      <div class="pm-row"><div class="pm-track"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" style="aspect-ratio:412/440" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" style="aspect-ratio:295/440" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" style="aspect-ratio:313/440" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" style="aspect-ratio:1368/440" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" style="aspect-ratio:806/440" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" style="aspect-ratio:426/440" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" style="aspect-ratio:678/440" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" style="aspect-ratio:296/440" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" style="aspect-ratio:753/440" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" style="aspect-ratio:457/440" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" style="aspect-ratio:346/440" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" style="aspect-ratio:256/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" style="aspect-ratio:412/440" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" style="aspect-ratio:295/440" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" style="aspect-ratio:313/440" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" style="aspect-ratio:1368/440" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" style="aspect-ratio:806/440" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" style="aspect-ratio:426/440" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" style="aspect-ratio:678/440" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" style="aspect-ratio:296/440" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" style="aspect-ratio:753/440" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" style="aspect-ratio:457/440" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" style="aspect-ratio:346/440" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" style="aspect-ratio:256/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div></div>
+      <div class="pm-row"><div class="pm-track"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" style="aspect-ratio:803/440" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" style="aspect-ratio:306/440" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" style="aspect-ratio:1067/440" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" style="aspect-ratio:625/440" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" style="aspect-ratio:968/440" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" style="aspect-ratio:1150/440" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" style="aspect-ratio:258/440" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" style="aspect-ratio:300/440" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" style="aspect-ratio:1238/440" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" style="aspect-ratio:729/440" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" style="aspect-ratio:803/440" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" style="aspect-ratio:306/440" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" style="aspect-ratio:1067/440" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" style="aspect-ratio:625/440" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" style="aspect-ratio:968/440" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" style="aspect-ratio:1150/440" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" style="aspect-ratio:258/440" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" style="aspect-ratio:300/440" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" style="aspect-ratio:1238/440" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" style="aspect-ratio:729/440" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div></div>
+      <div class="pm-row"><div class="pm-track"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" style="aspect-ratio:546/440" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" style="aspect-ratio:1054/440" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" style="aspect-ratio:585/440" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" style="aspect-ratio:478/440" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" style="aspect-ratio:277/440" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" style="aspect-ratio:297/440" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" style="aspect-ratio:282/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" style="aspect-ratio:959/440" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" style="aspect-ratio:1253/440" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" style="aspect-ratio:305/440" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" style="aspect-ratio:886/440" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" style="aspect-ratio:546/440" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" style="aspect-ratio:1054/440" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" style="aspect-ratio:585/440" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" style="aspect-ratio:478/440" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" style="aspect-ratio:277/440" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" style="aspect-ratio:297/440" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" style="aspect-ratio:282/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" style="aspect-ratio:959/440" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" style="aspect-ratio:1253/440" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" style="aspect-ratio:305/440" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" style="aspect-ratio:886/440" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div></div>
+    </div>
+
 
         <div class="cta-block reveal d4" style="margin-top: 48px;">
       <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
@@ -6384,22 +6417,9 @@ body.deliv-modal-open { overflow: hidden; }
 
 <!-- §12 FOUNDER CLOSE removed 2026-04-24 — redundant with earlier founder section -->
 
-<!-- §12.5 INLINE BOOKING — Calendly embedded in-page (NOT the popup widget, so it
-     never opens full-screen). Renders inside .cal-embed on the page + on mobile.
-     COPY_TODO: replace CALENDLY_URL below (data-url) with the real Calendly event
-     link, e.g. https://calendly.com/atlas-advisory/consultation . Everything else
-     is wired — widget.js is loaded at the bottom of the page. -->
-<section class="section s-dark text-center" id="book">
-  <div class="inner narrow">
-    <p class="eyebrow reveal d1">Book Your Call</p>
-    <h2 class="reveal d2">Grab a time that <em>works for you.</em></h2>
-    <p class="section-sub reveal d3" style="margin-bottom:34px;">Pick a slot below. You'll get a private confirmation with everything you need before we speak.</p>
-    <div class="cal-embed reveal d3">
-      <!-- data-url: paste the real Calendly event link here -->
-      <div class="calendly-inline-widget" data-url="CALENDLY_URL?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0d1f&text_color=ffffff&primary_color=A7B5E8" style="min-width:280px;height:100%;"></div>
-    </div>
-  </div>
-</section>
+<!-- (§12.5 inline Calendly booking section removed — never had a real URL and
+     no CTA pointed at it. Book-a-call CTAs will open Calendly directly once the
+     real event link is provided.) -->
 
 <!-- §13 FINAL CTA -->
 <section class="section s-black text-center" id="apply">
@@ -6955,16 +6975,35 @@ body.deliv-modal-open { overflow: hidden; }
       surface.innerHTML = '<div id="vidalytics_embed_'+embedId+'" style="width:100%;position:relative;padding-top:56.25%;"></div>';
       boot(embedId);
     }
+    // Real video thumbnail on the placeholder surface. Files are the videos'
+    // own Vidalytics poster frames, mirrored locally at img/video-thumbs/<id>.jpg
+    // (re-download via the loader.min.js "thumbnail" config if videos change).
+    // A soft scrim is composited in so play buttons/badges stay legible.
+    function applyThumb(surface, embedId){
+      if(!surface) return;
+      surface.style.backgroundImage =
+        'linear-gradient(rgba(5,8,18,0.18), rgba(5,8,18,0.42)), url("img/video-thumbs/'+embedId+'.jpg")';
+      surface.style.backgroundSize = 'cover';
+      surface.style.backgroundPosition = 'center';
+      const tag = surface.querySelector('.vt-placeholder-tag');
+      if(tag) tag.remove();
+    }
     // Section 1 — swipe carousel: .vt-thumb is the play surface.
     document.querySelectorAll('#video-testimonials .vt-card[data-vid]').forEach(card => {
       const thumb = card.querySelector('.vt-thumb');
       if(!thumb) return;
+      applyThumb(thumb, card.dataset.vid);
       thumb.addEventListener('click', () => mountPlayer(thumb, card.dataset.vid));
     });
-    // Section 2 — grid: .vt-frame is the play surface.
+    // Section 2 — grid: .vt-frame is the play surface (thumb goes on it too,
+    // behind the absolutely-positioned poster/play children).
     document.querySelectorAll('#video-testimonials-2 .video-testi-card[data-vid]').forEach(card => {
       const frame = card.querySelector('.vt-frame');
       if(!frame) return;
+      const poster = card.querySelector('.vt-poster');
+      applyThumb(poster || frame, card.dataset.vid);
+      const tag = frame.querySelector('.vt-placeholder-tag');
+      if(tag) tag.remove();
       frame.addEventListener('click', () => mountPlayer(frame, card.dataset.vid));
     });
   })();
@@ -7151,9 +7190,14 @@ body.deliv-modal-open { overflow: hidden; }
 
   // scrollTo only changes THIS scroller's horizontal offset — it can never move
   // the page vertically, which is the whole point of the rewrite.
+  // Paging is viewport-based, not slide-based: on desktop a "page" shows 4
+  // slides (25% each), on mobile 1 — same code either way.
+  function pageCount() { return Math.max(1, Math.round(viewport.scrollWidth / viewport.clientWidth)); }
   function go(i, smooth) {
-    idx = (i % N + N) % N;
-    viewport.scrollTo({ left: idx * viewport.clientWidth, behavior: (smooth === false || reduce) ? 'auto' : 'smooth' });
+    var P = pageCount();
+    idx = (i % P + P) % P;
+    var left = Math.min(idx * viewport.clientWidth, viewport.scrollWidth - viewport.clientWidth);
+    viewport.scrollTo({ left: left, behavior: (smooth === false || reduce) ? 'auto' : 'smooth' });
   }
   function stopAuto() { manual = true; if (timer) { clearInterval(timer); timer = null; } }
   function startAuto() {
@@ -7187,8 +7231,8 @@ body.deliv-modal-open { overflow: hidden; }
 })();
 </script>
 
-<!-- Calendly inline embed widget (renders the #book scheduler in-page, no popup). -->
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- (Calendly widget.js removed with the #book section — re-add when CTAs get
+     wired to the real Calendly event link.) -->
 
 <!-- Atlas first-party funnel tracker. Posts to the live portal /api/track. -->
 <script>window.ATLAS_TRACK_ENDPOINT = 'https://clientportal-two-rho.vercel.app/api/track';</script>
