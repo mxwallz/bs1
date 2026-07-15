@@ -642,11 +642,10 @@ footer {
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0e1020, #07091a);"></div>
           <div class="bv-play"></div>
           <div class="bv-tag">Legitimacy</div>
-          <div class="bv-dur">~3 min</div>
         </div>
         <div class="bv-body">
           <div class="bv-title">Who Is Benjamin Seda, and Why Should You Trust Him?</div>
-          <div class="bv-desc">His background, the Atlas track record, and how to independently verify the results you've seen on the main site.</div>
+          <div class="bv-desc">His background, the Atlas track record, and how to verify what you&rsquo;ve seen on the main site.</div>
         </div>
       </div>
 
@@ -655,63 +654,58 @@ footer {
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0a1018, #050810);"></div>
           <div class="bv-play"></div>
           <div class="bv-tag">Investment</div>
-          <div class="bv-dur">~4 min</div>
         </div>
         <div class="bv-body">
           <div class="bv-title">Why Atlas Costs What It Costs</div>
-          <div class="bv-desc">Honest breakdown of what's included, what you're actually buying, and how men decide if $6,000 is the right decision for their situation.</div>
+          <div class="bv-desc">An honest breakdown of what&rsquo;s included, what you&rsquo;re actually buying, and how to decide if it&rsquo;s right for your situation.</div>
         </div>
       </div>
 
-      <div class="bv-card reveal d3" data-video="fit">
+      <div class="bv-card reveal d3" data-video="divorced">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #100810, #09050f);"></div>
           <div class="bv-play"></div>
-          <div class="bv-tag">Fit</div>
-          <div class="bv-dur">~3 min</div>
+          <div class="bv-tag">Situation</div>
         </div>
         <div class="bv-body">
-          <div class="bv-title">Who This Program Is For (And Who It's Not)</div>
-          <div class="bv-desc">We turn away roughly 6 in 10 applicants. This video explains what separates the men who get strong results from those for whom Atlas is the wrong call.</div>
+          <div class="bv-title">What If I&rsquo;m Recently Divorced?</div>
+          <div class="bv-desc">Re-entering the dating world after a long relationship &mdash; Benjamin answers directly, on camera.</div>
         </div>
       </div>
 
-      <div class="bv-card reveal d1" data-video="risk">
+      <div class="bv-card reveal d1" data-video="diy">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0f0e10, #080709);"></div>
           <div class="bv-play"></div>
-          <div class="bv-tag">Risk</div>
-          <div class="bv-dur">~3 min</div>
+          <div class="bv-tag">Objection</div>
         </div>
         <div class="bv-body">
-          <div class="bv-title">What Happens If It Doesn't Work?</div>
-          <div class="bv-desc">The guarantee, what it covers, and an honest look at the percentage of clients who don't hit the 2-3 date target and why.</div>
+          <div class="bv-title">Can&rsquo;t I Just Do This Myself?</div>
+          <div class="bv-desc">The honest difference between trial-and-error alone and having your profiles, messages, and dates reviewed.</div>
         </div>
       </div>
 
-      <div class="bv-card reveal d2" data-video="timeline">
+      <div class="bv-card reveal d2" data-video="busy">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #08100e, #050a08);"></div>
           <div class="bv-play"></div>
-          <div class="bv-tag">Timeline</div>
-          <div class="bv-dur">~3 min</div>
+          <div class="bv-tag">Time</div>
         </div>
         <div class="bv-body">
-          <div class="bv-title">What Actually Happens in Your First 30 Days</div>
-          <div class="bv-desc">Week-by-week breakdown of what Atlas builds, what it requires from you, and when most clients start seeing movement in their pipeline.</div>
+          <div class="bv-title">I&rsquo;m Busy. How Much Time Will This Take?</div>
+          <div class="bv-desc">What the program actually requires from your calendar each week &mdash; including time spent on dates.</div>
         </div>
       </div>
 
-      <div class="bv-card reveal d3" data-video="results">
+      <div class="bv-card reveal d3" data-video="blurred">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0a0d1f, #070a14);"></div>
           <div class="bv-play"></div>
-          <div class="bv-tag">Results</div>
-          <div class="bv-dur">~4 min</div>
+          <div class="bv-tag">Privacy</div>
         </div>
         <div class="bv-body">
-          <div class="bv-title">Real Results. Average, Not Highlight Reel.</div>
-          <div class="bv-desc">Client outcomes including Todd, Spencer, Yaro, and Parker. What changed, how long it took, and what they had in common before they started.</div>
+          <div class="bv-title">Why Are So Many Testimonials Blurred?</div>
+          <div class="bv-desc">Why client identities are protected, what the NDA covers, and how to know the results are real.</div>
         </div>
       </div>
 
@@ -888,6 +882,7 @@ footer {
         vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
       })(window, document, 'Vidalytics', 'vidalytics_embed_'+embedId, 'https://quick.vidalytics.com/embeds/vsqPFSDP/'+embedId+'/');
     }
+    window.__vidalyticsBoot = boot;
     document.querySelectorAll('.cv-card[data-vid]').forEach(function (card) {
       var thumb = card.querySelector('.bv-thumb');
       if (!thumb) return;
@@ -1184,12 +1179,9 @@ window.addEventListener('scroll', () => {
 </script>
 <!-- ═══ VIDEO MODAL ════════════════════════════════════════ -->
 <!--
-  HOW TO ADD A VIDEO:
-  1) Upload the video in Vidalytics.
-  2) Copy its embed snippet (the full <div ...> + <script ...> block).
-  3) Paste it INSIDE the matching <div class="vid-slot" ...> below, replacing the
-     comment line. Leave the data-video attribute untouched.
-  Slots left empty just show "available shortly" — they won't break the page.
+  Slots are WIRED: each vid-slot carries data-embed (its Vidalytics embed id) and
+  the player boots lazily the first time that slot is opened. To swap a video,
+  change the data-embed id AND the inner div's vidalytics_embed_… id to match.
 -->
 <div class="vid-modal" id="vidModal" role="dialog" aria-modal="true" aria-label="Video">
   <div class="vid-modal-box">
@@ -1201,32 +1193,32 @@ window.addEventListener('scroll', () => {
     </div>
     <div class="vid-modal-stage">
 
-      <div class="vid-slot" data-video="vsl">
-        <!-- PASTE VIDALYTICS EMBED HERE — VSL (main "message from Benjamin" video) -->
+      <div class="vid-slot" data-video="vsl" data-embed="fMttxbyymmtYeuVG">
+        <div id="vidalytics_embed_fMttxbyymmtYeuVG" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="legitimacy">
-        <!-- PASTE VIDALYTICS EMBED HERE — "Who Is Benjamin Seda, and Why Should You Trust Him?" -->
+      <div class="vid-slot" data-video="legitimacy" data-embed="tcvVVMJ9OvdnYaes">
+        <div id="vidalytics_embed_tcvVVMJ9OvdnYaes" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="investment">
-        <!-- PASTE VIDALYTICS EMBED HERE — "Why Atlas Costs What It Costs" -->
+      <div class="vid-slot" data-video="investment" data-embed="O4qtzMhyLRud32Xf">
+        <div id="vidalytics_embed_O4qtzMhyLRud32Xf" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="fit">
-        <!-- PASTE VIDALYTICS EMBED HERE — "Who This Program Is For (And Who It's Not)" -->
+      <div class="vid-slot" data-video="divorced" data-embed="bm5R5FFOuS5BUl4U">
+        <div id="vidalytics_embed_bm5R5FFOuS5BUl4U" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="risk">
-        <!-- PASTE VIDALYTICS EMBED HERE — "What Happens If It Doesn't Work?" -->
+      <div class="vid-slot" data-video="diy" data-embed="YXyoKXeul3603b2n">
+        <div id="vidalytics_embed_YXyoKXeul3603b2n" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="timeline">
-        <!-- PASTE VIDALYTICS EMBED HERE — "What Actually Happens in Your First 30 Days" -->
+      <div class="vid-slot" data-video="busy" data-embed="JzmEtX7QgUHrd_RQ">
+        <div id="vidalytics_embed_JzmEtX7QgUHrd_RQ" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
-      <div class="vid-slot" data-video="results">
-        <!-- PASTE VIDALYTICS EMBED HERE — "Real Results. Average, Not Highlight Reel." -->
+      <div class="vid-slot" data-video="blurred" data-embed="X5CL6eex765AVXW6">
+        <div id="vidalytics_embed_X5CL6eex765AVXW6" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
     </div>
@@ -1243,14 +1235,21 @@ window.addEventListener('scroll', () => {
     vsl:        'A message from Benjamin',
     legitimacy: 'Who Is Benjamin Seda, and Why Should You Trust Him?',
     investment: 'Why Atlas Costs What It Costs',
-    fit:        "Who This Program Is For (And Who It's Not)",
-    risk:       "What Happens If It Doesn't Work?",
-    timeline:   'What Actually Happens in Your First 30 Days',
-    results:    'Real Results. Average, Not Highlight Reel.'
+    divorced:   "What If I'm Recently Divorced?",
+    diy:        "Can't I Just Do This Myself?",
+    busy:       "I'm Busy. How Much Time Will This Take?",
+    blurred:    'Why Are So Many Testimonials Blurred?'
   };
 
   function open(key) {
     slots.forEach(s => s.classList.toggle('active', s.dataset.video === key));
+    // Lazy-boot the Vidalytics player the first time its slot is opened.
+    slots.forEach(s => {
+      if (s.dataset.video === key && s.dataset.embed && !s.dataset.booted) {
+        s.dataset.booted = '1';
+        if (window.__vidalyticsBoot) window.__vidalyticsBoot(s.dataset.embed);
+      }
+    });
     titleEl.textContent = TITLES[key] || 'Video';
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1258,6 +1257,8 @@ window.addEventListener('scroll', () => {
   function close() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+    // Pause any playing video so audio doesn't continue behind the page.
+    slots.forEach(s => s.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (e) {} }));
     slots.forEach(s => s.classList.remove('active'));
   }
 
