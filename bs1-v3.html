@@ -3897,6 +3897,16 @@ body.deliv-modal-open { overflow: hidden; }
 /* Duplicate cards (used by an earlier autoscroll marquee) are hidden. */
 .video-testi-card.vtc-dup { display: none !important; }
 
+/* When a Vidalytics player is clicked in, drop the fixed portrait/landscape
+   aspect so the 16:9 embed defines its own height, and hide the poster overlay.
+   ID-scoped so it beats the mobile aspect-ratio overrides. */
+#video-testimonials .vt-thumb.vt-playing,
+#video-testimonials-2 .vt-frame.vt-playing {
+  aspect-ratio: auto; max-height: none; background: #000; cursor: default;
+}
+#video-testimonials .vt-thumb.vt-playing::after,
+#video-testimonials-2 .vt-frame.vt-playing::after { display: none; }
+
 /* ══════════════════════════════════════════════════════════
    §7 · Real Clients — 3 horizontal auto-scrolling rows
    Each row scrolls at a slow constant speed. Rows 1 and 3
@@ -4409,11 +4419,15 @@ body.deliv-modal-open { overflow: hidden; }
 #receipts .rcpt-frame::before, #receipts .rcpt-frame::after { content: ""; position: absolute; top: 0; bottom: 0; width: 6%; z-index: 2; pointer-events: none; }
 #receipts .rcpt-frame::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
 #receipts .rcpt-frame::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
-/* Transform slider: no scroll container, so it can't fight vertical page scroll. */
-#receipts .rcpt-viewport { overflow: hidden; }
-#receipts .rcpt-track { display: flex; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+/* Native horizontal scroll-snap carousel. The browser routes sideways drags to
+   this scroller and up/down drags to the page — no gesture fight, no vertical
+   jump while swiping. (The old transform slider captured neither axis, so any
+   vertical finger-drift during a swipe scrolled the whole page instead.) */
+#receipts .rcpt-viewport { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; }
+#receipts .rcpt-viewport::-webkit-scrollbar { display: none; }
+#receipts .rcpt-track { display: flex; }
 /* One slide per view; the WHOLE screenshot is scaled to fit inside the viewport. */
-#receipts .rcpt-slide { flex: 0 0 100%; display: flex; align-items: center; justify-content: center; height: clamp(320px, 58vh, 540px); padding: 0 12px; }
+#receipts .rcpt-slide { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; height: clamp(320px, 58vh, 540px); padding: 0 12px; }
 #receipts .rcpt-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 14px; border: 1px solid var(--border-2); background: var(--card-solid); box-shadow: 0 18px 40px rgba(0,0,0,0.42); }
 /* Prev/next arrows */
 #receipts .rcpt-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff; background: rgba(13,16,32,0.42); border: 1px solid rgba(255,255,255,0.14); transition: background 0.2s ease, opacity 0.2s ease; }
@@ -4963,48 +4977,68 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
     <div class="vt-swipe reveal d3" id="vtSwipe">
       <div class="vt-swipe-track">
 
-        <div class="vt-card">
+        <div class="vt-card" data-vid="LcTjwDwUVJAPmegJ">
           <div class="vt-thumb vt-g1">
-            <span class="vt-badge">Client</span>
-            <span class="vt-duration">2:47</span>
+            <span class="vt-badge">Live Approach</span>
             <div class="vt-video-state">
-              <button class="vt-play" aria-label="Play Todd testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-              <span class="vt-watch">Watch the interview</span>
+              <button class="vt-play" aria-label="Play Matt's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the approach</span>
             </div>
           </div>
           <div class="vt-meta">
-            <div class="vt-name">Todd, 54</div>
-            <div class="vt-quote">"20 dates in 30 days. Most in their 20s and 30s. Age was never the obstacle."</div>
+            <div class="vt-name">Matt</div>
           </div>
         </div>
 
-        <div class="vt-card">
+        <div class="vt-card" data-vid="htvu6_tOoA5XhfXx">
           <div class="vt-thumb vt-g2">
-            <span class="vt-badge">Client</span>
-            <span class="vt-duration">3:12</span>
+            <span class="vt-badge">Interview</span>
             <div class="vt-video-state">
-              <button class="vt-play" aria-label="Play Yaro testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <button class="vt-play" aria-label="Play Pat's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
               <span class="vt-watch">Watch the interview</span>
             </div>
           </div>
           <div class="vt-meta">
-            <div class="vt-name">Yaro</div>
-            <div class="vt-quote">"Every box checked except this one. 30 days in, 20+ dates on the calendar."</div>
+            <div class="vt-name">Pat</div>
           </div>
         </div>
 
-        <div class="vt-card">
+        <div class="vt-card" data-vid="L4Lggv9KUL9Jkzs_">
           <div class="vt-thumb vt-g3">
-            <span class="vt-badge">Client</span>
-            <span class="vt-duration">2:21</span>
+            <span class="vt-badge">Live Approach</span>
             <div class="vt-video-state">
-              <button class="vt-play" aria-label="Play Spencer testimonial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <button class="vt-play" aria-label="Play the NFL player's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the approach</span>
+            </div>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">NFL Player</div>
+          </div>
+        </div>
+
+        <div class="vt-card" data-vid="W0wdmtxqSNfQs3An">
+          <div class="vt-thumb vt-g1">
+            <span class="vt-badge">Interview</span>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play Kevin's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
               <span class="vt-watch">Watch the interview</span>
             </div>
           </div>
           <div class="vt-meta">
-            <div class="vt-name">Spencer</div>
-            <div class="vt-quote">"40+ Bumble matches in the first 24 hours. More than I could realistically date."</div>
+            <div class="vt-name">Kevin</div>
+          </div>
+        </div>
+
+        <div class="vt-card" data-vid="DawZ1einvsC83Bn2">
+          <div class="vt-thumb vt-g2">
+            <span class="vt-badge">Interview</span>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play JW's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the interview</span>
+            </div>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">JW</div>
           </div>
         </div>
 
@@ -5012,6 +5046,8 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 
       <div class="vt-dots" id="vtDots">
         <span class="vt-dot active"></span>
+        <span class="vt-dot"></span>
+        <span class="vt-dot"></span>
         <span class="vt-dot"></span>
         <span class="vt-dot"></span>
       </div>
@@ -5976,8 +6012,7 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 </section>
 
 
-<!-- §5b · VIDEO TESTIMONIALS (selfie-style, click-to-play).
-     Placeholders until 3 video files land in img/videos/v1.mp4, v2.mp4, v3.mp4. -->
+<!-- §5b · VIDEO TESTIMONIALS (Vidalytics click-to-load). Interviews + approaches + selfie. -->
 <section class="section s-dark" id="video-testimonials-2">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">Client Videos</p>
@@ -5985,143 +6020,123 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 
     <div class="video-testi-grid reveal d3">
 
-      <!-- Video 1 -->
-      <div class="video-testi-card" data-video="img/videos/v1.mp4">
+      <div class="video-testi-card" data-vid="20eVSEAOFYbJnZGs">
         <div class="vt-frame">
           <div class="vt-poster vtp-1"></div>
-          <span class="vt-placeholder-tag">Video 1</span>
-          <button class="vt-play-btn" aria-label="Play Video 1">
+          <span class="vt-placeholder-tag">Selfie</span>
+          <button class="vt-play-btn" aria-label="Play JW's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">0:47</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 1 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">JW</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Client selfie</div>
         </div>
       </div>
 
-      <!-- Video 2 -->
-      <div class="video-testi-card" data-video="img/videos/v2.mp4">
+      <div class="video-testi-card" data-vid="G_WxotOpdXN9nP7n">
         <div class="vt-frame">
           <div class="vt-poster vtp-2"></div>
-          <span class="vt-placeholder-tag">Video 2</span>
-          <button class="vt-play-btn" aria-label="Play Video 2">
+          <span class="vt-placeholder-tag">Interview</span>
+          <button class="vt-play-btn" aria-label="Play Adam's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">1:12</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 2 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">Adam</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Client interview</div>
         </div>
       </div>
 
-      <!-- Video 3 -->
-      <div class="video-testi-card" data-video="img/videos/v3.mp4">
+      <div class="video-testi-card" data-vid="hxyNOMcuu0RjqqWV">
         <div class="vt-frame">
           <div class="vt-poster vtp-3"></div>
-          <span class="vt-placeholder-tag">Video 3</span>
-          <button class="vt-play-btn" aria-label="Play Video 3">
+          <span class="vt-placeholder-tag">Live Approach</span>
+          <button class="vt-play-btn" aria-label="Play Johny's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">0:58</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 3 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">Johny</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Live approach</div>
         </div>
       </div>
 
-      <!-- Duplicate set for seamless mobile loop. Hidden on desktop. -->
-      <div class="video-testi-card vtc-dup" data-video="img/videos/v1.mp4" aria-hidden="true">
+      <div class="video-testi-card" data-vid="3QGDlOHjnrmF4ecQ">
         <div class="vt-frame">
           <div class="vt-poster vtp-1"></div>
-          <span class="vt-placeholder-tag">Video 1</span>
-          <button class="vt-play-btn" aria-label="Play Video 1" tabindex="-1">
+          <span class="vt-placeholder-tag">Interview</span>
+          <button class="vt-play-btn" aria-label="Play Ried's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">0:47</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 1 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">Ried</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Client interview</div>
         </div>
       </div>
-      <div class="video-testi-card vtc-dup" data-video="img/videos/v2.mp4" aria-hidden="true">
+
+      <div class="video-testi-card" data-vid="LDZUUFVxsh2dMvdC">
         <div class="vt-frame">
           <div class="vt-poster vtp-2"></div>
-          <span class="vt-placeholder-tag">Video 2</span>
-          <button class="vt-play-btn" aria-label="Play Video 2" tabindex="-1">
+          <span class="vt-placeholder-tag">Live Approach</span>
+          <button class="vt-play-btn" aria-label="Play Ron's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">1:12</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 2 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">Ron</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Live approach</div>
         </div>
       </div>
-      <div class="video-testi-card vtc-dup" data-video="img/videos/v3.mp4" aria-hidden="true">
+
+      <div class="video-testi-card" data-vid="k9EXDOSyGtWtokKz">
         <div class="vt-frame">
           <div class="vt-poster vtp-3"></div>
-          <span class="vt-placeholder-tag">Video 3</span>
-          <button class="vt-play-btn" aria-label="Play Video 3" tabindex="-1">
+          <span class="vt-placeholder-tag">Interview</span>
+          <button class="vt-play-btn" aria-label="Play William's video">
             <svg viewBox="0 0 48 48">
               <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
               <path d="M19 15v18l15-9z" fill="#fff"/>
             </svg>
           </button>
-          <div class="vt-runtime">0:58</div>
         </div>
         <div class="vt-meta">
           <div class="vt-name-line">
-            <span class="vt-name">[ Client 3 ]</span>
-            <span class="vt-age">· [ Age ]</span>
+            <span class="vt-name">William</span>
             <span class="vt-verified">✓</span>
           </div>
-          <div class="vt-occupation">[ Occupation ]</div>
-          <p class="vt-tldr">"[ One-line takeaway about their result. ]"</p>
+          <div class="vt-occupation">Client interview</div>
         </div>
       </div>
 
@@ -6963,18 +6978,42 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
     }, { passive: true });
   })();
 
-  // §5b · Video testimonials click-to-play.
-  // On first click, swap the placeholder frame for a real <video> element
-  // pointing at data-video. If file isn't there, the browser shows its
-  // native broken-media state — acceptable during placeholder phase.
-  document.querySelectorAll('.video-testi-card').forEach(card => {
-    const frame = card.querySelector('.vt-frame');
-    const src = card.dataset.video;
-    if (!frame || !src) return;
-    frame.addEventListener('click', () => {
-      frame.innerHTML = '<video controls autoplay playsinline preload="metadata" src="' + src + '"></video>';
-    }, { once: true });
-  });
+  // §5b · Video testimonials — Vidalytics click-to-load.
+  // Nothing loads until a card is clicked (zero perf cost on page load).
+  // On click we swap the placeholder surface for the Vidalytics embed and
+  // run the standard per-account bootstrap for that embed id.
+  (function initVidalytics(){
+    function boot(embedId){
+      (function (v, i, d, a, l, y, t, c, s) {
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+        if (!vsl){vsl=function(u,cb){
+          if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+          if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+          i.getElementsByTagName("head")[0].appendChild(s);
+        };}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+      })(window, document, 'Vidalytics', 'vidalytics_embed_'+embedId, 'https://quick.vidalytics.com/embeds/vsqPFSDP/'+embedId+'/');
+    }
+    function mountPlayer(surface, embedId){
+      if(!surface || surface.dataset.vidLoaded) return;
+      surface.dataset.vidLoaded = '1';
+      surface.classList.add('vt-playing');
+      surface.innerHTML = '<div id="vidalytics_embed_'+embedId+'" style="width:100%;position:relative;padding-top:56.25%;"></div>';
+      boot(embedId);
+    }
+    // Section 1 — swipe carousel: .vt-thumb is the play surface.
+    document.querySelectorAll('#video-testimonials .vt-card[data-vid]').forEach(card => {
+      const thumb = card.querySelector('.vt-thumb');
+      if(!thumb) return;
+      thumb.addEventListener('click', () => mountPlayer(thumb, card.dataset.vid));
+    });
+    // Section 2 — grid: .vt-frame is the play surface.
+    document.querySelectorAll('#video-testimonials-2 .video-testi-card[data-vid]').forEach(card => {
+      const frame = card.querySelector('.vt-frame');
+      if(!frame) return;
+      frame.addEventListener('click', () => mountPlayer(frame, card.dataset.vid));
+    });
+  })();
 
   // Mobile testimonials — rAF auto-scroll, user-scrollable, mobile only
   (function() {
@@ -7161,55 +7200,60 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 })();
 </script>
 
-<!-- Receipts slider (transform-based). One screenshot per slide. Advances on
-     arrow-click or horizontal swipe. Gentle auto-advance runs only while the
-     section is on-screen AND the page isn't being scrolled, and stops for good
-     once the user swipes or taps an arrow. No scroll container = no page-scroll lag. -->
+<!-- Receipts carousel (NATIVE horizontal scroll-snap). Swipe is handled by the
+     browser's own scroller, so a sideways drag moves the carousel and an up/down
+     drag scrolls the page — the two never fight (the old transform slider let
+     vertical drift scroll the page mid-swipe, which felt like jumping). Arrows
+     scroll horizontally only (never the page). Gentle auto-advance runs while the
+     section is on-screen and stops for good the moment the user touches it. -->
 <script>
 (function () {
+  var viewport = document.querySelector('#receipts .rcpt-viewport');
   var track = document.getElementById('rcptTrack');
-  if (!track) return;
-  var slides = Array.prototype.slice.call(track.children);
-  var N = slides.length;
+  if (!viewport || !track) return;
+  var N = track.children.length;
   var prev = document.getElementById('rcptPrev');
   var next = document.getElementById('rcptNext');
   var section = document.getElementById('receipts');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var DWELL = 4000;
-  var idx = 0, manual = reduce, timer = null, inView = false, scrolling = false, scrollT = null;
+  var idx = 0, manual = reduce, timer = null, inView = false;
 
-  function render() { track.style.transform = 'translateX(' + (-idx * 100) + '%)'; }
-  function go(i) { idx = (i % N + N) % N; render(); }        // wraps around
+  // scrollTo only changes THIS scroller's horizontal offset — it can never move
+  // the page vertically, which is the whole point of the rewrite.
+  function go(i, smooth) {
+    idx = (i % N + N) % N;
+    viewport.scrollTo({ left: idx * viewport.clientWidth, behavior: (smooth === false || reduce) ? 'auto' : 'smooth' });
+  }
   function stopAuto() { manual = true; if (timer) { clearInterval(timer); timer = null; } }
   function startAuto() {
     if (manual || timer) return;
-    timer = setInterval(function () { if (inView && !scrolling) go(idx + 1); }, DWELL);
+    timer = setInterval(function () { if (inView) go(idx + 1); }, DWELL);
   }
 
   prev.addEventListener('click', function () { stopAuto(); go(idx - 1); });
   next.addEventListener('click', function () { stopAuto(); go(idx + 1); });
 
-  // Horizontal swipe. We never preventDefault, so vertical drags still scroll the page.
-  var sx = 0, sy = 0, tracking = false;
-  track.addEventListener('touchstart', function (e) { var t = e.touches[0]; sx = t.clientX; sy = t.clientY; tracking = true; }, { passive: true });
-  track.addEventListener('touchend', function (e) {
-    if (!tracking) return; tracking = false;
-    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) { stopAuto(); go(idx + (dx < 0 ? 1 : -1)); }
+  // Native scroll handles the swipe itself. We only (a) treat the first user
+  // touch as "stop auto-advancing" and (b) keep idx in sync with where the user
+  // scrolled, rAF-throttled so it stays cheap.
+  viewport.addEventListener('pointerdown', stopAuto, { passive: true });
+  viewport.addEventListener('touchstart', stopAuto, { passive: true });
+  var sRaf = null;
+  viewport.addEventListener('scroll', function () {
+    if (sRaf !== null) return;
+    sRaf = requestAnimationFrame(function () {
+      sRaf = null;
+      idx = Math.round(viewport.scrollLeft / viewport.clientWidth);
+    });
   }, { passive: true });
 
-  // Pause auto-advance while the page is actively scrolling (so it never moves under you).
-  window.addEventListener('scroll', function () {
-    scrolling = true;
-    if (scrollT) clearTimeout(scrollT);
-    scrollT = setTimeout(function () { scrolling = false; }, 250);
-  }, { passive: true });
+  // Keep the current slide aligned if the viewport is resized (rotation, etc).
+  window.addEventListener('resize', function () { viewport.scrollLeft = idx * viewport.clientWidth; }, { passive: true });
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (e) { inView = e[0].isIntersecting; if (inView) startAuto(); }, { threshold: 0.35 }).observe(section);
   } else { inView = true; startAuto(); }
-
-  render();
 })();
 </script>
 
