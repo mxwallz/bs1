@@ -735,16 +735,153 @@ footer {
     </div>
 
     <style>
-    /* Static 2-column wall — two independent flex columns (NOT CSS multicol, which
-       rebalances and jumps as lazy images load). Each image reserves its box via an
-       inline aspect-ratio, so nothing reflows when it loads. Zero animation, zero
-       layout shift = smooth scroll. */
-    .proof-masonry { display: flex; gap: 12px; margin-top: 36px; align-items: flex-start; }
-    .proof-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
-    .proof-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
-    .proof-shot img { width: 100%; height: auto; display: block; }
-    @media (max-width: 600px){ .proof-masonry { gap: 10px; } .proof-col { gap: 10px; } .proof-shot { border-radius: 10px; } }
+    /* Desktop: 4-row auto-scroll marquee wall (ported from bs1-v2, with the
+       bs1-v3 perf lessons applied — overlay-gradient edge fades instead of
+       mask-image, and animation gated behind an .in-view IntersectionObserver
+       class so tracks only animate on-screen). Hover pauses a row.
+       Mobile (≤768px): static 2-column masonry — no animation, no jank. */
+    .proof-rows { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+    .proof-row { position: relative; overflow: hidden; }
+    .proof-row::before, .proof-row::after {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 70px; z-index: 2; pointer-events: none;
+    }
+    .proof-row::before { left: 0; background: linear-gradient(90deg, #0a0d1f, transparent); }
+    .proof-row::after { right: 0; background: linear-gradient(270deg, #0a0d1f, transparent); }
+    .proof-track { display: flex; width: max-content; transform: translateZ(0); backface-visibility: hidden; }
+    .proof-rows.in-view .proof-track { animation: proofScroll 64s linear infinite; will-change: transform; }
+    .proof-rows.in-view .proof-row:nth-child(2) .proof-track { animation-duration: 78s; animation-direction: reverse; }
+    .proof-rows.in-view .proof-row:nth-child(3) .proof-track { animation-duration: 70s; }
+    .proof-rows.in-view .proof-row:nth-child(4) .proof-track { animation-duration: 84s; animation-direction: reverse; }
+    .proof-row:hover .proof-track { animation-play-state: paused; }
+    .proof-row .proof-shot { flex: 0 0 auto; height: 210px; margin-right: 12px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+    .proof-row .proof-shot img { height: 100%; width: auto; display: block; }
+    @keyframes proofScroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .proof-rows.in-view .proof-track { animation: none; will-change: auto; }
+      .proof-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+    /* Static 2-column masonry (mobile) — two independent flex columns; each
+       image reserves its box via an inline aspect-ratio, so nothing reflows. */
+    .proof-masonry { display: none; }
+    .proof-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+    .proof-masonry .proof-shot { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+    .proof-masonry .proof-shot img { width: 100%; height: auto; display: block; }
+    @media (max-width: 768px) {
+      .proof-rows { display: none; }
+      .proof-masonry { display: flex; gap: 10px; margin-top: 36px; align-items: flex-start; }
+    }
     </style>
+
+    <div class="proof-rows" id="proofRows">
+      <div class="proof-row"><div class="proof-track">
+        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" style="aspect-ratio:683/440" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" style="aspect-ratio:412/440" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" style="aspect-ratio:546/440" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"></div>
+        <div class="proof-shot" data-tag="on-dates social-profiles"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" style="aspect-ratio:1688/440" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"></div>
+        <div class="proof-shot" data-tag="dating-apps online-dates"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" style="aspect-ratio:295/440" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" style="aspect-ratio:803/440" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" style="aspect-ratio:1054/440" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"></div>
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"></div>
+        <div class="proof-shot" data-tag="dating-apps relationship"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" style="aspect-ratio:313/440" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"></div>
+        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" style="aspect-ratio:306/440" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" style="aspect-ratio:585/440" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" style="aspect-ratio:606/440" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" style="aspect-ratio:683/440" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" style="aspect-ratio:412/440" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" style="aspect-ratio:546/440" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates social-profiles"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" style="aspect-ratio:1688/440" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps online-dates"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" style="aspect-ratio:295/440" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" style="aspect-ratio:803/440" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" style="aspect-ratio:1054/440" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps relationship"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" style="aspect-ratio:313/440" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" style="aspect-ratio:306/440" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" style="aspect-ratio:585/440" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" style="aspect-ratio:606/440" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"></div>
+      </div></div>
+      <div class="proof-row"><div class="proof-track">
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" style="aspect-ratio:1368/440" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"></div>
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" style="aspect-ratio:478/440" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" style="aspect-ratio:527/440" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" style="aspect-ratio:806/440" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" style="aspect-ratio:1067/440" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" style="aspect-ratio:277/440" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" style="aspect-ratio:1729/440" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" style="aspect-ratio:426/440" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" style="aspect-ratio:625/440" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" style="aspect-ratio:297/440" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" style="aspect-ratio:1127/440" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" style="aspect-ratio:678/440" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" style="aspect-ratio:1368/440" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" style="aspect-ratio:478/440" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" style="aspect-ratio:527/440" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" style="aspect-ratio:806/440" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" style="aspect-ratio:1067/440" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" style="aspect-ratio:277/440" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" style="aspect-ratio:1729/440" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" style="aspect-ratio:426/440" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" style="aspect-ratio:625/440" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" style="aspect-ratio:297/440" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" style="aspect-ratio:1127/440" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" style="aspect-ratio:678/440" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"></div>
+      </div></div>
+      <div class="proof-row"><div class="proof-track">
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" style="aspect-ratio:968/440" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" style="aspect-ratio:282/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"></div>
+        <div class="proof-shot" data-tag="relationship"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" style="aspect-ratio:296/440" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" style="aspect-ratio:1150/440" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" style="aspect-ratio:959/440" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" style="aspect-ratio:753/440" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" style="aspect-ratio:258/440" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" style="aspect-ratio:1253/440" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" style="aspect-ratio:618/440" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" style="aspect-ratio:457/440" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" style="aspect-ratio:968/440" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" style="aspect-ratio:282/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="relationship"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" style="aspect-ratio:296/440" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" style="aspect-ratio:1150/440" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" style="aspect-ratio:959/440" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" style="aspect-ratio:753/440" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" style="aspect-ratio:258/440" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" style="aspect-ratio:1253/440" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" style="aspect-ratio:618/440" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" style="aspect-ratio:457/440" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"></div>
+      </div></div>
+      <div class="proof-row"><div class="proof-track">
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" style="aspect-ratio:300/440" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"></div>
+        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" style="aspect-ratio:305/440" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" style="aspect-ratio:312/440" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" style="aspect-ratio:346/440" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" style="aspect-ratio:1238/440" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" style="aspect-ratio:886/440" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" style="aspect-ratio:438/440" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" style="aspect-ratio:256/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" style="aspect-ratio:729/440" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" style="aspect-ratio:1061/440" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" style="aspect-ratio:300/440" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" style="aspect-ratio:305/440" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" style="aspect-ratio:312/440" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" style="aspect-ratio:346/440" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" style="aspect-ratio:1238/440" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" style="aspect-ratio:886/440" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" style="aspect-ratio:438/440" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" style="aspect-ratio:256/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" style="aspect-ratio:729/440" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" style="aspect-ratio:1061/440" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div>
+        <div class="proof-shot" aria-hidden="true" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
+      </div></div>
+    </div>
 
     <div class="proof-masonry" id="proofWall">
       <div class="proof-col">
@@ -802,6 +939,16 @@ footer {
         <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
       </div>
     </div>
+
+    <script>
+    (function () {
+      var rows = document.getElementById('proofRows');
+      if (!rows || !('IntersectionObserver' in window)) { if (rows) rows.classList.add('in-view'); return; }
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { rows.classList.toggle('in-view', e.isIntersecting); });
+      }, { rootMargin: '100px' }).observe(rows);
+    })();
+    </script>
 
     <p class="sub-note text-center reveal" style="margin-top: 28px;">
       Real, unfiltered messages from inside the Atlas private network. Identities blurred to protect client privacy.
