@@ -463,6 +463,50 @@ footer {
   .twall { grid-template-columns: 1fr; }
   .sticky-bar { flex-direction: column; gap: 8px; text-align: center; }
 }
+/* ═══ VIDEO MODAL (Vidalytics) ═══════════════════════════ */
+.vid-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(3,4,6,0.82); backdrop-filter: blur(8px);
+  opacity: 0; transition: opacity 0.22s ease;
+}
+.vid-modal.open { display: flex; opacity: 1; }
+.vid-modal-box {
+  position: relative; width: 100%; max-width: 920px;
+  transform: translateY(12px); transition: transform 0.22s ease;
+}
+.vid-modal.open .vid-modal-box { transform: translateY(0); }
+.vid-modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 14px;
+}
+.vid-modal-title { font-size: 16px; font-weight: 600; color: var(--w100); letter-spacing: -0.01em; }
+.vid-modal-close {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--border-2); background: rgba(255,255,255,0.04);
+  color: var(--w75); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.vid-modal-close:hover { background: var(--gold-soft); color: var(--gold-hi); border-color: rgba(167,181,232,0.28); }
+.vid-modal-stage {
+  position: relative; aspect-ratio: 16/9; width: 100%;
+  background: var(--card-solid); border: 1px solid var(--border-2);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+/* embed slots: hidden until their video is active */
+.vid-slot { position: absolute; inset: 0; display: none; }
+.vid-slot.active { display: block; }
+.vid-slot > * { width: 100%; height: 100%; }
+/* graceful empty state until a Vidalytics embed is pasted in */
+.vid-slot:empty::before,
+.vid-slot.is-empty::before {
+  content: "This video will be available shortly.";
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 0 32px;
+  font-size: 13px; color: var(--w35); letter-spacing: 0.02em;
+}
 </style>
 </head>
 <body>
@@ -498,7 +542,7 @@ footer {
       <div class="step-num">1</div>
       <span class="step-text">Watch this video</span>
     </div>
-    <div class="main-video-wrap reveal d3">
+    <div class="main-video-wrap reveal d3" data-video="vsl">
       <div class="video-thumb-bg"></div>
       <!-- Swap for your Vimeo / Wistia iframe when ready -->
       <!-- <iframe src="https://player.vimeo.com/video/XXXXXXX?autoplay=0&color=A7B5E8" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border-radius:18px;"></iframe> -->
@@ -593,7 +637,7 @@ footer {
 
     <div class="breakout-grid">
 
-      <div class="bv-card reveal d1">
+      <div class="bv-card reveal d1" data-video="legitimacy">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0e1020, #07091a);"></div>
           <div class="bv-play"></div>
@@ -606,7 +650,7 @@ footer {
         </div>
       </div>
 
-      <div class="bv-card reveal d2">
+      <div class="bv-card reveal d2" data-video="investment">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0a1018, #050810);"></div>
           <div class="bv-play"></div>
@@ -619,7 +663,7 @@ footer {
         </div>
       </div>
 
-      <div class="bv-card reveal d3">
+      <div class="bv-card reveal d3" data-video="fit">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #100810, #09050f);"></div>
           <div class="bv-play"></div>
@@ -632,7 +676,7 @@ footer {
         </div>
       </div>
 
-      <div class="bv-card reveal d1">
+      <div class="bv-card reveal d1" data-video="risk">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0f0e10, #080709);"></div>
           <div class="bv-play"></div>
@@ -645,7 +689,7 @@ footer {
         </div>
       </div>
 
-      <div class="bv-card reveal d2">
+      <div class="bv-card reveal d2" data-video="timeline">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #08100e, #050a08);"></div>
           <div class="bv-play"></div>
@@ -658,7 +702,7 @@ footer {
         </div>
       </div>
 
-      <div class="bv-card reveal d3">
+      <div class="bv-card reveal d3" data-video="results">
         <div class="bv-thumb">
           <div class="bv-thumb-bg" style="background: linear-gradient(135deg, #0a0d1f, #070a14);"></div>
           <div class="bv-play"></div>
@@ -686,141 +730,81 @@ footer {
       <p class="eyebrow reveal">Client Proof</p>
       <h2 class="reveal d1">What happens after men<br><em>go through Atlas.</em></h2>
       <p class="reveal d2 body-lg" style="max-width: 540px; margin: 16px auto 0; color: var(--w55);">
-        Group chat messages, direct feedback, and recorded interviews. Unfiltered.
+        Group chat wins, dating-app matches, and real dates &mdash; straight from the private network. Blurred for privacy.
       </p>
     </div>
 
-    <div class="twall">
+    <style>
+    /* Static 2-column wall — two independent flex columns (NOT CSS multicol, which
+       rebalances and jumps as lazy images load). Each image reserves its box via an
+       inline aspect-ratio, so nothing reflows when it loads. Zero animation, zero
+       layout shift = smooth scroll. */
+    .proof-masonry { display: flex; gap: 12px; margin-top: 36px; align-items: flex-start; }
+    .proof-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    .proof-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+    .proof-shot img { width: 100%; height: auto; display: block; }
+    @media (max-width: 600px){ .proof-masonry { gap: 10px; } .proof-col { gap: 10px; } .proof-shot { border-radius: 10px; } }
+    </style>
 
-      <!-- Telegram group chat 1 -->
-      <div class="tg-card reveal d1">
-        <div class="tg-header">
-          <div class="tg-avatar" style="background: linear-gradient(135deg, #2B5FDB, #A7B5E8);">A</div>
-          <div>
-            <div class="tg-chat-name">Atlas Private Network</div>
-            <div class="tg-chat-count">14 members</div>
-          </div>
-        </div>
-        <div class="tg-body">
-          <div class="tg-msg-group">
-            <div class="tg-sender" style="color: #A7B5E8;">Todd M.</div>
-            <div class="tg-bubble in">Got 3 matches in the first 24 hours after the profile rebuild. This is insane compared to before.</div>
-            <div class="tg-time">Tue 9:41 AM</div>
-          </div>
-          <div class="tg-msg-group">
-            <div class="tg-sender" style="color: #7AA0FF;">Yaro K.</div>
-            <div class="tg-bubble in">Same thing happened to me. The IG strategy is what did it for me. Girl reached out before I even said anything.</div>
-            <div class="tg-time">Tue 9:48 AM</div>
-          </div>
-          <div class="tg-msg-group">
-            <div class="tg-sender" style="color: #4ade80;">Spencer R.</div>
-            <div class="tg-bubble in">Week 6 for me. Had 3 first dates in one week. Never happened before this.</div>
-            <div class="tg-time">Tue 10:02 AM</div>
-          </div>
-        </div>
-        <div class="tg-placeholder-label">Replace with actual Telegram screenshot</div>
+    <div class="proof-masonry" id="proofWall">
+      <div class="proof-col">
+        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8352_blurred.JPG" style="aspect-ratio:683/440" loading="lazy" decoding="async" alt="Stranger in the elevator compliments his new style on the way to a photo shoot"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8362_blurred.JPG" style="aspect-ratio:412/440" loading="lazy" decoding="async" alt="Client dates and sleeps with two women, out seven nights in a row"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8372_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Instagram story revives a ghosted match into a date she initiated"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8382_blurred.JPG" style="aspect-ratio:546/440" loading="lazy" decoding="async" alt="Client cold-approaches the most beautiful girl at a Rome event and dates her"></div>
+        <div class="proof-shot" data-tag="on-dates social-profiles"><img src="img/tg-testimonials/IMG_8415_blurred.JPG" style="aspect-ratio:1688/440" loading="lazy" decoding="async" alt="Great date with a model who complimented his new necklace"></div>
+        <div class="proof-shot" data-tag="dating-apps online-dates"><img src="img/tg-testimonials/IMG_8353_blurred.JPG" style="aspect-ratio:295/440" loading="lazy" decoding="async" alt="New opener converts a dating-app match into her number for drinks"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8363_blurred.JPG" style="aspect-ratio:803/440" loading="lazy" decoding="async" alt="Client recaps a date with a girl he met cold approaching last weekend"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" style="aspect-ratio:1054/440" loading="lazy" decoding="async" alt="Client finally lands a date with the hottest girl he has talked to"></div>
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client pulls over 40 Bumble matches in under 24 hours"></div>
+        <div class="proof-shot" data-tag="dating-apps relationship"><img src="img/tg-testimonials/IMG_8410_blurred.JPG" style="aspect-ratio:313/440" loading="lazy" decoding="async" alt="Client meets his girlfriend and dream woman off a dating app"></div>
+        <div class="proof-shot" data-tag="social-profiles"><img src="img/tg-testimonials/IMG_8354_blurred.JPG" style="aspect-ratio:306/440" loading="lazy" decoding="async" alt="Flirty text exchange he credits to his on-point new style"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8369_blurred.JPG" style="aspect-ratio:585/440" loading="lazy" decoding="async" alt="Client has one of his best-ever first dates from a Hinge match"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8374_blurred.JPG" style="aspect-ratio:606/440" loading="lazy" decoding="async" alt="Date thanks him for taking her out and he soft-closes a second one"></div>
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8405_blurred.JPG" style="aspect-ratio:1368/440" loading="lazy" decoding="async" alt="Client racks up over 30 app matches while traveling in New Zealand"></div>
+        <div class="proof-shot" data-tag="dating-apps"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client matches with 18 girls in a single day"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8417_blurred.JPG" style="aspect-ratio:478/440" loading="lazy" decoding="async" alt="Client lands an instant date with a model from a cold approach"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8355_blurred.JPG" style="aspect-ratio:527/440" loading="lazy" decoding="async" alt="Client pulls three numbers in his last seven cold approaches"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" style="aspect-ratio:806/440" loading="lazy" decoding="async" alt="Client logs 35-40 approaches, 10 numbers, and 4 dates in a week"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8370_blurred.JPG" style="aspect-ratio:1067/440" loading="lazy" decoding="async" alt="Client is lining up four dates for a single weekend"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8375_blurred.JPG" style="aspect-ratio:277/440" loading="lazy" decoding="async" alt="Client rallies past a slump and is thrilled with his dating progress"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8418_blurred.JPG" style="aspect-ratio:1729/440" loading="lazy" decoding="async" alt="Client is now seeing his third Wilhelmina model"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8445_blurred.JPG" style="aspect-ratio:426/440" loading="lazy" decoding="async" alt="Client feels unstoppable now that he approaches every girl in person"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8361_blurred.JPG" style="aspect-ratio:625/440" loading="lazy" decoding="async" alt="Client goes on a couple of first dates using the coaching date lines"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8366_blurred.JPG" style="aspect-ratio:297/440" loading="lazy" decoding="async" alt="Client turns one girl into seven dates and dates five women in eight days"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" style="aspect-ratio:1127/440" loading="lazy" decoding="async" alt="Client goes on three dates in a week from Hinge and a cold approach"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8414_blurred.JPG" style="aspect-ratio:678/440" loading="lazy" decoding="async" alt="Client is on pace for about 20 dates in one month"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8446_blurred.JPG" style="aspect-ratio:968/440" loading="lazy" decoding="async" alt="Client cold-approaches daily and lines up a date from one"></div>
       </div>
-
-      <!-- Video interview 1 -->
-      <div class="vi-card reveal d2">
-        <div class="vi-thumb">
-          <div class="vi-thumb-bg" style="background: linear-gradient(135deg, #0d1128, #080a18);"></div>
-          <div class="vi-play"></div>
-          <div class="vi-label">
-            <div class="vi-name">Todd M.</div>
-            <div class="vi-detail">Software Engineer, 31 — New York</div>
-          </div>
-        </div>
-        <div class="vi-body">
-          <div class="vi-result">3 dates in week 6</div>
-          <div class="vi-quote">"The profile work changed how women responded before I even sent a message."</div>
-        </div>
+      <div class="proof-col">
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8357_blurred.JPG" style="aspect-ratio:282/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8367_blurred.JPG" style="aspect-ratio:667/440" loading="lazy" decoding="async" alt="Client now has so many options he is the one ghosting girls"></div>
+        <div class="proof-shot" data-tag="relationship"><img src="img/tg-testimonials/IMG_8377_blurred.JPG" style="aspect-ratio:296/440" loading="lazy" decoding="async" alt="Client is still dating a model he cold-approached in Milan, planning trips together"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" style="aspect-ratio:1150/440" loading="lazy" decoding="async" alt="Client has three dates lined up for the coming week"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8420_blurred.JPG" style="aspect-ratio:959/440" loading="lazy" decoding="async" alt="First date with a bikini model ends back at his place"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8358_blurred.JPG" style="aspect-ratio:281/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" style="aspect-ratio:753/440" loading="lazy" decoding="async" alt="First date ends back at her place and becomes a recurring fling"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8378_blurred.JPG" style="aspect-ratio:258/440" loading="lazy" decoding="async" alt="Client picks up a few models on a night out in Milan"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8416_blurred.JPG" style="aspect-ratio:1253/440" loading="lazy" decoding="async" alt="Client cold-approaches an Instagram model in SoHo and takes her on a date"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8439_blurred.JPG" style="aspect-ratio:618/440" loading="lazy" decoding="async" alt="Client's daytime cold approach turns into an instant date"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8359_blurred.JPG" style="aspect-ratio:457/440" loading="lazy" decoding="async" alt="Girl texts a warm thank-you after their date and wants to meet again"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8364_blurred.JPG" style="aspect-ratio:300/440" loading="lazy" decoding="async" alt="Client lands his first date and a Hinge match asking for his Instagram"></div>
+        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8379_blurred.JPG" style="aspect-ratio:305/440" loading="lazy" decoding="async" alt="Dialed-in app profile pulls 100+ likes and 15 matches in 48 hours"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8443_blurred.JPG" style="aspect-ratio:312/440" loading="lazy" decoding="async" alt="A ghosted gym crush slides back into his Instagram DMs asking him out"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8365_blurred.JPG" style="aspect-ratio:346/440" loading="lazy" decoding="async" alt="Date across a language barrier goes well and becomes a regular fling"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8380_blurred.JPG" style="aspect-ratio:1238/440" loading="lazy" decoding="async" alt="Bumble profile lands two dates and more conversations in Rio"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8406_blurred.JPG" style="aspect-ratio:886/440" loading="lazy" decoding="async" alt="Client says he got a lot out of the program and feels great"></div>
+        <div class="proof-shot" data-tag="dating-apps on-dates"><img src="img/tg-testimonials/IMG_8413_blurred.JPG" style="aspect-ratio:438/440" loading="lazy" decoding="async" alt="Client goes from few matches to consistently 2+ dates a week"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8356_blurred.JPG" style="aspect-ratio:256/440" loading="lazy" decoding="async" alt="Cold approach becomes an instant date, kiss, and a second date lined up"></div>
+        <div class="proof-shot" data-tag="dating-apps social-profiles"><img src="img/tg-testimonials/IMG_8371_blurred.JPG" style="aspect-ratio:729/440" loading="lazy" decoding="async" alt="Three past dating-app matches re-engage after seeing his Instagram story"></div>
+        <div class="proof-shot" data-tag="on-dates"><img src="img/tg-testimonials/IMG_8376_blurred.JPG" style="aspect-ratio:561/440" loading="lazy" decoding="async" alt="Client calls the program one of his best investments for his dating life"></div>
+        <div class="proof-shot" data-tag="social-profiles online-dates"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" style="aspect-ratio:1061/440" loading="lazy" decoding="async" alt="Photo shoot goes well and he books three dates for the week"></div>
+        <div class="proof-shot" data-tag="online-dates"><img src="img/tg-testimonials/IMG_8419_blurred.JPG" style="aspect-ratio:773/440" loading="lazy" decoding="async" alt="Text exchange with a model leads to a date tomorrow night"></div>
       </div>
-
-      <!-- Telegram DM 1 -->
-      <div class="dm-card reveal d3">
-        <div class="dm-header">
-          <div class="dm-avatar" style="background: linear-gradient(135deg, #4f5bd5, #d62976);">P</div>
-          <div>
-            <div class="dm-name">Parker J.</div>
-            <div class="dm-online">online</div>
-          </div>
-        </div>
-        <div class="dm-body">
-          <div class="dm-bubble in">Bro I need to tell you. My IG went from doing nothing to 3 girls reaching out in 7 days after the rebuild.</div>
-          <div class="dm-time">Mon 2:14 PM</div>
-          <div class="dm-bubble out">That's exactly what we built it to do.</div>
-          <div class="dm-time right">Mon 2:16 PM</div>
-          <div class="dm-bubble in">I was skeptical. Now I'm not. Worth every cent.</div>
-          <div class="dm-time">Mon 2:19 PM</div>
-        </div>
-        <div class="tg-placeholder-label">Replace with actual Telegram screenshot</div>
-      </div>
-
-      <!-- Telegram group chat 2 -->
-      <div class="tg-card reveal d1">
-        <div class="tg-header">
-          <div class="tg-avatar" style="background: linear-gradient(135deg, #2B5FDB, #A7B5E8);">A</div>
-          <div>
-            <div class="tg-chat-name">Atlas Private Network</div>
-            <div class="tg-chat-count">14 members</div>
-          </div>
-        </div>
-        <div class="tg-body">
-          <div class="tg-msg-group">
-            <div class="tg-sender" style="color: #fa7e1e;">Aakash P.</div>
-            <div class="tg-bubble in">Date debrief call yesterday was a turning point. I went from nervous talking to women to genuinely curious. Different energy entirely.</div>
-            <div class="tg-time">Thu 7:22 PM</div>
-          </div>
-          <div class="tg-msg-group">
-            <div class="tg-sender" style="color: #A7B5E8;">Maneet S.</div>
-            <div class="tg-bubble in">45 days in. Consistent pipeline for the first time in years. The accountability alone is worth the investment.</div>
-            <div class="tg-time">Thu 8:01 PM</div>
-          </div>
-        </div>
-        <div class="tg-placeholder-label">Replace with actual Telegram screenshot</div>
-      </div>
-
-      <!-- Video interview 2 -->
-      <div class="vi-card reveal d2">
-        <div class="vi-thumb">
-          <div class="vi-thumb-bg" style="background: linear-gradient(135deg, #0a1018, #05080f);"></div>
-          <div class="vi-play"></div>
-          <div class="vi-label">
-            <div class="vi-name">Yaro K.</div>
-            <div class="vi-detail">Founder, 29 — San Francisco</div>
-          </div>
-        </div>
-        <div class="vi-body">
-          <div class="vi-result">Consistent pipeline in 45 days</div>
-          <div class="vi-quote">"Everything was built around me specifically. Not a generic script."</div>
-        </div>
-      </div>
-
-      <!-- Telegram DM 2 -->
-      <div class="dm-card reveal d3">
-        <div class="dm-header">
-          <div class="dm-avatar" style="background: linear-gradient(135deg, #1f2a3a, #4f5bd5);">H</div>
-          <div>
-            <div class="dm-name">Hector V.</div>
-            <div class="dm-online">online</div>
-          </div>
-        </div>
-        <div class="dm-body">
-          <div class="dm-bubble in">Just had my best date in 3 years. Ended the night exactly how I wanted. The texting system + first date framework is built different.</div>
-          <div class="dm-time">Sat 11:44 PM</div>
-          <div class="dm-bubble out">That's what we're here for. Keep it going.</div>
-          <div class="dm-time right">Sat 11:47 PM</div>
-          <div class="dm-bubble in">Already have two more booked next week. Wild.</div>
-          <div class="dm-time">Sat 11:50 PM</div>
-        </div>
-        <div class="tg-placeholder-label">Replace with actual Telegram screenshot</div>
-      </div>
-
-    </div><!-- /.twall -->
+    </div>
 
     <p class="sub-note text-center reveal" style="margin-top: 28px;">
-      All placeholders above. Replace each card with real Telegram screenshots and recorded video interviews.
+      Real, unfiltered messages from inside the Atlas private network. Identities blurred to protect client privacy.
     </p>
   </div>
 </section>
@@ -869,5 +853,96 @@ window.addEventListener('scroll', () => {
   document.getElementById('stickyBar').classList.toggle('visible', window.scrollY > 220);
 }, { passive: true });
 </script>
+<!-- ═══ VIDEO MODAL ════════════════════════════════════════ -->
+<!--
+  HOW TO ADD A VIDEO:
+  1) Upload the video in Vidalytics.
+  2) Copy its embed snippet (the full <div ...> + <script ...> block).
+  3) Paste it INSIDE the matching <div class="vid-slot" ...> below, replacing the
+     comment line. Leave the data-video attribute untouched.
+  Slots left empty just show "available shortly" — they won't break the page.
+-->
+<div class="vid-modal" id="vidModal" role="dialog" aria-modal="true" aria-label="Video">
+  <div class="vid-modal-box">
+    <div class="vid-modal-head">
+      <div class="vid-modal-title" id="vidModalTitle">Video</div>
+      <button class="vid-modal-close" id="vidModalClose" aria-label="Close video">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="vid-modal-stage">
+
+      <div class="vid-slot" data-video="vsl">
+        <!-- PASTE VIDALYTICS EMBED HERE — VSL (main "message from Benjamin" video) -->
+      </div>
+
+      <div class="vid-slot" data-video="legitimacy">
+        <!-- PASTE VIDALYTICS EMBED HERE — "Who Is Benjamin Seda, and Why Should You Trust Him?" -->
+      </div>
+
+      <div class="vid-slot" data-video="investment">
+        <!-- PASTE VIDALYTICS EMBED HERE — "Why Atlas Costs What It Costs" -->
+      </div>
+
+      <div class="vid-slot" data-video="fit">
+        <!-- PASTE VIDALYTICS EMBED HERE — "Who This Program Is For (And Who It's Not)" -->
+      </div>
+
+      <div class="vid-slot" data-video="risk">
+        <!-- PASTE VIDALYTICS EMBED HERE — "What Happens If It Doesn't Work?" -->
+      </div>
+
+      <div class="vid-slot" data-video="timeline">
+        <!-- PASTE VIDALYTICS EMBED HERE — "What Actually Happens in Your First 30 Days" -->
+      </div>
+
+      <div class="vid-slot" data-video="results">
+        <!-- PASTE VIDALYTICS EMBED HERE — "Real Results. Average, Not Highlight Reel." -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* Video modal — opens the matching Vidalytics slot for any [data-video] trigger */
+(function () {
+  const modal = document.getElementById('vidModal');
+  const titleEl = document.getElementById('vidModalTitle');
+  const slots = document.querySelectorAll('.vid-slot');
+  const TITLES = {
+    vsl:        'A message from Benjamin',
+    legitimacy: 'Who Is Benjamin Seda, and Why Should You Trust Him?',
+    investment: 'Why Atlas Costs What It Costs',
+    fit:        "Who This Program Is For (And Who It's Not)",
+    risk:       "What Happens If It Doesn't Work?",
+    timeline:   'What Actually Happens in Your First 30 Days',
+    results:    'Real Results. Average, Not Highlight Reel.'
+  };
+
+  function open(key) {
+    slots.forEach(s => s.classList.toggle('active', s.dataset.video === key));
+    titleEl.textContent = TITLES[key] || 'Video';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    slots.forEach(s => s.classList.remove('active'));
+  }
+
+  document.querySelectorAll('[data-video]').forEach(el => {
+    if (el.classList.contains('vid-slot')) return; // slots are targets, not triggers
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => open(el.dataset.video));
+  });
+
+  document.getElementById('vidModalClose').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+})();
+</script>
+
 </body>
 </html>
