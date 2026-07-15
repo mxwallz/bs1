@@ -4695,7 +4695,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 
 /* ══════════════════════════════════════════════════════════
-   MOBILE SWIPE DECK — scroll-pinned Tinder-style deliverables.
+   MOBILE SWIPE DECK — gesture-stepped Tinder-style deliverables.
    Desktop keeps the stacked .wi-modules layout; phones (≤767px)
    swap in a pinned card stack that swipes as you scroll.
    ══════════════════════════════════════════════════════════ */
@@ -4706,16 +4706,14 @@ body.deliv-modal-open { overflow: hidden; }
   #what-you-get .inner { max-width: none; }
 }
 .sd-track { position: relative; }
-/* Scroll-pinned deck: the viewport pins while you scroll the tall track,
-   cards advance one per scroll segment. NATIVE position:sticky — the browser
-   pins it on its compositor thread with zero frame lag (the old JS-driven
-   fixed-position state machine ran a frame behind the scroll and visibly
-   teleported at the pin/unpin boundaries, worst on scroll-up). Enabled by
-   switching the root overflow-x from hidden to clip. */
+/* Gesture-stepped deck: one horizontal swipe (or tap) = exactly one card.
+   No scroll pinning, no tall scroll track — the section is normal height and
+   vertical drags always just scroll the page. Card motion is a discrete CSS
+   transition (compositor-only), so it stays smooth regardless of scroll frame
+   rate or connection quality. */
 .sd-sticky {
-  position: sticky; top: 54px;
-  height: calc(100svh - 54px);
-  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
   padding: 10px 2px 12px;
 }
 .sd-head { flex-shrink: 0; padding: 4px 12px 0; }
@@ -4737,6 +4735,8 @@ body.deliv-modal-open { overflow: hidden; }
   transform-origin: center 78%;
   backface-visibility: hidden;
   will-change: transform, opacity; overflow: hidden;
+  /* discrete-step animation — pure compositor, no scroll-linked JS */
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 .sd-card::before {
   content: ""; position: absolute; top: -46%; left: 50%; transform: translateX(-50%);
@@ -4764,8 +4764,8 @@ body.deliv-modal-open { overflow: hidden; }
 .sd-card-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; color: var(--w35); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 14px; position: relative; z-index: 1; }
 .sd-card-foot svg { width: 15px; height: 15px; }
 .sd-hint { flex-shrink: 0; text-align: center; color: var(--w35); font-size: 10.5px; letter-spacing: 0.20em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.3s ease; }
-.sd-hint::after { content: "↓"; font-size: 13px; animation: sdBob 1.6s ease-in-out infinite; }
-@keyframes sdBob { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(4px); opacity: 1; } }
+.sd-hint::after { content: "←"; font-size: 13px; animation: sdBob 1.6s ease-in-out infinite; }
+@keyframes sdBob { 0%, 100% { transform: translateX(0); opacity: 0.5; } 50% { transform: translateX(-4px); opacity: 1; } }
 /* Reduced motion: no auto-advance — lay every card out as a static readable stack. */
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   #what-you-get .sd-stack { height: auto !important; }
@@ -5489,7 +5489,7 @@ body.deliv-modal-open { overflow: hidden; }
 
     </div>
 
-    <!-- MOBILE-ONLY: scroll-pinned Tinder-style swipe deck of the same deliverables -->
+    <!-- MOBILE-ONLY: gesture-stepped Tinder-style swipe deck of the same deliverables (one swipe/tap = one card) -->
     <div class="swipe-deck">
       <div class="sd-track" id="sdTrack">
         <div class="sd-sticky">
@@ -5615,7 +5615,7 @@ body.deliv-modal-open { overflow: hidden; }
             </article>
 
           </div>
-          <div class="sd-hint" id="sdHint">Keep scrolling</div>
+          <div class="sd-hint" id="sdHint">Swipe for the next one</div>
         </div>
       </div>
     </div>
@@ -7070,42 +7070,30 @@ body.deliv-modal-open { overflow: hidden; }
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   MOBILE SWIPE DECK — scroll-driven pinned card stack (≤767px).
-   The viewport pins while you scroll a tall track; each card holds
-   for one scroll segment then glides off with a light tilt, the next
-   peeking behind. Tuned per feedback: longer hold per card (seg 0.80)
-   so you can't blow past them, gentle 3deg lean (was 9). Reduced-motion
-   falls back to a plain static stack (no pin). Pinning is NATIVE
-   position:sticky (see .sd-sticky CSS) — JS only drives the card
-   transforms and the progress bar.
+   MOBILE SWIPE DECK — gesture-stepped card stack (≤767px).
+   One horizontal swipe (or tap) = exactly one card. Left = next,
+   right = previous, clamped at the ends. No scroll pinning, no tall
+   scroll track, no scroll-linked JS at all: vertical drags always
+   scroll the page (we never preventDefault), and the card motion is
+   a discrete CSS transition — pure compositor work, so it stays
+   smooth regardless of frame rate or connection quality.
+   Reduced-motion falls back to a plain static stack (CSS).
    ══════════════════════════════════════════════════════════ */
 (function () {
   var track = document.getElementById('sdTrack');
   var stack = document.getElementById('sdStack');
   if (!track || !stack) return;
-  var viewport = track.querySelector('.sd-sticky');
   var cards = Array.prototype.slice.call(stack.querySelectorAll('.sd-card'));
   var N = cards.length;
   var barFill = document.getElementById('sdBarFill');
   var curEl = document.getElementById('sdCur');
   var hint = document.getElementById('sdHint');
-  var STICKY_TOP = 54;
-  var SEG = 0.80;                 // scroll distance per card, in viewport heights (higher = slower / holds longer)
-  var LEAN = 3;                   // exit rotation in degrees (was 9 — felt like it leaned into the others)
+  var LEAN = 3;                   // exit rotation in degrees
   var mq = window.matchMedia('(max-width: 767px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var on = function () { return mq.matches && !reduce; };
 
-  var lastIndex = -1, ticking = false;
-
-  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
-  function ease(t) { return t * t * (3 - 2 * t); }   // smoothstep — matches the site's eased motion
-
-  function sizeTrack() {
-    if (!on()) { track.style.height = ''; return; }
-    var seg = window.innerHeight * SEG;
-    track.style.height = Math.round(window.innerHeight + (N - 1) * seg) + 'px';
-  }
+  var idx = 0, interacted = false;
 
   // Size the stack to the tallest card's natural content height so every
   // overlaid card shares one tight box (no empty flex space).
@@ -7124,71 +7112,63 @@ body.deliv-modal-open { overflow: hidden; }
     stack.style.height = Math.min(max, cap) + 'px';
   }
 
-  function render() {
+  // Set every card's resting state for the current index; the .sd-card CSS
+  // transition animates between states.
+  function apply() {
     if (!on()) return;
-    var trackRect = track.getBoundingClientRect();
-    // Deck fully off-screen → bail before the per-card transform loop.
-    // Keeps page scrolling smooth above/below the deck.
-    if (trackRect.bottom < -40 || trackRect.top > window.innerHeight + 40) return;
-    // Sticky handles the pinning; progress is just how far the track top has
-    // travelled past the pin line, over the pinnable range.
-    var pinRange = Math.max(1, track.offsetHeight - viewport.offsetHeight);
-    var p = clamp((STICKY_TOP - trackRect.top) / pinRange, 0, 1);
-    var cf = p * (N - 1);
-    var idx = Math.floor(cf + 1e-6); if (idx > N - 1) idx = N - 1;
-    var local = clamp(cf - idx, 0, 1);
-
-    if (idx !== lastIndex) {
-      if (lastIndex !== -1 && navigator.vibrate) navigator.vibrate(5);
-      lastIndex = idx;
-      curEl.textContent = String(idx + 1).padStart(2, '0');
-    }
-
-    barFill.style.width = (Math.pow(p, 0.6) * 100).toFixed(1) + '%';
-    hint.style.opacity = p > 0.03 ? '0' : '';
-
     for (var i = 0; i < N; i++) {
       var c = cards[i], transform, opacity, z;
       if (i < idx) {
         transform = 'translateX(124%) translateY(-2%) rotate(' + LEAN + 'deg)'; opacity = 0; z = 0;
       } else if (i === idx) {
-        var g = ease(local);
-        transform = 'translateX(' + (g * 124).toFixed(2) + '%) translateY(' + (-g * 2).toFixed(2) +
-                    '%) rotate(' + (g * LEAN).toFixed(2) + 'deg)';
-        opacity = 1; z = N + 1;
+        transform = 'none'; opacity = 1; z = N + 1;
       } else {
         var depth = i - idx;
-        var rise = depth === 1 ? ease(local) : 0;
-        var scale = (1 - depth * 0.05) + rise * 0.05;
-        var y = (depth * 3.0) - rise * 3.0;
-        transform = 'translateY(' + y.toFixed(2) + '%) scale(' + scale.toFixed(3) + ')';
+        transform = 'translateY(' + (depth * 3) + '%) scale(' + (1 - depth * 0.05).toFixed(3) + ')';
         opacity = depth <= 2 ? 1 : 0; z = N - depth;
       }
       c.style.transform = transform; c.style.opacity = opacity; c.style.zIndex = z;
     }
+    curEl.textContent = String(idx + 1).padStart(2, '0');
+    barFill.style.width = ((N <= 1 ? 1 : idx / (N - 1)) * 100).toFixed(1) + '%';
+    hint.style.opacity = interacted ? '0' : '';
   }
 
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }
+  function step(dir) {
+    var next = Math.max(0, Math.min(N - 1, idx + dir));
+    if (next === idx) { interacted = true; hint.style.opacity = '0'; return; }
+    idx = next; interacted = true;
+    if (navigator.vibrate) navigator.vibrate(5);
+    apply();
+  }
+
+  // One swipe = one card. Horizontal-only, small threshold so a short flick
+  // is enough; vertical drags fall through to normal page scroll. A clean
+  // tap (no movement) also advances.
+  var sx = 0, sy = 0, tracking = false;
+  stack.addEventListener('touchstart', function (e) {
+    var t = e.touches[0]; sx = t.clientX; sy = t.clientY; tracking = true;
+  }, { passive: true });
+  stack.addEventListener('touchend', function (e) {
+    if (!tracking || !on()) { tracking = false; return; }
+    tracking = false;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 32 && Math.abs(dx) > Math.abs(dy) * 1.2) step(dx < 0 ? 1 : -1);
+    else if (Math.abs(dx) < 8 && Math.abs(dy) < 8) step(1);
+  }, { passive: true });
 
   function reset() {
     cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; });
-    lastIndex = -1;
   }
 
-  function init() { sizeTrack(); measure(); if (on()) { render(); } else { reset(); } }
+  function init() { measure(); if (on()) { apply(); } else { reset(); } }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  // Resize guard: on phones, `resize` fires every time the browser toolbar
-  // collapses/expands — i.e. exactly when the user reverses scroll direction.
-  // Re-sizing the multi-viewport-tall track on those events shifted all the
-  // content below the deck mid-scroll, which read as the page jumping on its
-  // own. Only re-init on a width change (rotation / real resize) or a large
-  // height change; toolbar-sized height wobbles are ignored.
-  var lastW = window.innerWidth, lastH = window.innerHeight;
+  // Only re-measure on real width changes (rotation); toolbar-driven height
+  // resizes are ignored — re-laying out mid-scroll made the page jump.
+  var lastW = window.innerWidth;
   window.addEventListener('resize', function () {
-    var w = window.innerWidth, h = window.innerHeight;
-    if (w === lastW && Math.abs(h - lastH) < 150) return;   // toolbar wobble — ignore
-    lastW = w; lastH = h;
+    if (window.innerWidth === lastW) return;
+    lastW = window.innerWidth;
     init();
   }, { passive: true });
   (mq.addEventListener ? mq.addEventListener('change', init) : mq.addListener(init));
