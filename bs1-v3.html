@@ -70,7 +70,7 @@ body {
   background: var(--bg0); color: var(--w100);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
   font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale; overflow-x: clip; /* clip (not hidden): same clipping, but doesn't break position:sticky descendants */
   font-feature-settings: "ss01", "cv01", "cv11";
 }
 a { color: inherit; text-decoration: none; }
@@ -2536,8 +2536,8 @@ footer { padding: 44px 24px; border-top: 1px solid var(--border); text-align: ce
   .sticky-apply button { padding: 10px 16px; font-size: 11px; }
 }
 
-/* Prevent horizontal overflow universally */
-body { overflow-x: hidden; }
+/* Prevent horizontal overflow universally (clip: doesn't break position:sticky) */
+body { overflow-x: clip; }
 
 
 /* ══════════════════════════════════════════════════════════
@@ -2679,9 +2679,13 @@ html, body { background: var(--bg0); }
 /* ══════════════════════════════════════════════════════════
    v26.2 scroll + deliverable-card sizing fixes
    ══════════════════════════════════════════════════════════ */
-/* Lock page to vertical-only swipes (kills stray side-to-side scroll) */
-html { overflow-x: hidden; }
-body { overflow-x: hidden; touch-action: pan-y; }
+/* Lock page to vertical-only swipes (kills stray side-to-side scroll).
+   overflow-x: clip, not hidden — hidden makes html/body a scroll container,
+   which silently breaks position:sticky everywhere (the deck relied on a
+   fragile JS-fixed pin because of this). clip clips identically without
+   creating a scroll container. */
+html { overflow-x: clip; }
+body { overflow-x: clip; touch-action: pan-y; }
 /* Opt horizontal scroll BACK IN only on the elements that need it */
 .swipe-track, .testi-columns { touch-action: pan-x; }
 
@@ -4704,16 +4708,17 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .sd-track { position: relative; }
 /* Scroll-pinned deck: the viewport pins while you scroll the tall track,
-   cards advance one per scroll segment. JS-driven fixed positioning
-   (position:sticky is broken by the root's overflow-x:hidden). */
+   cards advance one per scroll segment. NATIVE position:sticky — the browser
+   pins it on its compositor thread with zero frame lag (the old JS-driven
+   fixed-position state machine ran a frame behind the scroll and visibly
+   teleported at the pin/unpin boundaries, worst on scroll-up). Enabled by
+   switching the root overflow-x from hidden to clip. */
 .sd-sticky {
-  position: absolute; top: 0; left: 0; right: 0;
+  position: sticky; top: 54px;
   height: calc(100svh - 54px);
   display: flex; flex-direction: column; justify-content: center; gap: 14px;
   padding: 10px 2px 12px;
 }
-.sd-sticky.is-fixed { position: fixed; top: 54px; right: auto; }
-.sd-sticky.is-bottom { position: absolute; top: auto; bottom: 0; left: 0; right: 0; }
 .sd-head { flex-shrink: 0; padding: 4px 12px 0; }
 .sd-head-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 11px; }
 .sd-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); }
@@ -4860,18 +4865,17 @@ body.deliv-modal-open { overflow: hidden; }
   #video-testimonials .vt-meta { padding: 20px 22px 24px; }
 }
 
-/* Perf: freeze EVERY looping animation while the page is actively scrolling.
+/* Perf: pause the looping animations only in sections that are OFF-SCREEN.
    ~45 infinite animations run across the page (phone-mockup demos, pulses,
-   marquees). Compositing all of them every frame is the main scroll drain, and
-   it hurts most exactly while the user scrolls — up or down. One body.is-scrolling
-   class (toggled by a single debounced scroll listener) pauses them for the
-   duration of the gesture and releases them ~180ms after scrolling stops, so at
-   rest everything animates normally. Cheaper and smoother than per-section
-   wake/sleep toggling, which itself spiked on scroll-up. Skipped under
-   prefers-reduced-motion (decorative loops are already suppressed there). */
-body.is-scrolling *,
-body.is-scrolling *::before,
-body.is-scrolling *::after { animation-play-state: paused !important; }
+   marquees); compositing all of them every frame is the main scroll drain.
+   An IntersectionObserver (JS below) toggles .anim-idle per section with a
+   generous margin, so anything the user can actually see keeps moving — a
+   previous approach froze EVERYTHING while scrolling, which made every visible
+   marquee stutter to a halt mid-gesture and read as page-wide glitchiness. */
+.section.anim-idle,
+.section.anim-idle *,
+.section.anim-idle *::before,
+.section.anim-idle *::after { animation-play-state: paused !important; }
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -6436,22 +6440,8 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 
 
 <script>
-  // Proof wall tag filter
-  (function() {
-    const tags = document.querySelectorAll('.proof-tag');
-    const cards = document.querySelectorAll('#proofWall .tc-card');
-    tags.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tags.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        cards.forEach(card => {
-          const match = f === 'all' || (card.dataset.tag || '').split(' ').includes(f);
-          card.style.display = match ? '' : 'none';
-        });
-      });
-    });
-  })();
+  // (dead code removed: proof-wall tag filter — the wall is now .proof-shot
+  //  static columns with no .proof-tag buttons in the markup)
 
   // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
@@ -6461,19 +6451,17 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* === Perf: pause looping animations while actively scrolling ===
-     See the body.is-scrolling CSS rule. Adds the class on the first scroll event
-     and removes it 180ms after the last one, so the ~45 infinite animations stop
-     compositing during the scroll gesture (the janky moment) and resume at rest.
-     Passive listener, single class toggle. Off under prefers-reduced-motion. */
+  /* === Perf: pause looping animations in off-screen sections ===
+     See the .anim-idle CSS rule. A 300px rootMargin means sections wake well
+     before they enter the viewport — nothing visible ever freezes; only work
+     the user can't see is skipped. Off under prefers-reduced-motion. */
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let scrollT = null;
-    window.addEventListener('scroll', () => {
-      document.body.classList.add('is-scrolling');
-      if (scrollT) clearTimeout(scrollT);
-      scrollT = setTimeout(() => { document.body.classList.remove('is-scrolling'); scrollT = null; }, 180);
-    }, { passive: true });
+    if (!('IntersectionObserver' in window)) return;
+    const animIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.target.classList.toggle('anim-idle', !e.isIntersecting));
+    }, { rootMargin: '300px 0px' });
+    document.querySelectorAll('.section').forEach(s => animIO.observe(s));
   })();
 
   /* === bs1-v2: sunk-cost count-up === */
@@ -6866,53 +6854,8 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
     setInterval(addNotif, INTERVAL_MS);
   }
 
-  // Profile Rebuild phone swiper (deliverable 01).
-  const profSlides = document.getElementById('prof-slides');
-  const profTitleEl = document.getElementById('prof-title');
-  const profDots = document.querySelectorAll('#prof-dots .prof-dot');
-  const profTitles = [
-    { brand: 'Hinge', title: 'Dating App Profile' },
-    { brand: 'Instagram', title: 'Profile Grid' },
-    { brand: 'Atlas', title: 'Image &amp; Wardrobe' },
-    { brand: 'Hinge', title: 'Bio &amp; Prompts' }
-  ];
-  if (profSlides && profTitleEl && profDots.length) {
-    profSlides.addEventListener('scroll', () => {
-      const rect = profSlides.getBoundingClientRect();
-      const center = rect.left + rect.width / 2;
-      let closest = 0; let closestDist = Infinity;
-      profSlides.querySelectorAll('.prof-slide').forEach((s, i) => {
-        const sRect = s.getBoundingClientRect();
-        const sCenter = sRect.left + sRect.width / 2;
-        const dist = Math.abs(sCenter - center);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      profDots.forEach((d, i) => d.classList.toggle('active', i === closest));
-      if (profTitles[closest]) {
-        profTitleEl.innerHTML = `<span class="prof-brand">${profTitles[closest].brand}</span>${profTitles[closest].title}`;
-      }
-    }, { passive: true });
-  }
-
-  // Tinder-style swipe cards. Update pagination dots.
-  const swipeTrack = document.getElementById('swipe-track');
-  const swipeDots = document.querySelectorAll('#swipe-dots .swipe-dot');
-  if (swipeTrack && swipeDots.length) {
-    const cards = swipeTrack.querySelectorAll('.swipe-card');
-    swipeTrack.addEventListener('scroll', () => {
-      const trackRect = swipeTrack.getBoundingClientRect();
-      const trackCenter = trackRect.left + trackRect.width / 2;
-      let closestIdx = 0;
-      let closestDist = Infinity;
-      cards.forEach((card, i) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(cardCenter - trackCenter);
-        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
-      });
-      swipeDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
-    }, { passive: true });
-  }
+  // (dead code removed: #prof-slides phone-swiper and #swipe-track dot
+  //  updaters — neither element exists in the current markup)
 
   // v30.6 · Deliverable accordion — moves the FULL .deliv (visual + copy)
   // into the tapped card's expand slot. Event delegation on document so
@@ -6958,23 +6901,34 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
   })();
 
   // Video testimonial swipe carousel dot updater (ported from v32).
+  // rAF-throttled: momentum scrolling fires hundreds of scroll events, and the
+  // old per-event getBoundingClientRect loop caused jank while swiping the
+  // cards. Once per frame, and dots only touched when the index changes.
   (function initVtCarousel() {
     const track = document.querySelector('.vt-swipe-track');
     const dots = document.querySelectorAll('#vtDots .vt-dot');
     if (!track || !dots.length) return;
     const cards = track.querySelectorAll('.vt-card');
+    let raf = null, activeIdx = -1;
     track.addEventListener('scroll', () => {
-      const trackRect = track.getBoundingClientRect();
-      const trackCenter = trackRect.left + trackRect.width / 2;
-      let closestIdx = 0;
-      let closestDist = Infinity;
-      cards.forEach((card, i) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(cardCenter - trackCenter);
-        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      if (raf !== null) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+        let closestIdx = 0;
+        let closestDist = Infinity;
+        cards.forEach((card, i) => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(cardCenter - trackCenter);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        });
+        if (closestIdx !== activeIdx) {
+          activeIdx = closestIdx;
+          dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+        }
       });
-      dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
     }, { passive: true });
   })();
 
@@ -7015,27 +6969,9 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
     });
   })();
 
-  // Mobile testimonials — rAF auto-scroll, user-scrollable, mobile only
-  (function() {
-    if (window.innerWidth > 768) return;
-    const outer = document.getElementById('testiMobileFeed');
-    if (!outer) return;
-    const track = outer.querySelector('.testi-feed-track');
-    let paused = false, resumeTimer, lastTs = null;
-    const SPEED = 38;
-    function step(ts) {
-      if (lastTs !== null && !paused) {
-        const dt = (ts - lastTs) / 1000;
-        outer.scrollTop += SPEED * dt;
-        if (outer.scrollTop >= track.scrollHeight / 2) outer.scrollTop -= track.scrollHeight / 2;
-      }
-      lastTs = ts;
-      requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-    outer.addEventListener('touchstart', function() { paused = true; clearTimeout(resumeTimer); }, { passive: true });
-    outer.addEventListener('touchend', function() { clearTimeout(resumeTimer); resumeTimer = setTimeout(function() { paused = false; lastTs = null; }, 1800); }, { passive: true });
-  })();
+  // (dead code removed: #testiMobileFeed auto-scroller — no such element in
+  //  the current markup; an rAF-driven scrollTop feed that moves on its own is
+  //  also exactly the kind of self-moving UI this page is steering away from)
 
   // Feature-card ambient particles — a few specks drift upward inside each
   // .wy-card, staggered so they don't move in lockstep. Skips reduced-motion.
@@ -7069,8 +7005,9 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
    for one scroll segment then glides off with a light tilt, the next
    peeking behind. Tuned per feedback: longer hold per card (seg 0.80)
    so you can't blow past them, gentle 3deg lean (was 9). Reduced-motion
-   falls back to a plain static stack (no pin). JS-driven fixed
-   positioning — position:sticky is broken by the root's overflow-x:hidden.
+   falls back to a plain static stack (no pin). Pinning is NATIVE
+   position:sticky (see .sd-sticky CSS) — JS only drives the card
+   transforms and the progress bar.
    ══════════════════════════════════════════════════════════ */
 (function () {
   var track = document.getElementById('sdTrack');
@@ -7089,7 +7026,7 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var on = function () { return mq.matches && !reduce; };
 
-  var lastIndex = -1, ticking = false, state = '';
+  var lastIndex = -1, ticking = false;
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function ease(t) { return t * t * (3 - 2 * t); }   // smoothstep — matches the site's eased motion
@@ -7117,39 +7054,16 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
     stack.style.height = Math.min(max, cap) + 'px';
   }
 
-  function setState(s) {
-    if (s === state) return;
-    state = s;
-    viewport.classList.toggle('is-fixed', s === 'pin');
-    viewport.classList.toggle('is-bottom', s === 'post');
-    if (s !== 'pin') { viewport.style.left = ''; viewport.style.width = ''; }
-  }
-
   function render() {
-    if (!on()) { setState('pre'); return; }
+    if (!on()) return;
     var trackRect = track.getBoundingClientRect();
-    // Deck fully off-screen → set resting state and bail before the per-card
-    // transform loop. Keeps page scrolling smooth above/below the deck.
-    if (trackRect.bottom < -40 || trackRect.top > window.innerHeight + 40) {
-      setState(trackRect.top > 0 ? 'pre' : 'post');
-      return;
-    }
-    var scrollY = window.scrollY || window.pageYOffset;
-    var trackTopAbs = trackRect.top + scrollY;
-    var pinH = viewport.offsetHeight;
-    var pinStart = trackTopAbs - STICKY_TOP;
-    var pinRange = Math.max(1, track.offsetHeight - pinH);
-    var pinEnd = pinStart + pinRange;
-
-    if (scrollY < pinStart) { setState('pre'); }
-    else if (scrollY > pinEnd) { setState('post'); }
-    else {
-      setState('pin');
-      viewport.style.left = Math.round(trackRect.left) + 'px';
-      viewport.style.width = Math.round(track.clientWidth) + 'px';
-    }
-
-    var p = clamp((scrollY - pinStart) / pinRange, 0, 1);
+    // Deck fully off-screen → bail before the per-card transform loop.
+    // Keeps page scrolling smooth above/below the deck.
+    if (trackRect.bottom < -40 || trackRect.top > window.innerHeight + 40) return;
+    // Sticky handles the pinning; progress is just how far the track top has
+    // travelled past the pin line, over the pinnable range.
+    var pinRange = Math.max(1, track.offsetHeight - viewport.offsetHeight);
+    var p = clamp((STICKY_TOP - trackRect.top) / pinRange, 0, 1);
     var cf = p * (N - 1);
     var idx = Math.floor(cf + 1e-6); if (idx > N - 1) idx = N - 1;
     var local = clamp(cf - idx, 0, 1);
@@ -7188,13 +7102,25 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
 
   function reset() {
     cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; });
-    lastIndex = -1; setState('pre');
+    lastIndex = -1;
   }
 
   function init() { sizeTrack(); measure(); if (on()) { render(); } else { reset(); } }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { sizeTrack(); init(); }, { passive: true });
+  // Resize guard: on phones, `resize` fires every time the browser toolbar
+  // collapses/expands — i.e. exactly when the user reverses scroll direction.
+  // Re-sizing the multi-viewport-tall track on those events shifted all the
+  // content below the deck mid-scroll, which read as the page jumping on its
+  // own. Only re-init on a width change (rotation / real resize) or a large
+  // height change; toolbar-sized height wobbles are ignored.
+  var lastW = window.innerWidth, lastH = window.innerHeight;
+  window.addEventListener('resize', function () {
+    var w = window.innerWidth, h = window.innerHeight;
+    if (w === lastW && Math.abs(h - lastH) < 150) return;   // toolbar wobble — ignore
+    lastW = w; lastH = h;
+    init();
+  }, { passive: true });
   (mq.addEventListener ? mq.addEventListener('change', init) : mq.addListener(init));
   init();
 })();
@@ -7216,8 +7142,12 @@ body.is-scrolling *::after { animation-play-state: paused !important; }
   var next = document.getElementById('rcptNext');
   var section = document.getElementById('receipts');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // No auto-advance on touch devices: a strip that moves by itself while the
+  // user is reading/swiping reads as the page acting on its own. Desktop
+  // (fine pointer) keeps the gentle auto-advance.
+  var coarse = window.matchMedia('(pointer: coarse)').matches;
   var DWELL = 4000;
-  var idx = 0, manual = reduce, timer = null, inView = false;
+  var idx = 0, manual = reduce || coarse, timer = null, inView = false;
 
   // scrollTo only changes THIS scroller's horizontal offset — it can never move
   // the page vertically, which is the whole point of the rewrite.
