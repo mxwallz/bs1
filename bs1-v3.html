@@ -4778,7 +4778,7 @@ body.deliv-modal-open { overflow: hidden; }
 /* Video testimonial thumbnail → animated before/after reveal that wipes L→R,
    then hands off to the video thumbnail (play button). Placeholder halves —
    drop real photos into --vt-before / --vt-after per card later. */
-#video-testimonials .vt-thumb { position: relative; overflow: hidden; padding: 0; }
+#video-testimonials .vt-thumb { position: relative; overflow: hidden; padding: 0; aspect-ratio: 1 / 1; /* square-ish on desktop (was 16:10 — read too rectangular); mobile overrides to 4/5 below */ }
 #video-testimonials .vt-thumb::after { display: none; }
 #video-testimonials .vt-badge, #video-testimonials .vt-duration { z-index: 6; }
 
