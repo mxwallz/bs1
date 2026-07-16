@@ -4806,11 +4806,13 @@ body.deliv-modal-open { overflow: hidden; }
   width: 24px; height: 24px; border-radius: 50%; background: var(--gold);
   box-shadow: 0 0 0 4px rgba(167,181,232,.22), 0 4px 12px rgba(0,0,0,.4);
 }
+/* Play overlay: ALWAYS visible. (It used to blink on a 7s vtHandoff cycle,
+   coordinated with the old before/after wipe these thumbs had — with real
+   video posters that just made the play button invisible half the time.) */
 #video-testimonials .vt-video-state {
   position: absolute; inset: 0; z-index: 3;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px;
   background: linear-gradient(to bottom, rgba(8,10,16,.15), rgba(8,10,16,.7));
-  opacity: 0; animation: vtHandoff 7s ease infinite;
 }
 #video-testimonials .vt-thumb .vt-play { position: static; transform: none; margin: 0; width: 56px; height: 56px; }
 #video-testimonials .vt-thumb .vt-play:hover { transform: scale(1.08); }
@@ -4827,15 +4829,9 @@ body.deliv-modal-open { overflow: hidden; }
   44% { left: 100%; opacity: 1; }
   52%, 100% { left: 100%; opacity: 0; }
 }
-@keyframes vtHandoff {
-  0% { opacity: 1; }
-  8%, 60% { opacity: 0; }
-  72%, 100% { opacity: 1; }
-}
 @media (prefers-reduced-motion: reduce) {
   #video-testimonials .vt-ba-after { clip-path: inset(0 0 0 0); animation: none; }
   #video-testimonials .vt-ba-divider { display: none; }
-  #video-testimonials .vt-video-state { opacity: 1; animation: none; }
 }
 /* Mobile: bigger, more prominent testimonial cards + taller portrait thumbnail */
 @media (max-width: 767px) {
