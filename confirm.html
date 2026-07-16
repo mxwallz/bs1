@@ -99,9 +99,10 @@ p { color: var(--w75); }
 @keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .nav-badge {
   display: flex; align-items: center; gap: 7px;
-  font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--ok);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: #fbbf24;
 }
-.nav-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px rgba(74,222,128,0.5); }
+.nav-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 8px rgba(251,191,36,0.5); animation: navDot 1.6s ease-in-out infinite; }
+@keyframes navDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
 /* ── hero ── */
 .hero-confirm {
@@ -111,11 +112,11 @@ p { color: var(--w75); }
 }
 .confirm-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--ok-soft); border: 1px solid rgba(74,222,128,0.28);
-  color: var(--ok); font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.35);
+  color: #fbbf24; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; padding: 7px 16px; border-radius: 99px; margin-bottom: 26px;
 }
-.confirm-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+.confirm-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fbbf24; animation: navDot 1.6s ease-in-out infinite; }
 .hero-subhead {
   font-size: clamp(15px, 1.45vw, 18px); color: var(--w55);
   max-width: 520px; margin: 20px auto 0; line-height: 1.7;
@@ -569,7 +570,7 @@ footer {
     </svg>
     ATLAS
   </div>
-  <div class="nav-badge">Call Confirmed</div>
+  <div class="nav-badge">Action Required</div>
 </nav>
 
 <!-- ═══ HERO ═══════════════════════════════════════════════ -->
@@ -578,11 +579,11 @@ footer {
 
     <!-- Badge + headline + subhead -->
     <div class="reveal">
-      <div class="confirm-badge">Call Confirmed</div>
+      <div class="confirm-badge">Final Steps Required</div>
     </div>
-    <h1 class="reveal d1">You're in.<br><em>Here's what to do before we speak.</em></h1>
+    <h1 class="reveal d1">Your call isn&rsquo;t locked in yet.<br><em>Complete the steps below to get on it.</em></h1>
     <p class="hero-subhead reveal d2">
-      Your call with Atlas Advisory is scheduled.
+      The time is reserved for you. The steps below are how you keep it.
     </p>
 
     <div class="must-do-alert reveal d2">
