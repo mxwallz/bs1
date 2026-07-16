@@ -207,6 +207,9 @@ p { color: var(--w75); }
 
 /* ── breakout videos ── */
 .breakout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+/* An odd card left alone on the last row centers itself (3-col: middle column;
+   2-col breakpoint: spans the row at single-card width). */
+.breakout-grid > .bv-card:last-child:nth-child(3n+1) { grid-column: 2; }
 .bv-card {
   background: var(--card); border: 1px solid var(--border); border-radius: 14px;
   overflow: hidden; cursor: pointer;
@@ -473,6 +476,8 @@ footer {
 /* ── responsive ── */
 @media (max-width: 900px) {
   .breakout-grid { grid-template-columns: repeat(2, 1fr); }
+  .breakout-grid > .bv-card:last-child:nth-child(3n+1) { grid-column: auto; }
+  .breakout-grid > .bv-card:last-child:nth-child(2n+1) { grid-column: 1 / -1; max-width: calc(50% - 9px); width: 100%; justify-self: center; }
   .twall { grid-template-columns: repeat(2, 1fr); }
   .urgency-grid { grid-template-columns: 1fr; }
 }
@@ -899,6 +904,173 @@ footer {
           <div class="bv-title">NFL Player</div>
           <div class="bv-desc">Real approach, on camera — no setup, no script.</div>
         </div>
+      </div>
+    </div>
+
+    <!-- YOUTUBE MONTAGE — public, verifiable live-coaching footage.
+         Thumbs mirrored at img/yt-thumbs/<videoId>.jpg (mqdefault). Links open
+         YouTube in a new tab with the playlist context. -->
+    <style>
+    .yt-montage { margin-top: 64px; }
+    .yt-wall {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 28px;
+    }
+    .yt-tile {
+      position: relative; display: block; border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--card); aspect-ratio: 16/9;
+    }
+    .yt-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease, opacity 0.3s; opacity: 0.88; }
+    .yt-tile:hover img { transform: scale(1.05); opacity: 1; }
+    .yt-tile-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.62);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.25s; pointer-events: none;
+    }
+    .yt-tile:hover .yt-tile-play { opacity: 1; }
+    .yt-tile:first-child { grid-column: span 2; grid-row: span 2; }
+    .yt-tile:first-child .yt-tile-play { opacity: 1; width: 48px; height: 48px; }
+    .yt-cta {
+      display: inline-flex; align-items: center; gap: 9px; margin-top: 22px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold);
+      text-decoration: none; border-bottom: 1px solid rgba(167,181,232,0.35); padding-bottom: 2px;
+    }
+    .yt-cta:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
+    @media (max-width: 900px) { .yt-wall { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 600px) { .yt-wall { grid-template-columns: repeat(3, 1fr); gap: 6px; } .yt-tile:first-child { grid-column: span 3; grid-row: auto; } }
+    </style>
+
+    <div class="yt-montage">
+      <div class="cv-sub reveal"><span class="cv-sub-label">Public on YouTube &mdash; Verify It Yourself</span><span class="cv-sub-line"></span></div>
+      <div class="text-center" style="margin-top: 40px;">
+        <h3 class="reveal d1" style="font-size: clamp(22px, 2.6vw, 30px);">Benjamin teaches this in public.<br><em>On camera. Strangers included.</em></h3>
+        <p class="reveal d2" style="max-width: 560px; margin: 14px auto 0; color: var(--w55); font-size: 14.5px; line-height: 1.65;">
+          30 strangers taught at once. A 71-year-old. An NFL player. Doctors, veterans, introverts. Every session is public on YouTube &mdash; nothing here we could fake if we wanted to.
+        </p>
+      </div>
+      <div class="yt-wall reveal d3">
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=I7MxKzkoAnA&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/I7MxKzkoAnA.jpg" loading="lazy" decoding="async" alt="I Tried Teaching 30 Strangers How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=FWiH-9yn1Mc&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/FWiH-9yn1Mc.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Looksmaxxer How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=IVqc4ZLIA7Y&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/IVqc4ZLIA7Y.jpg" loading="lazy" decoding="async" alt="Teaching a Divorced 41 Year Old How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=FayvY2E0hDc&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/FayvY2E0hDc.jpg" loading="lazy" decoding="async" alt="I Helped an Awkward Introvert Get an Instant Date">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=UHXL3aiYjeQ&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/UHXL3aiYjeQ.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Stranger How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=iML5GQQdBkE&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/iML5GQQdBkE.jpg" loading="lazy" decoding="async" alt="I Tried Teaching an Awkward Introvert How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=MS_CIpcOxz0&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/MS_CIpcOxz0.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Military Veteran How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=_zFuwDP5njc&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/_zFuwDP5njc.jpg" loading="lazy" decoding="async" alt="23 Year Old Virgin Picks Up a Model in NYC">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=BlRSTJ3vxxo&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/BlRSTJ3vxxo.jpg" loading="lazy" decoding="async" alt="I Helped a Short Asian Guy Get an Instant Date">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=69i1ju50de0&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/69i1ju50de0.jpg" loading="lazy" decoding="async" alt="I Tried Teaching an Extrovert How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=PfuE4wumv9o&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/PfuE4wumv9o.jpg" loading="lazy" decoding="async" alt="I Tried Teaching an NFL Player How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=RiC18XwggmU&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/RiC18XwggmU.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a 51 Year Old Doctor How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=XjlsE2CvgaY&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/XjlsE2CvgaY.jpg" loading="lazy" decoding="async" alt="I Tried Teaching an Entrepreneur How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=m4E6NSJhZwk&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/m4E6NSJhZwk.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Crypto Millionaire How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=UjK_bM78o4E&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/UjK_bM78o4E.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Doctor How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=nVS8tLBNcko&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/nVS8tLBNcko.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a 71 Year Old How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=5hr9zYH6-BQ&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/5hr9zYH6-BQ.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Short Asian Guy How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=FzNJmi6ybsI&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/FzNJmi6ybsI.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Shy Introvert How to Cold Approach">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=foa5bAcnWtY&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/foa5bAcnWtY.jpg" loading="lazy" decoding="async" alt="I Helped an Awkward Indian Guy Get an Instant Date">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=TEc88-WzQIg&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/TEc88-WzQIg.jpg" loading="lazy" decoding="async" alt="Awkward Guy Learns How to Flirt Naturally">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=jMPthBnFEeQ&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/jMPthBnFEeQ.jpg" loading="lazy" decoding="async" alt="This Awkward Introvert Tries Overcoming Approach Anxiety">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=-KDu2lmueVk&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/-KDu2lmueVk.jpg" loading="lazy" decoding="async" alt="I Tried Teaching an Awkward Introvert How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=mvWEVZ0dUu0&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/mvWEVZ0dUu0.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Former Rabbi How to Pickup Girls">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=uAf50So3YPU&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/uAf50So3YPU.jpg" loading="lazy" decoding="async" alt="What Happens When a 6&#x27;2 Chad Approaches Women?">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=rbO8WphR5vs&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/rbO8WphR5vs.jpg" loading="lazy" decoding="async" alt="What Happens When a &quot;Nice Guy&quot; Approaches Women?">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=ZKRQwQgWnTQ&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/ZKRQwQgWnTQ.jpg" loading="lazy" decoding="async" alt="Picking Up Girls at Hooters">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=zC3P_NcN9pU&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/zC3P_NcN9pU.jpg" loading="lazy" decoding="async" alt="34 Year Old Virgin Tries Cold Approach">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=KSLiIJKT0s0&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/KSLiIJKT0s0.jpg" loading="lazy" decoding="async" alt="What Happens When a 6&#x27;4 Chad Approaches Women?">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      <a class="yt-tile" href="https://www.youtube.com/watch?v=XcbK4-g6s74&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+        <img src="img/yt-thumbs/XcbK4-g6s74.jpg" loading="lazy" decoding="async" alt="6&#x27;2 Bodybuilder Tries Cold Approach for the First Time">
+        <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
+      </a>
+      </div>
+      <div class="text-center">
+        <a class="yt-cta" href="https://www.youtube.com/watch?v=I7MxKzkoAnA&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+          Watch the full series on YouTube
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
       </div>
     </div>
   </div>
