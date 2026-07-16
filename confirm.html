@@ -952,6 +952,18 @@ footer {
     .yt-tile:hover .yt-tile-play { opacity: 1; }
     .yt-tile:first-child { grid-column: span 2; grid-row: span 2; }
     .yt-tile:first-child .yt-tile-play { opacity: 1; width: 48px; height: 48px; }
+    .yt-authority {
+      display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px);
+      margin-top: 34px; padding: 20px 16px;
+      border: 1px solid var(--border); border-radius: 14px; background: var(--card);
+    }
+    .yt-stat { text-align: center; }
+    .yt-stat-num { font-family: 'Spectral', Georgia, serif; font-size: clamp(26px, 3.2vw, 38px); font-weight: 500; color: var(--w100); letter-spacing: -0.02em; line-height: 1; }
+    .yt-stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w55); margin-top: 8px; }
+    .yt-auth-divider { width: 1px; height: 40px; background: var(--border-2); }
+    /* lead tile becomes an in-page player on click */
+    .yt-tile-lead { cursor: pointer; }
+    .yt-tile-lead iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .yt-cta {
       display: inline-flex; align-items: center; gap: 9px; margin-top: 22px;
       font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold);
@@ -967,14 +979,31 @@ footer {
       <div class="text-center" style="margin-top: 40px;">
         <h3 class="reveal d1" style="font-size: clamp(22px, 2.6vw, 30px);">Nobody else volunteers<br><em>for this kind of test.</em></h3>
         <p class="reveal d2" style="max-width: 560px; margin: 14px auto 0; color: var(--w55); font-size: 14.5px; line-height: 1.65;">
-          Benjamin coaches 30 strangers at once, a 71-year-old, an NFL player, doctors, veterans and introverts &mdash; live, on camera, where every miss stays public forever. Ask any other coach or matchmaker to prove their skill like this, then watch them change the subject. It&rsquo;s all on YouTube.
+          Benjamin coaches 30 strangers at once, a 71-year-old, an NFL player, doctors, veterans and introverts &mdash; live, on camera, where every miss stays public forever. Ask any other coach or matchmaker to prove their skill like this, then watch them change the subject. Benjamin does it in front of 1.4&nbsp;million subscribers.
         </p>
       </div>
+      <div class="yt-authority reveal d2">
+        <div class="yt-stat">
+          <div class="yt-stat-num">1.4M+</div>
+          <div class="yt-stat-label">YouTube Subscribers</div>
+        </div>
+        <div class="yt-auth-divider"></div>
+        <div class="yt-stat">
+          <div class="yt-stat-num">29</div>
+          <div class="yt-stat-label">Public Coaching Sessions</div>
+        </div>
+        <div class="yt-auth-divider"></div>
+        <div class="yt-stat">
+          <div class="yt-stat-num">100%</div>
+          <div class="yt-stat-label">Filmed Live &amp; Unscripted</div>
+        </div>
+      </div>
+
       <div class="yt-wall reveal d3">
-      <a class="yt-tile" href="https://www.youtube.com/watch?v=I7MxKzkoAnA&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
+      <div class="yt-tile yt-tile-lead" id="ytLeadTile" role="button" tabindex="0" aria-label="Play: I Tried Teaching 30 Strangers How to Pickup Girls">
         <img src="img/yt-thumbs/I7MxKzkoAnA.jpg" loading="lazy" decoding="async" alt="I Tried Teaching 30 Strangers How to Pickup Girls">
         <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
-      </a>
+      </div>
       <a class="yt-tile" href="https://www.youtube.com/watch?v=FWiH-9yn1Mc&amp;list=PLEIRC0W2HdOxGRsQaNg9jHvDeOeOZlxwp" target="_blank" rel="noopener">
         <img src="img/yt-thumbs/FWiH-9yn1Mc.jpg" loading="lazy" decoding="async" alt="I Tried Teaching a Looksmaxxer How to Pickup Girls">
         <span class="yt-tile-play"><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></span>
@@ -1096,6 +1125,22 @@ footer {
       </div>
     </div>
   </div>
+
+  <script>
+  /* Lead montage tile — plays the 30-strangers video in place (YouTube iframe
+     loads only on click; the rest of the tiles link out). */
+  (function () {
+    var lead = document.getElementById('ytLeadTile');
+    if (!lead) return;
+    function play() {
+      if (lead.dataset.playing) return;
+      lead.dataset.playing = '1';
+      lead.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/I7MxKzkoAnA?autoplay=1&rel=0" title="I Tried Teaching 30 Strangers How to Pickup Girls" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    }
+    lead.addEventListener('click', play);
+    lead.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); } });
+  })();
+  </script>
 
   <script>
   /* Client videos — defines the shared Vidalytics boot used by the lightbox
