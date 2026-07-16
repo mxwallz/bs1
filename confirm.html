@@ -936,7 +936,21 @@ footer {
     .yt-montage { margin-top: 64px; }
     .yt-wall {
       display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 28px;
+      counter-reset: yt;
     }
+    /* Session number — bottom-right corner (the duration spot thumbnail
+       designers keep clear), so it never covers the baked-in title text. */
+    .yt-tile { counter-increment: yt; }
+    .yt-tile::after {
+      content: "#" counter(yt);
+      position: absolute; bottom: 5px; right: 5px; z-index: 2;
+      background: rgba(0,0,0,0.72); color: rgba(255,255,255,0.9);
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em;
+      font-variant-numeric: tabular-nums;
+      padding: 2px 6px; border-radius: 4px; pointer-events: none;
+    }
+    .yt-tile:first-child::after { font-size: 11px; padding: 3px 8px; bottom: 8px; right: 8px; }
+    .yt-tile-lead[data-playing]::after { display: none; }
     /* Center the leftover tiles on the last row. COUNT-SPECIFIC (29 tiles,
        lead spans 2x2): 6-col leaves 2 -> cols 3+4; 4-col leaves 2 -> cols 2+3;
        3-col leaves 1 -> col 2. Redo this math if the playlist count changes. */
