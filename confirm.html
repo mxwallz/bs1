@@ -507,6 +507,7 @@ footer {
   .appt-card { flex-direction: column; gap: 20px; padding: 24px 20px; }
   .appt-divider { width: 48px; height: 1px; }
   .breakout-grid { grid-template-columns: 1fr; }
+  .breakout-grid > .bv-card:last-child:nth-child(2n+1) { grid-column: auto; max-width: none; justify-self: stretch; }
   .twall { grid-template-columns: 1fr; }
   .sticky-bar { flex-direction: column; gap: 8px; text-align: center; }
 }
@@ -989,6 +990,11 @@ footer {
       text-decoration: none; border-bottom: 1px solid rgba(167,181,232,0.35); padding-bottom: 2px;
     }
     .yt-cta:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
+    @media (max-width: 640px) {
+      .yt-authority { flex-direction: column; gap: 18px; padding: 24px 16px; }
+      .yt-auth-divider { width: 44px; height: 1px; }
+      .yt-stat-label { letter-spacing: 0.08em; }
+    }
     @media (max-width: 900px) {
       .yt-wall { grid-template-columns: repeat(4, 1fr); }
       .yt-tile:nth-child(28) { grid-column: 2; }
