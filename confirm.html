@@ -936,7 +936,26 @@ footer {
     .yt-montage { margin-top: 64px; }
     .yt-wall {
       display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 28px;
+      counter-reset: yt;
     }
+    /* Session-number badge on every tile — the running count IS the proof.
+       (CSS counter, no markup; hidden on the lead tile once its player loads.) */
+    .yt-tile { counter-increment: yt; }
+    .yt-tile::after {
+      content: counter(yt, decimal-leading-zero) " / 29";
+      position: absolute; top: 6px; left: 6px; z-index: 2;
+      background: rgba(0,0,0,0.68); color: rgba(255,255,255,0.92);
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+      padding: 3px 7px; border-radius: 4px; pointer-events: none;
+    }
+    .yt-tile:first-child::after { font-size: 11px; padding: 4px 9px; top: 8px; left: 8px; }
+    .yt-tile-lead[data-playing]::after { display: none; }
+    /* Center the leftover tiles on the last row. COUNT-SPECIFIC (29 tiles,
+       lead spans 2x2): 6-col leaves 2 -> cols 3+4; 4-col leaves 2 -> cols 2+3;
+       3-col leaves 1 -> col 2. Redo this math if the playlist count changes. */
+    .yt-tile:nth-child(28) { grid-column: 3; }
+    .yt-tile:nth-child(29) { grid-column: 4; }
     .yt-tile {
       position: relative; display: block; border-radius: 8px; overflow: hidden;
       border: 1px solid var(--border); background: var(--card); aspect-ratio: 16/9;
@@ -970,8 +989,18 @@ footer {
       text-decoration: none; border-bottom: 1px solid rgba(167,181,232,0.35); padding-bottom: 2px;
     }
     .yt-cta:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
-    @media (max-width: 900px) { .yt-wall { grid-template-columns: repeat(4, 1fr); } }
-    @media (max-width: 600px) { .yt-wall { grid-template-columns: repeat(3, 1fr); gap: 6px; } .yt-tile:first-child { grid-column: span 3; grid-row: auto; } }
+    @media (max-width: 900px) {
+      .yt-wall { grid-template-columns: repeat(4, 1fr); }
+      .yt-tile:nth-child(28) { grid-column: 2; }
+      .yt-tile:nth-child(29) { grid-column: 3; }
+    }
+    @media (max-width: 600px) {
+      .yt-wall { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .yt-tile:first-child { grid-column: span 3; grid-row: auto; }
+      .yt-tile:nth-child(28) { grid-column: auto; }
+      .yt-tile:nth-child(29) { grid-column: 2; }
+      .yt-tile::after { font-size: 8.5px; padding: 2px 5px; }
+    }
     </style>
 
     <div class="yt-montage">
