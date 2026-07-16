@@ -4380,14 +4380,6 @@ body.deliv-modal-open { overflow: hidden; }
 #transformation .tf-badge.before { background: rgba(76,26,30,0.88); color: #fecaca; border: 1px solid rgba(248,113,113,0.55); }
 #transformation .tf-badge.after { background: rgba(20,58,36,0.9); color: #bbf7d0; border: 1px solid rgba(74,222,128,0.6); }
 #transformation .tf-meta { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-weight: 600; font-size: 15px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
-/* "×7 likes / matches" boost chip — middle-right on the AFTER card only.
-   COPY_TODO: verify the real multiplier with Ben before ads run on this. */
-#transformation .tf-boost { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); z-index: 3; display: flex; align-items: center; gap: 9px; padding: 8px 13px 8px 9px; border-radius: 13px; background: rgba(8,22,14,0.92); border: 1px solid rgba(74,222,128,0.55); box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
-#transformation .tf-boost-heart { width: 29px; height: 29px; border-radius: 50%; flex: none; display: grid; place-items: center; background: linear-gradient(135deg, #4ade80, #16a34a); box-shadow: 0 4px 12px rgba(74,222,128,0.35); }
-#transformation .tf-boost-heart svg { width: 15px; height: 15px; color: #fff; }
-#transformation .tf-boost-text { display: flex; flex-direction: column; line-height: 1.2; }
-#transformation .tf-boost-num { font-size: 16px; font-weight: 800; color: #4ade80; letter-spacing: -0.01em; }
-#transformation .tf-boost-sub { font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.02em; }
 #transformation .tf-thumbs { display: flex; gap: 6px; margin-top: 8px; }
 #transformation .tf-thumb { flex: 1 1 0; aspect-ratio: 3/4; border-radius: 9px; overflow: hidden; border: 1px solid var(--border-2); }
 #transformation .tf-side.before .tf-thumb { border-color: rgba(248,113,113,0.35); }
@@ -4397,16 +4389,15 @@ body.deliv-modal-open { overflow: hidden; }
 #transformation .tf-arrow svg { width: 22px; height: 22px; }
 #transformation .tf-caption { text-align: center; color: rgba(255,255,255,0.5); font-size: 13.5px; margin: 18px auto 0; max-width: 600px; line-height: 1.5; }
 @media (max-width: 620px){
-  #transformation .tf-pair { grid-template-columns: 1fr 1fr; gap: 10px; }
-  #transformation .tf-arrow { display: none; }
-  #transformation .tf-thumbs { gap: 4px; }
-  #transformation .tf-meta { font-size: 13px; bottom: 10px; left: 11px; }
-  /* shrink the boost chip on narrow cards so it doesn't cover the face */
-  #transformation .tf-boost { right: 7px; gap: 6px; padding: 6px 9px 6px 6px; border-radius: 11px; }
-  #transformation .tf-boost-heart { width: 23px; height: 23px; }
-  #transformation .tf-boost-heart svg { width: 12px; height: 12px; }
-  #transformation .tf-boost-num { font-size: 13px; }
-  #transformation .tf-boost-sub { font-size: 8.5px; }
+  /* Mobile: side-by-side made each photo ~170px wide — too small to read.
+     Stack full-width instead: red BEFORE on top, arrow pointing down, green
+     AFTER below. Cards cap at 400px so they stay photo-shaped, not billboard. */
+  #transformation .tf-pair { grid-template-columns: 1fr; gap: 16px; justify-items: center; }
+  #transformation .tf-side { width: 100%; max-width: 400px; }
+  #transformation .tf-arrow { display: grid; transform: rotate(90deg); width: 40px; height: 40px; }
+  #transformation .tf-arrow svg { width: 20px; height: 20px; }
+  #transformation .tf-thumbs { gap: 5px; }
+  #transformation .tf-meta { font-size: 14px; bottom: 11px; left: 12px; }
 }
 
 /* Mid-page receipts strip — one horizontal row of group-chat screenshots, links to the full wall */
@@ -4762,9 +4753,7 @@ body.deliv-modal-open { overflow: hidden; }
 .sd-card-body { font-size: 13.5px; line-height: 1.45; color: var(--w75); position: relative; z-index: 1; }
 .sd-card-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; color: var(--w35); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 14px; position: relative; z-index: 1; }
 .sd-card-foot svg { width: 15px; height: 15px; }
-.sd-hint { flex-shrink: 0; text-align: center; color: var(--w35); font-size: 10.5px; letter-spacing: 0.20em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.3s ease; }
-.sd-hint::after { content: "←"; font-size: 13px; animation: sdBob 1.6s ease-in-out infinite; }
-@keyframes sdBob { 0%, 100% { transform: translateX(0); opacity: 0.5; } 50% { transform: translateX(-4px); opacity: 1; } }
+/* (.sd-hint CSS removed — no swipe hint on the static stack) */
 /* (reduced-motion fallback removed — the static stack IS the default now) */
 
 /* Framework (#system) module cards → centered, icon-above-text on mobile */
@@ -5609,7 +5598,6 @@ body.deliv-modal-open { overflow: hidden; }
             </article>
 
           </div>
-          <div class="sd-hint" id="sdHint">Swipe for the next one</div>
         </div>
       </div>
     </div>
@@ -5651,11 +5639,6 @@ body.deliv-modal-open { overflow: hidden; }
               <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
               <span class="tf-badge after">After</span>
               <span class="tf-meta">Todd</span>
-              <!-- COPY_TODO: verify the real multiplier with Ben -->
-              <div class="tf-boost">
-                <span class="tf-boost-heart"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
-                <span class="tf-boost-text"><span class="tf-boost-num">×7</span><span class="tf-boost-sub">likes &amp; matches</span></span>
-              </div>
             </div>
             <div class="tf-thumbs">
               <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
@@ -5686,11 +5669,6 @@ body.deliv-modal-open { overflow: hidden; }
               <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
               <span class="tf-badge after">After</span>
               <span class="tf-meta">Adam</span>
-              <!-- COPY_TODO: verify the real multiplier with Ben -->
-              <div class="tf-boost">
-                <span class="tf-boost-heart"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
-                <span class="tf-boost-text"><span class="tf-boost-num">×7</span><span class="tf-boost-sub">likes &amp; matches</span></span>
-              </div>
             </div>
             <div class="tf-thumbs">
               <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
