@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Before/After — 3 Concepts · Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Spectral:ital,wght@0,400;0,500;1,400@display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg0: #050608; --bg1: #0a0d1f;
+  --gold: #A7B5E8; --gold-hi: #C4CEF5; --gold-soft: rgba(167,181,232,0.14);
+  --w100: #ffffff; --w75: rgba(255,255,255,0.75); --w55: rgba(255,255,255,0.55); --w35: rgba(255,255,255,0.35);
+  --border: rgba(255,255,255,0.09); --border-2: rgba(255,255,255,0.14);
+  --no: #f87171; --ok: #4ade80;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg0); color: var(--w100); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; overflow-x: clip; }
+h1, h2, .serif { font-family: 'Spectral', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; }
+.page-head { text-align: center; padding: clamp(48px, 8vw, 90px) 24px 8px; }
+.page-head h1 { font-size: clamp(28px, 4.5vw, 44px); }
+.page-head p { color: var(--w55); max-width: 620px; margin: 14px auto 0; font-size: 15px; }
+.concept { padding: clamp(56px, 8vw, 110px) 24px; border-top: 1px solid var(--border); margin-top: clamp(48px, 7vw, 80px); }
+.concept .inner { max-width: 1080px; margin: 0 auto; }
+.c-label { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); background: var(--gold-soft); border: 1px solid var(--border-2); padding: 6px 14px; border-radius: 99px; margin-bottom: 16px; }
+.concept h2 { font-size: clamp(24px, 3.4vw, 36px); margin-bottom: 10px; }
+.concept h2 em { font-style: italic; color: var(--gold-hi); }
+.c-why { color: var(--w55); font-size: 14.5px; max-width: 640px; margin-bottom: clamp(32px, 5vw, 52px); }
+.c-head { text-align: center; }
+.c-head .c-why { margin-left: auto; margin-right: auto; }
+img { display: block; }
+
+/* ═══════════ CONCEPT 1 — SWIPE VERDICT ═══════════ */
+.sv-stage { display: flex; justify-content: center; align-items: center; gap: clamp(18px, 5vw, 64px); flex-wrap: wrap; }
+.sv-card { position: relative; width: min(340px, 42vw); aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 30px 70px rgba(0,0,0,0.55); }
+.sv-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.sv-card::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
+.sv-card.before { transform: rotate(-4deg); }
+.sv-card.before img { filter: saturate(0.55) contrast(0.92) brightness(0.9); }
+.sv-card.after { transform: rotate(3deg); }
+.sv-stamp { position: absolute; top: 22px; z-index: 2; font-size: clamp(20px, 3vw, 30px); font-weight: 800; letter-spacing: 0.14em; padding: 6px 18px; border-radius: 8px; border: 3.5px solid; text-transform: uppercase; background: rgba(0,0,0,0.25); }
+.sv-card.before .sv-stamp { left: 18px; color: var(--no); border-color: var(--no); transform: rotate(-12deg); }
+.sv-card.after .sv-stamp { right: 18px; color: var(--ok); border-color: var(--ok); transform: rotate(10deg); }
+.sv-meta { position: absolute; left: 16px; bottom: 14px; z-index: 2; }
+.sv-name { font-weight: 700; font-size: 17px; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+.sv-sub { font-size: 12px; color: rgba(255,255,255,0.72); text-shadow: 0 1px 5px rgba(0,0,0,0.6); }
+.sv-card.after .sv-heart { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #ff6a86, #ff2d6f); box-shadow: 0 6px 18px rgba(255,45,111,0.5); }
+.sv-card.after .sv-heart svg { width: 19px; height: 19px; color: #fff; }
+.sv-vs { font-family: 'Spectral', Georgia, serif; font-style: italic; color: var(--w35); font-size: clamp(16px, 2.2vw, 22px); flex: none; }
+.sv-caption { text-align: center; color: var(--w55); font-size: 13.5px; margin-top: 34px; }
+@media (max-width: 560px) {
+  .sv-stage { gap: 10px; }
+  .sv-card { width: 44vw; border-radius: 16px; }
+  .sv-stamp { font-size: 15px; border-width: 2.5px; padding: 4px 10px; top: 12px; }
+  .sv-card.before .sv-stamp { left: 10px; }
+  .sv-card.after .sv-stamp { right: 10px; }
+  .sv-vs { display: none; }
+}
+
+/* ═══════════ CONCEPT 2 — THE NEW PROFILE (phone) ═══════════ */
+.np-stage { display: flex; justify-content: center; align-items: center; gap: clamp(28px, 6vw, 80px); flex-wrap: wrap; }
+.np-old { position: relative; width: min(230px, 34vw); transform: rotate(-5deg); }
+.np-old .np-photo { border-radius: 14px; overflow: hidden; border: 1px solid var(--border-2); aspect-ratio: 4/5; }
+.np-old img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: saturate(0.45) brightness(0.82); }
+.np-old-label { text-align: center; margin-top: 12px; color: var(--w35); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+.np-old-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(2deg); background: #1b1e2b; border: 1px solid var(--border-2); color: var(--w55); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 99px; white-space: nowrap; }
+.np-phone { position: relative; width: min(320px, 82vw); border-radius: 40px; padding: 12px; background: #101322; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 40px 90px rgba(0,0,0,0.65), 0 0 0 6px rgba(255,255,255,0.03); }
+.np-screen { border-radius: 30px; overflow: hidden; background: #0b0e1a; }
+.np-appbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 8px; }
+.np-applogo { font-weight: 800; font-size: 14px; color: var(--gold-hi); letter-spacing: 0.02em; }
+.np-appdots { display: flex; gap: 4px; }
+.np-appdots span { width: 4px; height: 4px; border-radius: 50%; background: var(--w35); }
+.np-profcard { position: relative; margin: 4px 10px 12px; border-radius: 20px; overflow: hidden; }
+.np-profcard img { width: 100%; aspect-ratio: 4/5.4; object-fit: cover; object-position: center 18%; }
+.np-profcard::after { content: ""; position: absolute; inset: auto 0 0 0; height: 42%; background: linear-gradient(to top, rgba(0,0,0,0.82), transparent); }
+.np-prof-meta { position: absolute; left: 16px; bottom: 14px; z-index: 2; }
+.np-prof-name { font-size: 21px; font-weight: 800; display: flex; align-items: center; gap: 7px; }
+.np-verified { width: 17px; height: 17px; border-radius: 50%; background: #3b82f6; display: inline-grid; place-items: center; font-size: 10px; }
+.np-prof-tag { font-size: 12px; color: rgba(255,255,255,0.78); margin-top: 2px; }
+.np-likebtn { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+.np-likebtn svg { width: 22px; height: 22px; color: #ff2d6f; }
+.np-prompt { margin: 0 10px 12px; background: #141830; border: 1px solid var(--border); border-radius: 16px; padding: 13px 15px; }
+.np-prompt-q { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w35); margin-bottom: 5px; }
+.np-prompt-a { font-family: 'Spectral', Georgia, serif; font-size: 15.5px; color: var(--w100); }
+.np-notif { position: absolute; top: 56px; left: -22px; right: -22px; z-index: 3; display: flex; align-items: center; gap: 9px; background: rgba(16,19,32,0.96); border: 1px solid var(--border-2); border-radius: 14px; padding: 9px 13px; box-shadow: 0 14px 34px rgba(0,0,0,0.5); animation: npIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s both; }
+.np-notif-heart { width: 30px; height: 30px; border-radius: 50%; flex: none; display: grid; place-items: center; background: linear-gradient(135deg, #ff6a86, #ff2d6f); }
+.np-notif-heart svg { width: 15px; height: 15px; color: #fff; }
+.np-notif-name { font-size: 12.5px; font-weight: 700; }
+.np-notif-sub { font-size: 10.5px; color: var(--w55); }
+@keyframes npIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+.np-arrow { color: var(--gold); flex: none; }
+.np-arrow svg { width: 34px; height: 34px; }
+@media (max-width: 720px) {
+  .np-stage { gap: 20px; }
+  .np-old { width: min(190px, 52vw); }
+  .np-arrow { transform: rotate(90deg); width: 100%; display: flex; justify-content: center; }
+  .np-notif { left: -8px; right: -8px; }
+}
+
+/* ═══════════ CONCEPT 3 — THE RESULTS FEED ═══════════ */
+.rf-stage { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); max-width: 880px; margin: 0 auto; }
+.rf-panel { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-2); aspect-ratio: 4/5.2; }
+.rf-panel img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+.rf-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 45%); }
+.rf-panel.before img { filter: grayscale(0.5) brightness(0.75); }
+.rf-tag { position: absolute; top: 14px; left: 14px; z-index: 3; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 13px; border-radius: 99px; }
+.rf-panel.before .rf-tag { background: rgba(58,62,74,0.85); color: #e8eaf0; border: 1px solid rgba(255,255,255,0.2); }
+.rf-panel.after .rf-tag { background: rgba(52,60,104,0.88); color: var(--gold-hi); border: 1px solid var(--gold); }
+.rf-empty { position: absolute; left: 12px; right: 12px; bottom: 14px; z-index: 3; background: rgba(10,12,20,0.88); border: 1px dashed rgba(255,255,255,0.22); border-radius: 14px; padding: 13px 15px; text-align: center; }
+.rf-empty-title { font-size: 12.5px; font-weight: 700; color: var(--w55); }
+.rf-empty-sub { font-size: 10.5px; color: var(--w35); margin-top: 2px; }
+.rf-feed { position: absolute; left: 12px; right: 12px; bottom: 14px; z-index: 3; display: flex; flex-direction: column; gap: 8px; }
+.rf-notif { display: flex; align-items: center; gap: 9px; background: rgba(13,16,28,0.94); border: 1px solid var(--border-2); border-radius: 13px; padding: 8px 12px; box-shadow: 0 10px 26px rgba(0,0,0,0.45); }
+.rf-notif:nth-child(1) { animation: rfIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s both; }
+.rf-notif:nth-child(2) { animation: rfIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.9s both; }
+.rf-notif:nth-child(3) { animation: rfIn 0.6s cubic-bezier(0.22,1,0.36,1) 1.5s both; }
+@keyframes rfIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.rf-ic { width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center; }
+.rf-ic.like { background: linear-gradient(135deg, #ff6a86, #ff2d6f); }
+.rf-ic.match { background: linear-gradient(135deg, #7c8ff0, #4d5fd8); }
+.rf-ic svg { width: 14px; height: 14px; color: #fff; }
+.rf-n-name { font-size: 12px; font-weight: 700; }
+.rf-n-sub { font-size: 10px; color: var(--w55); }
+.rf-caption { text-align: center; color: var(--w55); font-size: 13.5px; margin-top: 30px; }
+@media (max-width: 560px) {
+  .rf-panel { border-radius: 16px; }
+  .rf-notif { padding: 6px 9px; gap: 7px; }
+  .rf-ic { width: 23px; height: 23px; }
+  .rf-n-name { font-size: 10.5px; }
+  .rf-n-sub { font-size: 9px; }
+  .rf-empty { padding: 9px 10px; }
+}
+
+.foot { text-align: center; color: var(--w35); font-size: 12px; padding: 60px 24px 80px; border-top: 1px solid var(--border); margin-top: 80px; }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>Before / After — <em style="color:var(--gold-hi)">3 concepts</em></h1>
+  <p>Same real photos (Todd + Adam), three different ways to tell the story. Scroll through on desktop and phone — whichever wins gets ported into bs1-v3.</p>
+</div>
+
+<!-- ═══════════════ CONCEPT 1 ═══════════════ -->
+<section class="concept">
+  <div class="inner">
+    <div class="c-head">
+      <span class="c-label">Concept 1 · Swipe Verdict</span>
+      <h2>Swiped left. <em>Then swiped right.</em></h2>
+      <p class="c-why">Uses the app language every prospect already knows: the old profile gets the NOPE stamp, the rebuilt one gets the LIKE. Zero explanation needed — the verdict is the story.</p>
+    </div>
+    <div class="sv-stage">
+      <div class="sv-card before">
+        <img src="img/before-after/todd/before-6.jpg" alt="Todd before Atlas">
+        <span class="sv-stamp">Nope</span>
+        <div class="sv-meta"><div class="sv-name">Todd</div><div class="sv-sub">His old profile</div></div>
+      </div>
+      <div class="sv-vs">becomes</div>
+      <div class="sv-card after">
+        <img src="img/before-after/todd/after-2.jpg" alt="Todd after Atlas">
+        <span class="sv-stamp" style="color:var(--ok);border-color:var(--ok);">Like</span>
+        <div class="sv-meta"><div class="sv-name">Todd</div><div class="sv-sub">Rebuilt by Atlas</div></div>
+        <span class="sv-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+      </div>
+    </div>
+    <p class="sv-caption">Same man. The market's verdict flips.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ CONCEPT 2 ═══════════════ -->
+<section class="concept">
+  <div class="inner">
+    <div class="c-head">
+      <span class="c-label">Concept 2 · The New Profile</span>
+      <h2>His profile becomes <em>the product.</em></h2>
+      <p class="c-why">The "after" isn't just a nicer photo — it's a finished, top-1% dating profile shown as the real app experience: verified, styled, with a like landing in real time. The old profile literally gets left behind it.</p>
+    </div>
+    <div class="np-stage">
+      <div class="np-old">
+        <span class="np-old-badge">Before Atlas</span>
+        <div class="np-photo"><img src="img/before-after/adam/before-2.jpg" alt="Adam's old profile"></div>
+        <div class="np-old-label">The old profile</div>
+      </div>
+      <div class="np-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="np-phone">
+        <div class="np-notif">
+          <span class="np-notif-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+          <span><span class="np-notif-name">Sofia, 26</span><br><span class="np-notif-sub">just liked your profile</span></span>
+        </div>
+        <div class="np-screen">
+          <div class="np-appbar"><span class="np-applogo">Discover</span><span class="np-appdots"><span></span><span></span><span></span></span></div>
+          <div class="np-profcard">
+            <img src="img/before-after/adam/after-4.jpg" alt="Adam's rebuilt profile">
+            <div class="np-prof-meta">
+              <div class="np-prof-name">Adam <span class="np-verified">✓</span></div>
+              <div class="np-prof-tag">Rebuilt by Atlas</div>
+            </div>
+            <span class="np-likebtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+          </div>
+          <div class="np-prompt">
+            <div class="np-prompt-q">Together we could</div>
+            <div class="np-prompt-a">Skip the small talk over a real dinner.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONCEPT 3 ═══════════════ -->
+<section class="concept">
+  <div class="inner">
+    <div class="c-head">
+      <span class="c-label">Concept 3 · The Results Feed</span>
+      <h2>The photos change. <em>The phone proves it.</em></h2>
+      <p class="c-why">Keeps the current side-by-side layout, but the contrast is told through what the phone does: the before sits silent ("no new likes"), the after's notifications keep stacking. Outcome-first, not just aesthetics-first.</p>
+    </div>
+    <div class="rf-stage">
+      <div class="rf-panel before">
+        <img src="img/before-after/todd/before-6.jpg" alt="Todd before Atlas">
+        <span class="rf-tag">Before</span>
+        <div class="rf-empty">
+          <div class="rf-empty-title">No new likes this week</div>
+          <div class="rf-empty-sub">Last match: 4 months ago</div>
+        </div>
+      </div>
+      <div class="rf-panel after">
+        <img src="img/before-after/todd/after-2.jpg" alt="Todd after Atlas">
+        <span class="rf-tag">After</span>
+        <div class="rf-feed">
+          <div class="rf-notif">
+            <span class="rf-ic like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+            <span><span class="rf-n-name">Maya, 27</span><br><span class="rf-n-sub">liked your photo</span></span>
+          </div>
+          <div class="rf-notif">
+            <span class="rf-ic match"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <span><span class="rf-n-name">It's a match</span><br><span class="rf-n-sub">Camille wants to meet</span></span>
+          </div>
+          <div class="rf-notif">
+            <span class="rf-ic like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
+            <span><span class="rf-n-name">Sofia, 26</span><br><span class="rf-n-sub">liked your photo</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="rf-caption">All names are placeholders — swap for real (or representative) ones before shipping.</p>
+  </div>
+</section>
+
+<div class="foot">Atlas Advisory · internal concept page — not linked from the live site.</div>
+
+</body>
+</html>
