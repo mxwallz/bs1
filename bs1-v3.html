@@ -4372,9 +4372,11 @@ body.deliv-modal-open { overflow: hidden; }
 #transformation .tf-pair { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: clamp(12px, 3vw, 34px); max-width: 760px; margin: 0 auto; }
 #transformation .tf-card { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); aspect-ratio: 4/5; background: var(--card-solid); }
 /* Red/green verdict coding (feedback: "you can't tell which is the before").
-   Before = red outline, After = green outline — instant read, no caption needed. */
-#transformation .tf-side.before .tf-card { border: 2px solid rgba(248,113,113,0.6); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 22px rgba(248,113,113,0.12); }
-#transformation .tf-side.after .tf-card { border: 2px solid rgba(74,222,128,0.65); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 26px rgba(74,222,128,0.16); }
+   The outline wraps the ENTIRE side — main photo + thumbnails as one framed
+   unit. Red = before, green = after; the colored badges stay too. */
+#transformation .tf-side { border: 2px solid transparent; border-radius: 26px; padding: 10px; }
+#transformation .tf-side.before { border-color: rgba(248,113,113,0.65); box-shadow: 0 0 28px rgba(248,113,113,0.10); }
+#transformation .tf-side.after { border-color: rgba(74,222,128,0.7); box-shadow: 0 0 32px rgba(74,222,128,0.12); }
 #transformation .tf-card > img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
 #transformation .tf-card::after { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(to top, rgba(0,0,0,0.72), transparent); pointer-events: none; }
 /* Perf: no backdrop-filter here — 8 blurred badges re-compute every scroll frame
@@ -5643,7 +5645,7 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="tf-case reveal d2">
         <div class="tf-name">Todd</div>
         <div class="tf-pair">
-          <div class="tf-side">
+          <div class="tf-side before">
             <div class="tf-card">
               <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
               <span class="tf-badge before">Before</span>
@@ -5655,7 +5657,7 @@ body.deliv-modal-open { overflow: hidden; }
             </div>
           </div>
           <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="tf-side">
+          <div class="tf-side after">
             <div class="tf-card">
               <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
               <span class="tf-badge after">After</span>
@@ -5673,7 +5675,7 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="tf-case reveal d2">
         <div class="tf-name">Adam</div>
         <div class="tf-pair">
-          <div class="tf-side">
+          <div class="tf-side before">
             <div class="tf-card">
               <img src="img/before-after/adam/before-2.jpg" loading="lazy" decoding="async" alt="Adam's dating profile before Atlas — casual amateur phone photo">
               <span class="tf-badge before">Before</span>
@@ -5685,7 +5687,7 @@ body.deliv-modal-open { overflow: hidden; }
             </div>
           </div>
           <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="tf-side">
+          <div class="tf-side after">
             <div class="tf-card">
               <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
               <span class="tf-badge after">After</span>
