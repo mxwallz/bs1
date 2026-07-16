@@ -27,6 +27,10 @@
 <!-- Modern luxury typography. Spectral for headlines, Inter for body. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Vidalytics: preconnect so the first video tap skips DNS+TLS setup; the
+     per-video player scripts are additionally pre-warmed on touch/hover (JS). -->
+<link rel="preconnect" href="https://quick.vidalytics.com" crossorigin>
+<link rel="dns-prefetch" href="https://quick.vidalytics.com">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="//embed.typeform.com/next/embed.js"></script>
@@ -4882,6 +4886,10 @@ body.deliv-modal-open { overflow: hidden; }
   /* the two fixed bars: a touch more opaque now that the blur is gone */
   .nav { background: rgba(5,6,8,0.97) !important; }
   .sticky-apply { background: rgba(10,10,10,0.97) !important; }
+  /* No sticky nav on mobile: newer iOS Safari renders a visible gap band above
+     a fixed top bar. The nav sits at the top of the page and scrolls away;
+     the bottom Apply bar stays fixed as the persistent CTA. */
+  .nav { position: absolute !important; }
 }
 </style>
 </head>
@@ -6934,6 +6942,22 @@ body.deliv-modal-open { overflow: hidden; }
       })(window, document, 'Vidalytics', 'vidalytics_embed_'+embedId, 'https://quick.vidalytics.com/embeds/vsqPFSDP/'+embedId+'/');
     }
     window.__vidalyticsBoot = boot;
+    // Pre-warm a video's player scripts on first touch/hover — by the time the
+    // tap completes, loader.min.js + player.min.js are already in HTTP cache,
+    // so the modal plays near-instantly instead of doing DNS+TLS+2 script
+    // round-trips cold. fetch(no-cors) only fills the cache — nothing executes,
+    // so there's no hidden-autoplay risk. (link rel=prefetch is skipped: iOS
+    // Safari doesn't support it.)
+    var warmed = {};
+    function warm(embedId){
+      if (!embedId || warmed[embedId]) return;
+      warmed[embedId] = 1;
+      var base = 'https://quick.vidalytics.com/embeds/vsqPFSDP/' + embedId + '/';
+      ['loader.min.js', 'player.min.js'].forEach(function (f) {
+        try { fetch(base + f, { mode: 'no-cors', credentials: 'omit' }); } catch (err) {}
+      });
+    }
+    window.__vidalyticsWarm = warm;
     // Real video thumbnail on the placeholder surface. Files are the videos'
     // own Vidalytics poster frames, mirrored locally at img/video-thumbs/<id>.jpg
     // (re-download via the loader.min.js "thumbnail" config if videos change).
@@ -6948,11 +6972,16 @@ body.deliv-modal-open { overflow: hidden; }
       if(tag) tag.remove();
     }
     // Section 1 — swipe carousel: .vt-thumb is the play surface.
-    document.querySelectorAll('#video-testimonials .vt-card[data-vid]').forEach(card => {
+    document.querySelectorAll('#video-testimonials .vt-card[data-vid]').forEach((card, i) => {
       const thumb = card.querySelector('.vt-thumb');
       if(!thumb) return;
       applyThumb(thumb, card.dataset.vid);
+      thumb.addEventListener('touchstart', () => warm(card.dataset.vid), { passive: true });
+      thumb.addEventListener('pointerover', () => warm(card.dataset.vid), { passive: true });
       thumb.addEventListener('click', () => window.__openVidModal(card.dataset.vid));
+      // The featured (first) video is the likeliest tap — warm it once the
+      // page has settled, so even the very first tap is instant.
+      if (i === 0) setTimeout(() => warm(card.dataset.vid), 3500);
     });
     // Section 2 — grid: .vt-frame is the play surface (thumb goes on it too,
     // behind the absolutely-positioned poster/play children).
@@ -6963,6 +6992,8 @@ body.deliv-modal-open { overflow: hidden; }
       applyThumb(poster || frame, card.dataset.vid);
       const tag = frame.querySelector('.vt-placeholder-tag');
       if(tag) tag.remove();
+      frame.addEventListener('touchstart', () => warm(card.dataset.vid), { passive: true });
+      frame.addEventListener('pointerover', () => warm(card.dataset.vid), { passive: true });
       frame.addEventListener('click', () => window.__openVidModal(card.dataset.vid));
     });
   })();
