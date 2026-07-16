@@ -4974,16 +4974,19 @@ body.deliv-modal-open { overflow: hidden; }
     <div class="vt-swipe reveal d3" id="vtSwipe">
       <div class="vt-swipe-track">
 
-        <div class="vt-card" data-vid="LcTjwDwUVJAPmegJ">
-          <div class="vt-thumb vt-g1">
-            <span class="vt-badge">Live Approach</span>
+        <!-- Order: featured interview first (the strongest video → first card
+             on mobile), then the other interviews, then the live approaches. -->
+        <!-- COPY_TODO: real first name for the featured interview client -->
+        <div class="vt-card" data-vid="WiL7dwyNCgpDFSCi">
+          <div class="vt-thumb vt-g3">
+            <span class="vt-badge">Interview</span>
             <div class="vt-video-state">
-              <button class="vt-play" aria-label="Play Matt's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-              <span class="vt-watch">Watch the approach</span>
+              <button class="vt-play" aria-label="Play the featured client interview"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the interview</span>
             </div>
           </div>
           <div class="vt-meta">
-            <div class="vt-name">Matt</div>
+            <div class="vt-name">Client Interview</div>
           </div>
         </div>
 
@@ -4997,19 +5000,6 @@ body.deliv-modal-open { overflow: hidden; }
           </div>
           <div class="vt-meta">
             <div class="vt-name">Pat</div>
-          </div>
-        </div>
-
-        <div class="vt-card" data-vid="L4Lggv9KUL9Jkzs_">
-          <div class="vt-thumb vt-g3">
-            <span class="vt-badge">Live Approach</span>
-            <div class="vt-video-state">
-              <button class="vt-play" aria-label="Play the NFL player's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
-              <span class="vt-watch">Watch the approach</span>
-            </div>
-          </div>
-          <div class="vt-meta">
-            <div class="vt-name">NFL Player</div>
           </div>
         </div>
 
@@ -5039,10 +5029,37 @@ body.deliv-modal-open { overflow: hidden; }
           </div>
         </div>
 
+        <div class="vt-card" data-vid="LcTjwDwUVJAPmegJ">
+          <div class="vt-thumb vt-g1">
+            <span class="vt-badge">Live Approach</span>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play Matt's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the approach</span>
+            </div>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">Matt</div>
+          </div>
+        </div>
+
+        <div class="vt-card" data-vid="L4Lggv9KUL9Jkzs_">
+          <div class="vt-thumb vt-g3">
+            <span class="vt-badge">Live Approach</span>
+            <div class="vt-video-state">
+              <button class="vt-play" aria-label="Play the NFL player's video"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg></button>
+              <span class="vt-watch">Watch the approach</span>
+            </div>
+          </div>
+          <div class="vt-meta">
+            <div class="vt-name">NFL Player</div>
+          </div>
+        </div>
+
       </div>
 
       <div class="vt-dots" id="vtDots">
         <span class="vt-dot active"></span>
+        <span class="vt-dot"></span>
         <span class="vt-dot"></span>
         <span class="vt-dot"></span>
         <span class="vt-dot"></span>
@@ -7146,6 +7163,9 @@ body.deliv-modal-open { overflow: hidden; }
         <div id="vidalytics_embed_hxyNOMcuu0RjqqWV" style="width:100%;height:100%;position:relative;"></div>
       </div>
 
+      <div class="vid-slot" data-video="WiL7dwyNCgpDFSCi" data-embed="WiL7dwyNCgpDFSCi">
+        <div id="vidalytics_embed_WiL7dwyNCgpDFSCi" style="width:100%;height:100%;position:relative;"></div>
+      </div>
       <div class="vid-slot" data-video="LDZUUFVxsh2dMvdC" data-embed="LDZUUFVxsh2dMvdC">
         <div id="vidalytics_embed_LDZUUFVxsh2dMvdC" style="width:100%;height:100%;position:relative;"></div>
       </div>
