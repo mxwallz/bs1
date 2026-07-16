@@ -37,9 +37,9 @@ img { display: block; }
 .sv-card { position: relative; width: min(340px, 42vw); aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 30px 70px rgba(0,0,0,0.55); }
 .sv-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 .sv-card::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
-.sv-card.before { transform: rotate(-4deg); }
+.sv-card.before { transform: rotate(-4deg); border: 2px solid rgba(248,113,113,0.6); box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 22px rgba(248,113,113,0.12); }
 .sv-card.before img { filter: saturate(0.55) contrast(0.92) brightness(0.9); }
-.sv-card.after { transform: rotate(3deg); }
+.sv-card.after { transform: rotate(3deg); border: 2px solid rgba(74,222,128,0.65); box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 26px rgba(74,222,128,0.16); }
 .sv-stamp { position: absolute; top: 22px; z-index: 2; font-size: clamp(20px, 3vw, 30px); font-weight: 800; letter-spacing: 0.14em; padding: 6px 18px; border-radius: 8px; border: 3.5px solid; text-transform: uppercase; background: rgba(0,0,0,0.25); }
 .sv-card.before .sv-stamp { left: 18px; color: var(--no); border-color: var(--no); transform: rotate(-12deg); }
 .sv-card.after .sv-stamp { right: 18px; color: var(--ok); border-color: var(--ok); transform: rotate(10deg); }
@@ -62,11 +62,11 @@ img { display: block; }
 /* ═══════════ CONCEPT 2 — THE NEW PROFILE (phone) ═══════════ */
 .np-stage { display: flex; justify-content: center; align-items: center; gap: clamp(28px, 6vw, 80px); flex-wrap: wrap; }
 .np-old { position: relative; width: min(230px, 34vw); transform: rotate(-5deg); }
-.np-old .np-photo { border-radius: 14px; overflow: hidden; border: 1px solid var(--border-2); aspect-ratio: 4/5; }
+.np-old .np-photo { border-radius: 14px; overflow: hidden; border: 2px solid rgba(248,113,113,0.55); aspect-ratio: 4/5; }
 .np-old img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: saturate(0.45) brightness(0.82); }
 .np-old-label { text-align: center; margin-top: 12px; color: var(--w35); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
 .np-old-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(2deg); background: #1b1e2b; border: 1px solid var(--border-2); color: var(--w55); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 99px; white-space: nowrap; }
-.np-phone { position: relative; width: min(320px, 82vw); border-radius: 40px; padding: 12px; background: #101322; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 40px 90px rgba(0,0,0,0.65), 0 0 0 6px rgba(255,255,255,0.03); }
+.np-phone { position: relative; width: min(320px, 82vw); border-radius: 40px; padding: 12px; background: #101322; border: 2px solid rgba(74,222,128,0.5); box-shadow: 0 40px 90px rgba(0,0,0,0.65), 0 0 26px rgba(74,222,128,0.14); }
 .np-screen { border-radius: 30px; overflow: hidden; background: #0b0e1a; }
 .np-appbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 8px; }
 .np-applogo { font-weight: 800; font-size: 14px; color: var(--gold-hi); letter-spacing: 0.02em; }
@@ -102,6 +102,11 @@ img { display: block; }
 /* ═══════════ CONCEPT 3 — THE RESULTS FEED ═══════════ */
 .rf-stage { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); max-width: 880px; margin: 0 auto; }
 .rf-panel { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-2); aspect-ratio: 4/5.2; }
+.rf-panel.before { border: 2px solid rgba(248,113,113,0.6); }
+.rf-panel.after { border: 2px solid rgba(74,222,128,0.65); }
+.rf-x7 { position: absolute; top: 14px; right: 14px; z-index: 3; display: flex; align-items: baseline; gap: 5px; background: rgba(8,22,14,0.92); border: 1px solid rgba(74,222,128,0.55); border-radius: 99px; padding: 6px 13px; }
+.rf-x7 b { font-size: 15px; font-weight: 800; color: #4ade80; }
+.rf-x7 span { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.72); }
 .rf-panel img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
 .rf-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 45%); }
 .rf-panel.before img { filter: grayscale(0.5) brightness(0.75); }
@@ -229,6 +234,7 @@ img { display: block; }
       <div class="rf-panel after">
         <img src="img/before-after/todd/after-2.jpg" alt="Todd after Atlas">
         <span class="rf-tag">After</span>
+        <span class="rf-x7"><b>×7</b><span>likes &amp; matches</span></span>
         <div class="rf-feed">
           <div class="rf-notif">
             <span class="rf-ic like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.4-4.8-9.8-9.2C.9 8.7 2.3 5 5.7 5c2 0 3.3 1.1 4.2 2.3l.3.4.3-.4C11.4 6.1 12.7 5 14.7 5c3.4 0 4.8 3.7 3.5 6.8C15.4 16.2 12 21 12 21z"/></svg></span>
