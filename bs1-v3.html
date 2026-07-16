@@ -3748,7 +3748,7 @@ body.deliv-modal-open { overflow: hidden; }
 }
 .vt-frame {
   position: relative;
-  aspect-ratio: 9/16;
+  aspect-ratio: 1/1; /* square-ish (was 9:16 — read too rectangular); videos are 16:9 and open in the modal anyway */
   background: #0d0f16;
   overflow: hidden;
   cursor: pointer;
@@ -3894,7 +3894,7 @@ body.deliv-modal-open { overflow: hidden; }
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
-  .vt-frame { aspect-ratio: 9/14; max-height: 58vh; }
+  .vt-frame { aspect-ratio: 4/5; max-height: 58vh; } /* matches the top carousel's mobile shape */
   .vt-play-btn svg { width: 56px; height: 56px; }
   .vt-meta { padding: 14px 16px 16px; }
   .vt-name { font-size: 15px; }
