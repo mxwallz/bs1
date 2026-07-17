@@ -4872,6 +4872,13 @@ body.deliv-modal-open { overflow: hidden; }
   height: auto !important;
 }
 
+/* ── INLINE APPLICATION EMBED (#applyForm) ───────────────────
+   The one Typeform on the page; every Apply CTA scrolls here. */
+.apply-embed { max-width: 720px; margin: 36px auto 0; scroll-margin-top: 76px; }
+.apply-embed [data-tf-live] { border-radius: 18px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: 0 24px 60px rgba(0,0,0,0.45); background: var(--bg1); }
+.apply-embed iframe { display: block; width: 100%; min-height: 520px; }
+@media (max-width: 620px) { .apply-embed iframe { min-height: 560px; } .apply-embed { scroll-margin-top: 20px; } }
+
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
    scrolling behind it every frame. On the fixed nav + fixed bottom bar
@@ -4954,7 +4961,7 @@ body.deliv-modal-open { overflow: hidden; }
       <p class="vsl-label">"How Yaro went from 0 quality matches to 20+ dates in 30 days"<!-- COPY_TODO: VSL embed --></p>
     </div>
     <div class="cta-block reveal d4">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
     <!-- Hero stat row removed per v25 feedback. -->
@@ -5074,7 +5081,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
@@ -5335,7 +5342,7 @@ body.deliv-modal-open { overflow: hidden; }
     <p class="sub-note text-center" style="margin-top:32px;">Illustrative. Individual results depend on execution and profile.</p>
 
     <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
   </div>
@@ -5627,7 +5634,7 @@ body.deliv-modal-open { overflow: hidden; }
 
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
@@ -5851,7 +5858,7 @@ body.deliv-modal-open { overflow: hidden; }
          #what-you-get.) -->
 
     <div class="cta-block reveal d4" style="margin-top: 56px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
   </div>
@@ -5968,7 +5975,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
 
     <div class="cta-block reveal d4" style="margin-top: 56px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
   </div>
@@ -6106,7 +6113,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
@@ -6193,7 +6200,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
@@ -6313,7 +6320,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 
         <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds · NDA protected</div>
     </div>
 </section>
@@ -6380,10 +6387,13 @@ body.deliv-modal-open { overflow: hidden; }
       <span>Enrollment open · 4 spots remaining</span>
     </div>
     <h2 class="reveal d2">Ready to have this<br><em>area of your life permanently handled?</em></h2>
-    <div class="cta-block">
-      <button class="btn reveal d4" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100" style="padding: 20px 56px; font-size: 16px;">Apply for Your Consultation</button>
-      <div class="cta-friction reveal d4">takes 30 seconds · NDA protected</div>
+    <!-- THE application: inline Typeform (live embed). Every other Apply CTA
+         on the page scrolls here (data-apply-jump). On submit, a postMessage
+         listener (bottom of page) redirects to confirm.html. -->
+    <div class="apply-embed reveal d3" id="applyForm">
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
     </div>
+    <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · NDA protected</div>
   </div>
 </section>
 
@@ -6406,7 +6416,7 @@ body.deliv-modal-open { overflow: hidden; }
 <!-- v21 sticky mobile CTA bar -->
 <div class="sticky-apply">
   <div class="sa-info"><strong>4 spots remaining</strong> · takes 2 min</div>
-  <button data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply</button>
+  <button data-apply-jump>Apply</button>
 </div>
 
 
@@ -6421,6 +6431,25 @@ body.deliv-modal-open { overflow: hidden; }
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* === Apply funnel: one inline Typeform, every CTA jumps to it ===
+     All Apply buttons carry data-apply-jump and smooth-scroll to the embedded
+     form in #apply (no more popup). On submit, Typeform's iframe posts a
+     form-submit message — we catch it and hand off to the confirmation page. */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest && e.target.closest('[data-apply-jump]');
+    if (!btn) return;
+    const form = document.getElementById('applyForm');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  window.addEventListener('message', (e) => {
+    if (typeof e.origin !== 'string' || e.origin.indexOf('typeform.com') === -1) return;
+    const d = e.data;
+    if (d && (d.type === 'form-submit' || d.type === 'form_submit')) {
+      // brief beat so the Typeform thank-you screen registers, then hand off
+      setTimeout(() => { window.location.href = 'confirm.html?applied=1'; }, 1400);
+    }
+  });
 
   /* === Perf: pause looping animations in off-screen sections ===
      See the .anim-idle CSS rule. A 300px rootMargin means sections wake well
