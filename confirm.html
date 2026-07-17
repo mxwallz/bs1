@@ -1463,13 +1463,34 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* URL params: ?date=April+28%2C+2026&time=2%3A00+PM+EST */
+/* URL params: ?date=April+28%2C+2026&time=2%3A00+PM+EST
+   No date/time (the normal case when arriving from the bs1-v3 inline Typeform,
+   where the call is booked via the Calendly embedded INSIDE the form — the
+   booked slot can't cross out of that iframe): switch Step 2 to email-invite
+   mode. The appointment card points at the Calendly invite that's already in
+   their inbox, and the add-to-calendar buttons are hidden (Calendly's invite
+   IS the calendar entry). */
 (function () {
   const p = new URLSearchParams(window.location.search);
   const d = p.get('date'), t = p.get('time');
   if (d) document.getElementById('appt-date').textContent = decodeURIComponent(d);
   if (t) document.getElementById('appt-time').textContent = decodeURIComponent(t);
-  if (d && t) document.getElementById('sticky-appt').textContent = decodeURIComponent(d) + ' at ' + decodeURIComponent(t);
+  if (d && t) {
+    document.getElementById('sticky-appt').textContent = decodeURIComponent(d) + ' at ' + decodeURIComponent(t);
+  } else {
+    const card = document.querySelector('.appt-card');
+    if (card) card.innerHTML =
+      '<div class="appt-item" style="flex:1 1 100%;">' +
+        '<span class="appt-label">Your call is booked</span>' +
+        '<span class="appt-value">The calendar invite is in your email &mdash; open it and hit <strong>Accept</strong> so it\'s locked on your calendar.</span>' +
+      '</div>';
+    ['heroCalBtn', 'stickyCalBtn'].forEach(id => {
+      const b = document.getElementById(id);
+      if (b) b.style.display = 'none';
+    });
+    const sticky = document.getElementById('sticky-appt');
+    if (sticky) sticky.textContent = 'Invite sent to your email';
+  }
 })();
 
 /* Sticky bar after scroll */
