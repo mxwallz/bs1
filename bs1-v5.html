@@ -4661,6 +4661,31 @@ body.deliv-modal-open { overflow: hidden; }
   .rm-step.active .rm-dot::after { animation: none; }
   .rm-milestone::before { animation: none; }
 }
+
+/* === Merged Blueprint: roadmap steps with embedded deliverables === */
+.rm-content.has-delivs { display: block; }
+.rm-lead { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center; }
+.rm-lead.pipe { display: block; text-align: center; }
+.blu-pipe { max-width: 560px; margin: 18px auto 0; }
+.blu-pipe .pipe2 { max-width: 100%; padding: 0; margin: 0 auto; }
+.blu-pipe .pipe2 svg { width: 100%; height: auto; display: block; }
+.blu-pipe-cap { font-size: 13.5px; color: var(--w55); line-height: 1.6; max-width: 440px; margin: 6px auto 0; }
+.blu-delivs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+.blu-deliv { display: flex; gap: 13px; align-items: flex-start; padding: 15px 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.015); transition: border-color .3s ease, background .3s ease; }
+.blu-deliv:hover { border-color: var(--border-hi); background: rgba(255,255,255,0.03); }
+.blu-deliv-ic { width: 38px; height: 38px; border-radius: 10px; flex: none; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid var(--border-2); }
+.blu-deliv-ic svg { width: 19px; height: 19px; color: var(--gold-hi); }
+.blu-deliv-tx { min-width: 0; }
+.blu-deliv-tx .n { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+.blu-deliv-tx .h { font-family: 'Spectral', serif; font-size: 15.5px; font-weight: 500; color: var(--w100); line-height: 1.2; margin-bottom: 5px; }
+.blu-deliv-tx .p { font-size: 12.5px; color: var(--w55); line-height: 1.5; margin: 0; }
+.blu-deliv.span2 { grid-column: 1 / -1; }
+@media (max-width: 768px) {
+  .rm-lead, .blu-delivs { grid-template-columns: 1fr; }
+  .rm-lead { gap: 18px; }
+  .blu-delivs { margin-top: 18px; padding-top: 18px; }
+}
+
 /* === end bs1-v2 ZGA port === */
 
 /* === bs1-v2: sunk-cost section === */
@@ -5093,192 +5118,7 @@ body.deliv-modal-open { overflow: hidden; }
 <section class="section s-dark" id="phone-outcome">
   <div class="inner">
     <p class="eyebrow text-center reveal d1">The Outcome</p>
-    <h2 class="reveal d1 text-center">This is what your phone<br><em>will look like.</em></h2>
-
-    <div class="notif-wall reveal d3" style="margin-top: 56px;"><div class="notif-track">
-      <div class="notif n1">
-        <div class="notif-icon tinder">🔥</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">now</span></div>
-          <div class="notif-title"><span class="notif-count">12</span>new matches</div>
-          <div class="notif-text">Three women super-liked you today.</div>
-        </div>
-      </div>
-      <div class="notif n2">
-        <div class="notif-icon hinge">H</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">2m ago</span></div>
-          <div class="notif-title">Sarah liked your prompt</div>
-          <div class="notif-text">"The story about the dog made me laugh."</div>
-        </div>
-      </div>
-      <div class="notif n3">
-        <div class="notif-icon bumble">B</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Bumble</span><span class="notif-time">8m ago</span></div>
-          <div class="notif-title"><strong>Maya</strong> sent a message</div>
-          <div class="notif-text">"Okay Thursday works. Pick the place."</div>
-        </div>
-      </div>
-      <div class="notif n4">
-        <div class="notif-icon ig">◉</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">12m ago</span></div>
-          <div class="notif-title">2 new DMs from women</div>
-          <div class="notif-text">Both opened with a question about the trip photo.</div>
-        </div>
-      </div>
-      <div class="notif n5">
-        <div class="notif-icon tinder">🔥</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">25m ago</span></div>
-          <div class="notif-title">You have a new Super Like</div>
-          <div class="notif-text">Someone couldn't wait to swipe.</div>
-        </div>
-      </div>
-      <div class="notif n6">
-        <div class="notif-icon hinge">H</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">1h ago</span></div>
-          <div class="notif-title"><span class="notif-count">8</span>Likes You</div>
-          <div class="notif-text">Tap to see who's waiting.</div>
-        </div>
-      </div>
-      <div class="notif n7">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">1h ago</span></div>
-          <div class="notif-title">Mia</div>
-          <div class="notif-text">"no guy has ever approached me before, nice meeting you earlier today :)"</div>
-        </div>
-      </div>
-      <div class="notif n8">
-        <div class="notif-icon ig">◉</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">2h ago</span></div>
-          <div class="notif-title">Story viewer: Anna</div>
-          <div class="notif-text">She's been watching every one this week.</div>
-        </div>
-      </div>
-      <div class="notif n9">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">3h ago</span></div>
-          <div class="notif-title">Sophia</div>
-          <div class="notif-text">Thx for approaching me earlier 😘</div>
-        </div>
-      </div>
-      <div class="notif n10">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">4h ago</span></div>
-          <div class="notif-title">Lauren</div>
-          <div class="notif-text">Nice meeting you at the gym. Coffee soon?</div>
-        </div>
-      </div>
-      <div class="notif n11">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">5h ago</span></div>
-          <div class="notif-title">Emma</div>
-          <div class="notif-text">Can't stop thinking about last night 😍</div>
-        </div>
-      </div>
-
-      <div class="notif n1">
-        <div class="notif-icon tinder">🔥</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">now</span></div>
-          <div class="notif-title"><span class="notif-count">12</span>new matches</div>
-          <div class="notif-text">Three women super-liked you today.</div>
-        </div>
-      </div>
-      <div class="notif n2">
-        <div class="notif-icon hinge">H</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">2m ago</span></div>
-          <div class="notif-title">Sarah liked your prompt</div>
-          <div class="notif-text">"The story about the dog made me laugh."</div>
-        </div>
-      </div>
-      <div class="notif n3">
-        <div class="notif-icon bumble">B</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Bumble</span><span class="notif-time">8m ago</span></div>
-          <div class="notif-title"><strong>Maya</strong> sent a message</div>
-          <div class="notif-text">"Okay Thursday works. Pick the place."</div>
-        </div>
-      </div>
-      <div class="notif n4">
-        <div class="notif-icon ig">◉</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">12m ago</span></div>
-          <div class="notif-title">2 new DMs from women</div>
-          <div class="notif-text">Both opened with a question about the trip photo.</div>
-        </div>
-      </div>
-      <div class="notif n5">
-        <div class="notif-icon tinder">🔥</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Tinder</span><span class="notif-time">25m ago</span></div>
-          <div class="notif-title">You have a new Super Like</div>
-          <div class="notif-text">Someone couldn't wait to swipe.</div>
-        </div>
-      </div>
-      <div class="notif n6">
-        <div class="notif-icon hinge">H</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Hinge</span><span class="notif-time">1h ago</span></div>
-          <div class="notif-title"><span class="notif-count">8</span>Likes You</div>
-          <div class="notif-text">Tap to see who's waiting.</div>
-        </div>
-      </div>
-      <div class="notif n7">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">1h ago</span></div>
-          <div class="notif-title">Mia</div>
-          <div class="notif-text">"no guy has ever approached me before, nice meeting you earlier today :)"</div>
-        </div>
-      </div>
-      <div class="notif n8">
-        <div class="notif-icon ig">◉</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Instagram</span><span class="notif-time">2h ago</span></div>
-          <div class="notif-title">Story viewer: Anna</div>
-          <div class="notif-text">She's been watching every one this week.</div>
-        </div>
-      </div>
-      <div class="notif n9">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">3h ago</span></div>
-          <div class="notif-title">Sophia</div>
-          <div class="notif-text">Thx for approaching me earlier 😘</div>
-        </div>
-      </div>
-      <div class="notif n10">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">4h ago</span></div>
-          <div class="notif-title">Lauren</div>
-          <div class="notif-text">Nice meeting you at the gym. Coffee soon?</div>
-        </div>
-      </div>
-      <div class="notif n11">
-        <div class="notif-icon messages">💬</div>
-        <div class="notif-body">
-          <div class="notif-head"><span class="notif-app">Messages</span><span class="notif-time">5h ago</span></div>
-          <div class="notif-title">Emma</div>
-          <div class="notif-text">Can't stop thinking about last night 😍</div>
-        </div>
-      </div>
-    </div></div>
-
-    <!-- Transition beat into the "likes you" upsell strip. -->
-    <div class="match-transition reveal d3">
-      <h3>And these are the women<br><em>lining up to meet you.</em></h3>
-    </div>
+    <h2 class="reveal d1 text-center">These are the women<br><em>lining up to meet you.</em></h2>
 
     <!-- Tinder-style "likes you" premium upsell row. Blurred profile portraits. -->
     <div class="match-upsell reveal d4">
@@ -5349,420 +5189,49 @@ body.deliv-modal-open { overflow: hidden; }
 
 
 
-<!-- §9 WHAT YOU GET -->
-<section class="section s-dark" id="what-you-get">
+<!-- §9+§4+§4.5 MERGED · Blueprint: 90-day roadmap with deliverables embedded; pipeline animation inside Phase 2 -->
+<section class="section s-dark" id="blueprint" data-screen-label="Blueprint">
   <div class="inner">
     <div class="text-center">
-      <h2 class="reveal d1">What You Get Inside<br><em>Atlas Advisory.</em></h2>
-      <p class="body-lg reveal d2" style="max-width:560px; margin:16px auto 0; color:var(--w55);">Everything you need to build a dating life that matches your success.</p>
+      <p class="eyebrow reveal d1">How It Works</p>
+      <h2 class="reveal d1">One system. <em>Ninety days.</em></h2>
+      <p class="body-lg reveal d2" style="max-width:620px; margin:16px auto 0; color:var(--w55);">Get in front of the right women, turn attention into dates, and get expert feedback at every step. Here is everything we build for you &mdash; and exactly when.</p>
     </div>
 
-    <div class="wi-modules">
+    <div class="rm-wrap" id="rmSteps">
+      <div class="rm-line"></div>
+      <div class="rm-progress" id="rmProgress"></div>
 
-      <!-- 01 Wardrobe -->
-      <div class="wi-row reveal">
-        <div class="wi-text">
-          <div class="wi-num">01</div>
-          <h3 class="wi-title">Image &amp; Wardrobe Overhaul</h3>
-          <p class="wi-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-ba">
-            <div class="wi-ba-tile before"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="wi-ba-lab">Before</span></div>
-            <div class="wi-ba-tile after"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="wi-ba-lab">After</span></div>
+      <div class="rm-step">
+        <div class="rm-dot">1</div>
+        <div class="rm-content">
+          <div class="rm-textcol">
+            <div class="rm-week">Days 1-3</div>
+            <h3 class="rm-title">Onboarding &amp; Kickoff</h3>
+            <p class="rm-body">Your intake and first strategy call map your situation, your type, and the plan &mdash; with full system access and your private channel from day one.</p>
           </div>
-        </div>
-      </div>
-
-      <!-- 02 App Profiles -->
-      <div class="wi-row rev reveal">
-        <div class="wi-text">
-          <div class="wi-num">02</div>
-          <h3 class="wi-title">Done-For-You Dating App Profiles</h3>
-          <p class="wi-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-profile">
-            <div class="wi-profile-photo">
-              <span class="wi-pp-name">Top 1%</span>
-              <span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"/></svg></span>
-            </div>
-            <div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 Photographer -->
-      <div class="wi-row reveal">
-        <div class="wi-text">
-          <div class="wi-num">03</div>
-          <h3 class="wi-title">Photographer &amp; Photoshoot Playbook</h3>
-          <p class="wi-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-view">
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <span class="wi-rec">FOCUS</span>
-            <div class="wi-shutter"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 Instagram -->
-      <div class="wi-row rev reveal">
-        <div class="wi-text">
-          <div class="wi-num">04</div>
-          <h3 class="wi-title">Instagram Overhaul</h3>
-          <p class="wi-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-ig">
-            <div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div>
-            <div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 Approach -->
-      <div class="wi-row reveal">
-        <div class="wi-text">
-          <div class="wi-num">05</div>
-          <h3 class="wi-title">Real-Life Approach Gameplans</h3>
-          <p class="wi-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-map">
-            <svg viewBox="0 0 200 150" preserveAspectRatio="none"><g stroke="rgba(167,181,232,0.18)" stroke-width="1.5" fill="none"><path d="M0 40 H200"/><path d="M0 95 H200"/><path d="M55 0 V150"/><path d="M130 0 V150"/></g><path d="M55 95 L55 40 L130 40" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-dasharray="5 5"/></svg>
-            <span class="wi-pin"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 06 Conversion -->
-      <div class="wi-row rev reveal">
-        <div class="wi-text">
-          <div class="wi-num">06</div>
-          <h3 class="wi-title">The Conversion Blueprint</h3>
-          <p class="wi-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real‑life date quickly and reliably. Proven openers, texting sequences, and first date frameworks.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-chat">
-            <div class="wi-bub them">Honestly did not expect you to be this smooth</div>
-            <div class="wi-bub me">Then let me take you for a drink Thursday</div>
-            <div class="wi-bub them">It's a date</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 07 Date Frameworks -->
-      <div class="wi-row reveal">
-        <div class="wi-text">
-          <div class="wi-num">07</div>
-          <h3 class="wi-title">First-Date &amp; Relationship Frameworks</h3>
-          <p class="wi-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-cal">
-            <div class="wi-cal-top">This Week <span class="wi-chip">Date set</span></div>
-            <div class="wi-cal-grid"><div class="wi-cal-d">M</div><div class="wi-cal-d">T</div><div class="wi-cal-d">W</div><div class="wi-cal-d on">T</div><div class="wi-cal-d">F</div><div class="wi-cal-d">S</div><div class="wi-cal-d">S</div><div class="wi-cal-d">8</div><div class="wi-cal-d">9</div><div class="wi-cal-d">10</div><div class="wi-cal-d on">11</div><div class="wi-cal-d">12</div><div class="wi-cal-d">13</div><div class="wi-cal-d">14</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 08 Feedback Layer -->
-      <div class="wi-row rev reveal">
-        <div class="wi-text">
-          <div class="wi-num">08</div>
-          <h3 class="wi-title">The Feedback Layer</h3>
-          <p class="wi-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-wave">
-            <div class="wi-wave-bars"><span style="height:20px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:62px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:24px"></span><span style="height:40px"></span></div>
-            <div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Debrief &middot; 2:47</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 09 Atlas Network -->
-      <div class="wi-row reveal">
-        <div class="wi-text">
-          <div class="wi-num">09</div>
-          <h3 class="wi-title">The Atlas Network</h3>
-          <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-net">
-            <svg viewBox="0 0 200 200"><g stroke="rgba(167,181,232,0.4)" stroke-width="1.5"><line x1="100" y1="100" x2="170" y2="100"/><line x1="100" y1="100" x2="135" y2="161"/><line x1="100" y1="100" x2="65" y2="161"/><line x1="100" y1="100" x2="30" y2="100"/><line x1="100" y1="100" x2="65" y2="39"/><line x1="100" y1="100" x2="135" y2="39"/></g><g fill="var(--card-solid)" stroke="var(--gold)" stroke-width="1.5"><circle cx="170" cy="100" r="13"/><circle cx="135" cy="161" r="13"/><circle cx="65" cy="161" r="13"/><circle cx="30" cy="100" r="13"/><circle cx="65" cy="39" r="13"/><circle cx="135" cy="39" r="13"/></g><circle cx="100" cy="100" r="22" fill="var(--gold)"/><text x="100" y="104" text-anchor="middle" font-family="Spectral, serif" font-size="13" fill="#fff">You</text></svg>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- MOBILE-ONLY: gesture-stepped Tinder-style swipe deck of the same deliverables (one swipe/tap = one card) -->
-    <div class="swipe-deck">
-      <div class="sd-track" id="sdTrack">
-        <div class="sd-sticky">
-          <div class="sd-head">
-            <div class="sd-head-row">
-              <span class="sd-eyebrow">The Full Package</span>
-              <span class="sd-counter"><b id="sdCur">01</b><i>/ 09</i></span>
-            </div>
-            <div class="sd-bar"><div class="sd-bar-fill" id="sdBarFill"></div></div>
-          </div>
-          <div class="sd-stack" id="sdStack">
-
-            <article class="sd-card" data-i="0">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">01</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-ba">
-            <div class="wi-ba-tile before"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="wi-ba-lab">Before</span></div>
-            <div class="wi-ba-tile after"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="wi-ba-lab">After</span></div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">Image &amp; Wardrobe Overhaul</h3>
-              <p class="sd-card-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
-            </article>
-
-            <article class="sd-card" data-i="1">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">02</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-profile">
-            <div class="wi-profile-photo">
-              <span class="wi-pp-name">Top 1%</span>
-              <span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.2-9C1.3 9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.5.8-1.2 2-2.5 4-2.5 3.4 0 4.7 3.5 3.2 6.5C19 16.5 12 21 12 21z"></path></svg></span>
-            </div>
-            <div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">Done-For-You Dating App Profiles</h3>
-              <p class="sd-card-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
-            </article>
-
-            <article class="sd-card" data-i="2">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">03</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-view">
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <span class="wi-rec">FOCUS</span>
-            <div class="wi-shutter"></div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">Photographer &amp; Photoshoot Playbook</h3>
-              <p class="sd-card-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don't end up with cheesy LinkedIn headshots.</p>
-            </article>
-
-            <article class="sd-card" data-i="3">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">04</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-ig">
-            <div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div>
-            <div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">Instagram Overhaul</h3>
-              <p class="sd-card-body">An IG that quietly showcases your life and pulls women in. No fake flexing, no influencer cosplay. High-status, authentic presentation.</p>
-            </article>
-
-            <article class="sd-card" data-i="4">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">05</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-map">
-            <svg viewBox="0 0 200 150" preserveAspectRatio="none"><g stroke="rgba(167,181,232,0.18)" stroke-width="1.5" fill="none"><path d="M0 40 H200"></path><path d="M0 95 H200"></path><path d="M55 0 V150"></path><path d="M130 0 V150"></path></g><path d="M55 95 L55 40 L130 40" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-dasharray="5 5"></path></svg>
-            <span class="wi-pin"></span>
-          </div>
-              </div>
-              <h3 class="sd-card-title">Real-Life Approach Gameplans</h3>
-              <p class="sd-card-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
-            </article>
-
-            <article class="sd-card" data-i="5">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">06</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-chat">
-            <div class="wi-bub them">Honestly did not expect you to be this smooth</div>
-            <div class="wi-bub me">Then let me take you for a drink Thursday</div>
-            <div class="wi-bub them">It's a date</div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">The Conversion Blueprint</h3>
-              <p class="sd-card-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real-life date quickly and reliably. Proven openers and texting sequences.</p>
-            </article>
-
-            <article class="sd-card" data-i="6">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">07</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-cal">
-            <div class="wi-cal-top">This Week <span class="wi-chip">Date set</span></div>
-            <div class="wi-cal-grid"><div class="wi-cal-d">M</div><div class="wi-cal-d">T</div><div class="wi-cal-d">W</div><div class="wi-cal-d on">T</div><div class="wi-cal-d">F</div><div class="wi-cal-d">S</div><div class="wi-cal-d">S</div><div class="wi-cal-d">8</div><div class="wi-cal-d">9</div><div class="wi-cal-d">10</div><div class="wi-cal-d on">11</div><div class="wi-cal-d">12</div><div class="wi-cal-d">13</div><div class="wi-cal-d">14</div></div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">First-Date &amp; Relationship Frameworks</h3>
-              <p class="sd-card-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
-            </article>
-
-            <article class="sd-card" data-i="7">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">08</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-wave">
-            <div class="wi-wave-bars"><span style="height:20px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:62px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:24px"></span><span style="height:40px"></span></div>
-            <div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>Debrief · 2:47</div>
-          </div>
-              </div>
-              <h3 class="sd-card-title">The Feedback Layer</h3>
-              <p class="sd-card-body">Dating is the one skill where rejection doesn't explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
-            </article>
-
-            <article class="sd-card" data-i="8">
-              <div class="sd-card-top"><span class="sd-tag">Deliverable</span><span class="sd-idx">09</span></div>
-              <div class="sd-card-visual">
-                <div class="wi-net">
-            <svg viewBox="0 0 200 200"><g stroke="rgba(167,181,232,0.4)" stroke-width="1.5"><line x1="100" y1="100" x2="170" y2="100"></line><line x1="100" y1="100" x2="135" y2="161"></line><line x1="100" y1="100" x2="65" y2="161"></line><line x1="100" y1="100" x2="30" y2="100"></line><line x1="100" y1="100" x2="65" y2="39"></line><line x1="100" y1="100" x2="135" y2="39"></line></g><g fill="var(--card-solid)" stroke="var(--gold)" stroke-width="1.5"><circle cx="170" cy="100" r="13"></circle><circle cx="135" cy="161" r="13"></circle><circle cx="65" cy="161" r="13"></circle><circle cx="30" cy="100" r="13"></circle><circle cx="65" cy="39" r="13"></circle><circle cx="135" cy="39" r="13"></circle></g><circle cx="100" cy="100" r="22" fill="var(--gold)"></circle><text x="100" y="104" text-anchor="middle" font-family="Spectral, serif" font-size="13" fill="#fff">You</text></svg>
-          </div>
-              </div>
-              <h3 class="sd-card-title">The Atlas Network</h3>
-              <p class="sd-card-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
-            </article>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-    <div class="cta-block reveal d4" style="margin-top: 48px;">
-      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
-      <div class="cta-friction">takes 30 seconds · NDA protected</div>
-    </div>
-</section>
-
-
-<!-- §9.2 BEFORE / AFTER — profile rebuild transformation (dating-profile-style cards) -->
-<section class="section s-black" id="transformation">
-  <div class="inner">
-    <p class="eyebrow text-center reveal d1">The Profile Rebuild</p>
-    <h2 class="reveal d1 text-center">Same man. <em>New profile.</em></h2>
-    <p class="section-sub text-center reveal d2">Same guy — restyled, reshot, and packaged the way the top 1% of profiles are. Here's what the rebuild actually looks like.</p>
-    <div class="tf-cases">
-
-      <!-- Todd -->
-      <div class="tf-case reveal d2">
-        <div class="tf-name">Todd</div>
-        <div class="tf-pair">
-          <div class="tf-side before">
-            <div class="tf-card">
-              <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
-              <span class="tf-badge before">Before</span>
-              <span class="tf-meta">Todd</span>
-            </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/todd/before-8.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/todd/before-7.jpg" loading="lazy" decoding="async" alt=""></div>
-            </div>
-          </div>
-          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="tf-side after">
-            <div class="tf-card">
-              <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
-              <span class="tf-badge after">After</span>
-              <span class="tf-meta">Todd</span>
-            </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/todd/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+          <div class="rm-graphic">
+            <div class="rmg-check">
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln s"></span></div>
+              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
+              <div class="r"><span class="bx"></span><span class="ln xs"></span></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Adam -->
-      <div class="tf-case reveal d2">
-        <div class="tf-name">Adam</div>
-        <div class="tf-pair">
-          <div class="tf-side before">
-            <div class="tf-card">
-              <img src="img/before-after/adam/before-2.jpg" loading="lazy" decoding="async" alt="Adam's dating profile before Atlas — casual amateur phone photo">
-              <span class="tf-badge before">Before</span>
-              <span class="tf-meta">Adam</span>
+      <div class="rm-step">
+        <div class="rm-dot">2</div>
+        <div class="rm-content has-delivs">
+          <div class="rm-lead pipe">
+            <div class="rm-textcol">
+              <div class="rm-week">Days 1-14</div>
+              <h3 class="rm-title">Get In Front of the Right Women</h3>
+              <p class="rm-body" style="max-width:600px;margin:0 auto;">We build and install your entire presence, then switch on the 3-Part Pipeline: apps, Instagram, and real life all feeding you matches at once.</p>
             </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/adam/before-3.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/adam/before-1.jpg" loading="lazy" decoding="async" alt=""></div>
-            </div>
-          </div>
-          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="tf-side after">
-            <div class="tf-card">
-              <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
-              <span class="tf-badge after">After</span>
-              <span class="tf-meta">Adam</span>
-            </div>
-            <div class="tf-thumbs">
-              <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/adam/after-5.jpg" loading="lazy" decoding="async" alt=""></div>
-              <div class="tf-thumb"><img src="img/before-after/adam/after-2.jpg" loading="lazy" decoding="async" alt=""></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <p class="tf-caption reveal d3">Real clients. Same men, same faces — a profile built to match the life behind it.</p>
-  </div>
-</section>
-
-
-<!-- §9.3 RECEIPTS STRIP — mid-page proof teaser linking to the full wall -->
-<section class="section s-darker" id="receipts" style="padding-top:clamp(60px,7.5vw,96px);padding-bottom:clamp(60px,7.5vw,96px);">
-  <div class="inner wide">
-    <div class="rcpt-head">
-      <div>
-        <p class="eyebrow reveal d1">The Receipts</p>
-        <h2 class="reveal d1" style="max-width:520px;">Straight from the <em>client group chat.</em></h2>
-      </div>
-      <a href="#testimonials" class="rcpt-see reveal d2">See the full wall <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <!-- Transform-based slider (NOT native scroll): one screenshot per slide, fully
-         contained in the viewport. No scroll container = no gesture fight with the
-         page = no scroll lag. Arrows + horizontal swipe advance; gentle auto-advance
-         pauses while the page is scrolling and stops for good on first interaction. -->
-    <div class="rcpt-frame reveal d3">
-      <button class="rcpt-arrow prev" id="rcptPrev" aria-label="Previous screenshot" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="rcpt-viewport">
-        <div class="rcpt-track" id="rcptTrack">
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8383_blurred.JPG" loading="lazy" alt="Matched with 18 girls in one day — more than ever before"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8368_blurred.JPG" loading="lazy" alt="A win he's been chasing for months — the hottest girl he's talked to"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8407_blurred.JPG" loading="lazy" alt="Great date with a 27-year-old model who complimented his new necklace"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8360_blurred.JPG" loading="lazy" alt="35-40 approaches, 10 Instagrams, 4 dates in a week"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8373_blurred.JPG" loading="lazy" alt="100+ likes and 27 roses in 48 hours with high-end matches"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8408_blurred.JPG" loading="lazy" alt="Cold-approached an IG model in SoHo and took her to lunch"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8381_blurred.JPG" loading="lazy" alt="Three dates scheduled for the coming week"></div>
-          <div class="rcpt-slide"><img src="img/tg-testimonials/IMG_8412_blurred.JPG" loading="lazy" alt="Now seeing his third Wilhelmina model"></div>
-        </div>
-      </div>
-      <button class="rcpt-arrow next" id="rcptNext" aria-label="Next screenshot" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-
-<!-- §4 ATLAS SYSTEM (big numbers replaced with small icons) -->
-<section class="section s-black" id="system">
-  <div class="inner">
-    <p class="eyebrow text-center reveal d1">The System</p>
-    <h2 class="reveal d1 text-center">A framework.<br><em>Not tips.</em></h2>
-    <p class="body-lg reveal d2 text-center" style="max-width:640px; margin:24px auto 0; color:var(--w55);">
-      Get in front of the right women. Turn attention into dates. Expert feedback to optimize each step of the dating process.
-    </p>
-
-    <!-- Pipeline animation — featured visual -->
-    <div class="system-pipeline-visual reveal d3" style="max-width:680px;margin:52px auto 0;">
-      <div class="pipe2">
+            <div class="blu-pipe reveal d3">
+              <div class="pipe2">
             <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="The 3 Part Pipeline">
               <defs>
                 <linearGradient id="v12GlassGrad" x1="0" y1="0" x2="0" y2="1">
@@ -5847,126 +5316,60 @@ body.deliv-modal-open { overflow: hidden; }
               <text font-size="38" text-anchor="middle" dominant-baseline="central" fill="#C4CEF5" filter="url(#v12SoftGlow)">♥<animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"><mpath href="#v12PathTrunk"/></animateMotion></text>
             </svg>
           </div>
-      <p class="body-lg text-center reveal d3" style="max-width:560px; margin:28px auto 0; color:var(--w55);">Three independent streams. If one slows down, the other two keep feeding you. No single point of failure.</p>
-    </div>
-
-    <!-- (3 Part Pipeline copy cut 2026-07-16 per Marco — the animation stands
-         on its own. The "Conversion Blueprint" + "Feedback Layer" module cards
-         were removed earlier the same day; all three remain as deliverables in
-         #what-you-get.) -->
-
-    <div class="cta-block reveal d4" style="margin-top: 56px;">
-      <button class="btn" data-apply-jump>Apply for Your Consultation</button>
-      <div class="cta-friction">takes 30 seconds · NDA protected</div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-<!-- §4.5 · 90-DAY ROADMAP (ZGA-ported timeline, Atlas-tinted) -->
-<section class="section s-dark" id="roadmap">
-  <div class="inner">
-    <div class="text-center">
-      <p class="eyebrow reveal d1">How It Works</p>
-      <h2 class="reveal d1">Your 90-Day <em>Roadmap.</em></h2>
-      <p class="body-lg reveal d2" style="max-width:600px; margin:16px auto 0; color:var(--w55);">From the first call to a dating life that runs on its own. Here is exactly how it gets built.</p>
-    </div>
-
-    <div class="rm-wrap" id="rmSteps">
-      <div class="rm-line"></div>
-      <div class="rm-progress" id="rmProgress"></div>
-
-      <!-- Step 1 -->
-      <div class="rm-step">
-        <div class="rm-dot">1</div>
-        <div class="rm-content">
-          <div class="rm-textcol">
-            <div class="rm-week">Days 1-3 <!-- COPY_TODO: Ben confirm onboarding timeframe --></div>
-            <h3 class="rm-title">Onboarding &amp; Kickoff</h3>
-            <p class="rm-body">Your intake and first strategy call map your situation, your type, and the plan. You get full system access and your private channel from day one.</p>
-          </div>
-          <div class="rm-graphic">
-            <div class="rmg-check">
-              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
-              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln s"></span></div>
-              <div class="r done"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span class="ln"></span></div>
-              <div class="r"><span class="bx"></span><span class="ln xs"></span></div>
+              <p class="blu-pipe-cap">Three independent streams. If one slows down, the other two keep feeding you. No single point of failure.</p>
             </div>
+          </div>
+          <div class="blu-delivs">
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="blu-deliv-tx"><div class="n">01</div><div class="h">Image &amp; Wardrobe Overhaul</div><p class="p">Grooming, haircut, and outfits that finally match who you are on paper.</p></div></div>
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><div class="blu-deliv-tx"><div class="n">02</div><div class="h">Done-For-You Dating App Profiles</div><p class="p">Top-1% Hinge, Raya &amp; Bumble profiles, built and iterated for you.</p></div></div>
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span><div class="blu-deliv-tx"><div class="n">03</div><div class="h">Photographer &amp; Photoshoot Playbook</div><p class="p">We source your photographer and tell you exactly how to pose.</p></div></div>
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span><div class="blu-deliv-tx"><div class="n">04</div><div class="h">Instagram Overhaul</div><p class="p">A high-status, authentic grid that quietly pulls women in.</p></div></div>
+            <div class="blu-deliv span2"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div class="blu-deliv-tx"><div class="n">05</div><div class="h">Real-Life Approach Gameplans</div><p class="p">Where to go, what to say, and how to get the number.</p></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Step 2 -->
-      <div class="rm-step">
-        <div class="rm-dot">2</div>
-        <div class="rm-content">
-          <div class="rm-textcol">
-            <div class="rm-week">Days 1-14 <!-- COPY_TODO: site says "installed in 14 days", Ben confirm --></div>
-            <h3 class="rm-title">Pipeline Install</h3>
-            <p class="rm-body">Wardrobe, grooming, done-for-you dating app profiles, your photoshoot, and the Instagram overhaul all go live. The 3-Part Pipeline starts feeding you matches.</p>
-          </div>
-          <div class="rm-graphic">
-            <div class="rmg-pipe">
-              <div class="nd">APPS</div>
-              <span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-              <div class="nd">IG</div>
-              <span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-              <div class="nd" style="background:var(--gold);color:#fff;border-color:var(--gold);">IRL</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Milestone: momentum marker between Pipeline Install and Conversion -->
       <div class="rm-milestone">
         <span class="rm-ms-node"></span>
         <span class="rm-ms-label"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.6 6.3L21 9l-4.8 4.3L17.6 20 12 16.4 6.4 20l1.4-6.7L3 9l6.4-.7z"/></svg>Most men start reaching 1&ndash;3 high-quality dates here</span>
       </div>
 
-      <!-- Step 3 -->
       <div class="rm-step">
         <div class="rm-dot">3</div>
-        <div class="rm-content">
+        <div class="rm-content has-delivs">
           <div class="rm-textcol">
-            <div class="rm-week">Weeks 3-6 <!-- COPY_TODO: Ben confirm conversion-phase timeframe --></div>
-            <h3 class="rm-title">Conversion</h3>
-            <p class="rm-body">Proven openers, texting sequences, and first-date frameworks turn those matches into real dates on your calendar, reliably and on repeat.</p>
+            <div class="rm-week">Weeks 3-6</div>
+            <h3 class="rm-title">Turn Attention Into Dates</h3>
+            <p class="rm-body">Matches mean nothing until they are on your calendar. This is the conversion engine that gets them there &mdash; reliably, on repeat.</p>
           </div>
-          <div class="rm-graphic">
-            <div class="rmg-bars"><span style="height:22px"></span><span style="height:34px"></span><span style="height:44px"></span><span style="height:56px"></span><span style="height:64px"></span></div>
+          <div class="blu-delivs">
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="blu-deliv-tx"><div class="n">06</div><div class="h">The Conversion Blueprint</div><p class="p">Openers and texting sequences that turn a spark into a date, fast.</p></div></div>
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><div class="blu-deliv-tx"><div class="n">07</div><div class="h">First-Date &amp; Relationship Frameworks</div><p class="p">Run great dates, screen red flags, and escalate smoothly.</p></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Step 4 -->
       <div class="rm-step">
         <div class="rm-dot">4</div>
-        <div class="rm-content">
+        <div class="rm-content has-delivs">
           <div class="rm-textcol">
-            <div class="rm-week">Ongoing <!-- COPY_TODO: Ben confirm cadence --></div>
-            <h3 class="rm-title">The Feedback Layer</h3>
-            <p class="rm-body">Debriefs after every date, approach audits, and message support between sessions. We close the loop so every week is sharper than the last.</p>
+            <div class="rm-week">Ongoing</div>
+            <h3 class="rm-title">Expert Feedback, On Repeat</h3>
+            <p class="rm-body">Dating is the one skill where rejection never explains itself. We close the loop after every date, so each week is sharper than the last.</p>
           </div>
-          <div class="rm-graphic">
-            <div class="rmg-stack">
-              <div class="c b3"></div>
-              <div class="c b2"></div>
-              <div class="c top"><span class="tag">DEBRIEF</span><span class="l g"></span><span class="l"></span><span class="l s"></span></div>
-            </div>
+          <div class="blu-delivs">
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><div class="blu-deliv-tx"><div class="n">08</div><div class="h">The Feedback Layer</div><p class="p">Debriefs, approach audits, and message support between sessions.</p></div></div>
+            <div class="blu-deliv"><span class="blu-deliv-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></span><div class="blu-deliv-tx"><div class="n">09</div><div class="h">The Atlas Network</div><p class="p">Female advisors, six strategists, and a private room of high-performers.</p></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Finish -->
       <div class="rm-finish">
         <div class="rm-finish-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
         <div class="rm-finish-content">
           <div class="rm-week">Day 90 &middot; The Outcome</div>
           <h3>Consistent dates with women you <em>actually want.</em></h3>
-          <p>By day 90 the guesswork is gone. The pipeline is built, the system runs, and you have a dating life that finally matches your success. It is all yours to keep and run on autopilot.</p>
+          <p>The guesswork is gone. The pipeline is built, the system runs, and you have a dating life that finally matches your success &mdash; yours to keep and run on autopilot.</p>
         </div>
       </div>
 
@@ -5974,10 +5377,87 @@ body.deliv-modal-open { overflow: hidden; }
 
     <div class="cta-block reveal d4" style="margin-top: 56px;">
       <button class="btn" data-apply-jump>Apply for Your Consultation</button>
-      <div class="cta-friction">takes 30 seconds · NDA protected</div>
+      <div class="cta-friction">takes 30 seconds &middot; NDA protected</div>
     </div>
   </div>
 </section>
+
+<!-- §9.2 BEFORE / AFTER — profile rebuild transformation (dating-profile-style cards) -->
+<section class="section s-black" id="transformation">
+  <div class="inner">
+    <p class="eyebrow text-center reveal d1">The Profile Rebuild</p>
+    <h2 class="reveal d1 text-center">Same man. <em>New profile.</em></h2>
+    <p class="section-sub text-center reveal d2">Same guy — restyled, reshot, and packaged the way the top 1% of profiles are. Here's what the rebuild actually looks like.</p>
+    <div class="tf-cases">
+
+      <!-- Todd -->
+      <div class="tf-case reveal d2">
+        <div class="tf-name">Todd</div>
+        <div class="tf-pair">
+          <div class="tf-side before">
+            <div class="tf-card">
+              <img src="img/before-after/todd/before-6.jpg" loading="lazy" decoding="async" alt="Todd's dating photos before Atlas — hallway mirror selfie in sweats">
+              <span class="tf-badge before">Before</span>
+              <span class="tf-meta">Todd</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/before-8.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/before-7.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="tf-side after">
+            <div class="tf-card">
+              <img src="img/before-after/todd/after-2.jpg" loading="lazy" decoding="async" alt="Todd's rebuilt profile — polished travel and lifestyle photography">
+              <span class="tf-badge after">After</span>
+              <span class="tf-meta">Todd</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/todd/after-4.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/todd/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adam -->
+      <div class="tf-case reveal d2">
+        <div class="tf-name">Adam</div>
+        <div class="tf-pair">
+          <div class="tf-side before">
+            <div class="tf-card">
+              <img src="img/before-after/adam/before-2.jpg" loading="lazy" decoding="async" alt="Adam's dating profile before Atlas — casual amateur phone photo">
+              <span class="tf-badge before">Before</span>
+              <span class="tf-meta">Adam</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/adam/before-3.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/before-1.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+          <div class="tf-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="tf-side after">
+            <div class="tf-card">
+              <img src="img/before-after/adam/after-4.jpg" loading="lazy" decoding="async" alt="Adam's rebuilt dating profile — polished lifestyle photography">
+              <span class="tf-badge after">After</span>
+              <span class="tf-meta">Adam</span>
+            </div>
+            <div class="tf-thumbs">
+              <div class="tf-thumb"><img src="img/before-after/adam/after-1.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/after-5.jpg" loading="lazy" decoding="async" alt=""></div>
+              <div class="tf-thumb"><img src="img/before-after/adam/after-2.jpg" loading="lazy" decoding="async" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="tf-caption reveal d3">Real clients. Same men, same faces — a profile built to match the life behind it.</p>
+  </div>
+</section>
+
+
+<!-- §4 (The System) & §4.5 (90-Day Roadmap) merged into #blueprint above. -->
 
 
 <!-- §5b · VIDEO TESTIMONIALS (Vidalytics click-to-load). Interviews + approaches + selfie. -->
