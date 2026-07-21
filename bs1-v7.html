@@ -4377,6 +4377,8 @@ body.deliv-modal-open { overflow: hidden; }
 .pg-rowtag.after { background: rgba(20,58,36,0.88); color: #bbf7d0; }
 @media (max-width: 700px) {
   .pg-pair { grid-template-columns: 1fr; }
+  #transformation .tf-arrow { transform: rotate(90deg); margin: 2px auto; width: 40px; height: 40px; }
+}
 
 #transformation .tf-cases { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: clamp(36px,5vw,64px); margin-top: clamp(44px,6vw,64px); }
 #transformation .tf-case { width: 470px; max-width: 100%; }
@@ -5858,12 +5860,11 @@ body.deliv-modal-open { overflow: hidden; }
       <span>Enrollment open · 4 spots remaining</span>
     </div>
     <h2 class="reveal d2">Ready to have this<br><em>area of your life permanently handled?</em></h2>
-    <!-- THE application CTA: same button as the hero. Every other Apply CTA
-         scrolls here (data-apply-jump); this one opens the Typeform popup.
-         On submit, the postMessage listener (bottom of page) redirects to
-         confirm.html. -->
-    <div class="cta-block reveal d3" id="applyForm">
-      <button class="btn" data-tf-popup="ZY4Ldey7" data-tf-opacity="100" data-tf-size="100">Apply for Your Consultation</button>
+    <!-- THE application: inline Typeform (live embed). Every other Apply CTA
+         on the page scrolls here (data-apply-jump). On submit, a postMessage
+         listener (bottom of page) redirects to confirm.html. -->
+    <div class="apply-embed reveal d3" id="applyForm">
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
     </div>
     <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · NDA protected</div>
   </div>
