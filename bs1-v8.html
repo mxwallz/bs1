@@ -4960,7 +4960,7 @@ body.deliv-modal-open { overflow: hidden; }
 #video-testimonials .vtx-c .vtx-lockup .s { font-size: 11px; color: rgba(255,255,255,0.55); font-variant-numeric: tabular-nums; }
 #video-testimonials .vtx-c .vt-thumb .vt-play { width: 46px; height: 46px; }
 /* right-edge fade — signals more cards; hides at end of track */
-#video-testimonials .vt-swipe::after { content: ""; position: absolute; top: 0; bottom: 0; right: -1px; width: 96px; background: linear-gradient(to left, var(--bg0) 8%, transparent); pointer-events: none; z-index: 5; opacity: 1; transition: opacity 0.35s ease; }
+#video-testimonials .vt-swipe::after { display: none; }
 #video-testimonials .vt-swipe.vt-at-end::after { opacity: 0; }
 
 @keyframes vtWipe {
