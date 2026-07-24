@@ -5128,13 +5128,11 @@ body.deliv-modal-open { overflow: hidden; }
     <div class="vsl-wrap reveal d3" style="max-width: min(866px, 100%);">
       <div class="vsl-play"></div>
     </div>
-    <!-- Apply CTA: the Typeform stays hidden and opens as a popup overlay on click.
-         Every Apply button carries data-tf-popup; on submit the postMessage listener
-         (bottom of page) redirects to confirm.html. -->
-    <div class="cta-block reveal d4">
-      <button class="btn" data-tf-popup="01KXR68QGYKJZRN02GDTW38FDD">Apply for Your Consultation</button>
-      <div class="cta-friction">takes 30 seconds · confidential</div>
+    <!-- First CTA: inline Typeform application, directly below the VSL. -->
+    <div class="apply-embed reveal d4" id="applyForm">
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
     </div>
+    <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · confidential</div>
     <!-- Hero stat row removed per v25 feedback. -->
 
   </div>
@@ -6122,11 +6120,11 @@ body.deliv-modal-open { overflow: hidden; }
       <span>Enrollment open · 4 spots remaining</span>
     </div>
     <h2 class="reveal d2">Ready to have this<br><em>area of your life permanently handled?</em></h2>
-    <!-- embed relocated to hero 2026-07-22; this final CTA jumps back up to it -->
-    <div class="cta-block reveal d3">
-      <button class="btn" data-tf-popup="01KXR68QGYKJZRN02GDTW38FDD">Apply for Your Consultation</button>
-      <div class="cta-friction" style="margin-top:14px;">takes 30 seconds · confidential</div>
+    <!-- Last CTA: inline Typeform application. -->
+    <div class="apply-embed reveal d3" id="applyFormBottom">
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
     </div>
+    <div class="cta-friction reveal d3" style="margin-top:14px;">takes 30 seconds · confidential</div>
   </div>
 </section>
 
