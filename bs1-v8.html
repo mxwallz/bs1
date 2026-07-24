@@ -3457,6 +3457,10 @@ body.deliv-modal-open { overflow: hidden; }
 .vt-arrow.vt-next { right: -8px; }
 .vt-arrow[disabled] { opacity: 0.3; pointer-events: none; }
 @media (max-width: 768px) { .vt-arrow { width: 38px; height: 38px; } .vt-arrow.vt-prev { left: 4px; } .vt-arrow.vt-next { right: 4px; } .vt-arrow svg { width: 19px; height: 19px; } }
+/* Second video section: arrows only where the grid becomes a horizontal scroller (mobile) */
+.vt2-wrap { position: relative; }
+.vt-arrow.vt2-arrow { display: none; top: 50%; }
+@media (max-width: 768px) { .vt-arrow.vt2-arrow { display: flex; } .vt2-arrow.vt2-prev { left: 2px; } .vt2-arrow.vt2-next { right: 2px; } }
 .vt-swipe-track > .vt-card {
   flex: 0 0 calc(100% - 64px);
   max-width: 440px;
@@ -4435,6 +4439,11 @@ body.deliv-modal-open { overflow: hidden; }
 .ba-rebuild-grid .feat { grid-row: 1 / span 2; min-height: 218px; position: relative; }
 .ba-rebuild-grid .feat .ba-name { position: absolute; left: 10px; bottom: 9px; color: #fff; font-family: 'Spectral', serif; font-size: 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
 .ba-rebuild-grid .sq { aspect-ratio: 1; }
+/* Adam: static "sent above / built below" layout (no animation) */
+.ba-static { display: flex; flex-direction: column; gap: 24px; }
+.ba-static-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: start; }
+.ba-static-row .ba-print { position: static; width: auto; transform: none; z-index: auto; transition: none; }
+.ba-rebuild-static { position: relative; margin-top: 4px; }
 @media (max-width: 520px) { .ba-prints { height: 480px; } .ba-print.p1 { top: 48px; } .ba-print.p2 { top: 120px; } .ba-print.p3 { top: 56px; } }
 @media (prefers-reduced-motion: reduce) { .ba-print, .ba-rebuild { transition: none; } }
 
@@ -5017,6 +5026,9 @@ body.deliv-modal-open { overflow: hidden; }
 /* ── INLINE APPLICATION EMBED (#applyForm) ───────────────────
    The one Typeform on the page; every Apply CTA scrolls here. */
 .apply-embed { max-width: 560px; margin: 28px auto 0; scroll-margin-top: 76px; }
+/* First/last CTA: full inline embed on desktop, compact tap-to-open button on mobile */
+.apply-mobile { display: none; }
+@media (max-width: 620px) { .apply-desktop { display: none !important; } .apply-mobile { display: flex; margin-top: 20px; } }
 /* ══ NOTIFICATION WALL — auto-scrolling vertical feed (ported from bs1-v3, 2026-07-22) ══ */
 .notif-wall { display: block; max-height: 560px; max-width: 720px; margin: 56px auto 0; overflow: hidden; position: relative;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 90%, transparent 100%);
@@ -5128,9 +5140,12 @@ body.deliv-modal-open { overflow: hidden; }
     <div class="vsl-wrap reveal d3" style="max-width: min(866px, 100%);">
       <div class="vsl-play"></div>
     </div>
-    <!-- First CTA: inline Typeform application, directly below the VSL. -->
-    <div class="apply-embed reveal d4" id="applyForm">
+    <!-- First CTA: inline Typeform on desktop, tap-to-open popup button on mobile. -->
+    <div class="apply-embed reveal d4 apply-desktop" id="applyForm">
       <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
+    </div>
+    <div class="cta-block reveal d4 apply-mobile">
+      <button class="btn" data-tf-popup="01KXR68QGYKJZRN02GDTW38FDD">Apply for Your Consultation</button>
     </div>
     <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · confidential</div>
     <!-- Hero stat row removed per v25 feedback. -->
@@ -5470,16 +5485,6 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="wi-row reveal d2">
         <div class="wi-text">
           <span class="wi-num">03</span>
-          <h3 class="wi-title">Photographer &amp; Photoshoot Playbook</h3>
-          <p class="wi-body">We source and vet a photographer in your city, give them our photoshoot playbook, and tell you exactly how to pose so you don&rsquo;t end up with cheesy LinkedIn headshots.</p>
-        </div>
-        <div class="wi-visual">
-          <div class="wi-view"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span class="wi-rec">FOCUS</span><div class="wi-shutter"></div></div>
-        </div>
-      </div>
-      <div class="wi-row rev reveal d2">
-        <div class="wi-text">
-          <span class="wi-num">04</span>
           <h3 class="wi-title">Instagram Overhaul</h3>
           <p class="wi-body">An IG that quietly showcases your real life and pulls women in. High-status, authentic presentation that looks like you, not an influencer costume.</p>
         </div>
@@ -5487,9 +5492,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-ig"><div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div><div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div></div>
         </div>
       </div>
-      <div class="wi-row reveal d2">
+      <div class="wi-row rev reveal d2">
         <div class="wi-text">
-          <span class="wi-num">05</span>
+          <span class="wi-num">04</span>
           <h3 class="wi-title">Real-Life Approach Gameplans</h3>
           <p class="wi-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
         </div>
@@ -5497,9 +5502,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-map"><svg viewBox="0 0 280 210" fill="none"><path d="M18 176 C 78 158, 92 96, 158 84 S 246 64, 262 26" stroke="rgba(167,181,232,0.5)" stroke-width="2" stroke-dasharray="5 9" stroke-linecap="round"/></svg><span class="wi-pin"></span></div>
         </div>
       </div>
-      <div class="wi-row rev reveal d2">
+      <div class="wi-row reveal d2">
         <div class="wi-text">
-          <span class="wi-num">06</span>
+          <span class="wi-num">05</span>
           <h3 class="wi-title">The Conversion Blueprint</h3>
           <p class="wi-body">Whether you meet her on the street or on Hinge, we give you everything you need to turn that initial spark into a real-life date quickly and reliably. Proven openers, texting sequences, and first date frameworks.</p>
         </div>
@@ -5507,9 +5512,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-chat"><div class="wi-bub them">Honestly did not expect you to be this smooth</div><div class="wi-bub me">Then let me take you for a drink Thursday</div><div class="wi-bub them">It&rsquo;s a date</div></div>
         </div>
       </div>
-      <div class="wi-row reveal d2">
+      <div class="wi-row rev reveal d2">
         <div class="wi-text">
-          <span class="wi-num">07</span>
+          <span class="wi-num">06</span>
           <h3 class="wi-title">First-Date &amp; Relationship Frameworks</h3>
           <p class="wi-body">Simple structures for running great first dates, screening for red flags, escalating smoothly, and moving from casual to committed when you want.</p>
         </div>
@@ -5517,9 +5522,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-cal"><div class="wi-cal-top"><span>This Week</span><span class="wi-cal-set">Date set</span></div><div class="wi-cal-grid"><div class="wi-cal-d dow">M</div><div class="wi-cal-d dow">T</div><div class="wi-cal-d dow">W</div><div class="wi-cal-d dow">T</div><div class="wi-cal-d dow">F</div><div class="wi-cal-d dow">S</div><div class="wi-cal-d dow">S</div><div class="wi-cal-d">8</div><div class="wi-cal-d">9</div><div class="wi-cal-d">10</div><div class="wi-cal-d on">11</div><div class="wi-cal-d">12</div><div class="wi-cal-d">13</div><div class="wi-cal-d">14</div></div></div>
         </div>
       </div>
-      <div class="wi-row rev reveal d2">
+      <div class="wi-row reveal d2">
         <div class="wi-text">
-          <span class="wi-num">08</span>
+          <span class="wi-num">07</span>
           <h3 class="wi-title">The Feedback Layer</h3>
           <p class="wi-body">Dating is the one skill where rejection doesn&rsquo;t explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
         </div>
@@ -5527,9 +5532,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-wave"><div class="wi-wave-bars"><span style="height:22px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:60px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:24px"></span><span style="height:40px"></span></div><div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Debrief &middot; 2:47</div></div>
         </div>
       </div>
-      <div class="wi-row reveal d2">
+      <div class="wi-row rev reveal d2">
         <div class="wi-text">
-          <span class="wi-num">09</span>
+          <span class="wi-num">08</span>
           <h3 class="wi-title">The Atlas Network</h3>
           <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
         </div>
@@ -5626,7 +5631,6 @@ body.deliv-modal-open { overflow: hidden; }
           </div>
         </div>
       </div>
-
     <div class="cta-block reveal d4" style="margin-top: 56px;">
       <button class="btn" data-tf-popup="01KXR68QGYKJZRN02GDTW38FDD">Apply for Your Consultation</button>
       <div class="cta-friction">takes 30 seconds &middot; confidential</div>
@@ -5670,20 +5674,22 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="tf-case reveal d2">
         <div class="pg-text">
           <h3>We rebuilt <em>Adam&rsquo;s grid.</em></h3>
-          <p>What he sent, swept aside. What we built, front and center. Click to replay.</p>
+          <p>What he sent, up top. What we built, below.</p>
         </div>
-        <div class="ba-prints" id="baPrints" role="button" tabindex="0" aria-label="Replay the rebuild animation">
-          <div class="ba-print p1"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-2.jpg'), linear-gradient(160deg, #2a2e3d, #10121c);"><span class="ba-print-x">&#10005;</span></div></div></div>
-          <div class="ba-print p2"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-3.jpg'), linear-gradient(160deg, #232735, #0e1019);"><span class="ba-print-x">&#10005;</span></div></div></div>
-          <div class="ba-print p3"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-1.jpg'), linear-gradient(160deg, #2d2733, #100e17);"><span class="ba-print-x">&#10005;</span></div></div></div>
-          <div class="ba-rebuild"><div class="ba-rebuild-card">
+        <div class="ba-static">
+          <div class="ba-static-row">
+            <div class="ba-print"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-2.jpg'), linear-gradient(160deg, #2a2e3d, #10121c);"><span class="ba-print-x">&#10005;</span></div></div></div>
+            <div class="ba-print"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-3.jpg'), linear-gradient(160deg, #232735, #0e1019);"><span class="ba-print-x">&#10005;</span></div></div></div>
+            <div class="ba-print"><div class="ba-print-card"><div class="ba-print-photo" style="background-image: url('img/before-after/adam/before-1.jpg'), linear-gradient(160deg, #2d2733, #100e17);"><span class="ba-print-x">&#10005;</span></div></div></div>
+          </div>
+          <div class="ba-rebuild-card ba-rebuild-static">
             <span class="ba-rebuild-pill">The Rebuild &middot; Top 1%</span>
             <div class="ba-rebuild-grid">
               <div class="feat" style="background-image: url('img/before-after/adam/after-4.jpg'), radial-gradient(120% 100% at 50% 15%, #3d3a2b, #14131d 75%);"><span class="ba-name">Adam</span></div>
               <div class="sq" style="background-image: url('img/before-after/adam/adam-new.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #0e1018;"></div>
               <div class="sq" style="background-image: url('img/before-after/adam/after-5.jpg'), linear-gradient(150deg, #2b3350, #12141d);"></div>
             </div>
-          </div></div>
+          </div>
         </div>
       </div>
 
@@ -5701,6 +5707,9 @@ body.deliv-modal-open { overflow: hidden; }
     <p class="eyebrow text-center reveal d1">Client Videos</p>
     <h2 class="reveal d1 text-center">Real clients,<br><em>on camera.</em></h2>
 
+    <div class="vt2-wrap">
+      <button class="vt-arrow vt2-arrow vt2-prev" type="button" aria-label="Previous videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="vt-arrow vt2-arrow vt2-next" type="button" aria-label="Next videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
     <div class="video-testi-grid reveal d3">
 
       <div class="video-testi-card vtx-b" data-vid="20eVSEAOFYbJnZGs">
@@ -5769,6 +5778,7 @@ body.deliv-modal-open { overflow: hidden; }
         </div>
       </div>
 
+    </div>
     </div>
   </div>
     <div class="cta-block reveal d4" style="margin-top: 48px;">
@@ -6120,9 +6130,12 @@ body.deliv-modal-open { overflow: hidden; }
       <span>Enrollment open · 4 spots remaining</span>
     </div>
     <h2 class="reveal d2">Ready to have this<br><em>area of your life permanently handled?</em></h2>
-    <!-- Last CTA: inline Typeform application. -->
-    <div class="apply-embed reveal d3" id="applyFormBottom">
+    <!-- Last CTA: inline Typeform on desktop, tap-to-open popup button on mobile. -->
+    <div class="apply-embed reveal d3 apply-desktop" id="applyFormBottom">
       <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
+    </div>
+    <div class="cta-block reveal d3 apply-mobile">
+      <button class="btn" data-tf-popup="01KXR68QGYKJZRN02GDTW38FDD">Apply for Your Consultation</button>
     </div>
     <div class="cta-friction reveal d3" style="margin-top:14px;">takes 30 seconds · confidential</div>
   </div>
@@ -6720,6 +6733,30 @@ body.deliv-modal-open { overflow: hidden; }
       window.addEventListener('resize', updateArrows, { passive: true });
       updateArrows();
     }
+  })();
+
+  // Second video section (#video-testimonials-2): mobile arrows scroll the grid.
+  (function initVt2Arrows(){
+    const grid = document.querySelector('#video-testimonials-2 .video-testi-grid');
+    const wrap = document.querySelector('#video-testimonials-2 .vt2-wrap');
+    if (!grid || !wrap) return;
+    const prevBtn = wrap.querySelector('.vt2-prev');
+    const nextBtn = wrap.querySelector('.vt2-next');
+    const step = (dir) => {
+      const first = grid.querySelector('.video-testi-card');
+      const gap = parseFloat(getComputedStyle(grid).gap) || 14;
+      const w = first ? first.getBoundingClientRect().width + gap : grid.clientWidth;
+      grid.scrollBy({ left: dir * w, behavior: 'smooth' });
+    };
+    const update = () => {
+      if (prevBtn) prevBtn.disabled = grid.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
+    };
+    if (prevBtn) prevBtn.addEventListener('click', () => step(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => step(1));
+    grid.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
   })();
 
   // §5b · Video testimonials — Vidalytics click-to-load.
