@@ -4585,6 +4585,18 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .wi-ig-cell { aspect-ratio: 1; border-radius: 5px; background: linear-gradient(150deg, #191c2a, #0e1019); }
 .wi-ig-cell:nth-child(2n) { background: linear-gradient(150deg, rgba(167,181,232,0.16), #0e1019); }
+/* Real IG profile screenshot mockup (dark mode) */
+.wi-ig2 { width: 100%; max-width: 252px; background: #000; border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
+.ig2-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 10px; }
+.ig2-back, .ig2-dots { color: rgba(255,255,255,0.85); font-size: 17px; line-height: 1; }
+.ig2-handle { font-size: 13px; font-weight: 700; color: #fff; }
+.ig2-head { display: flex; align-items: center; gap: 12px; padding: 2px 14px 13px; }
+.ig2-av { width: 54px; height: 54px; border-radius: 50%; background-size: cover; background-position: center 18%; flex: none; border: 2px solid rgba(255,255,255,0.22); }
+.ig2-stat { text-align: center; flex: 1; }
+.ig2-stat b { display: block; font-size: 13px; color: #fff; }
+.ig2-stat span { font-size: 9.5px; color: rgba(255,255,255,0.6); }
+.ig2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+.ig2-grid span { aspect-ratio: 1; background-size: cover; background-position: center 25%; display: block; }
 
 /* 05 approach map */
 .wi-map { width: 100%; max-width: 280px; aspect-ratio: 4/3; border-radius: 14px; background: linear-gradient(150deg, #12141f, #0b0c12); position: relative; overflow: hidden; }
@@ -4630,6 +4642,18 @@ body.deliv-modal-open { overflow: hidden; }
 /* 09 network hub-and-spoke */
 .wi-net { width: 100%; max-width: 300px; aspect-ratio: 1; position: relative; }
 .wi-net svg { width: 100%; height: 100%; }
+/* Upgraded network: labeled role nodes orbiting a glowing You hub */
+.wi-net2 { width: 100%; max-width: 320px; aspect-ratio: 300/260; position: relative; }
+.wi-net2 .lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wi-net2 .lines line { stroke: rgba(167,181,232,0.28); stroke-width: 1.3; stroke-dasharray: 3 6; animation: netFlow 2.6s linear infinite; }
+@keyframes netFlow { to { stroke-dashoffset: -18; } }
+.wi-net2 .hub { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, rgba(167,181,232,0.35), rgba(167,181,232,0.12) 60%, rgba(12,14,22,0.9)); border: 1.5px solid var(--gold); color: #fff; font-family: 'Spectral', serif; font-size: 15px; box-shadow: 0 0 26px rgba(167,181,232,0.35); animation: hubPulse 3s ease-in-out infinite; z-index: 2; }
+@keyframes hubPulse { 50% { box-shadow: 0 0 42px rgba(167,181,232,0.55); } }
+.wi-net2 .node { position: absolute; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; z-index: 1; }
+.wi-net2 .av { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(160deg, #1b1f30, #10131f); border: 1px solid rgba(255,255,255,0.18); color: var(--gold-hi); font-family: 'Spectral', serif; font-size: 12px; font-weight: 600; position: relative; box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+.wi-net2 .av::after { content: ""; position: absolute; right: -1px; bottom: -1px; width: 9px; height: 9px; border-radius: 50%; background: #30D158; border: 2px solid #0b0d16; }
+.wi-net2 .lb { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w55); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .wi-net2 .lines line, .wi-net2 .hub { animation: none; } }
 
 /* --- TASK 2: 90-Day Roadmap timeline --- */
 .rm-wrap { max-width: 860px; margin: clamp(48px, 6vw, 76px) auto 0; position: relative; padding-left: 76px; }
@@ -5507,7 +5531,7 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
         </div>
         <div class="wi-visual bare">
-          <div class="wi-profile"><div class="wi-profile-photo" style="background: url('img/before-after/todd/app-profile.jpg') center 30% / cover no-repeat, linear-gradient(150deg, #1a1d2b, #0d0f1a);"><span class="wi-pp-name" style="text-shadow: 0 1px 8px rgba(0,0,0,0.7);">Top 1%</span><span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.3l-1.45-1.32C5.4 14.27 2 11.17 2 7.5 2 4.98 4 3 6.5 3c1.54 0 3.04.72 3.99 1.86h1.02C12.46 3.72 13.96 3 15.5 3 18 3 20 4.98 20 7.5c0 3.67-3.4 6.77-8.55 11.49L12 20.3z"/></svg></span></div><div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div></div>
+          <div class="wi-profile"><div class="wi-profile-photo" style="background: url('img/reid/web/p1.jpg') center 22% / cover no-repeat, linear-gradient(150deg, #1a1d2b, #0d0f1a);"><span class="wi-pp-name" style="text-shadow: 0 1px 8px rgba(0,0,0,0.7);">Top 1%</span><span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.3l-1.45-1.32C5.4 14.27 2 11.17 2 7.5 2 4.98 4 3 6.5 3c1.54 0 3.04.72 3.99 1.86h1.02C12.46 3.72 13.96 3 15.5 3 18 3 20 4.98 20 7.5c0 3.67-3.4 6.77-8.55 11.49L12 20.3z"/></svg></span></div><div class="wi-profile-prompt"><div class="q">A perfect first date looks like</div><div class="a">You will have to find out.</div></div></div>
         </div>
       </div>
       <div class="wi-row reveal d2">
@@ -5516,8 +5540,25 @@ body.deliv-modal-open { overflow: hidden; }
           <h3 class="wi-title">Instagram Overhaul</h3>
           <p class="wi-body">An IG that quietly showcases your real life and pulls women in. High-status, authentic presentation that looks like you, not an influencer costume.</p>
         </div>
-        <div class="wi-visual">
-          <div class="wi-ig"><div class="wi-ig-head"><div class="wi-ig-av"></div><div class="wi-ig-meta"><div class="h">your.life</div><div class="s">High-status. Authentic.</div></div></div><div class="wi-ig-grid"><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div><div class="wi-ig-cell"></div></div></div>
+        <div class="wi-visual bare">
+          <!-- Real client IG rebuild (Reid) as a mobile profile screenshot; handle blurred for privacy -->
+          <div class="wi-ig2">
+            <div class="ig2-top"><span class="ig2-back">&#8249;</span><span class="ig2-handle wi-redact">reid.mtthws</span><span class="ig2-dots">&#8942;</span></div>
+            <div class="ig2-head">
+              <span class="ig2-av" style="background-image:url('img/reid/web/p1.jpg')"></span>
+              <div class="ig2-stat"><b>42</b><span>Posts</span></div>
+              <div class="ig2-stat"><b>1,847</b><span>Followers</span></div>
+              <div class="ig2-stat"><b>512</b><span>Following</span></div>
+            </div>
+            <div class="ig2-grid">
+              <span style="background-image:url('img/reid/web/p1.jpg')"></span>
+              <span style="background-image:url('img/reid/web/p4.jpg')"></span>
+              <span style="background-image:url('img/reid/web/p2.jpg')"></span>
+              <span style="background-image:url('img/reid/web/p3.jpg')"></span>
+              <span style="background-image:url('img/reid/web/p5.jpg')"></span>
+              <span style="background-image:url('img/reid/web/p6.jpg')"></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="wi-row rev reveal d2">
@@ -5574,7 +5615,23 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
         </div>
         <div class="wi-visual">
-          <div class="wi-net"><svg viewBox="0 0 200 200" fill="none"><line x1="100" y1="100" x2="100" y2="30" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="170" y2="70" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="160" y2="150" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="100" y2="175" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="40" y2="150" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="30" y2="70" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><circle cx="100" cy="30" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="170" cy="70" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="160" cy="150" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="100" cy="175" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="40" cy="150" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="30" cy="70" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="100" cy="100" r="17" fill="rgba(167,181,232,0.16)" stroke="#A7B5E8" stroke-width="1.6"/><text x="100" y="104" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#C4CEF5">You</text></svg></div>
+          <div class="wi-net2" aria-hidden="true">
+            <svg class="lines" viewBox="0 0 300 260" fill="none">
+              <line x1="150" y1="130" x2="150" y2="44"/>
+              <line x1="150" y1="130" x2="252" y2="82"/>
+              <line x1="150" y1="130" x2="252" y2="186"/>
+              <line x1="150" y1="130" x2="150" y2="222"/>
+              <line x1="150" y1="130" x2="48" y2="186"/>
+              <line x1="150" y1="130" x2="48" y2="82"/>
+            </svg>
+            <div class="hub"><span>You</span></div>
+            <div class="node" style="left:50%;top:17%"><span class="av">FA</span><span class="lb">Female Advisors</span></div>
+            <div class="node" style="left:84%;top:31.5%"><span class="av">SC</span><span class="lb">Strategy Coach</span></div>
+            <div class="node" style="left:84%;top:71.5%"><span class="av">IM</span><span class="lb">Image Team</span></div>
+            <div class="node" style="left:50%;top:85.5%"><span class="av">7F</span><span class="lb">7-Fig Founder</span></div>
+            <div class="node" style="left:16%;top:71.5%"><span class="av">PE</span><span class="lb">PE Partner</span></div>
+            <div class="node" style="left:16%;top:31.5%"><span class="av">HF</span><span class="lb">Hedge Fund</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -5897,7 +5954,7 @@ body.deliv-modal-open { overflow: hidden; }
       <h2>I'm Benjamin Seda,<br><em>founder of Atlas Advisory.</em></h2>
       <!-- (bio copy removed 2026-07-16 per Marco — headline + stats only) -->
       <div class="stat-grid" style="grid-template-columns: repeat(3,1fr); margin-top: 28px;">
-        <div><div class="stat-big">#1</div><div class="stat-lab">Most-Followed</div></div>
+        <div><div class="stat-big">#1</div><div class="stat-lab">Most-Followed Dating Advisor</div></div>
         <div><div class="stat-big">10+</div><div class="stat-lab">Years Advising Men</div></div>
         <div><div class="stat-big">2M+</div><div class="stat-lab">Followers</div></div>
       </div>
