@@ -33,7 +33,6 @@
 <link rel="dns-prefetch" href="https://quick.vidalytics.com">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<script src="https://embed.typeform.com/next/embed.js"></script>
 
 <style>
 /* ══════════════════════════════════════════════════════════
@@ -5126,16 +5125,7 @@ body.deliv-modal-open { overflow: hidden; }
 .notif-count { display: inline-block; background: var(--no); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 99px; margin-right: 6px; }
 @media (max-width: 640px) { .notif-wall { max-height: 480px; max-width: 420px; margin: 48px auto 0; } }
 
-.apply-embed [data-tf-live] { border-radius: 18px; overflow: hidden; border: none; box-shadow: none; background: transparent; height: 420px; }
-.apply-embed iframe { display: block; width: 100%; height: 100% !important; min-height: 0 !important; }
-@media (max-width: 620px) {
-  /* Full mobile height: let the form take (nearly) the whole viewport */
-  .apply-embed [data-tf-live] { height: calc(100vh - 100px); height: calc(100svh - 100px); }
-  .apply-embed { scroll-margin-top: 20px; }
-  /* Scroll fix: the form iframe eats touch swipes. Ignore touches until the user
-     intentionally taps the form area once (JS adds .tf-on) — page scrolls freely. */
-  .apply-embed:not(.tf-on) [data-tf-live] { pointer-events: none; }
-}
+@media (max-width: 620px) { .apply-embed { scroll-margin-top: 20px; } }
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -5233,7 +5223,7 @@ body.deliv-modal-open { overflow: hidden; }
     </div>
     <!-- First CTA: inline Typeform (transparent), desktop + mobile. -->
     <div class="apply-embed reveal d4" id="applyForm">
-      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div><script src="//embed.typeform.com/next/embed.js"></script>
     </div>
     <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · confidential</div>
     <!-- Hero stat row removed per v25 feedback. -->
@@ -6252,7 +6242,7 @@ body.deliv-modal-open { overflow: hidden; }
     <h2 class="reveal d2">Ready to have this<br><em>area of your life permanently handled?</em></h2>
     <!-- Last CTA: inline Typeform (transparent), desktop + mobile. -->
     <div class="apply-embed reveal d3" id="applyFormBottom">
-      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
+      <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div><script src="//embed.typeform.com/next/embed.js"></script>
     </div>
     <div class="cta-friction reveal d3" style="margin-top:14px;">takes 30 seconds · confidential</div>
   </div>
@@ -6306,10 +6296,6 @@ body.deliv-modal-open { overflow: hidden; }
     if (!btn) return;
     const form = document.getElementById('applyForm');
     if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-  // Mobile: a deliberate tap on the embed area enables form interaction (see CSS pointer-events rule).
-  document.querySelectorAll('.apply-embed').forEach((wrap) => {
-    wrap.addEventListener('click', () => wrap.classList.add('tf-on'), { once: true });
   });
   window.addEventListener('message', (e) => {
     if (typeof e.origin !== 'string' || e.origin.indexOf('typeform.com') === -1) return;
