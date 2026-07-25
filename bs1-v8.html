@@ -5146,6 +5146,9 @@ body.deliv-modal-open { overflow: hidden; }
      a fixed top bar. The nav sits at the top of the page and scrolls away;
      the bottom Apply bar stays fixed as the persistent CTA. */
   .nav { position: absolute !important; }
+  /* 2026-07-25: nav removed on mobile entirely — headline starts near the top */
+  .nav { display: none !important; }
+  .hero { padding-top: clamp(34px, 8vw, 56px) !important; }
 }
 </style>
 </head>
@@ -5641,7 +5644,7 @@ body.deliv-modal-open { overflow: hidden; }
         <div class="wi-text">
           <span class="wi-num">08</span>
           <h3 class="wi-title">The Atlas Network</h3>
-          <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
+          <p class="wi-body">A vetted, private room of highly successful, driven men all working toward the same goal, with Ben's team of female advisors and strategy coaches inside. You get the accountability, the intel, and the standing invites when members hit your city.</p>
         </div>
         <div class="wi-visual">
           <div class="wi-chatg">
