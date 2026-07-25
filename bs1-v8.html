@@ -4547,17 +4547,13 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-ba-tile.after svg { opacity: 0.9; color: var(--gold-hi); }
 .wi-ba-lab { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--w55); }
 .wi-ba-tile.after .wi-ba-lab { color: var(--gold); }
-/* Wardrobe module: full-width stacked like the network map — text on top, big before/after below */
-.wi-row:has(.wi-ba) { grid-template-columns: 1fr; gap: 26px; }
-.wi-row:has(.wi-ba) .wi-text { order: 0; text-align: center; max-width: 640px; margin: 0 auto; }
-.wi-row:has(.wi-ba) .wi-visual { order: 1; }
-.wi-row:has(.wi-ba) .wi-ba { max-width: 660px; gap: 14px; }
-/* Real wardrobe photos in the Before/After tiles (both are 3:4, same as the tile) */
-.wi-ba-tile.has-photo { background-size: cover; background-position: center; }
-.wi-ba-tile.has-photo.before { filter: saturate(0.7) brightness(0.92); }
-.wi-ba-tile.has-photo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 52px; background: linear-gradient(transparent, rgba(5,8,14,0.8)); pointer-events: none; }
-.wi-ba-tile.has-photo .wi-ba-lab { position: relative; z-index: 1; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
-.wi-ba-tile.has-photo.after .wi-ba-lab { color: var(--gold-hi); }
+/* Wardrobe before/after: framed photos, labels OUTSIDE the image */
+.wi-ba-fig { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.wi-ba-fig .ph { aspect-ratio: 3/4; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.22); padding: 0; box-shadow: 0 0 0 5px rgba(255,255,255,0.04), 0 14px 34px rgba(0,0,0,0.4); }
+.wi-ba-fig.before .ph { filter: saturate(0.7) brightness(0.92); }
+.wi-ba-fig.after .ph { border-color: var(--gold); box-shadow: 0 0 0 5px var(--gold-soft), 0 14px 34px rgba(0,0,0,0.4); }
+.wi-ba-fig figcaption { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--w55); }
+.wi-ba-fig.after figcaption { color: var(--gold-hi); }
 
 /* 02 dating profile card */
 .wi-profile { width: 100%; max-width: 240px; border: none; border-radius: 18px; overflow: hidden; background: transparent; }
@@ -4567,11 +4563,14 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-profile-photo .wi-pp-like { position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(167,181,232,0.4); }
 .wi-profile-photo .wi-pp-like svg { width: 17px; height: 17px; color: #fff; }
 .wi-profile-prompt { padding: 13px 14px; }
-/* Hinge-style treatment for the dating-app profile card */
-.wi-hinge .wi-profile-photo { border-radius: 22px; }
-.wi-hinge .wi-pp-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
-.wi-hinge .wi-pp-like { background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
-.wi-hinge .wi-pp-like svg { color: #21262e; }
+/* Hinge-style dating card: white app UI, name header row, rounded photo card, white heart button */
+.wi-hinge { max-width: 280px; background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.45); }
+.wi-hinge .hg-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 16px 11px; background: #fff; }
+.wi-hinge .hg-name { color: #17151d; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
+.wi-hinge .hg-dots { color: #17151d; font-size: 18px; line-height: 1; }
+.wi-hinge .wi-profile-photo { border-radius: 14px; margin: 0 10px 12px; aspect-ratio: 4/5; }
+.wi-hinge .wi-pp-like { background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.35); width: 44px; height: 44px; }
+.wi-hinge .wi-pp-like svg { color: #17151d; width: 21px; height: 21px; }
 .wi-profile-prompt .q { font-size: 10px; color: var(--w35); letter-spacing: 0.04em; margin-bottom: 5px; }
 .wi-profile-prompt .a { font-size: 13px; color: var(--w100); line-height: 1.4; }
 
@@ -4596,7 +4595,7 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-ig-cell { aspect-ratio: 1; border-radius: 5px; background: linear-gradient(150deg, #191c2a, #0e1019); }
 .wi-ig-cell:nth-child(2n) { background: linear-gradient(150deg, rgba(167,181,232,0.16), #0e1019); }
 /* Real IG profile screenshot mockup (dark mode) */
-.wi-ig2 { width: 100%; max-width: 252px; background: #000; border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
+.wi-ig2 { width: 100%; max-width: 305px; background: #000; border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
 .ig2-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 10px; }
 .ig2-back, .ig2-dots { color: rgba(255,255,255,0.85); font-size: 17px; line-height: 1; }
 .ig2-handle { font-size: 13px; font-weight: 700; color: #fff; }
@@ -5125,10 +5124,7 @@ body.deliv-modal-open { overflow: hidden; }
 
 .apply-embed [data-tf-live] { border-radius: 18px; overflow: hidden; border: none; box-shadow: none; background: transparent; height: 420px; }
 .apply-embed iframe { display: block; width: 100%; height: 100% !important; min-height: 0 !important; }
-/* Mobile: the form iframe traps touch-scroll. Transparent guard lets swipes scroll the page; first tap activates the form. */
-.tf-guard { display: none; }
-@media (max-width: 620px) { .apply-embed { position: relative; } .apply-embed .tf-guard { display: block; position: absolute; inset: 0; z-index: 3; background: transparent; } }
-@media (max-width: 620px) { .apply-embed [data-tf-live] { height: 300px; } .apply-embed { scroll-margin-top: 20px; } }
+@media (max-width: 620px) { .apply-embed [data-tf-live] { height: 430px; } .apply-embed { scroll-margin-top: 20px; } }
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -5224,7 +5220,6 @@ body.deliv-modal-open { overflow: hidden; }
     <!-- First CTA: inline Typeform (transparent), desktop + mobile. -->
     <div class="apply-embed reveal d4" id="applyForm">
       <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
-      <div class="tf-guard" aria-hidden="true"></div>
     </div>
     <div class="cta-friction reveal d4" style="margin-top:14px;">takes 30 seconds · confidential</div>
     <!-- Hero stat row removed per v25 feedback. -->
@@ -5545,7 +5540,10 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">Work one-on-one with a professional stylist and image consultant on your haircut, grooming, and outfits for photos, dates, and day-to-day, so your appearance finally matches who you are on paper.</p>
         </div>
         <div class="wi-visual bare">
-          <div class="wi-ba"><div class="wi-ba-tile before has-photo" style="background-image: url('img/wardrobe/before.jpg');"><span class="wi-ba-lab">Before</span></div><div class="wi-ba-tile after has-photo" style="background-image: url('img/wardrobe/after.jpg');"><span class="wi-ba-lab">After</span></div></div>
+          <div class="wi-ba">
+            <figure class="wi-ba-fig before"><div class="ph" style="background-image: url('img/wardrobe/before.jpg');"></div><figcaption>Before</figcaption></figure>
+            <figure class="wi-ba-fig after"><div class="ph" style="background-image: url('img/wardrobe/after.jpg');"></div><figcaption>After</figcaption></figure>
+          </div>
         </div>
       </div>
       <div class="wi-row rev reveal d2">
@@ -5555,7 +5553,10 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">Top-1% profiles on Hinge, Raya, Bumble, and more. Photos, prompts, and bios built and iterated for you to attract high-caliber women.</p>
         </div>
         <div class="wi-visual bare">
-          <div class="wi-profile wi-hinge"><div class="wi-profile-photo" style="background: url('img/reid/web/hinge.jpg') center 24% / cover no-repeat, linear-gradient(150deg, #1a1d2b, #0d0f1a);"><span class="wi-pp-name" style="text-shadow: 0 1px 8px rgba(0,0,0,0.7);">Reid</span><span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.3l-1.45-1.32C5.4 14.27 2 11.17 2 7.5 2 4.98 4 3 6.5 3c1.54 0 3.04.72 3.99 1.86h1.02C12.46 3.72 13.96 3 15.5 3 18 3 20 4.98 20 7.5c0 3.67-3.4 6.77-8.55 11.49L12 20.3z"/></svg></span></div></div>
+          <div class="wi-profile wi-hinge">
+            <div class="hg-head"><span class="hg-name">Reid</span><span class="hg-dots">&#8943;</span></div>
+            <div class="wi-profile-photo" style="background: url('img/reid/web/hinge.jpg') center 24% / cover no-repeat, linear-gradient(150deg, #1a1d2b, #0d0f1a);"><span class="wi-pp-like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.3l-1.45-1.32C5.4 14.27 2 11.17 2 7.5 2 4.98 4 3 6.5 3c1.54 0 3.04.72 3.99 1.86h1.02C12.46 3.72 13.96 3 15.5 3 18 3 20 4.98 20 7.5c0 3.67-3.4 6.77-8.55 11.49L12 20.3z"/></svg></span></div>
+          </div>
         </div>
       </div>
       <div class="wi-row reveal d2">
@@ -6403,7 +6404,6 @@ body.deliv-modal-open { overflow: hidden; }
     <!-- Last CTA: inline Typeform (transparent), desktop + mobile. -->
     <div class="apply-embed reveal d3" id="applyFormBottom">
       <div data-tf-live="01KXR68QGYKJZRN02GDTW38FDD"></div>
-      <div class="tf-guard" aria-hidden="true"></div>
     </div>
     <div class="cta-friction reveal d3" style="margin-top:14px;">takes 30 seconds · confidential</div>
   </div>
@@ -6457,10 +6457,6 @@ body.deliv-modal-open { overflow: hidden; }
     if (!btn) return;
     const form = document.getElementById('applyForm');
     if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-  // Mobile embed tap-guard: a tap (not a swipe) removes the guard so the form becomes interactive.
-  document.querySelectorAll('.tf-guard').forEach((g) => {
-    g.addEventListener('click', () => g.remove(), { once: true });
   });
   window.addEventListener('message', (e) => {
     if (typeof e.origin !== 'string' || e.origin.indexOf('typeform.com') === -1) return;
