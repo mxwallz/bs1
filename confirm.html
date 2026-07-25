@@ -177,13 +177,13 @@ p { color: var(--w75); }
   padding: 20px 24px; backdrop-filter: blur(10px);
 }
 .prep-num {
-  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.4);
-  color: #fbbf24; font-size: 12px; font-weight: 700;
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(251,191,36,0.10); border: 1.5px solid rgba(251,191,36,0.45);
+  color: #fbbf24; font-size: 19px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
 }
-.prep-title { font-size: 14px; font-weight: 700; color: var(--w100); margin-bottom: 3px; }
-.prep-desc  { font-size: 13px; color: var(--w55); line-height: 1.55; }
+.prep-title { font-size: clamp(16px, 1.9vw, 19px); font-weight: 800; color: var(--w100); margin-bottom: 4px; }
+.prep-desc  { font-size: 14.5px; color: var(--w55); line-height: 1.55; }
 
 /* ── CTA anchor button ── */
 .cta-anchor-btn {
@@ -372,12 +372,12 @@ p { color: var(--w75); }
   margin-bottom: 16px; margin-top: 44px;
 }
 .step-num {
-  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,72,72,0.12); border: 1px solid rgba(255,72,72,0.45);
-  color: #ff6b6b; font-size: 11px; font-weight: 700;
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,72,72,0.12); border: 1.5px solid rgba(255,72,72,0.5);
+  color: #ff6b6b; font-size: 19px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
 }
-.step-text { color: #ff8585; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; }
+.step-text { color: #ff8585; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; font-size: clamp(15px, 2vw, 19px); }
 /* RED required-steps alert — the whole page hangs off completing these */
 .must-do-alert {
   display: flex; align-items: center; justify-content: center; gap: 16px;
@@ -395,7 +395,7 @@ p { color: var(--w75); }
 }
 @media (max-width: 600px) { .must-do-alert { padding: 16px 18px; gap: 12px; } }
 @media (prefers-reduced-motion: reduce) { .must-do-alert { animation: none; } }
-.eyebrow.step-red { color: #ff6b6b; }
+.eyebrow.step-red { color: #ff6b6b; font-size: 15px; font-weight: 800; }
 .eyebrow.step-amber { color: #fbbf24; }
 .step-text {
   font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
@@ -601,10 +601,6 @@ footer {
       <!-- Swap for your Vimeo / Wistia iframe when ready -->
       <!-- <iframe src="https://player.vimeo.com/video/XXXXXXX?autoplay=0&color=A7B5E8" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border-radius:18px;"></iframe> -->
       <div class="video-play-btn"></div>
-      <div class="video-caption">
-        <span class="video-caption-label">Watch your confirmation video (important)</span>
-        
-      </div>
     </div>
 
     <!-- Step 2: Add to calendar -->
