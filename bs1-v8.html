@@ -5128,7 +5128,13 @@ body.deliv-modal-open { overflow: hidden; }
 
 .apply-embed [data-tf-live] { border-radius: 18px; overflow: hidden; border: none; box-shadow: none; background: transparent; height: 420px; }
 .apply-embed iframe { display: block; width: 100%; height: 100% !important; min-height: 0 !important; }
-@media (max-width: 620px) { .apply-embed [data-tf-live] { height: 430px; } .apply-embed { scroll-margin-top: 20px; } }
+@media (max-width: 620px) {
+  .apply-embed [data-tf-live] { height: 430px; }
+  .apply-embed { scroll-margin-top: 20px; }
+  /* Scroll fix: the form iframe eats touch swipes. Ignore touches until the user
+     intentionally taps the form area once (JS adds .tf-on) — page scrolls freely. */
+  .apply-embed:not(.tf-on) [data-tf-live] { pointer-events: none; }
+}
 
 /* ── MOBILE SCROLL PERF ──────────────────────────────────────
    backdrop-filter: blur() forces the browser to re-blur everything
@@ -5644,7 +5650,7 @@ body.deliv-modal-open { overflow: hidden; }
         <div class="wi-text">
           <span class="wi-num">08</span>
           <h3 class="wi-title">The Atlas Network</h3>
-          <p class="wi-body">A vetted, private room of highly successful, driven men all working toward the same goal, with Ben's team of female advisors and strategy coaches inside. You get the accountability, the intel, and the standing invites when members hit your city.</p>
+          <p class="wi-body">A private, vetted room of successful, driven men working toward the same goal, with Ben's female advisors and strategy coaches inside. Members trade intel and link up when they hit the same city.</p>
         </div>
         <div class="wi-visual">
           <div class="wi-chatg">
@@ -6299,6 +6305,10 @@ body.deliv-modal-open { overflow: hidden; }
     if (!btn) return;
     const form = document.getElementById('applyForm');
     if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  // Mobile: a deliberate tap on the embed area enables form interaction (see CSS pointer-events rule).
+  document.querySelectorAll('.apply-embed').forEach((wrap) => {
+    wrap.addEventListener('click', () => wrap.classList.add('tf-on'), { once: true });
   });
   window.addEventListener('message', (e) => {
     if (typeof e.origin !== 'string' || e.origin.indexOf('typeform.com') === -1) return;
