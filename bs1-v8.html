@@ -3651,7 +3651,7 @@ body.deliv-modal-open { overflow: hidden; }
 .match-photo {
   position: absolute;
   inset: 0;
-  filter: blur(3px); /* subtle tease blur (v1 level) — swap in AI'd faces for full anonymity */
+  filter: blur(2px); /* subtle tease blur — swap in AI'd faces for full anonymity */
   transform: scale(1.12);
   background-size: cover;
   background-position: center 25%;
@@ -3711,7 +3711,7 @@ body.deliv-modal-open { overflow: hidden; }
     width: calc(50% - 4px);
   }
 
-  .match-photo { filter: blur(2.5px); }
+  .match-photo { filter: blur(1.8px); }
   .match-info { font-size: 11px; padding: 4px 6px; border-radius: 4px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }
@@ -4547,6 +4547,11 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-ba-tile.after svg { opacity: 0.9; color: var(--gold-hi); }
 .wi-ba-lab { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--w55); }
 .wi-ba-tile.after .wi-ba-lab { color: var(--gold); }
+/* Wardrobe module: full-width stacked like the network map — text on top, big before/after below */
+.wi-row:has(.wi-ba) { grid-template-columns: 1fr; gap: 26px; }
+.wi-row:has(.wi-ba) .wi-text { order: 0; text-align: center; max-width: 640px; margin: 0 auto; }
+.wi-row:has(.wi-ba) .wi-visual { order: 1; }
+.wi-row:has(.wi-ba) .wi-ba { max-width: 660px; gap: 14px; }
 /* Real wardrobe photos in the Before/After tiles (both are 3:4, same as the tile) */
 .wi-ba-tile.has-photo { background-size: cover; background-position: center; }
 .wi-ba-tile.has-photo.before { filter: saturate(0.7) brightness(0.92); }
@@ -5536,8 +5541,8 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="wi-row reveal d2">
         <div class="wi-text">
           <span class="wi-num">01</span>
-          <h3 class="wi-title">Image &amp; Wardrobe Overhaul</h3>
-          <p class="wi-body">Dialed-in haircut, grooming, and outfits for photos, dates, and day-to-day so your appearance finally matches who you are on paper.</p>
+          <h3 class="wi-title">Professional Image &amp; Wardrobe Overhaul</h3>
+          <p class="wi-body">Work one-on-one with a professional stylist and image consultant on your haircut, grooming, and outfits for photos, dates, and day-to-day, so your appearance finally matches who you are on paper.</p>
         </div>
         <div class="wi-visual bare">
           <div class="wi-ba"><div class="wi-ba-tile before has-photo" style="background-image: url('img/wardrobe/before.jpg');"><span class="wi-ba-lab">Before</span></div><div class="wi-ba-tile after has-photo" style="background-image: url('img/wardrobe/after.jpg');"><span class="wi-ba-lab">After</span></div></div>
