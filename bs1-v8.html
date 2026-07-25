@@ -3651,8 +3651,8 @@ body.deliv-modal-open { overflow: hidden; }
 .match-photo {
   position: absolute;
   inset: 0;
-  filter: blur(2px);
-  transform: scale(1.08);
+  filter: blur(7px); /* Tinder-"likes you" tease + hides identity */
+  transform: scale(1.12);
   background-size: cover;
   background-position: center 25%;
 }
@@ -3711,7 +3711,7 @@ body.deliv-modal-open { overflow: hidden; }
     width: calc(50% - 4px);
   }
 
-  .match-photo { filter: blur(2px); }
+  .match-photo { filter: blur(6px); }
   .match-info { font-size: 11px; padding: 4px 6px; border-radius: 4px; letter-spacing: 0; }
   .match-badge { font-size: 12px; }
   .match-heart { font-size: 13px; }
