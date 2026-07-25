@@ -5129,7 +5129,8 @@ body.deliv-modal-open { overflow: hidden; }
 .apply-embed [data-tf-live] { border-radius: 18px; overflow: hidden; border: none; box-shadow: none; background: transparent; height: 420px; }
 .apply-embed iframe { display: block; width: 100%; height: 100% !important; min-height: 0 !important; }
 @media (max-width: 620px) {
-  .apply-embed [data-tf-live] { height: 430px; }
+  /* Full mobile height: let the form take (nearly) the whole viewport */
+  .apply-embed [data-tf-live] { height: calc(100vh - 100px); height: calc(100svh - 100px); }
   .apply-embed { scroll-margin-top: 20px; }
   /* Scroll fix: the form iframe eats touch swipes. Ignore touches until the user
      intentionally taps the form area once (JS adds .tf-on) — page scrolls freely. */
