@@ -4587,6 +4587,19 @@ body.deliv-modal-open { overflow: hidden; }
 .wi-map { width: 100%; max-width: 280px; aspect-ratio: 4/3; border-radius: 14px; background: linear-gradient(150deg, #12141f, #0b0c12); position: relative; overflow: hidden; }
 .wi-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .wi-map .wi-pin { position: absolute; top: 38%; left: 56%; width: 16px; height: 16px; border-radius: 50% 50% 50% 0; background: var(--gold); transform: rotate(-45deg); box-shadow: 0 0 0 6px rgba(167,181,232,0.18); }
+/* Gameplan as a project-tracker card; location details blurred like client data */
+.wi-plan { width: 100%; max-width: 280px; border: 1px solid var(--border-2); border-radius: 14px; background: var(--card-solid); padding: 14px 15px; display: flex; flex-direction: column; gap: 11px; box-shadow: 0 14px 34px rgba(0,0,0,0.35); }
+.wi-plan-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.wi-plan-head .t { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w55); }
+.wi-plan-head .p { font-size: 12px; font-weight: 700; color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+.wi-plan-bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.wi-plan-bar span { display: block; height: 100%; background: var(--gold); border-radius: 99px; }
+.wi-plan-row { display: flex; gap: 10px; align-items: flex-start; }
+.wi-plan-row .chk { width: 18px; height: 18px; flex: none; border-radius: 6px; display: grid; place-items: center; font-size: 11px; font-weight: 800; background: var(--gold); color: #08101c; margin-top: 1px; }
+.wi-plan-row .chk.open { background: transparent; border: 1.5px solid rgba(255,255,255,0.25); }
+.wi-plan-row .task { display: block; font-size: 12.5px; font-weight: 600; color: var(--w100); line-height: 1.3; }
+.wi-plan-row .meta { display: block; font-size: 11px; color: var(--w55); margin-top: 2px; }
+.wi-redact { font-style: normal; filter: blur(4px); user-select: none; }
 
 /* 06 conversion chat */
 .wi-chat { width: 100%; max-width: 280px; display: flex; flex-direction: column; gap: 10px; }
@@ -5499,7 +5512,14 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">A step-by-step playbook for meeting women in your day-to-day life. Where to go, what to say, how to open, and how to ask for the number. Plus audio reviews of your approaches.</p>
         </div>
         <div class="wi-visual">
-          <div class="wi-map"><svg viewBox="0 0 280 210" fill="none"><path d="M18 176 C 78 158, 92 96, 158 84 S 246 64, 262 26" stroke="rgba(167,181,232,0.5)" stroke-width="2" stroke-dasharray="5 9" stroke-linecap="round"/></svg><span class="wi-pin"></span></div>
+          <div class="wi-plan">
+            <div class="wi-plan-head"><span class="t">Approach Gameplan &middot; Week 3</span><span class="p">68%</span></div>
+            <div class="wi-plan-bar"><span style="width:68%"></span></div>
+            <div class="wi-plan-row"><span class="chk">&#10003;</span><div class="txt"><span class="task">Warm-up opens</span><span class="meta">10 a day &middot; <em class="wi-redact">Whole Foods, Elm St</em></span></div></div>
+            <div class="wi-plan-row"><span class="chk">&#10003;</span><div class="txt"><span class="task">Direct approaches</span><span class="meta">5 a day &middot; <em class="wi-redact">Marina district</em></span></div></div>
+            <div class="wi-plan-row"><span class="chk open"></span><div class="txt"><span class="task">Number closes</span><span class="meta">3 this week &middot; <em class="wi-redact">Wine bar circuit</em></span></div></div>
+            <div class="wi-plan-row"><span class="chk open"></span><div class="txt"><span class="task wi-redact">Instant-date routing</span><span class="meta"><em class="wi-redact">Client-specific</em> &middot; unlocked inside</span></div></div>
+          </div>
         </div>
       </div>
       <div class="wi-row reveal d2">
