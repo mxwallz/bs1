@@ -4550,10 +4550,12 @@ body.deliv-modal-open { overflow: hidden; }
 /* Wardrobe before/after: framed photos, labels OUTSIDE the image */
 .wi-ba-fig { margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .wi-ba-fig .ph { aspect-ratio: 3/4; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.22); padding: 0; box-shadow: 0 0 0 5px rgba(255,255,255,0.04), 0 14px 34px rgba(0,0,0,0.4); }
-.wi-ba-fig.before .ph { filter: saturate(0.7) brightness(0.92); }
+.wi-ba-fig.before .ph { filter: saturate(0.5) brightness(0.82); }
 .wi-ba-fig.after .ph { border-color: var(--gold); box-shadow: 0 0 0 5px var(--gold-soft), 0 14px 34px rgba(0,0,0,0.4); }
-.wi-ba-fig figcaption { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--w55); }
+.wi-ba-fig figcaption { text-align: center; font-size: 12.5px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--w55); }
+.wi-ba-fig.before figcaption::before { content: "\2715\00a0\00a0"; color: #f87171; font-size: 11px; }
 .wi-ba-fig.after figcaption { color: var(--gold-hi); }
+.wi-ba-fig.after figcaption::before { content: "\2713\00a0\00a0"; color: var(--gold); font-size: 12px; }
 
 /* 02 dating profile card */
 .wi-profile { width: 100%; max-width: 240px; border: none; border-radius: 18px; overflow: hidden; background: transparent; }
@@ -4651,6 +4653,33 @@ body.deliv-modal-open { overflow: hidden; }
 /* 09 network hub-and-spoke */
 .wi-net { width: 100%; max-width: 300px; aspect-ratio: 1; position: relative; }
 .wi-net svg { width: 100%; height: 100%; }
+/* Atlas Network as a private group chat */
+.wi-chatg { width: 100%; max-width: 320px; background: #0d1017; border: 1px solid var(--border-2); border-radius: 18px; padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+.cg-head { display: flex; align-items: center; gap: 11px; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.cg-avs { display: flex; }
+.cg-avs span { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #39406b, #1c2138); border: 2px solid #0d1017; margin-left: -8px; }
+.cg-avs span:first-child { margin-left: 0; }
+.cg-avs span.more { background: #1a1e2c; color: var(--w55); font-size: 9px; }
+.cg-meta .t { font-size: 13.5px; font-weight: 700; color: #fff; }
+.cg-meta .s { font-size: 10.5px; color: var(--w35); }
+.cg-msg { display: flex; gap: 9px; align-items: flex-end; }
+.cg-av { width: 26px; height: 26px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; }
+.cg-av.a1 { background: linear-gradient(135deg, #5b6ea8, #2c3457); }
+.cg-av.a2 { background: linear-gradient(135deg, #7d5ba8, #3a2c57); }
+.cg-av.a3 { background: linear-gradient(135deg, #5ba887, #2c574a); }
+.cg-bub { background: #171c28; border: 1px solid rgba(255,255,255,0.07); border-radius: 13px 13px 13px 4px; padding: 9px 12px 10px; font-size: 12.5px; color: rgba(255,255,255,0.92); line-height: 1.45; }
+.cg-name { display: block; font-size: 10.5px; font-weight: 700; color: #8ea2e8; margin-bottom: 2px; }
+.cg-name.n2 { color: #b18ee8; }
+.cg-name.n3 { color: #7fd0ae; }
+.cg-reacts { display: flex; gap: 6px; margin-top: 8px; }
+.cg-reacts span { font-size: 10.5px; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; padding: 3px 8px; }
+.cg-typing { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--w35); padding-left: 35px; }
+.cg-typing .dots { display: inline-flex; gap: 3px; }
+.cg-typing .dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--w55); animation: cgDot 1.2s ease-in-out infinite; }
+.cg-typing .dots i:nth-child(2) { animation-delay: 0.15s; }
+.cg-typing .dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes cgDot { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cg-typing .dots i { animation: none; } }
 
 /* --- TASK 2: 90-Day Roadmap timeline --- */
 .rm-wrap { max-width: 860px; margin: clamp(48px, 6vw, 76px) auto 0; position: relative; padding-left: 76px; }
@@ -5615,7 +5644,16 @@ body.deliv-modal-open { overflow: hidden; }
           <p class="wi-body">A team of female advisors on the profile side. Six coaches on the strategy side. A closed room of other high-performing men. Not a public Discord of 21-year-olds.</p>
         </div>
         <div class="wi-visual">
-          <div class="wi-net"><svg viewBox="0 0 200 200" fill="none"><line x1="100" y1="100" x2="100" y2="30" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="170" y2="70" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="160" y2="150" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="100" y2="175" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="40" y2="150" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><line x1="100" y1="100" x2="30" y2="70" stroke="rgba(167,181,232,0.28)" stroke-width="1.4"/><circle cx="100" cy="30" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="170" cy="70" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="160" cy="150" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="100" cy="175" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="40" cy="150" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="30" cy="70" r="11" fill="#161925" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/><circle cx="100" cy="100" r="17" fill="rgba(167,181,232,0.16)" stroke="#A7B5E8" stroke-width="1.6"/><text x="100" y="104" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#C4CEF5">You</text></svg></div>
+          <div class="wi-chatg">
+            <div class="cg-head">
+              <div class="cg-avs"><span>M</span><span>D</span><span>J</span><span class="more">+9</span></div>
+              <div class="cg-meta"><div class="t">Atlas Network</div><div class="s">Private member group</div></div>
+            </div>
+            <div class="cg-msg"><span class="cg-av a1">M</span><div class="cg-bub"><span class="cg-name">Marcus</span>In NYC this week. Who wants to go out and do approaches?<div class="cg-reacts"><span>&#128293; 6</span><span>&#129309; 4</span></div></div></div>
+            <div class="cg-msg"><span class="cg-av a2">D</span><div class="cg-bub"><span class="cg-name n2">Dan</span>Down. Thursday after 7?</div></div>
+            <div class="cg-msg"><span class="cg-av a3">J</span><div class="cg-bub"><span class="cg-name n3">James</span>Flying in Friday. Count me in &#128293;</div></div>
+            <div class="cg-typing"><span class="dots"><i></i><i></i><i></i></span>Alex is typing&hellip;</div>
+          </div>
         </div>
       </div>
     </div>
@@ -5719,13 +5757,12 @@ body.deliv-modal-open { overflow: hidden; }
   <div class="inner">
     <p class="eyebrow text-center reveal d1">The Profile Rebuild</p>
     <h2 class="reveal d1 text-center">Same man. <em>New profile.</em></h2>
-    <p class="section-sub text-center reveal d2">He sent us what he had. We built the profile the top 1% actually swipe on. Same man, brand new results.</p>
+    <p class="section-sub text-center reveal d2">We reshot, restyled, and rebuilt it into the profile the top 1% actually swipe on.</p>
     <div class="tf-cases">
 
 <div class="tf-case tf-wide reveal d2">
         <div class="pg-text">
           <h3>Todd sent us <em>what he had.</em></h3>
-          <p>We reshot, restyled, and rebuilt it into the profile the top 1% actually swipe on.</p>
         </div>
         <div class="pg-pair">
             <div class="pg-panel">
