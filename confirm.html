@@ -377,7 +377,13 @@ p { color: var(--w75); }
   color: #ff6b6b; font-size: 19px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
 }
-.step-text { color: #ff8585; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; font-size: clamp(15px, 2vw, 19px); }
+.step-text {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(24px, 3.2vw, 36px); font-weight: 500;
+  color: var(--w100); letter-spacing: -0.01em; line-height: 1.2;
+  text-align: left;
+}
+.step-label { gap: 14px; }
 /* RED required-steps alert — the whole page hangs off completing these */
 .must-do-alert {
   display: flex; align-items: center; justify-content: center; gap: 16px;
@@ -594,7 +600,7 @@ footer {
     <!-- Step 1: Watch video -->
     <div class="step-label reveal d3">
       <div class="step-num">1</div>
-      <span class="step-text">Step 1 of 4 &middot; Watch your confirmation video (important)</span>
+      <span class="step-text">Watch your confirmation video <em>(important)</em></span>
     </div>
     <div class="main-video-wrap reveal d3" data-video="vsl">
       <div class="video-thumb-bg"></div>
@@ -606,7 +612,7 @@ footer {
     <!-- Step 2: Add to calendar -->
     <div class="step-label reveal d3" style="margin-top: 40px;">
       <div class="step-num">2</div>
-      <span class="step-text">Step 2 of 4 &middot; Lock it in your calendar</span>
+      <span class="step-text">Lock it in <em>your calendar</em></span>
     </div>
     <div class="appt-card reveal d3">
       <div class="appt-item">
