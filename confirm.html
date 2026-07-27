@@ -518,6 +518,27 @@ footer {
   .twall { grid-template-columns: 1fr; }
   .sticky-bar { flex-direction: column; gap: 8px; text-align: center; }
 }
+
+/* Mobile hero: no nav, no Don't-Skip pill; the h1 itself becomes the amber
+   caution banner so the confirmation video sits in the first screen. */
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .hero-confirm { padding-top: 30px; }
+  .hero-confirm .confirm-badge { display: none; }
+  .hero-confirm h1 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px; font-weight: 800; letter-spacing: 0.05em;
+    text-transform: uppercase; line-height: 1.45;
+    color: #fbbf24;
+    background: rgba(251,191,36,0.09);
+    border: 1.5px solid rgba(251,191,36,0.45);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: inline-block;
+  }
+  .hero-confirm h1 em { font-style: normal; color: #fbbf24; }
+  .hero-confirm h1 br { display: none; }
+}
 /* ═══ VIDEO MODAL (Vidalytics) ═══════════════════════════ */
 .vid-modal {
   position: fixed; inset: 0; z-index: 1000;
