@@ -110,20 +110,21 @@ p { color: var(--w75); }
   padding-bottom: clamp(56px, 7vw, 88px);
   padding-left: 24px; padding-right: 24px;
 }
-/* The h1 IS the caution banner — amber box, all viewports */
+/* The h1 IS the caution banner — red box + warning icon, all viewports */
 .hero-confirm h1 {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(17px, 1.5vw, 21px); font-weight: 800; letter-spacing: 0.05em;
   text-transform: uppercase; line-height: 1.45;
-  color: #fbbf24;
-  background: rgba(251,191,36,0.09);
-  border: 1.5px solid rgba(251,191,36,0.45);
+  color: #ff8585;
+  background: rgba(255,72,72,0.09);
+  border: 1.5px solid rgba(255,72,72,0.5);
   border-radius: 12px;
-  padding: 14px 22px;
+  padding: 16px 22px;
   display: inline-block;
 }
-.hero-confirm h1 em { font-style: normal; color: #fbbf24; }
+.hero-confirm h1 em { font-style: normal; color: #ff8585; }
 .hero-confirm h1 br { display: none; }
+.hero-confirm h1 .h1-caution { display: block; width: 28px; height: 28px; margin: 0 auto 10px; color: #ff5f5f; }
 .confirm-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.35);
@@ -538,6 +539,7 @@ footer {
 @media (max-width: 768px) {
   .nav { display: none; }
   .hero-confirm { padding-top: 30px; }
+  .hero-confirm h1 br { display: inline; }
 }
 /* ═══ VIDEO MODAL (Vidalytics) ═══════════════════════════ */
 .vid-modal {
@@ -603,7 +605,7 @@ footer {
 <section class="hero-confirm s-black">
   <div class="mid text-center">
 
-    <h1 class="reveal d1">Complete these steps<br><em>to confirm your call.</em></h1>
+    <h1 class="reveal d1"><svg class="h1-caution" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Complete these steps<br><em>to confirm your call.</em></h1>
 
 
     <!-- Step 1: Watch video -->
