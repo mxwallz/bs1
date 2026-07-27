@@ -84,7 +84,7 @@ p { color: var(--w75); }
 /* ── nav ── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
   padding: calc(16px + env(safe-area-inset-top,0px)) calc(32px + env(safe-area-inset-right,0px)) 16px calc(32px + env(safe-area-inset-left,0px));
   background: rgba(5,6,8,0.92); backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -110,6 +110,20 @@ p { color: var(--w75); }
   padding-bottom: clamp(56px, 7vw, 88px);
   padding-left: 24px; padding-right: 24px;
 }
+/* The h1 IS the caution banner — amber box, all viewports */
+.hero-confirm h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(17px, 1.5vw, 21px); font-weight: 800; letter-spacing: 0.05em;
+  text-transform: uppercase; line-height: 1.45;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.09);
+  border: 1.5px solid rgba(251,191,36,0.45);
+  border-radius: 12px;
+  padding: 14px 22px;
+  display: inline-block;
+}
+.hero-confirm h1 em { font-style: normal; color: #fbbf24; }
+.hero-confirm h1 br { display: none; }
 .confirm-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.35);
@@ -524,20 +538,6 @@ footer {
 @media (max-width: 768px) {
   .nav { display: none; }
   .hero-confirm { padding-top: 30px; }
-  .hero-confirm .confirm-badge { display: none; }
-  .hero-confirm h1 {
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 17px; font-weight: 800; letter-spacing: 0.05em;
-    text-transform: uppercase; line-height: 1.45;
-    color: #fbbf24;
-    background: rgba(251,191,36,0.09);
-    border: 1.5px solid rgba(251,191,36,0.45);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: inline-block;
-  }
-  .hero-confirm h1 em { font-style: normal; color: #fbbf24; }
-  .hero-confirm h1 br { display: none; }
 }
 /* ═══ VIDEO MODAL (Vidalytics) ═══════════════════════════ */
 .vid-modal {
@@ -597,16 +597,12 @@ footer {
     </svg>
     ATLAS
   </div>
-  <div class="nav-badge">Action Required</div>
 </nav>
 
 <!-- ═══ HERO ═══════════════════════════════════════════════ -->
 <section class="hero-confirm s-black">
   <div class="mid text-center">
 
-    <div class="reveal">
-      <div class="confirm-badge">Don&rsquo;t Skip</div>
-    </div>
     <h1 class="reveal d1">Complete these steps<br><em>to confirm your call.</em></h1>
 
 
