@@ -4652,6 +4652,23 @@ body.deliv-modal-open { overflow: hidden; }
 /* 09 network hub-and-spoke */
 .wi-net { width: 100%; max-width: 300px; aspect-ratio: 1; position: relative; }
 .wi-net svg { width: 100%; height: 100%; }
+/* Practice Dates: video-call mockup + post-date breakdown card */
+.wi-pd { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 12px; }
+.pd-call { position: relative; aspect-ratio: 16/10; border-radius: 16px; overflow: hidden; background: linear-gradient(160deg, #141326, #0a0a16); border: 1px solid var(--border-2); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+.pd-live { position: absolute; top: 10px; left: 12px; z-index: 2; font-size: 9px; font-weight: 800; letter-spacing: 0.14em; color: #ff6b6b; background: rgba(10,10,18,0.72); border: 1px solid rgba(255,107,107,0.35); border-radius: 99px; padding: 4px 9px; }
+.pd-her { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pd-self { position: absolute; right: 10px; bottom: 44px; width: 56px; height: 40px; border-radius: 8px; background: linear-gradient(150deg, #2a3350, #141a2e); border: 1px solid rgba(255,255,255,0.25); z-index: 2; }
+.pd-controls { position: absolute; left: 50%; bottom: 9px; transform: translateX(-50%); display: flex; gap: 9px; z-index: 2; }
+.pd-controls .pc { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.2); }
+.pd-controls .pc.end { background: #e5484d; border-color: #e5484d; }
+.pd-debrief { background: var(--card-solid); border: 1px solid var(--border-2); border-radius: 14px; padding: 13px 14px; display: flex; flex-direction: column; gap: 8px; }
+.pd-dhead { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w55); display: flex; justify-content: space-between; align-items: baseline; }
+.pd-when { font-size: 9px; letter-spacing: 0.06em; color: var(--gold); text-transform: none; }
+.pd-row { display: flex; gap: 8px; align-items: baseline; font-size: 12px; color: rgba(255,255,255,0.9); line-height: 1.4; }
+.pd-row span { flex: none; font-size: 11px; font-weight: 800; }
+.pd-row.good span { color: #30D158; }
+.pd-row.fix span { color: #f5b942; }
+.pd-row.tie span { color: var(--gold-hi); }
 /* Atlas Network as a private group chat */
 .wi-chatg { width: 100%; max-width: 320px; background: #0d1017; border: 1px solid var(--border-2); border-radius: 18px; padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
 .cg-head { display: flex; align-items: center; gap: 11px; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -5484,6 +5501,41 @@ body.deliv-modal-open { overflow: hidden; }
       <div class="wi-row reveal d2">
         <div class="wi-text">
           <span class="wi-num">07</span>
+          <h3 class="wi-title">Practice Dates</h3>
+          <p class="wi-body">Go on a virtual practice date with a real woman, then get a detailed breakdown of what worked, what to sharpen, and how it ties back to your profile. It&rsquo;s like having a flight simulator for your dating life.</p>
+        </div>
+        <div class="wi-visual bare">
+          <div class="wi-pd">
+            <div class="pd-call">
+              <span class="pd-live">&#9679; LIVE</span>
+              <svg class="pd-her" viewBox="0 0 120 84" aria-hidden="true">
+                <defs>
+                  <radialGradient id="pdGrad" cx="50%" cy="35%" r="70%">
+                    <stop offset="0%" stop-color="#c9a6d8"/><stop offset="55%" stop-color="#7a5f9e"/><stop offset="100%" stop-color="#2b2347"/>
+                  </radialGradient>
+                  <filter id="pdBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+                </defs>
+                <g filter="url(#pdBlur)" fill="url(#pdGrad)">
+                  <ellipse cx="60" cy="30" rx="15" ry="17"/>
+                  <path d="M43,30 C40,12 80,12 77,30 C77,20 43,20 43,30 Z"/>
+                  <path d="M30,84 C30,58 44,50 60,50 C76,50 90,58 90,84 Z"/>
+                </g>
+              </svg>
+              <div class="pd-self"></div>
+              <div class="pd-controls"><span class="pc"></span><span class="pc"></span><span class="pc end"></span></div>
+            </div>
+            <div class="pd-debrief">
+              <div class="pd-dhead">Post-Date Breakdown <span class="pd-when">within 24h</span></div>
+              <div class="pd-row good"><span>&#10003;</span>Strong opener, natural pace</div>
+              <div class="pd-row fix"><span>&#9651;</span>Lead the venue change sooner</div>
+              <div class="pd-row tie"><span>&#8618;</span>Synced back to your profile plan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wi-row rev reveal d2">
+        <div class="wi-text">
+          <span class="wi-num">08</span>
           <h3 class="wi-title">The Feedback Layer</h3>
           <p class="wi-body">Dating is the one skill where rejection doesn&rsquo;t explain itself. We close the loop. Debriefs after every date, approach audits, message support between sessions.</p>
         </div>
@@ -5491,9 +5543,9 @@ body.deliv-modal-open { overflow: hidden; }
           <div class="wi-wave"><div class="wi-wave-bars"><span style="height:22px"></span><span style="height:36px"></span><span style="height:50px"></span><span style="height:30px"></span><span style="height:58px"></span><span style="height:42px"></span><span style="height:64px"></span><span style="height:38px"></span><span style="height:52px"></span><span style="height:28px"></span><span style="height:46px"></span><span style="height:60px"></span><span style="height:34px"></span><span style="height:48px"></span><span style="height:24px"></span><span style="height:40px"></span></div><div class="wi-wave-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Debrief &middot; 2:47</div></div>
         </div>
       </div>
-      <div class="wi-row rev reveal d2">
+      <div class="wi-row reveal d2">
         <div class="wi-text">
-          <span class="wi-num">08</span>
+          <span class="wi-num">09</span>
           <h3 class="wi-title">The Atlas Network</h3>
           <p class="wi-body">A private, vetted room of successful, driven men working toward the same goal, with Ben's female advisors and strategy coaches inside. Members trade intel and link up when they hit the same city.</p>
         </div>
