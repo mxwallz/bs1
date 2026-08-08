@@ -30,10 +30,22 @@ body {
   padding: 16px 24px; background: rgba(5,6,8,0.92); backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
 }
-.nav-logo { font-family: 'Spectral', Georgia, serif; display: flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: 0.24em; }
-.nav-compass { width: 20px; height: 20px; flex-shrink: 0; animation: compassSpin 32s linear infinite; transform-origin: center; }
-@keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .nav-compass { animation: none; } }
+.nav-logo { font-family: 'Spectral', 'Playfair Display', Georgia, serif; font-size: 17px; font-weight: 600; letter-spacing: 0.26em; display: flex; align-items: center; gap: 10px; }
+.nav-logo-img { width: 44px; height: 44px; flex-shrink: 0; }
+.nav-logo-img .compass-rose { transform-box: fill-box; transform-origin: center; animation: compass-seek 4.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s 1 both; }
+.nav-logo:hover .compass-rose { animation: compass-seek 3.6s cubic-bezier(0.4, 0, 0.2, 1) 1 both; }
+@keyframes compass-seek {
+  0%   { transform: rotate(0deg); }
+  16%  { transform: rotate(116deg); }
+  24%  { transform: rotate(96deg); }
+  30%  { transform: rotate(100deg); }
+  46%  { transform: rotate(100deg); }
+  62%  { transform: rotate(224deg); }
+  70%  { transform: rotate(208deg); }
+  76%  { transform: rotate(212deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) { .nav-logo-img .compass-rose { animation: none; } }
 
 .hero { max-width: 760px; margin: 0 auto; padding: clamp(48px, 7vw, 90px) 24px 24px; text-align: center; }
 .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: inline-block; }
@@ -55,10 +67,24 @@ h1 em { font-style: italic; font-weight: 400; color: var(--w55); }
 
 <nav class="nav">
   <div class="nav-logo">
-    <svg class="nav-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="12" cy="12" r="10"/>
-      <polygon points="12,4 14.5,11.5 12,10 9.5,11.5" fill="currentColor" stroke="none"/>
-      <polygon points="12,20 9.5,12.5 12,14 14.5,12.5" fill="currentColor" opacity="0.35" stroke="none"/>
+    <svg class="nav-logo-img" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Atlas">
+      <!-- Outer ring -->
+      <circle cx="24" cy="24" r="21.5" stroke="rgba(255,255,255,0.18)" stroke-width="0.75"/>
+      <!-- Intercardinal tick marks -->
+      <line x1="39.2" y1="8.8" x2="36.6" y2="11.4" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="8.8"  y1="8.8" x2="11.4" y2="11.4" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="39.2" y1="39.2" x2="36.6" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <line x1="8.8"  y1="39.2" x2="11.4" y2="36.6" stroke="rgba(255,255,255,0.22)" stroke-width="0.75"/>
+      <!-- Rotating needle rose (N accent + S/E/W) -->
+      <g class="compass-rose">
+        <polygon points="24,3.5 26.8,22 24,24 21.2,22" fill="#A7B5E8"/>
+        <polygon points="24,44.5 26.8,26 24,24 21.2,26" fill="rgba(255,255,255,0.28)"/>
+        <polygon points="44.5,24 26,21.2 24,24 26,26.8" fill="rgba(255,255,255,0.28)"/>
+        <polygon points="3.5,24 22,26.8 24,24 22,21.2" fill="rgba(255,255,255,0.28)"/>
+      </g>
+      <!-- Center jewel -->
+      <circle cx="24" cy="24" r="3" fill="rgb(5,6,8)" stroke="rgba(255,255,255,0.45)" stroke-width="0.75"/>
+      <circle cx="24" cy="24" r="1.2" fill="rgba(255,255,255,0.9)"/>
     </svg>
     ATLAS
   </div>
