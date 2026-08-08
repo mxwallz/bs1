@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Schedule Your Atlas Call</title>
+<meta name="description" content="Pick a time for your Atlas Advisory call.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg0: #050608; --bg1: #0a0d1f; --card: rgba(255,255,255,0.025);
+  --border: rgba(255,255,255,0.06); --border-2: rgba(255,255,255,0.10);
+  --w100: #ffffff; --w75: rgba(255,255,255,0.72); --w55: rgba(255,255,255,0.55); --w35: rgba(255,255,255,0.35);
+  --gold: #A7B5E8; --gold-soft: rgba(167,181,232,0.14); --accent: #7AA0FF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg0); color: var(--w100);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; line-height: 1.6;
+}
+.nav {
+  position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 10px;
+  padding: 16px 24px; background: rgba(5,6,8,0.92); backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: 'Spectral', Georgia, serif; display: flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: 0.24em; }
+.nav-compass { width: 20px; height: 20px; flex-shrink: 0; animation: compassSpin 32s linear infinite; transform-origin: center; }
+@keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .nav-compass { animation: none; } }
+
+.hero { max-width: 760px; margin: 0 auto; padding: clamp(48px, 7vw, 90px) 24px 24px; text-align: center; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: inline-block; }
+h1 { font-family: 'Spectral', Georgia, serif; font-weight: 500; font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; margin-bottom: 20px; }
+h1 em { font-style: italic; font-weight: 400; color: var(--w55); }
+.lead { font-size: clamp(15px, 1.6vw, 18px); color: var(--w75); max-width: 620px; margin: 0 auto; }
+.lead strong { color: var(--w100); font-weight: 600; }
+
+.embed-wrap { max-width: 900px; margin: 8px auto 0; padding: 0 16px clamp(48px, 8vw, 90px); }
+#calendly-embed { min-width: 320px; height: 720px; }
+.embed-fallback { text-align: center; color: var(--w35); font-size: 13px; padding: 40px 0; }
+
+.footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; }
+.footer-logo { font-family: 'Spectral', Georgia, serif; letter-spacing: 0.22em; font-size: 13px; color: var(--w55); }
+.footer-note { font-size: 11px; color: var(--w35); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <svg class="nav-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="12,4 14.5,11.5 12,10 9.5,11.5" fill="currentColor" stroke="none"/>
+      <polygon points="12,20 9.5,12.5 12,14 14.5,12.5" fill="currentColor" opacity="0.35" stroke="none"/>
+    </svg>
+    ATLAS
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">One Last Step</span>
+  <h1>Pick a time for <em>your call.</em></h1>
+  <p class="lead">Pick your time below. The moment you do, you'll land on a confirmation page with a few important steps to lock in your call. <strong>Read it in full and follow every instruction before you close the tab</strong> — it's the difference between showing up ready and losing your spot.</p>
+</header>
+
+<div class="embed-wrap">
+  <div id="calendly-embed"></div>
+  <noscript><p class="embed-fallback">Please enable JavaScript to load the scheduler.</p></noscript>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ATLAS ADVISORY</div>
+  <p class="footer-note">This page is private. Please do not share it.</p>
+</footer>
+
+<!-- Calendly inline embed -->
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+(function () {
+  var CAL = 'https://calendly.com/brotherhood-program/brotherhood-program';
+
+  // Carry the applicant's name/email from the Typeform redirect into Calendly
+  // so the booking lands on the SAME record the application tagged (match key).
+  var p = new URLSearchParams(location.search), q = [];
+  if (p.get('name'))  q.push('name='  + encodeURIComponent(p.get('name')));
+  if (p.get('email')) q.push('email=' + encodeURIComponent(p.get('email')));
+  var url = CAL + (q.length ? ((CAL.indexOf('?') > -1 ? '&' : '?') + q.join('&')) : '');
+
+  function init() {
+    if (window.Calendly) {
+      Calendly.initInlineWidget({ url: url, parentElement: document.getElementById('calendly-embed') });
+    } else {
+      setTimeout(init, 150);
+    }
+  }
+  init();
+})();
+
+// When the booking completes, send them to the confirmation page.
+window.addEventListener('message', function (e) {
+  if (e.data && e.data.event === 'calendly.event_scheduled') {
+    window.location.href = 'confirm.html?applied=1';
+  }
+});
+</script>
+
+</body>
+</html>
