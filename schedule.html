@@ -55,7 +55,9 @@ h1 em { font-style: italic; font-weight: 400; color: var(--w55); }
 .lead strong { color: var(--w100); font-weight: 600; }
 
 .embed-wrap { max-width: 900px; margin: 8px auto 0; padding: 0 16px clamp(48px, 8vw, 90px); }
-#calendly-embed { min-width: 320px; height: 720px; }
+/* Tall enough that Calendly never shows its own inner scrollbar — the page scrolls, not the widget. */
+#calendly-embed { min-width: 320px; height: 1060px; }
+@media (max-width: 640px) { #calendly-embed { height: 1150px; } }
 .embed-fallback { text-align: center; color: var(--w35); font-size: 13px; padding: 40px 0; }
 
 .footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; }
