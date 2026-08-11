@@ -6388,8 +6388,13 @@ head.appendChild(script);
     if (typeof e.origin !== 'string' || e.origin.indexOf('typeform.com') === -1) return;
     const d = e.data;
     if (d && (d.type === 'form-submit' || d.type === 'form_submit')) {
-      // brief beat so the Typeform thank-you screen registers, then hand off
-      setTimeout(() => { window.location.href = 'confirm.html?applied=1'; }, 1400);
+      /* FALLBACK ONLY. The Typeform ending is configured to redirect to
+         schedule.html?name=&email= (recall params) — that redirect must win,
+         because it puts the applicant's email in a top-level URL where the
+         Hyros script can capture it (iframes are invisible to it). This timer
+         only catches forms with no redirect configured, so nobody strands on
+         the Typeform thank-you screen. */
+      setTimeout(() => { window.location.href = 'confirm.html?applied=1'; }, 3500);
     }
   });
 
