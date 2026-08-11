@@ -139,9 +139,14 @@ head.appendChild(script);
 })();
 
 // When the booking completes, send them to the confirmation page.
+// Carry name/email through so the Hyros script on confirm gets a second
+// capture point (it reads identity from top-level URL params).
 window.addEventListener('message', function (e) {
   if (e.data && e.data.event === 'calendly.event_scheduled') {
-    window.location.href = 'confirm.html?applied=1';
+    var p = new URLSearchParams(location.search), q = 'confirm.html?applied=1';
+    if (p.get('name'))  q += '&name='  + encodeURIComponent(p.get('name'));
+    if (p.get('email')) q += '&email=' + encodeURIComponent(p.get('email'));
+    window.location.href = q;
   }
 });
 </script>
