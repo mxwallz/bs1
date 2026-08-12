@@ -602,7 +602,8 @@ footer {
 </style>
 <script>
 /* ── Geofence (client-side) ─────────────────────────────────────────────
-   Blocks the ISO country codes below via geo-IP lookup (get.geojs.io).
+   Geo-IP lookup (get.geojs.io); the ISO country codes below get redirected
+   to Ben's YouTube channel instead of seeing this page.
    FAIL-OPEN: any lookup error/timeout renders the page normally.
    Edit the BLOCKED list to add/remove countries (ISO 3166-1 alpha-2). */
 (function () {
@@ -614,25 +615,13 @@ footer {
     'RW','SH','ST','SN','SC','SL','SO','ZA','SS','SD','SZ','TZ','TG',
     'TN','UG','EH','ZM','ZW','RE','ID','KH','MY','PH','VN'
   ];
-  function blockPage() {
-    try {
-      document.title = 'Not Available';
-      document.documentElement.innerHTML =
-        '<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Not Available</title></head>' +
-        '<body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#050608;color:#fff;font-family:Georgia,serif;text-align:center;padding:24px;">' +
-        '<div><div style="font-size:13px;letter-spacing:0.3em;color:rgba(167,181,232,0.8);margin-bottom:18px;">ATLAS ADVISORY</div>' +
-        '<div style="font-size:26px;line-height:1.4;color:rgba(255,255,255,0.92);">Atlas isn&rsquo;t available<br>in your region.</div></div></body>';
-      window.scrollTo(0, 0);
-    } catch (e) {}
-  }
   try {
     fetch('https://get.geojs.io/v1/ip/country.json', { mode: 'cors' })
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var cc = d && d.country ? String(d.country).toUpperCase() : '';
         if (cc && BLOCKED.indexOf(cc) !== -1) {
-          if (document.body) blockPage();
-          else document.addEventListener('DOMContentLoaded', blockPage);
+          window.location.replace('https://www.youtube.com/@realbenjaminseda');
         }
       })
       .catch(function () {});
