@@ -8,6 +8,35 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+<script>
+/* ── Geofence (client-side) ─────────────────────────────────────────────
+   Geo-IP lookup (get.geojs.io); the ISO country codes below get redirected
+   to Ben's YouTube channel instead of seeing this page.
+   FAIL-OPEN: any lookup error/timeout renders the page normally.
+   Edit the BLOCKED list to add/remove countries (ISO 3166-1 alpha-2). */
+(function () {
+  var BLOCKED = [
+    'PK','IN','BH','IR','IQ','JO','KW','LB','OM','QA','SA','TR','YE',
+    'DZ','AO','BJ','BW','BF','BI','CM','CV','CF','TD','KM','CG','CD',
+    'CI','DJ','EG','GQ','ER','ET','GA','GM','GH','GN','GW','KE','LS',
+    'LR','LY','MG','MW','ML','MR','MU','YT','MA','MZ','NA','NE','NG',
+    'RW','SH','ST','SN','SC','SL','SO','ZA','SS','SD','SZ','TZ','TG',
+    'TN','UG','EH','ZM','ZW','RE','ID','KH','MY','PH','VN'
+  ];
+  try {
+    fetch('https://get.geojs.io/v1/ip/country.json', { mode: 'cors' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var cc = d && d.country ? String(d.country).toUpperCase() : '';
+        if (cc && BLOCKED.indexOf(cc) !== -1) {
+          window.location.replace('https://www.youtube.com/@realbenjaminseda');
+        }
+      })
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
