@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Google Analytics 4 (gtag.js). Live — Atlas property web stream. -->
+<script>
+  window.GA_MEASUREMENT_ID = 'G-0ZVWK7LPKL';
+  (function () {
+    var id = window.GA_MEASUREMENT_ID;
+    if (!id || /X{4,}/.test(id)) return; // not configured yet — no-op
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+  })();
+</script>
 <title>Schedule Your Atlas Call</title>
 <meta name="description" content="Pick a time for your Atlas Advisory call.">
 <meta name="robots" content="noindex, nofollow">
