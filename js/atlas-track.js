@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT = window.ATLAS_TRACK_ENDPOINT || 'https://clientportal-two-rho.vercel.app/api/track';
+  var ENDPOINT = window.ATLAS_TRACK_ENDPOINT || 'https://atlas-portal-ten.vercel.app/api/track';
 
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
